@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>net.mdatools</groupId>
+  <artifactId>modelant.conversion.maven.test</artifactId>
+  <version>@project.parent.version@</version>
+
+  <description>Maven plugin for model conversion tests</description>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>net.mdatools</groupId>
+        <artifactId>modelant.conversion.maven.plugin</artifactId>
+        <version>@project.version@</version>
+        <executions>
+          <execution>
+            <phase>compile</phase>
+            <goals>
+              <goal>uml13-to-uml14</goal>
+            </goals>
+            <configuration>
+              <sourceModel>test/xmi/demo.xml</sourceModel>
+              <targetModel>target/converted-to-UML14.xml</targetModel>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

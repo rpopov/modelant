@@ -1,0 +1,30 @@
+## --------------------------------------------------------
+## Parameters of Jasper servlet engine provided in the
+## servlet context / config
+## --------------------------------------------------------
+
+# The characters encoding as they woud be sent in a request
+#javaEncoding=UTF8
+
+# Do you want to keep the generated Java files around?
+# true/false
+keepGenerated=true
+
+# Do you want support for "large" files? What this essentially
+# means is that we generated code so that the HTML data in a JSP
+# file is stored separately as opposed to those constant string
+# data being used literally in the generated servlet.
+# true/false
+# largeFile=false
+
+# Do you want support for "mapped" files? This will generate
+# servlet that has a print statement per line of the JSP file.
+# This seems like a really nice feature to have for debugging.
+# true/false
+# mappedFile=true
+
+# Do we want to include debugging information in the class file?
+# true/false
+# classDebugInfo=true
+
+# jspCompilerPlugin = class implementing org.apache.jasper.compiler.JavaCompiler interface

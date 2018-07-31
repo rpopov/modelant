@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+ * Copyright (c) 2001,2012 Rusi Popov, MDA Tools.net
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Rusi Popov (popovr@mdatools.net) - initial implementation
+ -->
+<!--
+  Tasks, types and macros of ModelAnt Template engine.<br/>
+  Usage:<br/><br/>
+
+  &lt;typedef resource="net/mdatools/modelant/template/antlib.xml"/&gt;<br/><br/>
+
+  Imports:<br/><br/>
+
+  &lt;typedef resource="net/mdatools/modelant/core/antlib.xml"/&gt;
+  -->
+<antlib xmlns:current="ant:current">
+
+   <typedef resource="net/mdatools/modelant/core/antlib.xml" />
+
+   <taskdef name="template.init" classname="net.mdatools.modelant.template.task.DeclareTemplateContextTask"/>
+
+   <taskdef name="template" classname="net.mdatools.modelant.template.task.TemplateTask"/>
+
+   <taskdef name="template.compile" classname="net.mdatools.modelant.template.task.CompileTemplateTask"/>
+</antlib>

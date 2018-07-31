@@ -1,0 +1,30 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>net.mdatools</groupId>
+    <artifactId>modelant.uml14</artifactId>
+    <version>${revision}</version>
+  </parent>
+
+  <artifactId>modelant.uml14.api</artifactId>
+
+  <dependencies>      
+    <!--dependency>
+      <groupId>net.mdatools</groupId>
+      <artifactId>modelant.uml14.metamodel</artifactId>
+      <version>${project.version}</version>
+    </dependency-->
+    <dependency>
+      <groupId>org.andromda.thirdparty.jmi</groupId>
+      <artifactId>jmi</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.andromda.thirdparty.jmi</groupId>
+      <artifactId>mof</artifactId>
+    </dependency>
+  </dependencies>    
+  
+</project>

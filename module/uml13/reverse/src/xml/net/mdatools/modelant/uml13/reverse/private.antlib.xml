@@ -1,0 +1,1304 @@
+<?xml version="1.0"?>
+<!--
+ * Copyright (c) 2001,2012 Rusi Popov, MDA Tools.net
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Rusi Popov (popovr@mdatools.net) - initial implementation
+ -->
+
+<!--
+  Macros that are used in the public reverse engineering macros, but are not to be published.
+  -->
+<antlib xmlns:current="ant:current" >
+
+  <!--
+     Registers in the UML 1.3 Core wrapper classes and factory, needed for the tasks below.
+   -->
+  <typedef resource="net/mdatools/modelant/uml13/wrap/antlib.xml"/>
+  <typedef resource="net/mdatools/modelant/template/antlib.xml"/>
+
+  <!--
+    Print this class, its attributes and tagged values and remove them from the named list-valued property
+    -->
+  <macrodef name="db.deep.print">
+    <attribute name="property" default="this"/>
+    <attribute name="indent" default=""/>
+    <attribute name="list"  description="The property whose value is expected to be a collection of objects to remove the current class (table) from."/>
+    <element name="print.override" optional="true" implicit="true" description="What not to print in nested elements"/>
+    <sequential>
+      <uml13.print property="@{property}" prefix="@{indent}" name="print">
+        <print.override/>
+      </uml13.print>
+      <echo>@{indent}${print}</echo>
+      <list.remove property="@{list}" name="@{property}"/>
+      
+      <print.tags indent="@{indent}" property="@{property}"/>
+      <remove.tagged.values list="@{list}" property="@{property}"/>
+
+      <if>
+        <isinstanceof metaclass="Foundation:Core:Class"/>
+        <then> <!-- Printing an added CLASS -->
+          <!-- Print the class' attributes (and methods) -->
+          <for>
+            <uml13.get property="@{property}" path="feature"/>
+            <tasks>
+              <db.deep.print indent="@{indent}    " list="@{list}">              
+                <equals metaclass="Attribute"        attributes="type.name, initialValue.body"/>
+                <except>
+                  <equals metaclass="ModelElement"   associations="namespace"/>
+                  <equals metaclass="Attribute"      associations="owner"/>
+                </except>                                    
+                <print.override/>
+              </db.deep.print>
+            </tasks>
+          </for>
+        </then>
+        <else>
+          <if>
+            <isinstanceof metaclass="Foundation:Core:Association"/>
+            <then> <!-- the ends are already printed, we do not support tags at end level in the rev. eng. DB models, avoid printing the ends separately -->
+              <uml13.get property="@{property}" path="connection"/>
+              <list.remove.all property="@{list}"/>
+              
+              <print.tags indent="@{indent}    " property="@{property}"/>
+              <remove.tagged.values list="@{list}" property="@{property}"/>
+            </then>
+          </if>
+        </else>
+      </if>
+    </sequential>
+  </macrodef>
+
+  <!-- remove the tags of the current -->
+  <macrodef name="remove.tagged.values">
+    <attribute name="property" default="this" description="The name of the property that holds a model element, whose tagged values are to be removed. Default: this"/>
+    <attribute name="list"  description="The property whose value is expected to be a collection of objects to remove the current class (table) from."/>
+    <sequential>
+      <for>
+        <uml13.get path="tag" property="@{property}"/>
+        <tasks>
+          <list.remove property="@{list}" name="this"/>
+        </tasks>
+      </for>
+    </sequential>
+  </macrodef>
+
+  <!--
+    Prints the tags associated to the current model element.
+    Suitable to print results of  databases comparison
+    -->
+  <macrodef name="print.tags">
+    <attribute name="property" default="this"/>
+    <attribute name="indent" default=""/>
+    <sequential>
+      <for>
+        <select>
+          <uml13.get path="tag" property="@{property}"/>
+
+          <evaluate>
+            <tasks>
+              <ref.get path="value"/>
+            </tasks>
+
+            <not>
+              <isempty/>
+            </not>
+          </evaluate>
+        </select>
+        <tasks>
+          <ref.get path="tag" name="tag"/>
+          <ref.get path="value" name="value"/>
+          <echo>@{indent}  ${tag}:  ${value}</echo>
+        </tasks>
+      </for>
+    </sequential>
+  </macrodef>
+
+  <!--
+    Remove from all classes the attributes with the name provided
+    -->
+  <macrodef name="remove.attributes.by.name">
+    <attribute name="extent" description="The name of the extent where the model is loaded"/>
+    <attribute name="name"  description="the actual name of the attributes to remove"/>
+    <sequential>
+      <for>
+        <select>
+          <allOfMetaclassSelector extent="@{extent}" metaclass="Foundation::Core::Attribute"/>
+
+          <evaluate>
+            <tasks>
+              <ref.get path="name" name="attribute.name"/>
+            </tasks>
+
+              <equals arg1="@{name}" arg2="${attribute.name}"/>
+
+          </evaluate>
+        </select>
+
+        <tasks>
+          <ref.get path="name" name="name"/>
+          <ref.get path="owner.name" name="owner.name"/>
+          <ref.destroy/>
+          <echo> Removed attribute: ${owner.name}.${name}</echo>
+        </tasks>
+      </for>
+    </sequential>
+  </macrodef>
+
+  <!--
+    Remove from all classes the methods related to attributes, i.e. methods that
+    contain the attribute name in their names
+    -->
+  <macrodef name="remove.methods.for.attribute">
+    <attribute name="extent" description="The name of the extent where the model is loaded"/>
+    <sequential>
+        <for>
+          <allOfMetaclassSelector extent="@{extent}" metaclass="Foundation::Core::Attribute"/>
+
+          <tasks>
+             <ref.get path="name" name="name"/>
+             <ref.get path="owner.name" name="class.name"/>
+             <ref.get path="type.name"  name="type.name"/>
+
+             <for> <!-- for each method containing the attribute name-->
+               <select>
+                  <ref.get path="owner.feature"/>
+
+                  <evaluate>
+                    <tasks>
+                      <ref.get path="name" name="feature.name"/>
+                    </tasks>
+
+                      <and>
+                         <isinstanceof metaclass="Foundation::Core::Operation"/>
+                         <matches pattern="(?i)^.*${name}.*$" string="${feature.name}"/>
+                      </and>
+
+                  </evaluate>
+               </select>
+               <tasks>
+                 <ref.get path="owner.name" name="class.name"/>
+                 <ref.get path="name"       name="method.name"/>
+                 <echo> Remove support method: ${class.name}.${method.name} for primitive attribute ${name} of ${type.name}</echo>
+
+                 <ref.destroy/>
+               </tasks>
+             </for>
+          </tasks>
+        </for>
+    </sequential>
+  </macrodef>
+
+  <!--
+    Remove from all classes the methods with the exact name provided
+    -->
+  <macrodef name="remove.methods.by.regex">
+    <attribute name="extent" description="The name of the extent where the model is loaded"/>
+    <attribute name="regex"  description="the actual name of the methods to remove"/>
+    <sequential>
+        <for>
+          <select>
+            <allOfMetaclassSelector extent="@{extent}" metaclass="Foundation::Core::Operation"/>
+            <evaluate>
+              <tasks>
+                 <ref.get path="name" name="method.name"/>
+              </tasks>
+
+              <matches string="${method.name}" pattern="@{regex}"/>
+
+            </evaluate>
+          </select>
+          <tasks>
+             <ref.get path="name" name="method.name"/>
+             <ref.get path="owner.name" name="owner.name"/>
+             <ref.destroy/>
+             <echo> Removed method: ${owner.name}.${method.name}</echo>
+          </tasks>
+        </for>
+    </sequential>
+  </macrodef>
+
+  <!--
+    Remove from all classes the methods with the visibility (kind) provided
+    -->
+  <macrodef name="remove.methods.by.visibility">
+    <attribute name="extent" description="The name of the extent where the model is loaded"/>
+    <attribute name="visibility" default="vk_private" description="possible values: vk_private, vk_protected, vk_public"/>
+    <sequential>
+        <ref.get.enum extent="@{extent}" package="Foundation::Data_Types" type="VisibilityKind" literal="@{visibility}" name="private.visibility"/>
+
+        <for>
+          <select>
+            <allOfMetaclassSelector extent="@{extent}" metaclass="Foundation::Core::Operation"/>
+            <evaluate>
+              <tasks>
+                 <ref.get path="visibility"/>
+              </tasks>
+
+              <isequal property1="private.visibility"/>
+
+            </evaluate>
+          </select>
+
+          <tasks>
+             <ref.get path="name" name="method.name"/>
+             <ref.get path="owner.name" name="owner.name"/>
+             <ref.destroy/>
+             <echo> Removed private method: ${owner.name}.${method.name}</echo>
+          </tasks>
+        </for>
+    </sequential>
+  </macrodef>
+
+  <!--
+    Remove from all classes their constructors
+    -->
+  <macrodef name="remove.constructors">
+    <attribute name="extent" description="The name of the extent where the model is loaded"/>
+    <sequential>
+        <for>
+          <select>
+            <allOfMetaclassSelector extent="@{extent}" metaclass="Foundation::Core::Operation"/>
+             <!--
+              Constructors are those methods with name == name of the owner class
+              -->
+            <evaluate>
+              <tasks>
+                <ref.get path="name"       name="method.name"/>
+                <ref.get path="owner.name" name="class.name"/>
+              </tasks>
+
+                <equals arg1="${class.name}" arg2="${method.name}"/>
+
+            </evaluate>
+          </select>
+
+          <tasks>
+             <ref.get path="name" name="method.name"/>
+             <ref.destroy/>
+             <echo> Removed constructor: ${method.name}</echo>
+          </tasks>
+        </for>
+    </sequential>
+  </macrodef>
+
+  <!--
+    Create an attribute with the name, type and owner class provided
+    -->
+  <macrodef name="create.attribute">
+    <attribute name="extent" description="The name of the extent where the model is loaded"/>
+    <attribute name="name"  description="the actual name to assign to the attribute"/>
+    <attribute name="owner" description="the name of the property with the class that owns the attribute"/>
+    <attribute name="type"  description="the name of the property with the class that owns type of the attribute"/>
+    <sequential>
+      <local name="this"> <!-- leave this bound to the created attribute -->
+        <uml13.get property="@{owner}" path="associationEnd" name="these.ends"/>
+
+         <if>
+           <and>
+             <not> <!-- no attribute with the same name -->
+               <exists>
+                <ref.get property="@{owner}" path="feature"/>
+
+                <evaluate>
+                  <tasks>
+                    <ref.get path="name" name="feature.name"/>
+                  </tasks>
+
+                    <matches string="${feature.name}" pattern="^(?i)@{name}$"/>
+
+                </evaluate>
+               </exists>
+             </not>
+
+             <not> <!-- no association with the same name at the role at the other end -->
+               <exists>
+                <propertySelector property="these.ends"/>
+
+                <evaluate>
+                    <tasks>
+                      <wrap.method method="getOtherAssociationEnd" name="other.end"/>
+
+                      <ref.get property="other.end" path="name" name="other.role.name"/>
+                    </tasks>
+
+                      <matches string="${other.role.name}" pattern="^(?i)@{name}$"/>
+
+                  </evaluate>
+               </exists>
+             </not>
+
+           </and>
+           <then> <!-- there is no other feature/attribute with the name to create -->
+             <ref.create extent="@{extent}" metaclass="Foundation::Core::Attribute"/>
+             <ref.set path="owner" name="@{owner}"/>
+             <ref.set path="type"  name="@{type}"/>
+             <ref.set path="name"  value="@{name}"/>
+
+           </then>
+           <else>
+             <ref.get property="@{owner}" path="name" name="class.name"/>
+
+             <echo> Skipped creating attribute  ${class.name}.@{name} that repeats an attribute/association</echo>
+           </else>
+         </if>
+      </local>
+    </sequential>
+  </macrodef>
+
+  <!--
+    Create an association from a class to a class in a specific role.
+    -->
+  <macrodef name="create.association">
+    <attribute name="extent" description="The name of the extent where the model is loaded"/>
+    <attribute name="from" description="the name of the property with the class that at this (non-navigable) side of the association"/>
+    <attribute name="to"   description="the name of the property with the class that at the other (navigable to) side of the association"/>
+    <attribute name="to.role" description="the role of the other side of the association"/>
+    <attribute name="to.many" default="false" description="indicates the multiplicity of the other side of the association - false means 0..1, true means 0..n"/>
+    <sequential>
+      <local name="this"> <!-- leave this bound to the created attribute -->
+        <uml13.get property="@{from}" path="associationEnd" name="these.ends"/>
+
+        <if>
+          <and>
+            <not> <!-- no attribute with the same name -->
+              <exists>
+                <ref.get property="@{from}" path="feature"/>
+
+                <evaluate>
+                  <tasks>
+                    <ref.get path="name" name="feature.name"/>
+                  </tasks>
+
+                    <matches string="${feature.name}" pattern="^(?i)@{to.role}$"/>
+
+                </evaluate>
+              </exists>
+            </not>
+
+            <not> <!-- no association with the same name at the role at the other end -->
+              <exists>
+                <propertySelector property="these.ends"/>
+
+                <evaluate>
+                  <tasks>
+                    <wrap.method method="getOtherAssociationEnd" name="other.end"/>
+
+                    <ref.get property="other.end" path="name" name="other.role.name"/>
+                  </tasks>
+
+                    <matches string="${other.role.name}" pattern="^(?i)@{to.role}$"/>
+
+                </evaluate>
+              </exists>
+            </not>
+
+          </and>
+          <then> <!-- there is no other feature/attribute with the name to create -->
+
+            <ref.create extent="@{extent}" metaclass="Foundation::Core::Association" name="association"/>
+
+            <ref.get property="@{from}"     path="namespace" name="namespace"/>
+            <ref.set property="association" path="namespace" name="namespace"/>
+
+            <ref.create extent="@{extent}" metaclass="Foundation::Core::AssociationEnd" name="this.end"/>
+            <ref.create extent="@{extent}" metaclass="Foundation::Core::AssociationEnd" name="other.end"/>
+
+            <ref.assoc.set property="this.end"  path="association" name="association"/>
+            <ref.assoc.set property="other.end" path="association" name="association"/>
+
+            <ref.assoc.set property="this.end"  path="type" name="@{from}"/>
+            <ref.set       property="this.end"  path="isNavigable" value="false" class="java.lang.Boolean"/>
+
+            <ref.assoc.set property="other.end" path="type" name="@{to}"/>
+            <ref.set       property="other.end" path="name" value="@{to.role}"/>
+            <ref.set       property="other.end" path="isNavigable" value="true" class="java.lang.Boolean"/>
+
+            <!-- setup multiplicity to other.end -->
+            <ref.create extent="@{extent}" metaclass="Foundation::Data_Types::Multiplicity" name="multiplicity"/>
+            <ref.create extent="@{extent}" metaclass="Foundation::Data_Types::MultiplicityRange" name="multiplicity.range"/>
+
+            <ref.assoc.add property="multiplicity" path="range" name="multiplicity.range"/>
+            <ref.set property="multiplicity.range" path="lower" value="0" class="java.lang.Integer"/>
+
+            <if>
+              <istrue value="@{to.many}"/>
+              <then>
+                 <ref.set property="multiplicity.range" path="upper" value="-1" class="java.lang.Integer"/> <!-- unlimited -->
+              </then>
+              <else>
+                 <ref.set property="multiplicity.range" path="upper" value="1" class="java.lang.Integer"/> <!-- 0..1 -->
+              </else>
+            </if>
+            <ref.set property="other.end" path="multiplicity" name="multiplicity"/>
+
+          </then>
+          <else>
+            <ref.get property="@{from}" path="name" name="class.name"/>
+
+            <echo> Skipped creating association ${class.name} to @{to.role} that repeats an attribute/association</echo>
+          </else>
+        </if>
+      </local>
+    </sequential>
+  </macrodef>
+
+  <!--
+    In all classes replace the object-typed attributes with associations. No methods are removed.
+    Leaves attributes that have a data type as their type.
+    -->
+  <macrodef name="abstract.attributes">
+    <attribute name="extent" description="The name of the extent where the model is loaded"/>
+    <sequential>
+        <!--
+          Create associations for all *-to-many attributes
+          Create associations for all *-to-one attributes
+          remove the attribute
+          -->
+        <for>
+          <select>
+            <allOfMetaclassSelector extent="@{extent}" metaclass="Foundation::Core::Attribute"/>
+            <evaluate>
+              <tasks>
+                <ref.get path="type"/>
+              </tasks>
+
+                <isinstanceof metaclass="Foundation::Core::Class"/>
+
+            </evaluate>
+          </select>
+
+          <tasks>
+             <!--
+                this is an Attribute
+               -->
+             <ref.get path="name"         name="name"/>
+             <ref.get path="owner.name"   name="class.name"/>
+             <ref.get path="type.name"    name="type.name"/>
+             <ref.get path="multiplicity" name="multi.name"/>
+
+             <echo> Association support attribute: ${class.name}.${name} to ${type.name}</echo>
+
+             <!--
+               Identify the participating classes
+               -->
+             <ref.get path="owner"      name="thisClass"/>
+             <ref.get path="owner.name" name="thisRole"/>
+
+             <ref.get path="type"  name="otherClass"/>
+             <ref.get path="name"  name="otherRole"/>
+
+             <ref.get path="multiplicity"    name="otherMultiplicity"/>
+
+             <ref.destroy/>
+
+             <create.association extent="@{extent}" from="thisClass" to="otherClass" to.role="${otherRole}"/> <!-- otherMultiplicity -->
+
+          </tasks>
+        </for>
+    </sequential>
+  </macrodef>
+
+  <!--
+    Creates associations or attribues for the pairs of setter+getter methods.
+    Approach: The interfaces are not domain notions, so they just represent common characteristics, identified for development purposes.
+    Thus, the methods from the interfaces should be replicated in their implementation classes, the interfaces by themselves should be kept empty.
+    The interfaces that are no more referenced in associations or methods must be removed.
+
+    Becasue of that logic, <b>first process the interfaces</b> so the associations/attributes will be pushed into the implementing classes and the same methods
+    will be removed from those classes, thus when the class themselves would be processed there will be no doubled associations / attributes.
+    -->
+  <macrodef name="abstract.methods">
+    <attribute name="extent" description="The name of the extent where the model is loaded"/>
+    <attribute name="setter.prefix" default="set" description="the verb used as a prefix of the setter methods to check. Default: set"/>
+    <attribute name="getter.prefix" default="get" description="the verb used as a prefix of the getter methods to check. Default: get"/>
+    <attribute name="to.many" default="false" description="indicates the multiplicity of the other side of the association - false means 0..1, true means 0..n"/>
+    <attribute name="parameter.supertype" default="Class" description="The simple metamodel class name to search setter methods with parameters of. Recommended values: Class, DataType, where Class leads to establishing associations, whereas  DataType leads to creating attributes"/>
+    <attribute name="meta.superclass" default="Class" description="The simple metamodel class name to search methods in instances of"/>
+    <sequential>
+      <local>
+        <ref.get.enum  name="in.parameter.kind" extent="@{extent}" package="Foundation::Data_Types" type="ParameterDirectionKind" literal="pdk_inout"/>
+
+        <!-- find a pair of methods of the class named setX and getX and convert them to association -->
+        <for iterator="classifier">
+          <allOfMetaclassSelector extent="@{extent}" metaclass="Foundation::Core::@{meta.superclass}"/>
+
+          <tasks>
+             <!--
+               find a setter method with exactly one parameter
+               -->
+             <for iterator="setter">
+               <selector>
+                 <ref.get path="feature"/>
+               </selector>
+               <condition>
+                 <and>
+                    <isinstanceof property="setter" metaclass="Foundation::Core::Operation"/>
+
+                    <evaluate>
+                      <tasks>
+                        <ref.get property="setter" path="name"/>
+                      </tasks>
+
+                        <matches string="${this}" pattern="^@{setter.prefix}.*$"/>
+
+                    </evaluate>
+
+
+                    <!--
+                      Correctness condition: there is exactly one parameter specified [holding the class to associate]
+                      -->
+                    <exists iterator="this.parameter">
+                      <ref.get property="setter" path="parameter"/>
+
+                      <and>
+                        <evaluate>
+                          <tasks>
+                            <ref.get property="this.parameter" path="kind" name="parameter.kind"/>
+                            <ref.get property="this.parameter" path="type" name="parameter.type"/>
+                          </tasks>
+
+                          <and>
+                            <isequal      property1="parameter.kind" property2="in.parameter.kind"/> <!-- found one parameter -->
+                            <isinstanceof property="parameter.type"  metaclass="Foundation::Core::@{parameter.supertype}"/> <!-- the parameter is a class or data type (depending on the macro attribute) -->
+                          </and>
+                        </evaluate>
+
+                        <not>      <!-- there is no other parameter -->
+                          <exists iterator="other.parameter">
+                            <ref.get property="setter" path="parameter"/>
+
+                            <evaluate>
+                              <tasks>
+                                <ref.get property="other.parameter" path="kind" name="parameter.kind"/>
+                              </tasks>
+
+                              <and>
+                                <not>
+                                  <isequal property1="this.parameter" property2="other.parameter"/>
+                                </not>
+                                <isequal property1="parameter.kind" property2="in.parameter.kind"/>
+                              </and>
+                            </evaluate>
+                          </exists>
+                        </not>
+
+                      </and>
+                    </exists>
+
+                    <exists> <!-- there is a getter with the same name (prefix) -->
+                      <ref.get property="classifier" path="feature"/>
+
+                      <evaluate>
+                        <tasks>
+                           <ref.get path="name" name="getter.name"/>
+
+                           <ref.get property="setter" path="name" name="setter.name"/>
+
+                           <string.replace string="${setter.name}" regex="^@{setter.prefix}(.*)$" replacement="$1" name="common.name"/>
+
+                           <wrap.method method="getPluralForm" name="common.name.plural"> <!-- uses the uml13.properties file to identify the irregular plural forms -->
+                             <parameter value="${common.name}"/>
+                           </wrap.method>
+                        </tasks>
+
+                          <and>
+                             <isinstanceof metaclass="Foundation::Core::Operation"/>
+
+                             <matches string="${getter.name}"
+                                      pattern="(?i)^@{getter.prefix}(${common.name}$|${common.name.plural})$"/>
+                          </and>
+
+                      </evaluate>
+                    </exists>
+                 </and>
+               </condition>
+               <tasks> <!--  this is a setter method with exactly 1 parameter of class/data type and at least one getter with the same name-->
+
+                 <!--
+                   Invariant: any setter that was related to an established association, has no owner set
+                   -->
+
+                 <if>
+                  <evaluate>
+                    <tasks>
+                       <ref.get property="setter" path="owner" name="owner"/>
+                    </tasks>
+                    <not>
+                      <isempty property="owner"/>
+                    </not>
+                  </evaluate>
+                  <then> <!-- setter is still not processed -->
+
+                      <ref.get property="setter" path="name" name="setter.name"/>
+
+                      <string.replace string="${setter.name}" regex="^@{setter.prefix}(.*)$" replacement="$1" name="common.name"/>
+
+                      <wrap.method property="setter"  method="getPluralForm" name="common.name.plural"> <!-- uses the uml13.properties file to identify the irregular plural forms -->
+                        <parameter value="${common.name}"/>
+                      </wrap.method>
+
+                      <echo> Common name: ${common.name}</echo>
+
+                      <!--
+                       Depending on the type of the getter method decide if the methods represent an association or an attribute
+                       -->
+                      <select name="setter.parameters">
+                        <ref.get property="setter" path="parameter"/>
+
+                        <evaluate>
+                          <tasks>
+                            <ref.get path="kind" name="parameter.kind"/>
+                          </tasks>
+
+                          <isequal property1="parameter.kind" property2="in.parameter.kind"/>
+
+                        </evaluate>
+                      </select> <!-- setter.parameters consists of exactly one "in parameter", which is holds the type to associate/attribute-->
+
+                      <ref.get property="classifier" path="name" name="class.name"/>
+
+                      <echo> Found an association from @{meta.superclass} ${class.name} to role ${common.name}</echo>
+
+                       <for property="setter.parameters"> <!-- exactly 1 iteration expected -->
+                        <tasks>
+                        <ref.get path="type" name="type"/>
+
+                        <!--
+                          Identify the classes to implement associations in
+                          -->
+                        <wrap.method property="classifier" method="getImmediateImplementations" name="implementing.classes"/>
+
+                        <for property="implementing.classes" iterator="owner.class">
+                          <tasks>
+                          <!--
+                            Exclude from processing any method related to the association/attribute to create
+                            -->
+                          <unbind.methods.by.name owner.class="owner.class" name.regex="^[a-z]*(${common.name}|${common.name.plural})$"/>
+
+                          <if>
+                            <isinstanceof property="type" metaclass="Foundation::Core::DataType"/>
+                            <then>
+                              <!-- a simple type attribute -->
+                              <create.attribute extent="@{extent}" owner="owner.class" type="type" name="${common.name}"/>
+
+                            </then>
+                            <else> <!-- the methods support an association -->
+                              <create.association extent="@{extent}" from="owner.class" to="type" to.role="${common.name}" to.many="@{to.many}"/>
+                            </else>
+                          </if>
+                          </tasks>
+                        </for>
+
+                        <!--
+                          Exclude from processing any method related to the association/attribute to create in this classifier
+                          -->
+                        <unbind.methods.by.name owner.class="classifier" name.regex="^[a-z]*(${common.name}|${common.name.plural})$"/>
+                        </tasks>
+                      </for>
+                    </then>
+                 </if>
+               </tasks>
+             </for>
+          </tasks>
+        </for>
+
+        <!-- destroy any method that is has no owner i.e. excluded from processing as a related to a created association -->
+        <for>
+          <select>
+            <allOfMetaclassSelector extent="@{extent}" metaclass="Foundation::Core::Operation"/>
+            <not>
+              <exists>
+                <ref.get  path="owner"/>
+              </exists>
+            </not>
+          </select>
+
+          <tasks>
+             <ref.destroy/>
+          </tasks>
+        </for>
+      </local>
+    </sequential>
+  </macrodef>
+
+  <!--
+     Remove the model elements that have no namespace. Such classes could be released when destroying their package, methods could be released
+     when destroying their classes, etc.
+    -->
+  <macrodef name="remove.elements.without.namespace">
+    <attribute name="extent" description="The name of the extent where the model is loaded"/>
+    <attribute name="metaclass" description="the metaclass instances of which to be destroyed"/>
+    <sequential>
+        <!-- destroy any method that is has no owner i.e. excluded from processing as a related to a created association -->
+        <for>
+          <select>
+            <allOfMetaclassSelector extent="@{extent}" metaclass="@{metaclass}"/>
+
+            <not>
+              <exists>
+                <ref.get path="namespace"/>
+              </exists>
+            </not>
+          </select>
+          <tasks>
+            <ref.destroy/>
+          </tasks>
+        </for>
+    </sequential>
+  </macrodef>
+
+  <!--
+     Remove the data types that are not used in attributes, parameters, associations, generalizations or depndency from it.
+     Such cases could happen when destroying attribute or methods, etc.
+     Remove also the generalizations that become obsolete.
+     Repeat this as much as possible in order to remove all anomalies.
+    -->
+  <macrodef name="remove.unused.classifiers">
+    <attribute name="extent" description="The name of the extent where the model is loaded"/>
+    <attribute name="metaclass" description="the metaclass instances of which to be destroyed"/>
+    <sequential>
+      <!--
+        Remove as much as possible elements of the type - they cannot be more than the instances of that type,
+        whereas each iteration removes 0 or more instances or relations, thus repeating the removal procedure
+        for each instance will be enough to remove all obsolete instances.
+        There are no means of implementing the optimized algorithm like "while any change happened do ..."
+        -->
+      <for iterator="counter">
+        <allOfMetaclassSelector extent="@{extent}" metaclass="@{metaclass}"/>
+
+        <tasks>
+          <for iterator="type">
+            <select>
+              <allOfMetaclassSelector extent="@{extent}" metaclass="@{metaclass}"/>
+
+              <and>
+                <not>
+                  <exists iterator="attribute">
+                    <selector>
+                      <allOfMetaclassSelector extent="@{extent}" metaclass="Foundation::Core::Attribute"/>
+                    </selector>
+                    <evaluate>
+                      <tasks>
+                        <ref.get property="attribute" path="type" name="attribute.type"/>
+                      </tasks>
+
+                        <isequal property1="type" property2="attribute.type"/>
+
+                    </evaluate>
+                  </exists>
+                </not>
+                <not>
+                  <exists iterator="end">
+                    <selector>
+                      <allOfMetaclassSelector extent="@{extent}" metaclass="Foundation::Core::AssociationEnd"/>
+                    </selector>
+                    <evaluate>
+                      <tasks>
+                        <ref.get property="end" path="type" name="end.type"/>
+                      </tasks>
+
+                        <isequal property1="type" property2="end.type"/>
+
+                    </evaluate>
+                  </exists>
+                </not>
+                <not>
+                  <exists iterator="parameter">
+                    <selector>
+                      <allOfMetaclassSelector extent="@{extent}" metaclass="Foundation::Core::Parameter"/>
+                    </selector>
+                    <evaluate>
+                      <tasks>
+                        <ref.get property="parameter" path="type" name="parameter.type"/>
+                      </tasks>
+
+                        <isequal property1="type" property2="parameter.type"/>
+
+                    </evaluate>
+                  </exists>
+                </not>
+                <not>
+                  <exists iterator="gen">
+                    <selector>
+                      <allOfMetaclassSelector extent="@{extent}" metaclass="Foundation::Core::Generalization"/>
+                    </selector>
+                    <evaluate>
+                      <tasks>
+                        <ref.get property="gen" path="parent" name="gen.parent"/>
+                      </tasks>
+
+                        <isequal property1="type" property2="gen.parent"/>
+
+                    </evaluate>
+                  </exists>
+                </not>
+                <not>
+                  <exists iterator="dep">
+                    <selector>
+                      <allOfMetaclassSelector extent="@{extent}" metaclass="Foundation::Core::Dependency"/>
+                    </selector>
+                    <evaluate>
+                      <tasks>
+                        <ref.get property="dep" path="supplier" name="suppliers"/>
+                      </tasks>
+
+                        <not>
+                          <isin property="type" list="suppliers"/>
+                        </not>
+
+                    </evaluate>
+                  </exists>
+                </not>
+              </and>
+            </select>
+
+            <tasks>
+               <ref.destroy property="type"/>
+            </tasks>
+          </for>
+
+          <remove.obsolete.generalizations extent="@{extent}"/>
+
+        </tasks>
+      </for>
+    </sequential>
+  </macrodef>
+
+  <!--
+    Remove generalzations with no children a parent
+    -->
+  <macrodef name="remove.obsolete.generalizations">
+    <attribute name="extent" description="The name of the extent where the model is loaded"/>
+    <sequential>
+        <for>
+          <select>
+            <allOfMetaclassSelector extent="@{extent}" metaclass="Foundation::Core::Generalization"/>
+
+            <evaluate>
+              <tasks>
+                <ref.get path="child"  name="child"/>
+                <ref.get path="parent" name="parent"/>
+              </tasks>
+
+                <or>
+                  <isempty property="child"/>
+                  <isempty property="parent"/>
+                </or>
+
+            </evaluate>
+          </select>
+
+          <tasks>
+             <ref.destroy/>
+          </tasks>
+        </for>
+    </sequential>
+  </macrodef>
+
+  <!--
+     Remove the classifier with the name provided only if it is not an attribute type, association end or depenency supplier.
+    -->
+  <macrodef name="remove.explicit.classifier">
+    <attribute name="extent" description="The name of the extent where the model is loaded"/>
+    <attribute name="name"      description="the name of the classifier to remove"/>
+    <attribute name="metaclass" description="the metaclass instances of which to be destroyed"/>
+    <sequential>
+
+      <for iterator="type">
+        <select>
+          <allOfMetaclassSelector extent="@{extent}" metaclass="@{metaclass}"/>
+
+          <and>
+            <evaluate>
+              <tasks>
+                <ref.get property="type" path="name" name="type.name"/>
+              </tasks>
+
+                <matches string="${type.name}" pattern="(?i)^@{name}$"/>
+
+            </evaluate>
+
+              <for.each iterator="attribute">
+                <allOfMetaclassSelector extent="@{extent}" metaclass="Foundation::Core::Attribute"/>
+
+                <evaluate>
+                  <tasks>
+                    <ref.get property="attribute" path="type" name="attribute.type"/>
+                  </tasks>
+                  <not>
+                    <isequal property1="type" property2="attribute.type"/>
+                  </not>
+                </evaluate>
+              </for.each>
+              <for.each iterator="end">
+                <allOfMetaclassSelector extent="@{extent}" metaclass="Foundation::Core::AssociationEnd"/>
+                <evaluate>
+                  <tasks>
+                    <ref.get property="end" path="type" name="end.type"/>
+                  </tasks>
+
+                  <not>
+                    <isequal property1="type" property2="end.type"/>
+                  </not>
+                </evaluate>
+              </for.each>
+              <for.each iterator="parameter">
+                <allOfMetaclassSelector extent="@{extent}" metaclass="Foundation::Core::Parameter"/>
+
+                <evaluate>
+                  <tasks>
+                    <ref.get property="parameter" path="type" name="parameter.type"/>
+                  </tasks>
+
+                  <not>
+                    <isequal property1="type" property2="parameter.type"/>
+                   </not>
+                </evaluate>
+              </for.each>
+
+              <for.each iterator="dep">
+                <allOfMetaclassSelector extent="@{extent}" metaclass="Foundation::Core::Dependency"/>
+
+                <evaluate>
+                  <tasks>
+                     <ref.get property="dep" path="supplier" name="suppliers"/>
+                  </tasks>
+
+                      <isin property="type" list="suppliers"/>
+
+                </evaluate>
+              </for.each>
+          </and>
+        </select>
+
+        <tasks>
+           <ref.destroy property="type"/>
+        </tasks>
+      </for>
+
+      <remove.obsolete.generalizations extent="@{extent}"/>
+
+    </sequential>
+  </macrodef>
+
+  <!--
+    Set the owner to null (unbind) of the methods in the owner.class that have name matching the regular expression
+    -->
+  <macrodef name="unbind.methods.by.name">
+    <attribute name="owner.class" description="The name of the property with the class/interface that holds the method"/>
+    <attribute name="name.regex"  description="The regular expression on the method name to unbind the matching classes"/>
+    <sequential>
+      <!--
+        Exclude from processing any method related to the association/attribute to create
+        -->
+      <for> <!-- for each method containing the association name-->
+        <selector>
+          <ref.get path="feature"/>
+        </selector>
+         <condition>
+            <evaluate>
+              <tasks>
+                <ref.get path="name" name="name"/>
+              </tasks>
+
+                <and>
+                   <isinstanceof metaclass="Foundation::Core::Operation"/>
+
+                   <matches string="${name}" pattern="@{name.regex}"/>
+                </and>
+
+            </evaluate>
+         </condition>
+         <tasks>
+           <ref.get path="owner.name" name="class.name"/>
+           <ref.get path="name"       name="method.name"/>
+           <echo> Remove association support method: ${class.name}.${method.name} for association ${common.name}</echo>
+
+           <ref.set path="owner"/> <!-- set owner to null -->
+         </tasks>
+      </for>
+    </sequential>
+  </macrodef>
+
+  <!--
+    Remove empty interfaces
+    -->
+  <macrodef name="remove.empty.interfaces">
+    <attribute name="extent" description="The name of the extent where the model is loaded"/>
+    <sequential>
+        <for>
+          <select>
+            <allOfMetaclassSelector extent="@{extent}" metaclass="Foundation::Core::Interface"/>
+            <evaluate>
+              <tasks> <!-- BUG. FIX! -->
+                <ref.get  path="feature" name="feature"/>
+                <uml13.get path="associationEnd" name="end"/>
+              </tasks>
+
+                <not>
+                  <isempty/>
+                </not>
+
+            </evaluate>
+
+
+            <and>
+              <isempty property="feature"/> <!-- no methods in the interface -->
+
+              <isempty property="end"/> <!-- not being an end of any association-->
+
+              <not>   <!-- the interface is not a parameter type -->
+                <exists iterator="parameter">
+                  <selector>
+                    <allOfMetaclassSelector extent="@{extent}" metaclass="Foundation::Core::Parameter"/>
+                  </selector>
+                  <evaluate>
+                    <tasks>
+                      <ref.get property="parameter" path="type" name="parameter.type"/>
+                    </tasks>
+
+                      <isequal property1="this" property2="parameter.type"/>
+
+                  </evaluate>
+                </exists>
+              </not>
+            </and>
+          </select>
+
+          <tasks>
+             <!-- Remove any generalization ending at this -->
+             <for>
+               <ref.get path="generalization"/>
+
+               <tasks>
+                 <ref.destroy/>
+              </tasks>
+             </for>
+             <for>
+               <ref.get path="specialization"/>
+
+               <tasks>
+                 <ref.destroy/>
+               </tasks>
+             </for>
+             <ref.get path="name" name="interface.name"/>
+             <ref.destroy/>
+             <echo> Removed interface: ${interface.name}</echo>
+          </tasks>
+        </for>
+    </sequential>
+  </macrodef>
+
+  <!--
+     Test: there are no attributes with the same name in the same class
+    -->
+  <macrodef name="assert.no.repeated.attributes">
+    <attribute name="extent" description="The name of the extent where the model is loaded"/>
+    <sequential>
+        <for iterator="owner">
+          <allOfMetaclassSelector extent="@{extent}" metaclass="Foundation::Core::Class"/>
+
+          <tasks>
+            <for iterator="attribute">
+              <select> <!-- any duplicated attribute -->
+                <select> <!-- any attribute -->
+                  <ref.get property="owner" path="feature"/>
+
+                  <isinstanceof metaclass="Foundation::Core::Attribute"/>
+                </select>
+
+                <exists iterator="other.attribute">
+                  <select> <!-- any attribute -->
+                    <ref.get property="owner" path="feature"/>
+
+                    <isinstanceof metaclass="Foundation::Core::Attribute"/>
+                  </select>
+
+                   <and>
+                      <not>
+                        <isequal property1="other.attribute" property2="attribute"/>
+                      </not>
+
+                      <evaluate>
+                        <tasks>
+                          <ref.get property="attribute"      path="name" name="attribute.name"/>
+                          <ref.get property="other.attribute" path="name" name="other.attribute.name"/>
+                        </tasks>
+
+                        <matches string="${attribute.name}" pattern="^(?i)${other.attribute.name}$"/>
+
+                      </evaluate>
+                   </and>
+                </exists>
+              </select>
+
+              <tasks>
+                 <ref.get property="owner"    path="name" name="owner.name"/>
+                 <ref.get property="attribute" path="name" name="name"/>
+                 <echo> Found duplicated attribute: ${owner.name}.${name}</echo>
+              </tasks>
+            </for>
+          </tasks>
+        </for>
+    </sequential>
+  </macrodef>
+
+  <!--
+     Test: there are no associations with the same name at the other end in the same class
+    -->
+  <macrodef name="assert.no.repeated.associations">
+    <attribute name="extent" description="The name of the extent where the model is loaded"/>
+    <sequential>
+        <for iterator="owner">
+          <allOfMetaclassSelector extent="@{extent}" metaclass="Foundation::Core::Class"/>
+
+          <tasks>
+            <!--
+               Check all associations from the owner class
+              -->
+            <uml13.get property="owner" path="associationEnd" name="this.ends"/>
+
+            <for iterator="this.end.1">
+              <select>
+                <propertySelector property="this.ends"/>
+                <and>
+                    <evaluate>
+                      <tasks>
+                         <wrap.method method="getOtherAssociationEnd" property="this.end.1" name="other.end.1"/>
+
+                         <ref.get property="other.end.1" path="name" name="other.end.name"/>
+                      </tasks>
+
+                        <not>
+                           <isempty property="other.end.name"/> <!-- not empty role at the other end-->
+                        </not>
+
+                    </evaluate>
+
+                    <exists iterator="this.end.2">
+                      <propertySelector property="this.ends"/>
+
+                      <evaluate>
+                        <tasks>
+                           <wrap.method method="getOtherAssociationEnd" property="this.end.1" name="other.end.1"/>
+                           <wrap.method method="getOtherAssociationEnd" property="this.end.2" name="other.end.2"/>
+
+                           <ref.get property="other.end.1" path="name" name="other.end.1.name"/>
+                           <ref.get property="other.end.2" path="name" name="other.end.2.name"/>
+                        </tasks>
+
+                          <and>
+                             <not>
+                               <isequal property1="this.end.1" property2="this.end.2"/> <!-- two different associations from the owner class -->
+                             </not>
+
+                             <isequal property1="other.end.1.name" property2="other.end.2.name"/> <!-- same names at the other end -->
+                          </and>
+
+                      </evaluate>
+                    </exists>
+                 </and>
+              </select>
+              <tasks>
+                <ref.get property="owner" path="name" name="owner.name"/>
+
+                <wrap.method method="getOtherAssociationEnd" property="this.end.1" name="other.end.1"/>
+                <ref.get property="other.end.1" path="name" name="other.end.name"/>
+
+                <echo> Found repeated association: ${owner.name}.${other.end.name}</echo>
+              </tasks>
+            </for>
+          </tasks>
+        </for>
+    </sequential>
+  </macrodef>
+
+  <!--
+     Test: there are no methods that possible association or attribute methods left
+    -->
+  <macrodef name="assert.no.possible.associations">
+    <attribute name="extent" description="The name of the extent where the model is loaded"/>
+    <attribute name="setter.prefix" default="set" description="the verb used as a prefix of the setter methods to check. Default: set"/>
+    <attribute name="getter.prefix" default="get" description="the verb used as a prefix of the getter methods to check. Default: set"/>
+    <attribute name="excluded.classses" default="" description="a comma-separated list of simple class names not to test (becasue they are known to have false positives)"/>
+    <sequential>
+      <for iterator="owner">
+        <select> <!-- any class that is not explicitly excluded -->
+          <allOfMetaclassSelector extent="@{extent}" metaclass="Foundation::Core::Class"/>
+
+          <evaluate>
+            <tasks>
+              <ref.get property="owner" path="name" name="name"/>
+            </tasks>
+
+            <not> <!-- an acceptable class name --> <!-- TODO check the regex -->
+              <matches string="@{excluded.classses}," pattern="${name}[ ,;]+"/>
+            </not>
+          </evaluate>
+        </select>
+
+        <tasks>
+          <for iterator="method">
+            <select>
+              <select> <!-- any owned method -->
+                <ref.get property="owner" path="feature"/>
+
+                <isinstanceof property="method" metaclass="Foundation::Core::Operation"/>
+              </select>
+
+              <evaluate>
+                <tasks>
+                  <ref.get property="method" path="name" name="method.name"/>
+                </tasks>
+
+                <and>
+                  <matches string="${method.name}" pattern="^@{setter.prefix}.*$"/> <!-- a setter method -->
+
+                  <exists iterator="other.method">
+                    <select> <!-- any owned method -->
+                      <ref.get property="owner" path="feature"/>
+
+                      <isinstanceof property="method" metaclass="Foundation::Core::Operation"/>
+                    </select>
+
+                    <evaluate>
+                      <tasks>
+                        <ref.get property="other.method" path="name" name="other.method.name"/>
+
+                        <!-- extract a common name substring for both methods -->
+                        <string.replace string="${method.name}${other.method.name}"
+                                        regex="^(?i)@{setter.prefix}(.*).*@{getter.prefix}\1.*$"
+                                        replacement="$1" name="common.name"/>
+
+                        <echo level="verbose"> ${method.name}, ${other.method.name} -> common: ${common.name}</echo>
+                      </tasks>
+
+                      <and>
+                         <matches  string="${other.method.name}" pattern="^@{getter.prefix}.*$"/> <!-- a getter method -->
+
+                         <not>
+                           <isempty property="common.name"/> <!-- non-empty common part of the names of both methods -->
+                         </not>
+                      </and>
+                    </evaluate>
+                  </exists>
+                </and>
+              </evaluate>
+            </select>
+
+            <tasks>
+               <ref.get property="owner" path="name" name="owner.name"/>
+               <ref.get property="method" path="name" name="name"/>
+               <echo> Found possible association or attribute support method: ${owner.name}.${name}</echo>
+            </tasks>
+          </for>
+        </tasks>
+      </for>
+    </sequential>
+  </macrodef>
+</antlib>

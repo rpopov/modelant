@@ -1,0 +1,46 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>net.mdatools</groupId>
+  <artifactId>modelant.uml13.maven.test</artifactId>
+  <version>@project.version@</version>
+
+  <description>The MOF 1.4 maven plugin tests</description>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>net.mdatools</groupId>
+        <artifactId>modelant.uml13.maven.plugin</artifactId>
+        <version>@project.version@</version>
+         <dependencies>
+           <dependency>
+               <groupId>org.apache.derby</groupId>
+               <artifactId>derby</artifactId>
+               <version>10.13.1.1</version>
+           </dependency>    
+         </dependencies>        
+        <executions>
+          <execution>
+            <phase>compile</phase>
+            <goals>
+              <goal>database-to-uml13</goal>
+            </goals>
+            <configuration>
+              <url>jdbc:derby:memory:myDb;create=true</url>
+              <user>sa</user>
+              <password>sa</password>
+              <schema>SA, SYS</schema>
+              <driver>org.apache.derby.jdbc.EmbeddedDriver</driver>
+              
+              <outputFile>target/sa-UML13.xmi</outputFile>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="build-products" basedir="..\.." default="all" >
+
+  <import file="..\..\..\..\env.xml"/>
+
+  <typedef resource="net/mdatools/modelant/core/antlib.xml" loaderRef="loader">
+    <classpath>
+      <!--
+        All the build modelant components
+        -->
+      <fileset dir="${root.dist}/lib" erroronmissingdir="false">
+        <include name="*.jar"/>
+      </fileset>
+      <!--
+        The module-specific classpath, used for development
+        -->
+      <pathelement path="${java.class.path}"/>
+    </classpath>
+  </typedef>
+  <typedef resource="net/mdatools/modelant/template/antlib.xml" loaderRef="loader"/>
+
+  <target name="all">
+    <property name="this" value="wrapped value"/>
+
+    <template.init root="${test}/jsp"
+                  context="test"
+                  classpathref="classpath"/>
+
+    <template context="test"
+              file="${out}/src/out.txt"
+              method="renderProperty"/>
+  </target>
+</project>

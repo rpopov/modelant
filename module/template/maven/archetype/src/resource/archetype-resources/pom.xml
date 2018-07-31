@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+#if ($parentArtifactId != $artifactId 
+     || $parentGroupId != $groupId) 
+  <parent>
+    <groupId>${parentGroupId}</groupId>
+    <artifactId>${parentArtifactId}</artifactId>
+    <version>${parentVersion}</version>
+  </parent>
+  
+#end  
+  <groupId>${groupId}</groupId>
+  <artifactId>${artifactId}</artifactId>
+  <version>${version}</version>
+
+  <description>JMI (JCP-40) API to access ${metamodelUrl} models</description>
+
+  <dependencies>
+    <!-- Standard JMI / JCP-40 API -->
+    <dependency>
+      <groupId>org.andromda.thirdparty.jmi</groupId>
+      <artifactId>jmi</artifactId>
+      <version>20030918</version>
+    </dependency>
+    <dependency>
+      <groupId>org.andromda.thirdparty.jmi</groupId>
+      <artifactId>mof</artifactId>
+      <version>20030918</version>
+    </dependency>
+  </dependencies>
+  
+  <profiles>
+    <profile>
+      <id>generate</id>
+      
+      <!--
+        Active only of there are no sources generated yet. 
+        In order to generate the sources again, delete the sources directory.
+        -->
+      <activation>
+        <file>
+          <missing>${project.build.sourceDirectory}</missing>
+        </file>
+      </activation>        
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>net.mdatools</groupId>
+            <artifactId>modelant.repository.maven.plugin</artifactId>
+            <version>${project.version}</version>
+            
+            <!--
+               Include the repository's implementation in the classpath of the plugin
+               in order to allow it instantiate the repo.
+              -->
+            <dependencies>
+              <dependency>
+                <groupId>net.mdatools</groupId>
+                <artifactId>modelant.repository.impl</artifactId>
+                <version>${project.version}</version>
+              </dependency>    
+            </dependencies>
+            
+            <executions>
+              <execution>
+                <id>generate-model-api</id>
+                <phase>generate-sources</phase>
+                <goals>
+                  <goal>generate-model-api</goal>
+                </goals>
+                <configuration>
+                  <metamodelFile>${metamodelUrl}</metamodelFile>
+                </configuration>
+              </execution>
+            </executions>            
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>  
+</project>

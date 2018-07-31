@@ -1,0 +1,34 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>net.mdatools</groupId>
+  <artifactId>modelant.uml13.maven.test</artifactId>
+  <version>@project.version@</version>
+
+  <description>The UML 1.3 maven plugin tests</description>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>net.mdatools</groupId>
+        <artifactId>modelant.uml13.maven.plugin</artifactId>
+        <version>@project.version@</version>
+        <executions>
+          <execution>
+            <phase>compile</phase>
+            <goals>
+              <goal>xsd-to-uml13</goal>
+            </goals>
+            <configuration>
+              <schemaFile>src/xsd/ejb-jar_2_1.xsd</schemaFile>
+              <outputFile>target/ejb-jar-UML13.xmi</outputFile>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

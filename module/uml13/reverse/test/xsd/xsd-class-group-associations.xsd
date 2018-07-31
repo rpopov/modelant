@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://java.sun.com/xml/ns/j2ee" xmlns:j2ee="http://java.sun.com/xml/ns/j2ee" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.4">
+
+  <xsd:group name="descriptionGroup">
+    <xsd:sequence> <!-- 3 associations -->
+      <xsd:element name="description"  type="j2ee:iconType" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="display-name" type="j2ee:iconType" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="icon"         type="j2ee:iconType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:group>
+
+  <xsd:complexType name="listenerType">
+    <xsd:sequence>
+      <xsd:group ref="j2ee:descriptionGroup"/> <!-- inlined 3 associations + 1 -->
+      <xsd:element name="listener-class" type="xsd:string"></xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="id" type="xsd:ID"/>
+  </xsd:complexType>
+
+  
+  <xsd:complexType name="iconType">
+    <xsd:sequence>
+      <xsd:element name="small-icon" type="xsd:string" minOccurs="0"></xsd:element>
+      <xsd:element name="large-icon" type="xsd:string" minOccurs="0"></xsd:element>
+    </xsd:sequence>
+    <xsd:attribute name="id" type="xsd:ID"/>
+  </xsd:complexType>
+ 
+</xsd:schema>

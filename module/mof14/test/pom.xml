@@ -1,0 +1,32 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>net.mdatools</groupId>
+    <artifactId>modelant.mof14</artifactId>
+    <version>${revision}</version>
+  </parent>
+
+  <artifactId>modelant.mof14.test</artifactId>
+  <description>The MOF 1.4 meta-metamodeling tests</description>
+
+  <dependencies>
+    <dependency>
+      <groupId>net.mdatools</groupId>
+      <artifactId>modelant.mof14.metamodel</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>net.mdatools</groupId>
+      <artifactId>modelant.core.impl</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>net.mdatools</groupId>
+      <artifactId>modelant.repository.impl</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+</project>

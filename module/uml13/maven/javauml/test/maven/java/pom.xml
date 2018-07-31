@@ -1,0 +1,52 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <groupId>net.mdatools</groupId>
+  <artifactId>modelant.uml13.maven.test.java</artifactId>
+  <version>@project.version@</version>
+
+  <description>Test the reverse enginering Java to UMl 1.3 in a Maven plugin project</description>
+ 
+  <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <debug.port>8901</debug.port>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>net.mdatools</groupId>
+        <artifactId>modelant.uml13.maven.javauml</artifactId>
+        <version>@project.version@</version>
+        <executions>
+          <execution>
+            <phase>compile</phase>
+            <goals>
+              <goal>java-to-uml13</goal>
+            </goals>
+            <configuration>
+              <additionalJOptions>
+                <additionalJOption>-J-Xdebug</additionalJOption>
+                <additionalJOption>-J-Xnoagent</additionalJOption>
+                <additionalJOption>-J-Xrunjdwp:transport=dt_socket,address=${debug.port},server=y,suspend=n</additionalJOption>
+              </additionalJOptions>
+              <showErrors>true</showErrors>
+              <modelFile>${basedir}/target/model.xmi</modelFile>
+              <sourcepath>${basedir}/src/main/resources</sourcepath>
+              <includeDependencySources>false</includeDependencySources>
+              <includeTransitiveDependencySources>false</includeTransitiveDependencySources>
+              <debug>false</debug>
+              <verbose>false</verbose>              
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

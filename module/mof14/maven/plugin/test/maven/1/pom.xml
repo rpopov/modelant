@@ -1,0 +1,415 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <groupId>net.mdatools</groupId>
+  <artifactId>modelant.mof14.maven.test</artifactId>
+  <version>@project.parent.version@</version>
+  
+  <description>Maven plugin for ModelAnt MOF 1.4 tests</description>
+
+  <dependencies>
+    <dependency>
+      <groupId>net.mdatools</groupId>
+      <artifactId>modelant.mof14.metamodel</artifactId>
+      <version>@project.version@</version>
+    </dependency>
+    <dependency>
+      <groupId>net.mdatools</groupId>
+      <artifactId>modelant.mof14.maven.plugin</artifactId>
+      <version>@project.version@</version>
+    </dependency> 
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>net.mdatools</groupId>
+        <artifactId>modelant.mof14.maven.plugin</artifactId>
+        <version>@project.version@</version>
+        <executions>
+          <execution>
+            <phase>compile</phase>
+            <goals>
+              <goal>compare-mof14-metamodels</goal>
+            </goals>
+            <configuration>
+              <sourceMetamodel>src/resource/01-12-02_Diff_modelant.xml</sourceMetamodel>
+              <targetMetamodel>src/resource/01-02-15_Diff_modelant.xml</targetMetamodel>
+              <equals>
+                <equal>
+                   <source>Foundation::Data_Types</source>
+                   <target>Data_Types</target>
+                </equal>
+                <equal>
+                   <source>Foundation::Core</source>
+                   <target>Core</target>
+                </equal>
+                <equal>
+                   <source>Behavioral_Elements::Common_Behavior</source>
+                   <target>Common_Behavior</target>
+                </equal>
+                <equal>
+                   <source>Behavioral_Elements::Use_Cases</source>
+                   <target>Use_Cases</target>
+                </equal>
+                <equal>
+                   <source>Behavioral_Elements::State_Machines</source>
+                   <target>State_Machines</target>
+                </equal>
+                <equal>
+                   <source>Behavioral_Elements::Collaborations</source>
+                   <target>Collaborations</target>
+                </equal>
+                 <equal>
+                   <source>Behavioral_Elements::Activity_Graphs</source>
+                   <target>Activity_Graphs</target>
+                </equal>
+
+                <equal>
+                  <source>Foundation::Extension_Mechanisms</source>
+                  <target>Core</target>
+                </equal>
+
+                <!--equal>
+                  <source>Model_Management</source>
+                  <target>Model_Management</target>
+                </equal-->
+                
+                <equal>
+                  <source>Model_Management::A_modelElement_elementImport</source> 
+                  <target>Model_Management::A_importedElement_elementImport</target>
+                </equal>
+                <equal>  <!-- AssociationEnd -->
+                  <source>Model_Management::A_modelElement_elementImport::modelElement</source> 
+                  <target>Model_Management::A_importedElement_elementImport::importedElement</target>
+                </equal>
+                <equal>  <!-- Reference -->
+                  <source>Model_Management::ElementImport::modelElement</source> 
+                  <target>Model_Management::ElementImport::importedElement</target>
+                </equal>
+                
+                <equal>
+                  <source>Behavioral_Elements::Collaborations::A_collaboration_representedClassifier</source> 
+                  <target>Collaborations::A_representedClassifier_collaboration</target>
+                </equal>
+                
+                <equal>                
+                  <source>Behavioral_Elements::Collaborations::A_message2_sender</source> 
+                  <target>Collaborations::A_message_sender</target>
+                </equal>
+                <equal> <!-- AssociationEnd -->
+                  <source>Behavioral_Elements::Collaborations::A_message2_sender::message2</source> 
+                  <target>Collaborations::A_message_sender::message</target>
+                </equal>
+                <!-- No reference renaming as this becomes an unidirectional association-->
+                
+                <equal>
+                  <source>Behavioral_Elements::Collaborations::A_message4_activator</source>
+                  <target>Collaborations::A_message_activator</target>
+                </equal>
+                <equal> <!-- AssociationEnd -->
+                  <source>Behavioral_Elements::Collaborations::A_message4_activator::message4</source> 
+                  <target>Collaborations::A_message_activator::message</target>
+                </equal>
+                <!-- No reference renaming as this becomes an unidirectional association-->
+                
+                <equal>
+                  <source>Behavioral_Elements::Collaborations::A_receiver_message1</source>
+                  <target>Collaborations::A_receiver_message</target>
+                </equal>
+                <equal> <!-- AssociationEnd -->
+                  <source>Behavioral_Elements::Collaborations::A_receiver_message1::message1</source> 
+                  <target>Collaborations::A_receiver_message::message</target>
+                </equal>
+                <!-- No reference renaming as this becomes an unidirectional association-->
+                                
+                <equal>
+                  <source>Behavioral_Elements::Common_Behavior::A_argument_stimulus1</source>
+                  <target>Common_Behavior::A_argument_stimulus</target>
+                </equal>
+                <equal> <!-- AssociationEnd -->
+                  <source>Behavioral_Elements::Common_Behavior::A_argument_stimulus1::stimulus1</source> 
+                  <target>Common_Behavior::A_argument_stimulus::stimulus</target>
+                </equal>
+                <!-- No reference renaming as this becomes an unidirectional association-->
+                                
+                <equal>
+                  <source>Behavioral_Elements::Common_Behavior::A_receiver_stimulus2</source>
+                  <target>Common_Behavior::A_receiver_stimulus</target>
+                </equal>
+                <equal> <!-- AssociationEnd -->
+                  <source>Behavioral_Elements::Common_Behavior::A_receiver_stimulus2::stimulus2</source> 
+                  <target>Common_Behavior::A_receiver_stimulus::stimulus</target>
+                </equal>
+                <!-- No reference renaming as this becomes an unidirectional association-->
+                                                
+                <equal>
+                  <source>Behavioral_Elements::Common_Behavior::A_stimulus3_sender</source>
+                  <target>Common_Behavior::A_stimulus_sender</target>
+                </equal>
+                <equal> <!-- AssociationEnd -->
+                  <source>Behavioral_Elements::Common_Behavior::A_stimulus3_sender::stimulus3</source> 
+                  <target>Common_Behavior::A_stimulus_sender::stimulus</target>
+                </equal>
+                <!-- No reference renaming as this becomes an unidirectional association-->
+                
+                <!-- A_stimulus_communicationLink becomes unidirectional -->
+                <!-- A_behavior_context becomes unidirectional -->
+                <!-- A_signal_reception becomes unidirectional -->
+                <!-- A_signal_sendAction becomes unidirectional -->
+                <!-- A_transition_trigger becomes unidirectional -->
+                <!-- A_state_internalTransition becomes unidirectional -->
+                <!-- A_state_deferrableEvent becomes unidirectional -->
+                <!-- A_extensionPoint_extend becomes unidirectional --> 
+                <!-- A_parent_specialization becomes unidirectional -->
+                <!-- A_resident_elementResidence becomes unidirectional -->
+                <!-- A_presentation_subject becomes unidirectional -->
+                <!-- A_supplier_supplierDependency becomes unidirectional -->
+                <!-- A_specification_method becomes unidirectional  -->
+                <!-- A_stereotype_extendedElement becomes unidirectional -->                
+                <!-- A_modelElement_taggedValue becomes bi-directional -->
+                <!-- A_context_raisedSignal -->
+                <!-- A_dispatchAction_stimulus -->
+                
+                <equal>
+                  <source>Behavioral_Elements::State_Machines::A_state1_entry</source>
+                  <target>State_Machines::A_state_entry</target>
+                </equal>
+                <equal> <!-- AssociationEnd -->
+                  <source>Behavioral_Elements::State_Machines::A_state1_entry::state1</source> 
+                  <target>State_Machines::A_state_entry::state</target>
+                </equal>
+                <!-- No reference renaming as this becomes an unidirectional association-->
+                
+                <equal>
+                  <source>Behavioral_Elements::State_Machines::A_state2_exit</source>
+                  <target>State_Machines::A_state_exit</target>
+                </equal>
+                <equal>
+                  <source>Behavioral_Elements::State_Machines::A_state2_exit::state2</source> 
+                  <target>State_Machines::A_state_exit::state</target>
+                </equal>
+                <!-- No reference renaming as this becomes an unidirectional association-->
+                                
+                <equal>
+                  <source>Behavioral_Elements::State_Machines::A_state3_doActivity</source>
+                  <target>State_Machines::A_state_doActivity</target>
+                </equal>
+                <equal> <!-- AssociationEnd -->
+                  <source>Behavioral_Elements::State_Machines::A_state3_doActivity::state3</source> 
+                  <target>State_Machines::A_state_doActivity::state</target>
+                </equal>
+                <!-- No reference renaming as this becomes an unidirectional association-->
+                
+                <equal>
+                  <source>Behavioral_Elements::Use_Cases::A_base_extend2</source>
+                  <target>Use_Cases::A_base_extender</target>
+                </equal>
+                <equal> <!-- AssociationEnd -->
+                  <source>Behavioral_Elements::Use_Cases::A_base_extend2::extend2</source> 
+                  <target>Use_Cases::A_base_extender::extender</target>
+                </equal>
+                <!-- No reference renaming as this becomes an unidirectional association-->
+                
+                <equal>
+                  <source>Behavioral_Elements::Use_Cases::A_include2_base</source>
+                  <target>Use_Cases::A_include_base</target>
+                </equal>
+                <equal> <!-- AssociationEnd -->
+                  <source>Behavioral_Elements::Use_Cases::A_include2_base::include2</source> 
+                  <target>Use_Cases::A_include_base::include</target>
+                </equal>
+                <equal> <!-- Reference -->
+                  <source>Behavioral_Elements::Use_Cases::UseCase::include2</source> 
+                  <target>Use_Cases::UseCase::include</target>
+                </equal>
+                
+                <equal>
+                  <source>Behavioral_Elements::Use_Cases::A_include_addition</source>
+                  <target>Use_Cases::A_includer_addition</target>
+                </equal>
+                <equal> <!-- AssociationEnd -->
+                  <source>Behavioral_Elements::Use_Cases::A_include_addition::include</source> 
+                  <target>Use_Cases::A_includer_addition::includer</target>
+                </equal>
+                <!-- No reference renaming as this becomes an unidirectional association-->                
+                
+                <equal>
+                  <source>Behavioral_Elements::State_Machines::A_subMachineState_submachine</source>
+                  <target>State_Machines::A_submachineState_submachine</target>
+                </equal>
+                <equal> <!-- AssociationEnd -->
+                  <source>Behavioral_Elements::State_Machines::A_subMachineState_submachine::subMachineState</source> 
+                  <target>State_Machines::A_submachineState_submachine::submachineState</target>
+                </equal>
+                <equal> <!-- Reference -->
+                  <source>Behavioral_Elements::State_Machines::StateMachine::subMachineState</source> 
+                  <target>State_Machines::StateMachine::submachineState</target>
+                </equal>
+                
+                <equal>
+                  <source>Foundation::Core::A_modelElement_templateParameter</source>
+                  <target>Core::A_template_templateParameter</target>
+                </equal>
+                <equal> <!-- AssociationEnd -->
+                  <source>Foundation::Core::A_modelElement_templateParameter::modelElement</source> 
+                  <target>Core::A_template_templateParameter::template</target>
+                </equal>
+                <equal> <!-- Reference -->
+                  <source>Foundation::Core::TemplateParameter::modelElement</source> 
+                  <target>Core::TemplateParameter::template</target>
+                </equal>                
+
+                
+                <equal>
+                  <source>Foundation::Core::A_modelElement2_templateParameter2</source>
+                  <target>Core::A_template_templateParameter</target>
+                </equal>
+                <equal> <!-- AssociationEnd -->
+                  <source>Foundation::Core::A_modelElement2_templateParameter2::modelElement2</source> 
+                  <target>Core::A_template_templateParameter::template</target>
+                </equal>                
+                <equal> <!-- Reference -->
+                  <source>Foundation::Core::TemplateParameter::modelElement2</source> 
+                  <target>Core::TemplateParameter::template</target>
+                </equal>                
+                <equal> <!-- AssociationEnd -->
+                  <source>Foundation::Core::A_modelElement2_templateParameter2::templateParameter2</source> 
+                  <target>Core::A_template_templateParameter::templateParameter</target>
+                </equal>
+                <equal> <!-- Reference -->
+                  <source>Foundation::Core::ModelElement::templateParameter2</source> 
+                  <target>Core::ModelElement::templateParameter</target>
+                </equal>
+                
+                <equal>
+                  <source>Foundation::Core::A_defaultElement_templateParameter3</source>
+                  <target>Core::A_template_templateParameter</target>
+                </equal>
+                <equal> <!-- AssociationEnd -->
+                  <source>Foundation::Core::A_defaultElement_templateParameter3::defaultElement</source> 
+                  <target>Core::A_template_templateParameter::template</target>
+                </equal>
+                <equal> <!-- Reference -->
+                  <source>Foundation::Core::TemplateParameter::defaultElement</source> 
+                  <target>Core::TemplateParameter::template</target>
+                </equal>                                
+                <equal> <!-- AssociationEnd -->
+                  <source>Foundation::Core::A_defaultElement_templateParameter3::templateParameter3</source> 
+                  <target>Core::A_template_templateParameter::templateParameter</target>
+                </equal>
+                <equal> <!-- Reference -->
+                  <source>Foundation::Core::ModelElement::templateParameter3</source> 
+                  <target>Core::ModelElement::templateParameter</target>
+                </equal>
+
+                <equal>
+                  <source>Behavioral_Elements::Collaborations::A_predecessor_message3</source>
+                  <target>Collaborations::A_predecessor_successor</target>
+                </equal>
+                <equal> <!-- AssociationEnd -->
+                  <source>Behavioral_Elements::Collaborations::A_predecessor_message3::message3</source> 
+                  <target>Collaborations::A_predecessor_successor::successor</target>
+                </equal>
+                <!-- No reference renaming as this is an unidirectional association-->
+                                
+                <equal>
+                  <source>Foundation::Core::A_implementationLocation_residentElement</source>
+                  <target>Core::A_container_residentElement</target>
+                </equal>
+                <equal> <!-- AssociationEnd -->
+                  <source>Foundation::Core::A_implementationLocation_residentElement::implementationLocation</source> 
+                  <target>Core::A_container_residentElement::container</target>
+                </equal>
+                <equal> <!-- Reference -->
+                  <source>Foundation::Core::ElementResidence::implementationLocation</source> 
+                  <target>Core::ElementResidence::container</target>
+                </equal>
+                
+                <equal>
+                  <source>Foundation::Core::A_deploymentLocation_resident</source>
+                  <target>Core::A_deploymentLocation_deployedComponent</target>
+                </equal>
+                <equal> <!-- AssociationEnd -->
+                  <source>Foundation::Core::A_deploymentLocation_resident::resident</source> 
+                  <target>Core::A_deploymentLocation_deployedComponent::deployedComponent</target>
+                </equal>
+                <equal> <!-- Reference -->
+                  <source>Foundation::Core::Node::resident</source> 
+                  <target>Core::Node::deployedComponent</target>
+                </equal>
+                                
+                <equal>
+                  <source>Foundation::Core::A_parameter_type</source>
+                  <target>Core::A_typedParameter_type</target>
+                </equal>
+                <equal> <!-- AssociationEnd -->
+                  <source>Foundation::Core::A_parameter_type::parameter</source> 
+                  <target>Core::A_typedParameter_type::typedParameter</target>
+                </equal>
+                <!-- No reference renaming as this is an unidirectional association-->
+                
+                <equal>
+                  <source>Foundation::Core::A_structuralFeature_type</source>
+                  <target>Core::A_typedFeature_type</target>
+                </equal>
+                <equal> <!-- AssociationEnd -->
+                  <source>Foundation::Core::A_structuralFeature_type::structuralFeature</source> 
+                  <target>Core::A_typedFeature_type::typedFeature</target>
+                </equal>
+                <!-- No reference renaming as this is an unidirectional association-->
+                                
+                <equal>
+                  <source>Foundation::Extension_Mechanisms::A_constrainedElement2_stereotypeConstraint</source> 
+                  <target>Core::A_constrainedStereotype_stereotypeConstraint</target>
+                </equal>
+                <equal> <!-- AssociationEnd -->
+                  <source>Foundation::Extension_Mechanisms::A_constrainedElement2_stereotypeConstraint::constrainedElement2</source> 
+                  <target>Core::A_constrainedStereotype_stereotypeConstraint::constrainedStereotype</target>
+                </equal>
+                <!-- No reference renaming as this is an unidirectional association-->
+                                
+                <equal>
+                  <source>Foundation::Core::A_participant_specification</source>
+                  <target>Core::A_specifiedEnd_specification</target>
+                </equal>
+                <equal> <!-- AssociationEnd -->
+                  <source>Foundation::Core::A_participant_specification::participant</source> 
+                  <target>Core::A_specifiedEnd_specification::specifiedEnd</target>
+                </equal>
+                <!-- No reference renaming as this is an unidirectional association-->                                
+                
+                <equal>
+                  <source>Foundation::Core::A_type_associationEnd</source>
+                  <target>Core::A_participant_association</target>
+                </equal>
+                <equal> <!-- AssociationEnd -->
+                  <source>Foundation::Core::A_type_associationEnd::associationEnd</source> 
+                  <target>Core::A_participant_association::association</target>
+                </equal>
+                <equal> <!-- AssociationEnd -->
+                  <source>Foundation::Core::A_type_associationEnd::type</source> 
+                  <target>Core::A_participant_association::participant</target>
+                </equal>
+                <equal> <!-- Reference -->
+                  <source>Foundation::Core::AssociationEnd::type</source> 
+                  <target>Core::AssociationEnd::participant</target>
+                </equal>
+                
+                <!-- A_attributeLink_attribute is kept as unidirectional -->
+                <equal>
+                  <source>Foundation::Extension_Mechanisms::A_requiredTag_stereotype</source>
+                  <target>Extension_Mechanisms::A_definedTag_owner</target>
+                </equal>
+                
+              </equals>
+              <export implementation="net.mdatools.modelant.core.operation.model.export.StructuredTextExport"/>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

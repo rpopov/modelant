@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ Copyright (c) 2010,2012 Rusi Popov, MDA Tools.net
+ All rights reserved. This program and the accompanying materials
+ are made available under the terms of the Eclipse Public License v1.0
+ which accompanies this distribution, and is available at
+ http://www.eclipse.org/legal/epl-v10.html
+
+ Contributors:
+    Rusi Popov (popovr@mdatools.net) - initial implementation
+ -->
+
+<!--
+   test script for
+  -->
+<project name="build-products" basedir="..\..">
+
+  <import file="..\..\..\..\env.xml"/>
+
+  <!--
+    Assumption: the needed libraries are already listed in classpath / classloader
+    -->
+  <typedef resource="uml13/meta.xml"/>
+  <typedef resource="net/mdatools/modelant/util/assert.xml"/>
+
+  <!-- Metamodel -->
+  <property name="repository.model" value="vegas" />
+
+  <property name="modelFileToImport"    value="${test.xml}/lars.xmi" />
+
+  <!-- Load the model in the global repository -->
+    <mdr work="${work}"/>
+    <uml13.load.metamodel/>
+    <uml13.instantiate extent="${repository.model}"/>
+
+    <!-- Import a vegas model in the model repository -->
+    <mdr.read.xmi extent="${repository.model}"
+                  file="${modelFileToImport}" />
+    <!-- TODO: check if this is needed -->
+    <!--uml13.begin.intensive.read extent="${repository.model}"/-->
+
+     <!--
+        NO SELECTION
+       -->
+      <select>
+        <allOfMetaclassSelector extent="${repository.model}" metaclass="Foundation::Core::Class"/>
+
+        <istrue value="false"/>
+      </select>
+      <assert.empty name="this"/>
+
+       <!--
+          ALL SELECTION + formatting
+         -->
+
+      <echo>Expected all class names listed</echo>
+      <for>
+        <select>
+          <allOfMetaclassSelector extent="${repository.model}" metaclass="Foundation::Core::Class"/>
+          <istrue value="true"/>
+        </select>
+        <tasks>
+           <ref.get name="name" path="name"/>
+
+           <format name="all.caps.formatted" value="${name}" format="allCapital"/>
+           <format name="all.lower.formatted" value="${name}" format="allLower"/>
+           <format name="first.lower.formatted" value="${name}" format="firstLower"/>
+           <format name="first.caprital.formatted" value="${name}" format="firstCapital"/>
+           <format name="no.change.formatted" value="${name}" format="noChange"/>
+           <echo>${name}
+      all.caps.formatted: ${all.caps.formatted}
+     all.lower.formatted: ${all.lower.formatted}
+   first.lower.formatted: ${first.lower.formatted}
+first.caprital.formatted: ${first.caprital.formatted}
+     no.change.formatted: ${no.change.formatted}</echo>
+        </tasks>
+      </for>
+
+<!--
+  Outermost package
+  -->
+    <!--getPackage extent="${repository.model}" package="" name="outermost"/-->
+    <ref.create extent="${repository.model}" metaclass="Foundation::Core::Class" name="new.class"/>
+
+    <ref.get property="new.class"  path="name" name="name"/>
+    <echo>expected null name: ${name}</echo>
+
+<!--
+  Dupcliacte class
+  -->
+    <ref.create.same property="new.class" name="new.new.class"/>
+    <echo>created: ${new.new.class}</echo>
+
+    <ref.verify property="new.new.class"/>
+
+    <ref.destroy property="new.new.class"/>
+
+    <property name="new.name" value="%%%"/>
+    <ref.set property="new.class" path="name" name="new.name"/>
+    <echo>new class: ${new.class}</echo>
+
+    <ref.get.enum extent="${repository.model}" package="Foundation::Data_Types" type="VisibilityKind" literal="vk_public" name="new.enum"/>
+    <echo>new enum: ${new.enum}</echo>
+
+    <ref.set property="new.class" path="visibility" name="new.enum"/>
+    <echo>changed class: ${new.class}</echo>
+
+
+    <!--
+      Pre-condition:
+      - each class has a namespace assigned
+      -->
+    <for>
+      <select>
+        <allOfMetaclassSelector extent="${repository.model}" metaclass="Foundation::Core::Class"/>
+        <evaluate>
+          <tasks>
+             <ref.get path="name" name="class.name"/>
+          </tasks>
+
+          <matches string="${class.name}" pattern="^[a-zA-Z0-9_]+$"/>
+        </evaluate>
+      </select>
+      <tasks>
+<!--
+  Get an attribute
+  -->
+         <ref.get path="name" name="name"/>
+         <echo> get an attribute (name): ${name}</echo>
+
+<!--
+  Get an associated
+  -->
+         <ref.get path="namespace" name="namespace"/>
+         <assert.not.empty name="namespace"/>
+
+<!--
+  Set an attribute
+  -->
+         <ref.get path="name" name="name1"/>
+         <ref.set path="name" name="name1"/>
+         <ref.get path="name" name="name2"/>
+         <assert.equals value1="${name1}" value2="${name2}"/> <!-- no change caused -->
+<!--
+  Set an associated
+  -->
+         <ref.get path="namespace" name="namespace1"/>
+         <ref.set path="namespace" name="namespace1"/>
+         <ref.get path="namespace" name="namespace2"/>
+         <assert.true>
+           <isequal property1="namespace1" property2="namespace2"/>
+         </assert.true>
+      </tasks>
+    </for>
+    <uml13.destroy/>
+</project>

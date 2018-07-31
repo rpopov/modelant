@@ -1,0 +1,68 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>net.mdatools</groupId>
+    <artifactId>modelant.uml13</artifactId>
+    <version>${revision}</version>
+  </parent>
+
+  <artifactId>modelant.uml13.reverse</artifactId>  
+
+  <dependencies>
+    <dependency>
+      <groupId>net.mdatools</groupId>
+      <artifactId>modelant.repository.api</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>net.mdatools</groupId>
+      <artifactId>modelant.repository.impl</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>net.mdatools</groupId>
+      <artifactId>modelant.uml13.metamodel</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>net.mdatools</groupId>
+      <artifactId>modelant.core.api</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>net.mdatools</groupId>
+      <artifactId>modelant.core.impl</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>net.mdatools</groupId>
+      <artifactId>modelant.uml13.api</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.sun.xsom</groupId>
+      <artifactId>xsom</artifactId>
+    </dependency>    
+    <dependency>
+      <groupId>com.thaiopensource</groupId>
+      <artifactId>trang</artifactId>
+    </dependency>    
+    <dependency>
+      <groupId>com.sun</groupId>
+      <artifactId>tools</artifactId>
+    </dependency>    
+    
+    <!-- TEST ONLY -->
+    
+    <dependency>
+        <groupId>org.apache.derby</groupId>
+        <artifactId>derby</artifactId>
+        <version>10.13.1.1</version>
+        <scope>test</scope>
+    </dependency>    
+  </dependencies>
+
+</project>

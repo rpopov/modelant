@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>net.mdatools</groupId>
+    <artifactId>modelant.template.maven</artifactId>
+    <version>${revision}</version>
+  </parent>
+  
+  <artifactId>modelant.template.maven.plugin</artifactId>
+
+  <packaging>maven-plugin</packaging>  <!-- Activates the plugin profile, defined in the root pom -->
+
+  <description>Maven plugin for ModelAnt templates</description>
+
+  <dependencies>  
+    <dependency>
+      <groupId>org.apache.maven.shared</groupId>
+      <artifactId>file-management</artifactId>
+    </dependency>
+  
+    <dependency>
+      <groupId>net.mdatools</groupId>
+      <artifactId>modelant.template.impl</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+  <!-- 
+    See http://maven.apache.org/guides/introduction/introduction-to-profiles.html  
+    -->   
+</project>

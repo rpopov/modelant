@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archetype-descriptor 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0"
+    xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.0.0 http://maven.apache.org/xsd/archetype-descriptor-1.0.0.xsd" 
+    name="modelant.metamodel.api">
+  
+  <requiredProperties>
+    <requiredProperty key="package"><defaultValue>${groupId}.${artifactId}</defaultValue></requiredProperty>
+
+    <requiredProperty key="parentGroupId"><defaultValue>${groupId}</defaultValue></requiredProperty>
+    <requiredProperty key="parentArtifactId"><defaultValue>${artifactId}</defaultValue></requiredProperty>
+    <requiredProperty key="parentVersion"><defaultValue>${version}</defaultValue></requiredProperty>
+ 
+    <requiredProperty key="metamodelUrl"/>
+  </requiredProperties>
+</archetype-descriptor>

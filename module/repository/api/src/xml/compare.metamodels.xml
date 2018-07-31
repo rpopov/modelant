@@ -1,0 +1,524 @@
+<?xml version="1.0"?>
+<!--
+ * Copyright (c) 2001,2012 Rusi Popov, MDA Tools.net
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Rusi Popov (popovr@mdatools.net) - initial implementation
+ -->
+
+<!--
+  An example script to compare the metamodels of UML 1.3 and UML 1.4. <br/>
+  Note the use of: <ul>
+  <li> <b>mdr.*</b> tasks to initialize the (meta)models repository and load UML 1.3 and UML 1.4 metamodels in it
+  <li> <b>mof14.compare.models</b> task within compare.uml13.uml14 macro to compare the metamodels, while establishing explicit correspondence
+       between the moved or renamed packages in both metamodels, and at the end to dump the result
+  <li> <b>select</b> task to query the model elements identfied as changed
+  <li> <b>for</b> task to query the changed model elements and print only those of a certain MOF Classes
+  </ul>
+  This script was used to build <b>uml13.copy.uml14</b> macro.
+  -->
+<project name="build-products" basedir="../.." >
+  <import file="..\..\..\..\env.xml"/>
+
+  <typedef resource="mof14/meta.xml"/>
+  <typedef resource="uml13/meta.xml"/>
+  <typedef resource="uml14/meta.xml"/>
+
+  <!-- Project directory structure -->
+  <echo>
+    Comparing (new) UML 1.4 and (old) UML 1.3 metamodels
+    NOTE:
+     - skipped requiredElements MOF association as a verbose and derived one
+     - skipped qualifiedName MOF attribue different anyway
+  </echo>
+
+  <macrodef name="compare.uml13.uml14" description="Extracted to make the mapping the metamodels explicit and avoid littering it with processing details.
+      See the final definition of this macro in the antlib.xml">
+
+    <attribute name="uml13.extent" description="the name of the extent where the UML 1.3 metamodel is loaded"/>
+    <attribute name="uml14.extent" description="the name of the extent where the UML 1.4 metamodel is loaded"/>
+    <element name="handle.changed" implicit="true"  description="holds the nested tasks to process the corresponding objects and reveal changes (if any)"/>
+    <sequential>
+      <mof14.compare.models new="@{uml14.extent}" old="@{uml13.extent}">
+        <map>
+           <old metaclass="Package"> <!-- examine MOF Package objects (UML 1.3 metamodel packages) -->
+             <evaluate>
+               <tasks>
+                    <!-- UML 1.3 Package {Activity_Graphs}/Package {Behavioral_Elements}-->
+                 <ref.get path="name"/>
+               </tasks>
+
+                 <equals arg1="${this}" arg2="Activity_Graphs"/>
+
+             </evaluate>
+           </old>
+           <new metaclass="Package">            <!-- UML 1.4 Package {Activity_Graphs} -->
+             <evaluate>
+               <tasks>
+
+                 <ref.get path="name"/>
+               </tasks>
+
+                 <equals arg1="${this}" arg2="Activity_Graphs"/>
+
+             </evaluate>
+           </new>
+        </map>
+        <map>
+           <old metaclass="Package"> <!-- examine MOF Package objects (UML 1.3 metamodel packages) -->
+             <evaluate>
+               <tasks>
+                    <!-- UML 1.3 Package {State_Machines}/Package {Behavioral_Elements}-->
+                 <ref.get path="name"/>
+               </tasks>
+
+                 <equals arg1="${this}" arg2="State_Machines"/>
+
+             </evaluate>
+           </old>
+           <new metaclass="Package">            <!-- UML 1.4 Package {State_Machines} -->
+             <evaluate>
+               <tasks>
+
+                 <ref.get path="name"/>
+               </tasks>
+
+                 <equals arg1="${this}" arg2="State_Machines"/>
+
+             </evaluate>
+           </new>
+        </map>
+        <map>
+           <old metaclass="Package"> <!-- examine MOF Package objects (UML 1.3 metamodel packages) -->
+             <evaluate>
+               <tasks>
+
+                 <ref.get path="name"/>
+               </tasks>
+
+                 <equals arg1="${this}" arg2="Data_Types"/>
+
+             </evaluate>
+           </old>
+           <new metaclass="Package">
+             <evaluate>
+               <tasks>
+
+                 <ref.get path="name"/>
+               </tasks>
+
+                 <equals arg1="${this}" arg2="Data_Types"/>
+
+             </evaluate>
+           </new>
+        </map>
+        <map>
+           <old metaclass="Package"> <!-- examine MOF Package objects (UML 1.3 metamodel packages) -->
+             <evaluate>
+               <tasks>
+
+                 <ref.get path="name"/>
+               </tasks>
+
+                 <equals arg1="${this}" arg2="Core"/>
+
+             </evaluate>
+           </old>
+           <new metaclass="Package">
+             <evaluate>
+               <tasks>
+
+                 <ref.get path="name"/>
+               </tasks>
+
+                 <equals arg1="${this}" arg2="Core"/>
+
+             </evaluate>
+           </new>
+        </map>
+        <map>
+           <old metaclass="Package"> <!-- examine MOF Package objects (UML 1.3 metamodel packages) -->
+             <evaluate>
+               <tasks>
+
+                 <ref.get path="name"/>
+               </tasks>
+
+                 <equals arg1="${this}" arg2="Use_Cases"/>
+
+             </evaluate>
+           </old>
+           <new metaclass="Package">
+             <evaluate>
+               <tasks>
+
+                 <ref.get path="name"/>
+               </tasks>
+
+                 <equals arg1="${this}" arg2="Use_Cases"/>
+
+             </evaluate>
+           </new>
+        </map>
+        <map>
+           <old metaclass="Package"> <!-- examine MOF Package objects (UML 1.3 metamodel packages) -->
+             <evaluate>
+               <tasks>
+
+                 <ref.get path="name"/>
+               </tasks>
+
+                 <equals arg1="${this}" arg2="Common_Behavior"/>
+
+             </evaluate>
+           </old>
+           <new metaclass="Package">
+             <evaluate>
+               <tasks>
+
+                 <ref.get path="name"/>
+               </tasks>
+
+                 <equals arg1="${this}" arg2="Common_Behavior"/>
+
+             </evaluate>
+           </new>
+        </map>
+        <map>
+           <old metaclass="Package"> <!-- examine MOF Package objects (UML 1.3 metamodel packages) -->
+             <evaluate>
+               <tasks>
+
+                 <ref.get path="name"/>
+               </tasks>
+
+                 <equals arg1="${this}" arg2="Collaborations"/>
+
+             </evaluate>
+           </old>
+           <new metaclass="Package">
+             <evaluate>
+               <tasks>
+
+                 <ref.get path="name"/>
+               </tasks>
+
+                 <equals arg1="${this}" arg2="Collaborations"/>
+
+             </evaluate>
+           </new>
+        </map>
+        <map>
+           <old metaclass="Class"> <!-- examine MOF Package objects (UML 1.3 metamodel packages) -->
+             <evaluate>
+               <tasks>
+
+                 <ref.get path="name"/>
+               </tasks>
+
+                 <equals arg1="${this}" arg2="TaggedValue"/>
+
+             </evaluate>
+           </old>
+           <new metaclass="Class">
+             <evaluate>
+               <tasks>
+
+                 <ref.get path="name"/>
+               </tasks>
+
+                 <equals arg1="${this}" arg2="TaggedValue"/>
+
+             </evaluate>
+           </new>
+        </map>
+        <map>
+           <old metaclass="Class"> <!-- examine MOF Package objects (UML 1.3 metamodel packages) -->
+             <evaluate>
+               <tasks>
+
+                 <ref.get path="name"/>
+               </tasks>
+
+                 <equals arg1="${this}" arg2="Stereotype"/>
+
+             </evaluate>
+           </old>
+           <new metaclass="Class">
+             <evaluate>
+               <tasks>
+                 <ref.get path="name"/>
+               </tasks>
+
+                 <equals arg1="${this}" arg2="Stereotype"/>
+
+             </evaluate>
+           </new>
+        </map>
+        <detect.changes>
+          <handle.changed/>
+        </detect.changes>
+      </mof14.compare.models>
+    </sequential>
+  </macrodef>
+
+  <!-- Load the model in the global repository -->
+  <mdr work="${work}"/>
+  <uml13.load.metamodel metamodel.extent="UML13"/>
+  <uml14.load.metamodel metamodel.extent="UML14"/>
+
+  <compare.uml13.uml14 uml14.extent="UML14" uml13.extent="UML13">
+
+    <select name="association.names">
+       <propertySelector property="association.names"/>
+
+       <not> <!-- skip the verbose derived association 'requiredElements' -->
+         <equals arg1="${this}" arg2="requiredElements"/>
+       </not>
+    </select>
+
+    <if>
+      <not>
+        <isempty property="association.names"/>
+      </not>
+      <then> <!-- there is something to print -->
+
+       <echo/>
+       <echo> ------- Changed associations:</echo>
+
+       <mof14.print property="UML14.element" name="value"/>
+       <echo>Element: ${value}</echo>
+
+       <for iterator="association">
+         <tasks>
+          <propertySelector property="association.names"/>
+
+          <echo/>
+          <echo> association: ${association} </echo>
+
+          <mof14.print property="${association}.added" name="value"/>
+          <echo> added: ${value}</echo>
+
+          <mof14.print property="${association}.deleted" name="value"/>
+          <echo> deleted: ${value}</echo>
+          </tasks>
+        </for>
+      </then>
+    </if>
+
+    <select name="attribute.names">
+       <propertySelector property="attribute.names"/>
+
+       <not> <!-- skip the verbose 'qualifiedName' attribute which is anyway changed-->
+         <equals arg1="${this}" value="qualifiedName"/>
+       </not>
+    </select>
+
+    <if>
+       <not>
+           <isempty property="attribute.names"/>
+       </not>
+      <then> <!-- there is something to print -->
+
+         <echo> ------- Changed attributes: </echo>
+         <echo/>
+         <mof14.print property="UML14.element" name="value"/>
+         <echo>Element: ${value}</echo>
+
+         <for iterator="attribute.names">
+           <tasks>
+              <propertySelector property="attribute"/>
+
+              <echo/>
+              <echo> attribute: ${attribute} </echo>
+
+              <ref.get property="UML14.element" path="${attribute}"/>
+              <print name="value"/>
+              <echo> new value: ${value}</echo>
+
+              <ref.get property="UML13.element" path="${attribute}"/>
+              <print name="value"/>
+              <echo> old value: ${value}</echo>
+           </tasks>
+         </for>
+       </then>
+    </if>
+  </compare.uml13.uml14>
+
+  <echo/>
+  <echo>Added PACKAGES:</echo>
+  <for>
+    <select>
+      <propertySelector property="UML14.orphans"/>
+
+      <isinstanceof metaclass="Package"/>
+    </select>
+
+    <tasks>
+      <mof14.print/>
+    </tasks>
+  </for>
+
+  <echo/>
+  <echo>Deleted PACKAGES:</echo>
+  <for>
+    <select>
+      <propertySelector property="UML13.orphans"/>
+
+      <isinstanceof metaclass="Package"/>
+    </select>
+
+    <tasks>
+      <mof14.print/>
+    </tasks>
+  </for>
+
+  <echo/>
+  <echo>Added CLASSES:</echo>
+  <for>
+    <select>
+      <propertySelector property="UML14.orphans"/>
+      <isinstanceof metaclass="Class"/>
+    </select>
+    <tasks>
+      <mof14.print/>
+    </tasks>
+  </for>
+
+  <echo/>
+  <echo>Deleted CLASSES:</echo>
+  <for>
+    <select>
+      <propertySelector property="UML13.orphans"/>
+      <isinstanceof metaclass="Class"/>
+    </select>
+    <tasks>
+      <mof14.print/>
+    </tasks>
+  </for>
+
+  <echo/>
+  <echo>Added ATTRIBUTES:</echo>
+  <for>
+    <select>
+      <propertySelector property="UML14.orphans"/>
+      <isinstanceof metaclass="Attribute"/>
+    </select>
+    <tasks>
+      <mof14.print/>
+    </tasks>
+  </for>
+
+  <echo/>
+  <echo>Deleted ATTRIBUTES:</echo>
+  <for>
+    <select>
+      <propertySelector property="UML13.orphans"/>
+      <isinstanceof metaclass="Attribute"/>
+    </select>
+    <tasks>
+      <mof14.print/>
+    </tasks>
+  </for>
+
+  <echo/>
+  <echo>Added REFERENCES:</echo>
+  <for>
+    <select>
+      <propertySelector property="UML14.orphans"/>
+      <isinstanceof metaclass="Reference"/>
+    </select>
+    <tasks>
+      <mof14.print/>
+    </tasks>
+  </for>
+
+  <echo/>
+  <echo>Deleted REFERENCES:</echo>
+  <for>
+    <select>
+      <propertySelector property="UML13.orphans"/>
+      <isinstanceof metaclass="Reference"/>
+    </select>
+    <tasks>
+      <mof14.print/>
+    </tasks>
+  </for>
+
+  <echo/>
+  <echo>Added ASSOCIATIONS:</echo>
+  <for>
+    <select>
+      <propertySelector property="UML14.orphans"/>
+
+      <or>
+        <isinstanceof metaclass="Association"/>
+        <isinstanceof metaclass="AssociationEnd"/>
+      </or>
+    </select>
+    <tasks>
+      <mof14.print/>
+    </tasks>
+  </for>
+
+  <echo/>
+  <echo>Deleted ASSOCIATIONS:</echo>
+  <for>
+    <select>
+      <propertySelector property="UML13.orphans"/>
+      <or>
+        <isinstanceof metaclass="Association"/>
+        <isinstanceof metaclass="AssociationEnd"/>
+      </or>
+    </select>
+    <tasks>
+      <mof14.print/>
+    </tasks>
+  </for>
+
+  <echo/>
+  <echo>Added OTHERS:</echo>
+  <for>
+    <select>
+      <propertySelector property="UML14.orphans"/>
+      <not>
+        <or>
+          <isinstanceof metaclass="Package"/>
+          <isinstanceof metaclass="Class"/>
+          <isinstanceof metaclass="Attribute"/>
+          <isinstanceof metaclass="Association"/>
+          <isinstanceof metaclass="AssociationEnd"/>
+          <isinstanceof metaclass="Reference"/>
+        </or>
+      </not>
+    </select>
+    <tasks>
+      <mof14.print/>
+    </tasks>
+  </for>
+
+  <echo/>
+  <echo>Deleted OTHERS:</echo>
+  <for>
+    <select>
+      <propertySelector property="UML13.orphans"/>
+      <not>
+        <or>
+          <isinstanceof metaclass="Package"/>
+          <isinstanceof metaclass="Class"/>
+          <isinstanceof metaclass="Attribute"/>
+          <isinstanceof metaclass="Association"/>
+          <isinstanceof metaclass="AssociationEnd"/>
+          <isinstanceof metaclass="Reference"/>
+        </or>
+      </not>
+    </select>
+    <tasks>
+      <mof14.print/>
+    </tasks>
+  </for>
+</project>

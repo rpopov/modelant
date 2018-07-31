@@ -1,0 +1,488 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>net.mdatools</groupId>
+  <artifactId>modelant</artifactId>
+  <version>${revision}</version>
+
+  <packaging>pom</packaging>
+
+  <name>modelant</name>
+  <description>Maven plugins to automate:
+- the creation and comparison of UML 1.3, UML 1.4, MOF 1.4 models,
+- the generation of code from models
+- the reverse engineering of java code, relational databases and XML DTD/XSD,
+- the fransformatoion of models, e.g. tranformation of of UMl 1.3 models to UML 1.4 .
+The produced UML 1.3 models are suitable to be imported in
+- Rational Rose 2003 + XMI Plugin
+- WhiteStar UML / Star UML
+- Enterprise Architect
+- other
+whereas the converted to UML 1.4 models can be imported in:
+- Argo UML
+- Enterprise Architect
+- other
+  </description>
+
+  <licenses>
+    <license>
+      <name>Eclipse Public License - v 1.0</name>
+      <url>https://www.eclipse.org/legal/epl-v10.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <organization>
+    <name>MDA Tools</name>
+    <url>https://mdatools.net/</url>
+  </organization>
+  <url>https://mdatools.net/</url>
+
+  <developers>
+    <developer>
+      <name>Rusi Popov</name>
+      <email>popovr@mdatools.net</email>
+      <organization>MDA Tools</organization>
+    </developer>
+  </developers>
+
+  <issueManagement>
+    <system>Mantis 2.9.1</system>
+    <url>https://mdatools.net/mantis</url>
+  </issueManagement>
+
+  <scm>
+    <url>https://github.com/rpopov/modelant</url>
+    <connection>scm:git:https://github.com/rpopov/modelant.git</connection>
+    <developerConnection>scm:git:https://github.com/rpopov/modelant.git</developerConnection>
+  </scm>
+
+  <prerequisites>
+    <maven>3.3.0</maven>
+  </prerequisites>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>public-tools</id>
+      <name>Repository of any public/external maven plugins/tools. It is a local cache of Maven Central repository.</name>
+      <url>http://localhost:8081/repository/public-tools-maven/</url>
+      <layout>default</layout>
+    </pluginRepository>
+  </pluginRepositories>
+  <repositories>
+    <repository>
+      <id>public-components</id>
+      <name>Any external components of modelant. Separated for analysis of vulnerabilities. It is a local cache of Maven Central repository.</name>
+      <url>http://localhost:8081/repository/modelant-maven-public-component/</url>
+      <layout>default</layout>
+    </repository>
+  </repositories>
+  <distributionManagement>
+    <repository>
+      <id>release</id>
+      <name>Repository of modelant releases</name>
+      <url>http://localhost:8081/repository/modelant-maven-release/</url>
+      <uniqueVersion>false</uniqueVersion>
+    </repository>
+    <snapshotRepository>
+      <id>snapshot</id>
+      <name>Repository of temporary modelant snapshots</name>
+      <url>http://localhost:8081/repository/modelant-maven-snapshot/</url>
+      <uniqueVersion>true</uniqueVersion>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <modules>
+    <module>module/repository</module>
+    <module>module/core</module>
+    <module>module/template</module>
+    <module>module/mof14</module>
+    <module>module/uml13</module>
+    <module>module/uml14</module>
+    <module>module/conversion</module>
+  </modules>
+
+  <properties>
+    <defaultGoal>install</defaultGoal>
+    <revision>3.3.0-SNAPSHOT</revision>
+
+    <!--
+      Test debug options
+      -->
+    <DEBUG_PORT>7000</DEBUG_PORT>
+    <DEBUG_SUSPEND>n</DEBUG_SUSPEND>
+
+    <build.compiler.debug>true</build.compiler.debug>
+    <build.compiler.debug.level>lines,vars,source</build.compiler.debug.level>
+
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.12</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven</groupId>
+        <artifactId>maven-plugin-api</artifactId>
+        <version>3.0</version>
+        <!--scope>provided</scope-->
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven</groupId>
+        <artifactId>maven-plugin-descriptor</artifactId>
+        <version>2.2.1</version>
+        <!--scope>provided</scope-->
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven.plugin-tools</groupId>
+        <artifactId>maven-plugin-annotations</artifactId>
+        <version>3.5.1</version>
+        <!--scope>provided</scope-->
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.0.0</version>
+      </dependency>
+      <dependency>
+        <!-- javax.jmi.repository -->
+        <groupId>org.andromda.thirdparty.jmi</groupId>
+        <artifactId>jmi</artifactId>
+        <version>20030918</version>
+      </dependency>
+      <dependency>
+        <!-- javax.jmi.model -->
+        <groupId>org.andromda.thirdparty.jmi</groupId>
+        <artifactId>mof</artifactId>
+        <version>20030918</version>
+      </dependency>
+      <dependency>
+        <groupId>org.andromda.thirdparty.netbeans.mdr</groupId>
+        <artifactId>jmiutils</artifactId>
+        <version>20050711</version>
+      </dependency>
+      <dependency>
+        <groupId>org.andromda.thirdparty.netbeans.mdr</groupId>
+        <artifactId>mdrapi</artifactId>
+        <version>20050711</version>
+      </dependency>
+      <dependency>
+        <groupId>org.andromda.thirdparty.netbeans.mdr</groupId>
+        <artifactId>nbmdr</artifactId>
+        <version>20050711</version>
+      </dependency>
+      <dependency>
+        <groupId>org.andromda.thirdparty.netbeans.mdr</groupId>
+        <artifactId>openide-util</artifactId>
+        <version>20050711</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven.shared</groupId>
+        <artifactId>file-management</artifactId>
+        <version>3.0.0</version>
+      </dependency>
+      <dependency>
+        <groupId>com.sun.xsom</groupId>
+        <artifactId>xsom</artifactId>
+        <version>20110809</version>
+      </dependency>
+      <dependency>
+        <groupId>com.thaiopensource</groupId>
+        <artifactId>trang</artifactId>
+        <version>20091111</version>
+      </dependency>
+      <dependency>
+        <groupId>com.sun</groupId>
+        <artifactId>tools</artifactId>
+        <version>1.8</version>
+        <scope>system</scope>
+        <systemPath>${java.home}/../lib/tools.jar</systemPath>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <sourceDirectory>${project.basedir}/src/java</sourceDirectory>
+    <scriptSourceDirectory>${project.basedir}/src/bsh</scriptSourceDirectory>
+    <testSourceDirectory>${project.basedir}/test/java</testSourceDirectory>
+    <resources>
+      <resource>
+        <directory>${project.basedir}/src/resource</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+
+    <testResources>
+      <testResource>
+        <directory>${project.basedir}/test/resource</directory>
+        <filtering>true</filtering>
+      </testResource>
+    </testResources>
+
+    <pluginManagement>
+      <!-- Define the versions and default values for all publigins in all descendant projects -->
+      <plugins>
+        <!--
+          As of http://blog.soebes.de/blog/2017/04/02/maven-pom-files-without-a-version-in-it/
+          this plugin resolves the ${revision} in the produced pom.xml included in the produced .jars
+
+          NOTE: It does NOT include the dependencies, imposed through profiles!
+                Therefore, the profiles should not add more dependencies than ones with <scope>provided</scope>
+
+          As of http://maven.apache.org/maven-ci-friendly.html
+          this allows the use of ${revision} property to coordinate the module versions
+          -->
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>flatten-maven-plugin</artifactId>
+          <version>1.0.1</version>
+          <configuration>
+            <updatePomFile>true</updatePomFile>
+
+            <!--
+              As of https://www.mojohaus.org/flatten-maven-plugin/flatten-mojo.html
+              make maven FLAT plugin include the dependencies from the applied profiles by default
+            -->
+            <embedBuildProfileDependencies>true</embedBuildProfileDependencies>
+          </configuration>
+          <executions>
+            <execution>
+              <id>flatten</id>
+              <phase>process-resources</phase>
+              <goals>
+                <goal>flatten</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>flatten.clean</id>
+              <phase>clean</phase>
+              <goals>
+                <goal>clean</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.17</version>
+          <configuration>
+            <!--
+              Always run each test in a dedicated JVM, specifically considering the fact that MDR is a singleton, which does not provide the needed isolation
+              Default: <forkCount>1</forkCount>
+              In order to suppress forking set the property: <forkCount>0</forkCount>
+            -->
+            <reuseForks>false</reuseForks>
+            <failIfNoTests>false</failIfNoTests>
+
+            <argLine>-ea -Xmx1024m -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=${DEBUG_SUSPEND},address=${DEBUG_PORT} -Djava.util.logging.config.file=${basedir}${file.separator}logging.properties</argLine>
+            <systemPropertyVariables></systemPropertyVariables>
+
+            <!-- Terminate the test running JVMs when the main process is terminated  -->
+            <shutdown>kill</shutdown>
+          </configuration>
+        </plugin>
+
+        <!-- Testing the plugin, see [A5] -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-invoker-plugin</artifactId>
+          <version>3.1.0</version>
+          <configuration>
+            <!-- [A5] -->
+            <projectsDirectory>test/maven</projectsDirectory>
+
+            <!-- Let the scripts use the TEST DEPENDENCIES in the classpath -->
+            <addTestClassPath>true</addTestClassPath>
+
+            <!--
+              Collect the execution output files in the "target" directory instead of the source directories test/maven/<name>/target
+              See: https://maven.apache.org/plugins/maven-invoker-plugin/examples/clone-projects.html
+              -->
+            <cloneProjectsTo>${project.build.directory}/maven-test</cloneProjectsTo>
+            <!--localRepositoryPath>${project.build.directory}/maven-repository</localRepositoryPath-->
+
+            <!--
+              Use an explicit settings.xml file to allow resolving the third-party dependencies in the local repository
+              See: https://maven.apache.org/plugins/maven-invoker-plugin/examples/fast-use.html
+            -->
+            <settingsFile>test/maven/settings.xml</settingsFile>
+
+            <pomIncludes>
+              <pomInclude>*/pom.xml</pomInclude>
+            </pomIncludes>
+
+            <!-- Debug the spawned maven process-->
+            <environmentVariables>
+              <DEBUG_PORT>7001</DEBUG_PORT>
+              <DEBUG_SUSPEND>n</DEBUG_SUSPEND>
+            </environmentVariables>
+
+            <debug>false</debug>
+
+            <goals>package</goals>
+
+            <!--
+              The script to verify the execution should be in src/bsh specifically src/bsh/verify.bsh.
+              The invoker will not fail if no script provided.
+              -->
+            <postBuildHookScript>src/bsh/verify.bsh</postBuildHookScript>
+
+            <!--
+              Additional variables / parameters of the scripts to execute
+              -->
+            <scriptVariables>
+              <projectBaseDir>${basedir}</projectBaseDir>
+              <projectGroupId>${project.groupId}</projectGroupId>
+              <projectArtifactId>${project.artifactId}</projectArtifactId>
+              <projectVersion>${project.version}</projectVersion>
+            </scriptVariables>
+          </configuration>
+          <executions>
+            <execution>
+              <id>test</id>
+              <phase>install</phase>
+              <goals>
+                <goal>install</goal>
+                <goal>run</goal>
+              </goals>
+            </execution>
+         </executions>
+        </plugin>
+
+        <!--
+          Check plugin documentation
+          -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-docck-plugin</artifactId>
+          <version>1.1</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>check</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-plugin-plugin</artifactId>
+          <version>3.5.1</version>
+          <executions>
+            <execution>
+              <id>default-descriptor</id>
+              <phase>process-classes</phase>
+            </execution>
+            <execution>
+              <id>help-goal</id>
+              <goals>
+                <goal>helpmojo</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+      <!--
+        As of http://blog.soebes.de/blog/2017/04/02/maven-pom-files-without-a-version-in-it/
+        this plugin resolves the ${revision} in the produced pom.xml included in the produced .jars
+
+        NOTE: It does NOT include the dependencies, imposed through profiles!
+              Therefore, the profiles should not add more dependencies than ones with <scope>provided</scope>
+
+        As of http://maven.apache.org/maven-ci-friendly.html
+        this allows the use of ${revision} property to coordinate the module versions
+        -->
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>flatten-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+  <!-- https://mdatools.net/wiki/index.php?title=Modelant_-_migration_to_maven -->
+  <profiles>
+    <profile>
+      <!--
+        The way to compile the maven plugins in the ModelAnt project
+        -->
+      <id>maven-plugin</id>
+      <activation>
+        <file>
+          <exists>profile.maven-plugin</exists>
+        </file>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>org.apache.maven</groupId>
+          <artifactId>maven-plugin-api</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.maven</groupId>
+          <artifactId>maven-plugin-descriptor</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>org.apache.maven.plugin-tools</groupId>
+          <artifactId>maven-plugin-annotations</artifactId>
+        </dependency>
+      </dependencies>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-plugin-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-docck-plugin</artifactId>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <!--
+        The way to test the maven plugins in the ModelAnt project
+        -->
+      <id>maven-test</id>
+      <activation>
+        <file>
+          <exists>test/maven/</exists>
+        </file>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-invoker-plugin</artifactId>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+  <inceptionYear>2001</inceptionYear>
+</project>

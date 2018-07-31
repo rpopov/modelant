@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://java.sun.com/xml/ns/j2ee"
+            xmlns:j2ee="http://java.sun.com/xml/ns/j2ee"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            elementFormDefault="qualified"
+            attributeFormDefault="unqualified"
+            version="2.1">
+
+  <xsd:element name="ejb-jar" type="j2ee:ejb-jarType">
+    <xsd:annotation>
+      <xsd:documentation>
+
+	This is the root of the ejb-jar deployment descriptor.
+
+      </xsd:documentation>
+    </xsd:annotation>
+
+    <xsd:key name="ejb-name-key">
+      <xsd:annotation>
+        <xsd:documentation>
+
+          The ejb-name element contains the name of an enterprise
+          bean. The name must be unique within the ejb-jar file.
+
+        </xsd:documentation>
+      </xsd:annotation>
+      <xsd:selector xpath="j2ee:enterprise-beans/*"/>
+      <xsd:field xpath="j2ee:ejb-name"/>
+    </xsd:key>
+  </xsd:element>
+
+  <xsd:complexType name="ejb-jarType">
+    <xsd:annotation>
+      <xsd:documentation>
+
+	The ejb-jarType defines the root element of the EJB
+	deployment descriptor. It contains
+
+	    - an optional description of the ejb-jar file
+	    - an optional display name
+	    - an optional icon that contains a small and a large
+	      icon file name
+	    - mandatory structural information about all included
+	      enterprise beans
+	    - a descriptor for container managed relationships,
+	      if any
+	    - an optional application-assembly descriptor
+	    - an optional name of an ejb-client-jar file for the
+	      ejb-jar.
+
+      </xsd:documentation>
+    </xsd:annotation>
+
+    <xsd:attribute name="id" type="xsd:ID"/>
+  </xsd:complexType>
+
+</xsd:schema>

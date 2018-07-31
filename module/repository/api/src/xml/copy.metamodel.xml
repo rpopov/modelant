@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Copyright (c) 2001,2012 Rusi Popov, MDA Tools.net
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Rusi Popov (popovr@mdatools.net) - initial implementation
+ -->
+
+<!--
+   A test script to copy a model (in UML 1.3) as a another model in UML 1.3 with no transformation.<br/>
+   Note the use of:<ul>
+   <li> <b>mdr.*</b> tasks to initialize the (meta)models repository and load both UML 1.3 models in it
+   <li> <b>copy.to.metamodel</b> tasks that does the actual copy, currently with no transformation/change,
+        set by <b><map.identity/></b>, because the from- and to- extents/models are of the same UML 1.3 version
+   </ul>
+   This is a demonstration of <b>copy.to.metamodel</b> macro with no transformation of the metamodel (i.e. identity transformation),
+   this way copying UML 1.3 models as UML 1.3 models.
+  -->
+<project name="build-products" basedir="../..">
+  <import file="..\..\..\..\env.xml"/>
+
+  <typedef resource="net/mdatools/modelant/uml13/core/antlib.xml"/>
+
+  <property name="first.modelFileToImport"    value="${xmi}/vegas_model.xml" />
+
+  <!-- Load the model in the global repository -->
+  <mdr work="${work}"/>
+
+  <uml13.load.metamodel/>
+  <uml13.instantiate extent="FIRST"/>
+
+  <!-- Import a model in the model repository -->
+  <mdr.read.xmi extent="FIRST"
+                file="${first.modelFileToImport}" />
+
+  <uml13.instantiate extent="SECOND"/>
+
+  <copy.to.metamodel from="FIRST" to="SECOND">
+    <!-- no change/transformation of the model while copying -->
+    <map.identity/>
+  </copy.to.metamodel>
+
+  <echo> Exporting result... </echo>
+  <mdr.write.xmi extent="SECOND"
+            file="${out}/copy.xml"
+            xmiVersion="1.1"/>
+</project>
