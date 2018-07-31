@@ -1,11 +1,9 @@
 /*
- * Copyright (c) i:FAO AG 2018. All Rights Reserved.
+ * Copyright c 2018 Rusi Popov, MDA Tools.net All rights reserved.
  *
- * This SOURCE CODE FILE, which has been provided by i:FAO AG as part
- * of a product of i:FAO AG for use ONLY by licensed users of the product,
- * includes CONFIDENTIAL and PROPRIETARY information.
- *
- * Created on 4.03.2018 г.
+ * This program and the accompanying materials are made available under the terms of the
+ * Eclipse Public License v2.0 which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v20.html
  */
 package net.mdatools.modelant.core.operation.model;
 
