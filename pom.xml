@@ -28,8 +28,8 @@ whereas the converted to UML 1.4 models can be imported in:
 
   <licenses>
     <license>
-      <name>Eclipse Public License - v 1.0</name>
-      <url>https://www.eclipse.org/legal/epl-v10.html</url>
+      <name>Eclipse Public License - v 2.0</name>
+      <url>https://www.eclipse.org/legal/epl-v20.html</url>
       <distribution>repo</distribution>
     </license>
   </licenses>
@@ -38,6 +38,7 @@ whereas the converted to UML 1.4 models can be imported in:
     <name>MDA Tools</name>
     <url>https://mdatools.net/</url>
   </organization>
+  
   <url>https://mdatools.net/</url>
 
   <developers>
@@ -58,11 +59,11 @@ whereas the converted to UML 1.4 models can be imported in:
     <connection>scm:git:https://github.com/rpopov/modelant.git</connection>
     <developerConnection>scm:git:https://github.com/rpopov/modelant.git</developerConnection>
   </scm>
-
+<!--
   <prerequisites>
     <maven>3.3.0</maven>
   </prerequisites>
-
+-->
   <pluginRepositories>
     <pluginRepository>
       <id>public-tools</id>
@@ -370,6 +371,7 @@ whereas the converted to UML 1.4 models can be imported in:
         <!--
           Check plugin documentation
           -->
+<!--		  
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-docck-plugin</artifactId>
@@ -382,7 +384,7 @@ whereas the converted to UML 1.4 models can be imported in:
             </execution>
           </executions>
         </plugin>
-
+-->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-plugin-plugin</artifactId>
@@ -457,10 +459,12 @@ whereas the converted to UML 1.4 models can be imported in:
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-plugin-plugin</artifactId>
           </plugin>
+<!--		  
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-docck-plugin</artifactId>
           </plugin>
+  -->		  
         </plugins>
       </build>
     </profile>
