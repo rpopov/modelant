@@ -107,7 +107,6 @@ whereas the converted to UML 1.4 models can be imported in:
   </modules>
 
   <properties>
-    <defaultGoal>install</defaultGoal>
     <revision>3.3.0-SNAPSHOT</revision>
 
     <!--

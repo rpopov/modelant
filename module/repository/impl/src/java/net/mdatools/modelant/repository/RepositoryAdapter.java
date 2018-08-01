@@ -73,7 +73,7 @@ import net.mdatools.modelant.repository.spi.ModelRepositorySetup;
  *   }
  * </pre>
  *
- * {@link "http://netbeans.org/download/5_5/javadoc/org-netbeans-api-mdr/index.html?org/netbeans/api/mdr/JMIStreamFactory.html"}
+ * @see <a href="http://netbeans.org/download/5_5/javadoc/org-netbeans-api-mdr/index.html?org/netbeans/api/mdr/JMIStreamFactory.html">JMIStreamFactory</a>
  */
 public final class RepositoryAdapter implements ModelRepositorySetup {
 
@@ -108,7 +108,7 @@ public final class RepositoryAdapter implements ModelRepositorySetup {
   }
 
   /**
-   * @see net.mdatools.modelant.repository.api.ModelRepository#initialize(java.io.File)
+   * @see net.mdatools.modelant.repository.spi.ModelRepositorySetup#initialize(File)
    */
   public void initialize(File workDir) {
     File targetFile;
@@ -188,9 +188,9 @@ public final class RepositoryAdapter implements ModelRepositorySetup {
   }
 
   /**
-   * @see net.mdatools.modelant.repository.api.ModelRepository#getMdRepository()
+   * @return non-null repository implementation
    */
-  public MDRepository getMdRepository() {
+  MDRepository getMdRepository() {
     if ( !isInitialized() ) {
       throw new RuntimeException( "The Meta-Data Repository is not initialized" );
     }
@@ -223,7 +223,7 @@ public final class RepositoryAdapter implements ModelRepositorySetup {
 
 
   /**
-   * @see net.mdatools.modelant.repository.api.ModelRepository#createMofExtent(java.lang.String)
+   * @see net.mdatools.modelant.repository.api.ModelRepository#constructMetamodelExtent(java.lang.String)
    */
   public RefPackage constructMetamodelExtent(String extentName) throws Exception {
     RefPackage result;
@@ -271,7 +271,7 @@ public final class RepositoryAdapter implements ModelRepositorySetup {
     }
 
     metaPackage = null;
-    it = (Iterator<MofPackage>) mofPackage.getMofPackage().refAllOfClass().iterator();
+    it = mofPackage.getMofPackage().refAllOfClass().iterator();
     while ( metaPackage == null && it.hasNext() ) {
       pack = it.next();
 

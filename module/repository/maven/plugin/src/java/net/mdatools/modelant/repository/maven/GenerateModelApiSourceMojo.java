@@ -12,6 +12,9 @@ import java.util.Date;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.Execute;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
 
 import net.mdatools.modelant.repository.api.ModelRepository;
 import net.mdatools.modelant.repository.api.ModelRepositoryFactory;
@@ -20,11 +23,12 @@ import net.mdatools.modelant.repository.api.ModelRepositoryFactory;
  * Creates the JMI API packages for a metamodel, creates corresponding JARs, generates JAVADOC and zips it.
  * Use it to establish new metamodels like UML 1.3, UML 1.4, CWM,...
  *
- * @goal generate-model-api
- * @phase process-sources
- * @execute phase="process-sources"
  * @author Rusi Popov
  */
+@Mojo(name="generate-model-api",
+      defaultPhase=LifecyclePhase.PROCESS_SOURCES
+		)
+@Execute(phase=LifecyclePhase.PROCESS_SOURCES)
 public class GenerateModelApiSourceMojo extends AbstractMojo {
 
   /**

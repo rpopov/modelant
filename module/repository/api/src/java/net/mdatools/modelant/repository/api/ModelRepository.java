@@ -39,7 +39,7 @@ import org.netbeans.api.mdr.CreationFailedException;
  *   }
  * </pre>
  *
- * {@linkplain "http://netbeans.org/download/5_5/javadoc/org-netbeans-api-mdr/index.html?org/netbeans/api/mdr/JMIStreamFactory.html"}
+ * @see <a href="http://netbeans.org/download/5_5/javadoc/org-netbeans-api-mdr/index.html?org/netbeans/api/mdr/JMIStreamFactory.html">JMIStreamFactory</a>
  */
 public interface ModelRepository {
 
