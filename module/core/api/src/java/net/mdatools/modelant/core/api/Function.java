@@ -24,7 +24,7 @@ package net.mdatools.modelant.core.api;
 public interface Function<A,R> {
 
   /**
-   * @param argument
+   * @param argument to apply this function (instance) on
    * @return the operation's result, if any
    * @throws RuntimeException
    * @throws IllegalArgumentException when the operation is not set up

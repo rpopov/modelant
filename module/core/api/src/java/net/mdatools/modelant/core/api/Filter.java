@@ -11,7 +11,7 @@ import java.util.Collection;
 
 /**
  * Filter the collection result of a selector and produce a sub-collection of it
- * @param <T> the type of the argument&result collections' contents
+ * @param <T> the type of the argument and result collections' contents
  * @author Rusi Popov
  */
 public interface Filter<T> extends Selector<Collection<T>, T> {

@@ -38,7 +38,7 @@ public interface NameMapping {
   /**
    * The Reflective interface for Structs imposes the need any Struct types to be copied through a
    * dedicated, explicit procedure, which handle the correspondence and order of the struct's fields.
-   * <br/><b>
+   * <b>
    * Assumption: The structs do not nest and the structs do not refer objects/model elements -
    * the field values are only primitive values.
    * </b>

@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Any wrapper of instances of <A>, used for compile time control of objects' wrapping
+ * Any wrapper of instances of <b>A</b>, used for compile time control of objects' wrapping
  * @param <A> the wrapped type
  * @author Rusi Popov
  */

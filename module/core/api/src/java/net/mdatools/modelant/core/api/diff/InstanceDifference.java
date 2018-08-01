@@ -45,7 +45,7 @@ public interface InstanceDifference {
   RefObject getYObject();
 
   /**
-   * @param diff non-null && !diff.thereAreChanges() i.e. best match
+   * @param diff non-null and !diff.thereAreChanges() i.e. best match
    * @return true if this is a match of at least one of the objects used in diff, this way representing
    *         a sub-optimal match
    */
