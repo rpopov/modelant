@@ -23,7 +23,7 @@ import net.mdatools.modelant.core.operation.model.topology.EquivalenceClassesMap
 /**
  * Hold all identified changes/differences between xObject and yObject
  */
-public class InstanceDifferencesImpl implements InstanceDifference {
+class InstanceDifferencesImpl implements InstanceDifference {
 
   private final List<String> attributesWithDifferences = new ArrayList<>();
   private final List<AssociationDifference> associationDiffs = new ArrayList<>();
@@ -47,21 +47,22 @@ public class InstanceDifferencesImpl implements InstanceDifference {
   private static final PrintModelElement PRINT_NESTED_MODEL_ELEMENT = new PrintModelElement("    ");
 
   /**
-   * correspondents.map(xObject)=correspondents.getRepresentative(yObject)
-   * xObject.attributeNames = yObject.attributeNames
-   * xObject.assiciationNames = yObject.assiciationNames
-   * @param xCorrespondent
-   * @param yCorrespondent
-   * @param equivalenceClasses
+   * Requires: <ul>
+   * <li>correspondents.map(xObject)=correspondents.getRepresentative(yObject)
+   * <li>xObject.attributeNames = yObject.attributeNames
+   * <li>xObject.assiciationNames = yObject.assiciationNames
+   * </ul>
+   * @param xCorrespondent not null
+   * @param yCorrespondent not null
    * @param correspondents
    */
-  public InstanceDifferencesImpl(CachedModelElement xCorrespondent,
-                                 CachedModelElement yCorrespondent,
-                                 EquivalenceClassesMap<RefObject> equivalenceClasses) {
+  InstanceDifferencesImpl(CachedModelElement xCorrespondent,
+  									      CachedModelElement yCorrespondent,
+                          EquivalenceClassesMap<RefObject> correspondents) {
     this.xObject = xCorrespondent;
     this.yObject = yCorrespondent;
 
-    this.correspondents = equivalenceClasses;
+    this.correspondents = correspondents;
 
     assert correspondents.map(xObject.getWrapped())==correspondents.getRepresentative(yObject.getWrapped())
            : "Expected x and y pertain to mapped equivalence classes";

@@ -24,6 +24,7 @@ public class FilterByField<T extends RefObject> implements Filter<T> {
   private final String target;
 
   /**
+   * @param fieldName non-null field name to evaluate value if it has the value provided
    * @param target not null name value to search for
    */
   public FilterByField(String fieldName, String target) {

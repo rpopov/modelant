@@ -43,12 +43,11 @@ import net.mdatools.modelant.core.util.Navigator;
  *      matching criteria, but matching due to this one are considered as moved or changed elements.
  * </ul>
  * <b>A model elements from the "new" model is treated as equal to a model element from the "old" model, if:</b><ul>
- * <li>both they have equal (primitive) values of the attributes<br/>AND
- * <li>they refer equal objects through associations
+ * <li>both they have equal (primitive) values of the attributes
+ * <li>AND they refer equal objects through associations
  * </ul>
  * Model elements, for which there are no criteria (attributes or associations) specified for their class
  * are treated as NOT EQUAL.
- * </b>
  * @author Rusi Popov
  */
 public class CompareModels implements Function<RefPackage, ModelComparisonResult> {

@@ -225,13 +225,4 @@ public class NameImpl<P extends Name<?>> implements Name<P> {
       }
     };
   }
-
-  /**
-   * Override in subclasses
-   * @return true
-   * @see net.mdatools.modelant.core.api.name.Name#canWrite(javax.jmi.reflect.RefPackage)
-   */
-  public boolean canWrite(RefPackage targetExtent) {
-    return true;
-  }
 }

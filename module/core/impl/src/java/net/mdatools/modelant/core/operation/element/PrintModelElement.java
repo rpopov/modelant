@@ -52,7 +52,6 @@ public class PrintModelElement implements Function<Object, String>{
   /**
    * The only constructor of ModelElementPrinter is to wrap up a non-null model element to print.
    * @param prefix to all lines
-   * @param modelElement is the model element to wrap up (it might be null)
    */
   public PrintModelElement(String prefix) {
     if ( prefix != null ) {

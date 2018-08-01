@@ -52,7 +52,7 @@ public class PackageNameImpl extends NameImpl<PackageName> implements PackageNam
   }
 
   /**
-   * @param rootPackage
+   * @param rootPackage the extent or another instance of a package proxy (class) to start navigating form
    * @return the metamodel package this describes, starting from the rootPackage extent
    * @throws JmiException
    * @see net.mdatools.modelant.core.api.name.PackageName#getMetaPackage(javax.jmi.reflect.RefPackage)
@@ -80,7 +80,7 @@ public class PackageNameImpl extends NameImpl<PackageName> implements PackageNam
   }
 
 	/**
-	 * @see net.mdatools.modelant.core.api.name.Name#construct(net.mdatools.modelant.core.api.name.Name, java.lang.String)
+	 * @see net.mdatools.modelant.core.api.name.Name#constructName(net.mdatools.modelant.core.api.name.Name, java.lang.String)
 	 */
 	public Name<PackageName> constructName(PackageName parent, String name) {
 		return new PackageNameImpl(parent, name);

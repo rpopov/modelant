@@ -57,7 +57,7 @@ public class FormatWrapText implements Function<String,String>{
    * Wrap the paragraphs to maxLineLength characters terminated by "line.separator"
    * @param prefix not null is prefix to be inserted in the beginning of each new line
    * @param defaultVal non null is the value to prefix the first line
-   * @param maxLineLength > 0
+   * @param maxLineLength &gt; 0
    */
   public FormatWrapText(String prefix, String defaultVal,int maxLineLength) {
     this(prefix, defaultVal, maxLineLength, System.getProperty( "line.separator" ));
@@ -67,7 +67,7 @@ public class FormatWrapText implements Function<String,String>{
    * Wrap the paragraphs to maxLineLength characters terminated by lineSeparator
    * @param prefix not null is prefix to be inserted in the beginning of each new line
    * @param defaultVal non null is the value to prefix the first line
-   * @param maxLineLength > 0
+   * @param maxLineLength &gt; 0
    * @param lineSeparator not null
    */
   public FormatWrapText(String prefix, String defaultVal,int maxLineLength, String lineSeparator) {
@@ -88,8 +88,6 @@ public class FormatWrapText implements Function<String,String>{
    * specific line terminator (CR LF or LF only). If the line is empty, defaultVal is returned.
    *
    * @param line to format
-   * @param prefix is prefix to be inserted in the beginning of each new line
-   * @param defaultVal is the value to prefix the first line
    * @return a string where all new lines (including the first one) are prefixed with the prefix
    *         string
    */

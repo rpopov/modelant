@@ -13,7 +13,6 @@ import javax.jmi.reflect.RefPackage;
 
 import net.mdatools.modelant.core.api.Function;
 import net.mdatools.modelant.core.util.Navigator;
-import net.mdatools.modelant.repository.api.ModelRepositoryFactory;
 
 /**
  * Instantiate a model element of a metamodel.
@@ -39,7 +38,7 @@ public class Create implements Function<String, RefObject> {
    * executes the nested &lt;template&gt; tasks for the filtered classes collection. This
    * methods invokes the internal formatting tasks with the metaclass itself.
    * @param metaclass Path in the metamodel to the metaclass whose instances (in the model/extent) are to be
-   * processed. Format of metaclass attribute: { <package>::} <meta class>
+   * processed. Format of metaclass attribute: {&lt;package&gt;::} &lt;meta class&gt;
    */
   public RefObject execute(String metaclass) throws IllegalArgumentException {
     RefClass refClass;
