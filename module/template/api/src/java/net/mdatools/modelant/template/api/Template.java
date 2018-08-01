@@ -17,14 +17,14 @@ import java.io.IOException;
  * <b>explicit or implicit render methods</b>.
  * <ul>
  * <li>The <b>explicit</b> render methods are just regular Java methods, that delegate to the methods of the TemplateEngine
- * by transferring itself (this) as the first parameter.<br/>
+ * by transferring itself (this) as the first parameter.
  * Note that the methods<ul>
  * <li>{@link TemplateEngine#render(Object, TemplateContext)}
  * <li>{@link TemplateEngine#render(java.util.Collection, Template, TemplateContext)}
  * </ul>
  * </ul>
  * use the name of the Java method that immediately calls them as the name of the ModelAnt Template to call -
- * see the implicit methods below.<br/>
+ * see the implicit methods below.
  * The methods:<ul>
  * <li>{@link TemplateEngine#render(Object, String, TemplateContext)}
  * <li>{@link TemplateEngine#render(java.util.Collection, String, TemplateContext)}

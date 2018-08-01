@@ -27,7 +27,7 @@ import net.mdatools.modelant.repository.spi.BaseModelFactory;
 public final class Mof14ModelFactory extends BaseModelFactory {
 
   /**
-   * @see net.mdatools.modelant.repository.api.ModelFactory#getMetamodelName()
+   * @see net.mdatools.modelant.repository.spi.MetamodelFactorySetup#getMetamodelName()
    */
   public String getMetamodelName() {
     return "MOF14";
