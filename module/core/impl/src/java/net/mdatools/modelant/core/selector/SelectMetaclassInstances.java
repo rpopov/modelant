@@ -40,7 +40,7 @@ public class SelectMetaclassInstances implements Selector<RefPackage, RefObject>
   }
 
   /**
-   * @see Selector#select()
+   * @param sourceExtent not null extent
    */
   public Collection<RefObject> execute(RefPackage sourceExtent) throws JmiException {
     Collection<RefObject> result;

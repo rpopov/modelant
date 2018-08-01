@@ -23,7 +23,7 @@ import net.mdatools.modelant.core.util.Navigator;
 public class SelectAllObjects implements Selector<RefPackage, RefObject> {
 
   /**
-   * @param argument not used
+   * @param sourceExtent not null extent where to collect all instances in
    * @return not null collection of all model objects, that are instances of any model class in the wrapped extent
    * @throws JmiException
    * @see net.mdatools.modelant.core.api.Function#execute(java.lang.Object)

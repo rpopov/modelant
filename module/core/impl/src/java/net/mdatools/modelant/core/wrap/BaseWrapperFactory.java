@@ -18,12 +18,12 @@ import net.mdatools.modelant.core.api.wrap.Wrapper;
 import net.mdatools.modelant.core.api.wrap.WrapperFactory;
 
 /**
- * This class is the root class for all factories of wrapper classes.<br/>
+ * This class is the root class for all factories of wrapper classes.
  * CONVENTION:<ul>
  * <li> each Factory subclass must have all its constructors <b>protected</b>, where one of them must be without parameters.
  *      This prevents accidental instantiation of the factory itself this way violating its Singleton property.
  * <li> each Factory instance caches internally all the wrapper objects it creates, in order to guarantee: <pre>
- *      (for each X, Y)( factory.wrap(X) == factory.wrap(X) <=> X == Y)
+ *      (for each X, Y)( factory.wrap(X) == factory.wrap(X) &lt;=&gt; X == Y)
  *      </pre>
  * <li> The subclasses must provide the mapping from wrapped to wrapper classes.
  * </ul>
@@ -52,7 +52,7 @@ public abstract class BaseWrapperFactory implements WrapperFactory {
       result = (Wrapper<A>) wrappedToWrapperMap.get( toWrap );
       if ( result == null ) {
         result = constructWrapper( toWrap );
-        wrappedToWrapperMap.put(toWrap, (Wrapper<Object>) result );
+        wrappedToWrapperMap.put(toWrap, result );
       }
     }
     return result;

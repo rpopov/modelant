@@ -42,7 +42,7 @@ public class SelectByQualifiedName implements Selector<RefPackage, RefObject> {
   }
 
   /**
-   * @param
+   * @param sourceExtent not null extent where to collect objects in
    * @return non-null list of one element - the metaobject, describing the metaclass
    */
   public Collection<RefObject> execute(RefPackage sourceExtent) throws JmiException {

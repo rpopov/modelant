@@ -19,7 +19,7 @@ public class EquivalenceClassesMapTest extends TestCase {
   private EquivalenceClassesMap<String> eq = new EquivalenceClassesMapImpl<String>();
 
   /**
-   * Test method for {@link net.mdatools.modelant.core.api.EquivalenceClassesMap#add(java.lang.Object, java.lang.Object)}.
+   * Test method for {@link net.mdatools.modelant.core.operation.model.topology.EquivalenceClassesMap#add(java.lang.Object, java.lang.Object)}.
    */
   public void testAddX() {
     eq.add( "from", "to1" );

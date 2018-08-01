@@ -157,8 +157,6 @@ public class Node<V extends RefObject> {
    * This method assigns the Nodes that represent the model elements associated to the wrapped one
    * and sets in level the number of referenced objects.
    * @param modelToNodeMap non-null
-   * @param modelToNodeMap
-   * @param associations a non-null list of association names to identify the wrapped object
    */
   public void assignAssociatedNodes(Map<V, Node<V>> modelToNodeMap) {
     Iterator<String> associationsIterator;

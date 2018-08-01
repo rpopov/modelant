@@ -324,14 +324,14 @@ public class RenamingMapping implements NameMapping {
 	}
 
   /**
-   * @see net.mdatools.modelant.core.api.model.ValueMapping#mapEnum(net.mdatools.modelant.core.api.name.EnumValueName)
+   * @see net.mdatools.modelant.core.api.model.NameMapping#mapEnum(net.mdatools.modelant.core.api.name.EnumValueName)
    */
   public final EnumValueName mapEnum(EnumValueName value) {
     return constructMappedName(value);
   }
 
   /**
-   * @see net.mdatools.modelant.core.api.model.ValueMapping#mapEnum(net.mdatools.modelant.core.api.name.EnumValueName)
+   * @see net.mdatools.modelant.core.api.model.NameMapping#mapEnum(net.mdatools.modelant.core.api.name.EnumValueName)
    */
   public final Operation<RefStruct> mapStruct(StructName structName, RefPackage targetExtent, Map<RefObject, RefObject> objectsMap) {
     return lookupNameOperation( structName ).construct( targetExtent, objectsMap, this );

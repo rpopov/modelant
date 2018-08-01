@@ -329,7 +329,7 @@ public class Navigator {
    * This method finds the metapackage with the name provided
    *
    * @param rootPackage is the top-most package / the model's extent
-   * @param metaPackageName a meta package name with syntax [<package>{::<package>}]
+   * @param metaPackageName a meta package name with syntax [&lt;package&gt;{::&lt;package&gt;}]
    * @return the non-null meta package
    * @throws JmiException if the meta package name is not a valid one
    */
@@ -366,7 +366,7 @@ public class Navigator {
    * the meta class with the qualified metaclass name.
    *
    * @param rootPackage is the top-most package / the model's extent
-   * @param metaClassName a meta class qualified name with syntax { <package>::} <class>
+   * @param metaClassName a meta class qualified name with syntax {&lt;package&gt;::} &lt;class&gt;
    * @return the non-null metaclass described in the <code> metaclass </code> attribute
    * @throws JmiException if the metaclass name is not a valid one
    */

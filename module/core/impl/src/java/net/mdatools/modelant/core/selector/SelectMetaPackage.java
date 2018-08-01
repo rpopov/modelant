@@ -41,8 +41,8 @@ public class SelectMetaPackage implements Selector<RefPackage, RefObject> {
   }
 
   /**
-   * @param
-   * @return non-null list of one element - the metaobject, describing the metaclass
+   * @param sourceExtent not null
+   * @return non-null list of one element - the metaobject, describing the metapackage
    */
   public Collection<RefObject> execute(RefPackage sourceExtent) throws JmiException {
     Collection<RefObject> result;

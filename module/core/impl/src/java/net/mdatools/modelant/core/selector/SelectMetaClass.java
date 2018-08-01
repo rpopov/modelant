@@ -41,7 +41,7 @@ public class SelectMetaClass implements Selector<RefPackage, RefObject> {
   }
 
   /**
-   * @param
+   * @param sourceExtent not null model extent where to lookup the metaclass in
    * @return non-null list of one element - the metaobject, describing the metaclass
    */
   public Collection<RefObject> execute(RefPackage sourceExtent) throws JmiException {

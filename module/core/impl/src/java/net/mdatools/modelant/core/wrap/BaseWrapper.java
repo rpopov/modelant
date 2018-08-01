@@ -84,7 +84,7 @@ public abstract class BaseWrapper<A> implements Serializable, Wrapper<A> {
    * @return null, when null provided, otherwise a properly initialized
    *         wrapper class that wraps toWrap
    * @throws IllegalArgumentException when mapping is not possible
-   * @see Factories#wrap(Object)
+   * @see Wrapper#wrap(Object)
    */
   public final Wrapper<A> wrap(A toWrap) throws IllegalArgumentException {
     return factory.wrap( toWrap );
@@ -97,7 +97,7 @@ public abstract class BaseWrapper<A> implements Serializable, Wrapper<A> {
    * @return null, when null provided, otherwise a properly initialized
    *         collection of wrappers that wrap the elements of toWrap
    * @throws IllegalArgumentException when mapping is not possible
-   * @see Factories#wrap(Collection)
+   * @see Wrapper#wrap(Collection)
    */
   public final List<Wrapper<A>> wrap(Collection<A> toWrap) throws IllegalArgumentException {
     return factory.wrap( toWrap );
