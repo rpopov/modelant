@@ -40,6 +40,7 @@ whereas the converted to UML 1.4 models can be imported in:
   </organization>
   
   <url>https://mdatools.net/</url>
+  <inceptionYear>2001</inceptionYear>
 
   <developers>
     <developer>
@@ -370,8 +371,7 @@ whereas the converted to UML 1.4 models can be imported in:
 
         <!--
           Check plugin documentation
-          -->
-<!--		  
+          -->  
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-docck-plugin</artifactId>
@@ -384,7 +384,7 @@ whereas the converted to UML 1.4 models can be imported in:
             </execution>
           </executions>
         </plugin>
--->
+		
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-plugin-plugin</artifactId>
@@ -459,12 +459,10 @@ whereas the converted to UML 1.4 models can be imported in:
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-plugin-plugin</artifactId>
           </plugin>
-<!--		  
           <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-docck-plugin</artifactId>
           </plugin>
-  -->		  
         </plugins>
       </build>
     </profile>
@@ -488,5 +486,26 @@ whereas the converted to UML 1.4 models can be imported in:
       </build>
     </profile>
   </profiles>
-  <inceptionYear>2001</inceptionYear>
+  
+  <reporting>
+    <excludeDefaults>true</excludeDefaults>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.0.1</version>
+		<configuration>
+		  <quiet>true</quiet>
+		</configuration>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>javadoc-no-fork</report>
+              <report>test-javadoc-no-fork</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+    </plugins>
+  </reporting>  
 </project>

@@ -10,6 +10,7 @@ package net.mdatools.modelant.repository.spi;
 import java.io.File;
 
 import net.mdatools.modelant.repository.api.ModelRepository;
+import net.mdatools.modelant.repository.api.ModelRepositoryFactory;
 
 /**
  * Initialize the MetaData Repository to work in.
@@ -18,7 +19,7 @@ import net.mdatools.modelant.repository.api.ModelRepository;
 public interface ModelRepositorySetup extends ModelRepository {
 
   /**
-   * Used by the {@link ModelRepositiryFactory} only
+   * Used by the {@link ModelRepositoryFactory} only
    * On shutdown remove the storage files.
    * @param workDir possibly null directory name where to keep the repository files
    *        When null provided, the current directory is assumed. The file and needed directories

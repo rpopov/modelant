@@ -45,7 +45,7 @@ public abstract class BaseModelFactory implements ModelFactory, MetamodelFactory
   private ModelPackage mofExtent;
 
   /**
-   * @see net.mdatools.modelant.repository.api.ModelFactory#setMetamodelRepository(net.mdatools.modelant.repository.api.ModelRepository)
+   * @see MetamodelFactorySetup#construct(ModelRepository, ClassLoader)
    */
   public final ModelFactory construct(ModelRepository repository, ClassLoader loader) {
     if ( this.repository != null ) {

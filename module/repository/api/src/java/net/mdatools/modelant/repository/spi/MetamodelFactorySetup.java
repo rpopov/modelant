@@ -25,7 +25,8 @@ public interface MetamodelFactorySetup {
   /**
    * Initialize the factory and load the metamodel into a unique extent
    * Called only by the ModelRepository when looking it up.
-   * @param loader TODO
+   * @param loader not null class loader to find the resource with the model to load
+   * @param repository not null repository where to load the metamodel
    * @return the non-null root package the metamodel is loaded
    * @throws IllegalArgumentException in case of metamodel load failed
    */

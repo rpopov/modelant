@@ -45,7 +45,7 @@ public interface ModelFactory {
    * Instantiate the metamodel in a new unique extent
    * @return non-null extent where to load/produce a model
    * @throws IllegalArgumentException in case the extent is not available or the metamodel load failed
-   * @see #readModel(RefPackage)
+   * @see #readModel(RefPackage, File)
    */
   RefPackage instantiate();
 
@@ -54,7 +54,7 @@ public interface ModelFactory {
    * @param extentName not null, unique name of a not used extent
    * @return non-null extent where to load/produce a model
    * @throws IllegalArgumentException in case the extent is not available or the metamodel load failed
-   * @see #readModel(RefPackage)
+   * @see #readModel(RefPackage, File)
    */
   RefPackage instantiate(String extentName);
 

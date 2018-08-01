@@ -39,7 +39,7 @@ import org.netbeans.api.mdr.CreationFailedException;
  *   }
  * </pre>
  *
- * {@link "http://netbeans.org/download/5_5/javadoc/org-netbeans-api-mdr/index.html?org/netbeans/api/mdr/JMIStreamFactory.html"}
+ * {@linkplain "http://netbeans.org/download/5_5/javadoc/org-netbeans-api-mdr/index.html?org/netbeans/api/mdr/JMIStreamFactory.html"}
  */
 public interface ModelRepository {
 
@@ -58,8 +58,6 @@ public interface ModelRepository {
    * @throws IllegalStateException if this repository is not initialized yet
    * @throws IllegalArgumentException if of no factory for the metamodel found
    * @see net.mdatools.modelant.repository.spi.ModelRepositorySetup#initialize(File)
-   * @see net.mdatools.modelant.repository.spi.ModelRepositorySetup#initialize(String)
-   * @see net.mdatools.modelant.repository.spi.ModelRepositorySetup#isInitialized()
    */
   ModelFactory loadMetamodel(String metamodelName) throws IllegalStateException, IllegalArgumentException;
 
@@ -72,15 +70,13 @@ public interface ModelRepository {
    * Expected is that the MetamodelFactories instantiated implement also MetamodelFactorySetup service provider interface
    * for their initialization.
    * @param metamodelName non-null
-   * @param not null class loader to lookup
+   * @param loader not null class loader to lookup
    * @return not null factory for the metamodel provided
    * @throws IllegalStateException if this repository is not initialized yet
    * @throws IllegalArgumentException if of no factory for the metamodel found
    * @see net.mdatools.modelant.repository.spi.ModelRepositorySetup#initialize(File)
-   * @see net.mdatools.modelant.repository.spi.ModelRepositorySetup#initialize(String)
-   * @see net.mdatools.modelant.repository.spi.ModelRepositorySetup#isInitialized()
    */
-  ModelFactory loadMetamodel(String metamodelName, ClassLoader loade) throws IllegalStateException, IllegalArgumentException;
+  ModelFactory loadMetamodel(String metamodelName, ClassLoader loader) throws IllegalStateException, IllegalArgumentException;
 
 
   /**
@@ -131,7 +127,7 @@ public interface ModelRepository {
   /**
    * Instantiate a metamodel package, this way creating a repository for models as metamodel instances.
    *
-   * @param mofExtentName non-empty name to assign to the newly created MOF extent or metamodel extent/model repository.
+   * @param mofExtent non-null newly created MOF extent or metamodel extent/model repository.
    * @param modelExtentName non-empty name of the MOF extent where to lookup the metamodel package to instantiate a model repository
    * @param metaPackageName non-empty name of the metamodel package to instantiate and create a model repository
    * @return non-null extent created
@@ -166,7 +162,6 @@ public interface ModelRepository {
    * Both metamodel and model should be in XMI format.
    * @param extentName
    * @param url
-   * @param resourceAsStream
    * @throws IOException
    * @throws MalformedXMIException
    */
@@ -178,7 +173,6 @@ public interface ModelRepository {
    * @param extentName
    * @param url non-null metamodel in XMI format
    * @param classLoader not null classloader to resolve the url through
-   * @param resourceAsStream
    * @throws IOException
    * @throws MalformedXMIException
    */
@@ -276,7 +270,7 @@ public interface ModelRepository {
   /**
    * Generate metamodel API (JMI mapping) as source files.
    * @param dir non-nill destination directory where to generate the JMI API sources
-   * @param extent non-null name of the MOF extent where the metamodel to generate API for is loaded.
+   * @param extentName non-null name of the MOF extent where the metamodel to generate API for is loaded.
    * @param headerFile optional containing specific JAVADOC to be put in the header of each java generated
    * @throws IOException
    */
@@ -286,7 +280,6 @@ public interface ModelRepository {
   /**
    * Creates metamodel API (JMI mapping) as compiled classes.
    * @throws IOException
-   * @throws Exception
    */
   void mapClasses(File dir, String extentName) throws IOException;
 }
