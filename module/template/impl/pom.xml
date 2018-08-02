@@ -18,7 +18,9 @@
       <version>${project.version}</version>
     </dependency>
   </dependencies>
-  
+  <!-- 
+    TODO let it work out-of-process, then the test's classpath should not be fixed that hacky way
+   -->
   <properties>
      <forkCount>0</forkCount>  
   </properties>  

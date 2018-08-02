@@ -375,6 +375,10 @@ whereas the converted to UML 1.4 models can be imported in:
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-docck-plugin</artifactId>
           <version>1.1</version>
+		  <configuration>
+		    <!-- suppress checking the URLs -->
+		    <offline>true</offline>
+		  </configuration>
           <executions>
             <execution>
               <goals>
@@ -401,6 +405,11 @@ whereas the converted to UML 1.4 models can be imported in:
             </execution>
           </executions>
         </plugin>
+		<plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>3.0.1</version>
+        </plugin>  
       </plugins>
     </pluginManagement>
 
@@ -458,10 +467,6 @@ whereas the converted to UML 1.4 models can be imported in:
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-plugin-plugin</artifactId>
           </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-docck-plugin</artifactId>
-          </plugin>
         </plugins>
       </build>
     </profile>
@@ -484,27 +489,49 @@ whereas the converted to UML 1.4 models can be imported in:
         </plugins>
       </build>
     </profile>
+
+    <profile>
+      <!--
+        Check the documentation only in the root project
+        -->
+      <id>check-doc</id>
+      <activation>
+        <property>
+          <name>artifactId</name>
+		  <value>modelant</value>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-docck-plugin</artifactId>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
   </profiles>
-  
+
   <reporting>
     <excludeDefaults>true</excludeDefaults>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.0.1</version>
 		<configuration>
 		  <quiet>true</quiet>
 		</configuration>
         <reportSets>
           <reportSet>
             <reports>
-              <report>javadoc-no-fork</report>
-              <report>test-javadoc-no-fork</report>
+              <report>javadoc-no-fork</report> <!-- aggregate -->
+              <!--report>aggregate-jar</report--> 
+              <!--report>test-javadoc-no-fork</report-->
             </reports>
           </reportSet>
         </reportSets>
       </plugin>
     </plugins>
-  </reporting>  
+  </reporting>    
 </project>
