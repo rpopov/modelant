@@ -25,7 +25,7 @@ import net.mdatools.modelant.template.api.TemplateEngine;
 import net.mdatools.modelant.template.api.TemplateEngineFactory;
 
 /**
- * This task compiles the listed ModelAnt Templates, this way allowing their compilation (and thus validation)
+ * Compile the listed ModelAnt Templates, this way allowing their validation
  * as part of the build process.
  * @author Rusi Popov
  */

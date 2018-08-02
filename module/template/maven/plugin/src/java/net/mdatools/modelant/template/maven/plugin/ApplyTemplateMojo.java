@@ -19,8 +19,8 @@ import net.mdatools.modelant.template.api.TemplateEngine;
 import net.mdatools.modelant.template.api.TemplateEngineFactory;
 
 /**
- * This task compiles the listed ModelAnt Templates, this way allowing their compilation (and thus validation)
- * as part of the build process.
+ * Apply the named template on the value of the named system property, in order to produce the contents of
+ * the target file.
  * @author Rusi Popov
  */
 @Mojo(name="apply-templates",

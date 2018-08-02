@@ -13,6 +13,9 @@ import javax.jmi.reflect.RefPackage;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.Execute;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
 
 import net.mdatools.modelant.conversion.model.ConvertUml13ToUml14;
 import net.mdatools.modelant.repository.api.ModelFactory;
@@ -21,11 +24,12 @@ import net.mdatools.modelant.repository.api.ModelRepositoryFactory;
 
 /**
  * Convert the source UML 1.3 model to UML 1.4 and export it in XMI 1.2
- * @goal uml13-to-uml14
- * @phase compile
- * @execute phase="compile"
  * @author Rusi Popov
  */
+@Mojo(name="uml13-to-uml14",
+defaultPhase=LifecyclePhase.COMPILE
+)
+@Execute(phase=LifecyclePhase.COMPILE)
 public class ConvertUml13ToUml14Model extends AbstractMojo {
 
   /**

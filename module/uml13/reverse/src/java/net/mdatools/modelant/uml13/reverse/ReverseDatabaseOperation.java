@@ -35,7 +35,6 @@ import net.mdatools.modelant.repository.api.ModelRepository;
  * Reverse engineering logic for database schemas and storing the results as
  * UML 1.3 objects. The model produced is in fact a Platform Specific Model, which might need
  * additional processing and tuning.
- * <br/>
  * Conventions for the model produced:
  * <ol>
  * <li>The database column types are converted to DataType instances named: &lt;type
@@ -182,7 +181,7 @@ public class ReverseDatabaseOperation implements Function<Connection, RefPackage
 
   /**
    * @param modelRepository not null
-   * @param schemes not null, not empty name of the schemes to reverse engineer.<br/>
+   * @param schemes not null, not empty name of the schemes to reverse engineer.
    * NOTE: It might be case sensitive.
    */
   public ReverseDatabaseOperation(ModelRepository modelRepository, String... schemes) {
@@ -195,7 +194,7 @@ public class ReverseDatabaseOperation implements Function<Connection, RefPackage
    * provided
    *
    * @param metadata is the database metadata to reverse engineer
-   * @param schemes the name of the DB schemes to reverse engineer
+   * @param schema the name of the DB schema to reverse engineer
    * @return non-null list of registered tables
    * @throws SQLException
    */
@@ -251,7 +250,7 @@ public class ReverseDatabaseOperation implements Function<Connection, RefPackage
    * the extent provided. The relationships are identified on class-by-class basis.
    * @param tables non-null list of regitered tables
    * @param metadata is the database metadata to reverse engineer
-   * @param schemes the name of the DB schemes to reverse engineer
+   * @param schema the name of the DB schemes to reverse engineer
    * @throws SQLException
    */
   protected void processRelationships(List<UmlClass> tables, DatabaseMetaData metadata, String schema) throws SQLException {

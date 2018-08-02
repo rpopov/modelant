@@ -15,6 +15,9 @@ import javax.jmi.reflect.RefPackage;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.Execute;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
 
 import net.mdatools.modelant.core.api.diff.Export;
 import net.mdatools.modelant.core.api.diff.ModelComparisonResult;
@@ -26,11 +29,12 @@ import net.mdatools.modelant.repository.api.ModelRepositoryFactory;
 
 /**
  * Compare two metamodels and report the differences, that are needed to convert the source metamodel into the target one
- * @goal compare-mof14-metamodels
- * @phase compile
- * @execute phase="compile"
  * @author Rusi Popov
  */
+@Mojo(name="compare-mof14-metamodels",
+defaultPhase=LifecyclePhase.COMPILE
+)
+@Execute(phase=LifecyclePhase.COMPILE)
 public class CompareMetamodelsMojo extends AbstractMojo {
 
   /**

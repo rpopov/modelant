@@ -16,6 +16,9 @@ import javax.jmi.reflect.RefPackage;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.Execute;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
 
 import net.mdatools.modelant.core.api.Function;
 import net.mdatools.modelant.repository.api.ModelRepository;
@@ -26,7 +29,6 @@ import net.mdatools.modelant.uml13.reverse.ReverseDatabaseOperation;
  * Reverse engineering logic for database schemas and storing the results as
  * UML 1.3 objects. The model produced is in fact a Platform Specific Model, which might need
  * additional processing and tuning.
- * <br/>
  * Conventions for the model produced:
  * <ol>
  * <li>The database column types are converted to DataType instances named: &lt;type
@@ -44,12 +46,12 @@ import net.mdatools.modelant.uml13.reverse.ReverseDatabaseOperation;
  * <li>Each attribute pertaining to the table's primary key is bound a 'primary_key' tagged value
  * Its value is the sequence order of the column in the tible's primary key.
  * </ol>
- *
- * @goal database-to-uml13
- * @phase compile
- * @execute phase="compile"
  * @author Rusi Popov
  */
+@Mojo(name="database-to-uml13",
+  defaultPhase=LifecyclePhase.COMPILE
+)
+@Execute(phase=LifecyclePhase.COMPILE)
 public class ReverseEngineerDatabaseMojo extends AbstractMojo {
 
   /**

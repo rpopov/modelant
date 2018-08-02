@@ -15,6 +15,9 @@ import javax.jmi.reflect.RefPackage;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.Execute;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
 
 import net.mdatools.modelant.core.api.diff.Export;
 import net.mdatools.modelant.core.api.diff.ModelComparisonResult;
@@ -28,11 +31,12 @@ import net.mdatools.modelant.uml13.metamodel.CompareUml13Models;
 /**
  * Compare two UML 1.3 models and report the differences, that are needed to convert the source model
  * into the target one.
- * @goal compare-uml13-models
- * @phase compile
- * @execute phase="compile"
  * @author Rusi Popov
  */
+@Mojo(name="compare-uml13-models",
+defaultPhase=LifecyclePhase.COMPILE
+)
+@Execute(phase=LifecyclePhase.COMPILE)
 public class CompareModelsMojo extends AbstractMojo {
 
   /**

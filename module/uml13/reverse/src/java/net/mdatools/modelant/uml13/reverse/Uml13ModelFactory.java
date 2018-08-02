@@ -297,8 +297,7 @@ public class Uml13ModelFactory {
   }
 
   /**
-   * This method instantiates a public exception with the qualified name provided. <b>This method
-   * instantiates an Exception, but the Exceptions might be messed with the regular classes so they
+   * Instantiate a public exception with the qualified name provided, but the Exceptions might be messed with the regular classes so they
    * are registered as DataTypes at the model level instead of UnlExceprion-s when they are also
    * reverse engineered.
    * @param qualifiedName of the exception to be created
@@ -508,9 +507,9 @@ public class Uml13ModelFactory {
 
 
   /**
-	 * Locate the model element using its qualified Name in this model object.
-	 * @param qualifiedName is a non-empty string with the qualified name of a model element
-	 *
+	 * Locate the model element using its Name in this model object.
+	 * @param namespace not null namespace to look for the name
+	 * @param name not null element name
 	 * @return the non-null model element with the name specified.
 	 * @throws IllegalArgumentException when not found
 	 */

@@ -13,6 +13,9 @@ import javax.jmi.reflect.RefPackage;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.Execute;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
 
 import net.mdatools.modelant.core.api.Function;
 import net.mdatools.modelant.repository.api.ModelRepository;
@@ -39,11 +42,12 @@ import net.mdatools.modelant.uml13.reverse.ReverseXsdOperation;
  *     values. These tagged values are compatible with the Rose's approach to documentation. They are
  *     optional.
  * </ul>
- * @goal xsd-to-uml13
- * @phase compile
- * @execute phase="compile"
  * @author Rusi Popov
  */
+@Mojo(name="xsd-to-uml13",
+  defaultPhase=LifecyclePhase.COMPILE
+)
+@Execute(phase=LifecyclePhase.COMPILE)
 public class ReverseEngineerXsdMojo extends AbstractMojo {
 
   /**
