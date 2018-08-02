@@ -11,17 +11,22 @@ import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.apache.maven.plugins.annotations.Execute;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
+
 import net.mdatools.modelant.template.api.TemplateEngine;
 import net.mdatools.modelant.template.api.TemplateEngineFactory;
 
 /**
  * This task compiles the listed ModelAnt Templates, this way allowing their compilation (and thus validation)
  * as part of the build process.
- * @goal apply-templates
- * @phase compile
- * @execute phase="compile"
  * @author Rusi Popov
  */
+@Mojo(name="apply-templates",
+      defaultPhase=LifecyclePhase.COMPILE
+)
+@Execute(phase=LifecyclePhase.COMPILE)
 public class ApplyTemplateMojo extends CompilationContext {
 
   /**

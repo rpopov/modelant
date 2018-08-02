@@ -15,6 +15,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.maven.plugin.MojoFailureException;
+import org.apache.maven.plugins.annotations.Execute;
+import org.apache.maven.plugins.annotations.LifecyclePhase;
+import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.shared.model.fileset.FileSet;
 import org.apache.maven.shared.model.fileset.util.FileSetManager;
 
@@ -24,11 +27,12 @@ import net.mdatools.modelant.template.api.TemplateEngineFactory;
 /**
  * This task compiles the listed ModelAnt Templates, this way allowing their compilation (and thus validation)
  * as part of the build process.
- * @goal compile-templates
- * @phase compile
- * @execute phase="compile"
  * @author Rusi Popov
  */
+@Mojo(name="compile-templates",
+defaultPhase=LifecyclePhase.COMPILE
+)
+@Execute(phase=LifecyclePhase.COMPILE)
 public class CompileTemplateMojo extends CompilationContext {
 
   /**
@@ -39,8 +43,6 @@ public class CompileTemplateMojo extends CompilationContext {
 
   /**
    * This method is used by the enclosing task ForEachTask.
-   * @throws org.apache.tools.ant.BuildException
-   * @see org.apache.tools.ant.Task#execute()
    */
   public final void execute() throws MojoFailureException {
     String[] includedFiles;

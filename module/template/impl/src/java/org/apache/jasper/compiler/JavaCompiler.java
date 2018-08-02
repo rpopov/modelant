@@ -18,7 +18,6 @@ public interface JavaCompiler {
 
   /**
    * @param sources not null list of ABSOLUTE file names
-   * @param out not null diagnostic messages stream
    * @throws IOException on file or compilation errors foun
    */
   void compile(List<File> sources) throws IOException;

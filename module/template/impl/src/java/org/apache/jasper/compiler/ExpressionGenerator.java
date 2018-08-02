@@ -59,7 +59,7 @@
 package org.apache.jasper.compiler;
 
 /**
- * Generator to deal with ModelAnt Template expressions: <%= ... %> stuff.
+ * Generator to deal with ModelAnt Template expressions: &lt;%= ... %&gt; stuff.
  *
  * @author Anil K. Vijendran
  */

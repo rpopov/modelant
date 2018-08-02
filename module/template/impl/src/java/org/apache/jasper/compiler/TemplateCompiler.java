@@ -30,7 +30,7 @@ import net.mdatools.modelant.template.api.TemplateCompilationContext;
  * Convention:<ul>
  * <li> the template source file names are either:<ul>
  *      <li>constructed from the qualified java class name of the objects the template is applicable for, by appending
- *          as the actual class name the name of the template itself<br/>
+ *          as the actual class name the name of the template itself
  *          or
  *      <li>constructed from a relative file name, considering the directories in it as package names and the name of the
  *          template file to reproduce the same template name when reproduced from target class and template name
@@ -57,7 +57,6 @@ public class TemplateCompiler {
 
   /**
    * @param compilationContext
-   * @param javac
    * @throws IOException when invalid classpath entry is provided
    */
   public TemplateCompiler(TemplateCompilationContext compilationContext) throws IOException {

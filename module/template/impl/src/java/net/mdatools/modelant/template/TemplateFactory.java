@@ -43,8 +43,7 @@ public final class TemplateFactory {
   private final TemplateCompiler templateCompiler;
 
   /**
-   * @param compilationContext not null
-   * @param context is the context name relative to rootPath or the context itself. It could be null.
+   * @param compilationContext is the context name relative to rootPath or the context itself. It could be null.
    * @throws IOException
    */
   public TemplateFactory(TemplateCompilationContext compilationContext) throws IOException {
@@ -63,9 +62,9 @@ public final class TemplateFactory {
 
   /**
    * Lookup the template to render the instances of the provided class either<ul>
-   * <li>as an already cached template<br/>
+   * <li>as an already cached template
    * or
-   * <li>as a template, still not loaded, but loading it now<br/>
+   * <li>as a template, still not loaded, but loading it now
    * or
    * <li>as a cached decision that there is no such template for that clas, no more than one attempt to load
    *     the template is made

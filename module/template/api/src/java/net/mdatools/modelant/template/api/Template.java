@@ -29,7 +29,7 @@ import java.io.IOException;
  * <li>{@link TemplateEngine#render(Object, String, TemplateContext)}
  * <li>{@link TemplateEngine#render(java.util.Collection, String, TemplateContext)}
  * </ul>
- * have as an additional parameter the name of the ModelAnt Template to call.
+ * have as an additional parameter the name of the ModelAnt Template to call.<ul>
  * <li>The <b>implicit</b> render methods are implemented just as ModelAnt Templates following the convention:
  *   <ul>
  *   <li> Create a corresponding ModelAnt Template for the wrapper method must be
@@ -43,6 +43,7 @@ import java.io.IOException;
  * containing the <b>non-null object</b> to render the template for.
  * <li> The ModelAnt Template use scriptlets to generate the dynamic content. The scriptlets allow calling any methods of
  * the wrapped object, including rendering it through other ModelAnt Templates or rendering other objects.
+ * </ul></ul>
  * @param <W> The type of the wrapped object
  * @author Rusi Popov
  */
