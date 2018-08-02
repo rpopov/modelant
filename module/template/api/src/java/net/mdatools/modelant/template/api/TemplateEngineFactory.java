@@ -13,8 +13,8 @@ import java.util.Map;
 import java.util.ServiceLoader;
 
 /**
- * A well known factory of initialized Template Engines, as of [A4], according to the
- * provided implementation, found in classpath.
+ * A well known factory of initialized Template Engines, according to the
+ * provided implementation, found in classpath. See [A4]
  * @author Rusi Popov
  */
 public final class TemplateEngineFactory {
@@ -22,7 +22,6 @@ public final class TemplateEngineFactory {
   /**
    * Factory and cache of Template Engines, as of [A4] architecture
    * map: path -> TemplateEngine
-   * TODO: REMOVE, avoid using the engines as singletons
    */
   private static final Map<String, TemplateEngine> engines = new HashMap<>();
 
@@ -30,8 +29,7 @@ public final class TemplateEngineFactory {
   }
 
   /**
-   * This method creates a context for a set of templates (quite the same as the web context for ModelAnt Templates) in
-   * the same context.
+   * Construct a singleton template engine for the unique compilation contest. The context's identifier is its unique name.
    * @param compilationContext not null
    * @return non-null template engine
    * @throws RuntimeException on instantiation problems
@@ -41,7 +39,7 @@ public final class TemplateEngineFactory {
     ConstructTemplateEngine construct;
     String key;
 
-    key = constructKey( compilationContext );
+    key = compilationContext.getUniqueName();
     result = engines.get( key );
     if ( result == null ) {
       construct = ServiceLoader.load(ConstructTemplateEngine.class).iterator().next(); // not null
@@ -54,13 +52,26 @@ public final class TemplateEngineFactory {
                                            +"\" failed with:",
                                            ex);
       }
-
       engines.put( key, result );
     }
     return result;
   }
 
-  private static String constructKey(TemplateCompilationContext compilationContext) {
-    return compilationContext.getTemplateDirectory().getAbsolutePath();
+  /**
+   * @param uniqueName not null unique name of a template (set) Engine
+   * @return non-null engine already registered with that unique name
+   * @throws IllegalArgumentException when no engine found / the name is not bound
+   * @see #construct(TemplateCompilationContext)
+   */
+  public TemplateEngine getEngine(String uniqueName) throws IllegalArgumentException {
+    TemplateEngine result;
+
+    result = engines.get( uniqueName );
+    if ( result == null ) {
+      throw new IllegalArgumentException("Template engine for context \""
+                                         +uniqueName
+                                         +"\" is still not constructed");
+    }
+		return result;
   }
 }
