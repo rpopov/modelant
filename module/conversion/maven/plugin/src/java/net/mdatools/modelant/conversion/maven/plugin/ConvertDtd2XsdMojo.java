@@ -5,7 +5,7 @@
  * Eclipse Public License v2.0 which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
  */
-package net.mdatools.modelant.uml13.maven.plugin.convert;
+package net.mdatools.modelant.conversion.maven.plugin;
 
 import java.io.File;
 import java.util.ArrayList;

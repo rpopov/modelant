@@ -45,11 +45,7 @@
     <dependency>
       <groupId>com.sun.xsom</groupId>
       <artifactId>xsom</artifactId>
-    </dependency>    
-    <dependency>
-      <groupId>com.thaiopensource</groupId>
-      <artifactId>trang</artifactId>
-    </dependency>    
+    </dependency>        
     <dependency>
       <groupId>com.sun</groupId>
       <artifactId>tools</artifactId>

@@ -40,5 +40,9 @@
       <artifactId>modelant.repository.impl</artifactId>
       <version>${project.version}</version>
     </dependency>
+    <dependency>
+      <groupId>com.thaiopensource</groupId>
+      <artifactId>trang</artifactId>
+    </dependency>	
   </dependencies>
 </project>
