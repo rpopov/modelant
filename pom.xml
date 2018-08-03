@@ -49,12 +49,14 @@ whereas the converted to UML 1.4 models can be imported in:
     </developer>
   </developers>
   
-<!--
-  <prerequisites>
-    <maven>3.3.0</maven>
-  </prerequisites>
--->
-
+  <mailingLists>
+    <mailingList>
+      <subscribe>https://mdatools.net/blog/</subscribe>
+      <unsubscribe>https://mdatools.net/blog/</unsubscribe>
+      <archive>https://mdatools.net/blog/</archive>
+    </mailingList> 
+  </mailingLists> 
+    
   <modules>
     <module>module/repository</module>
     <module>module/core</module>
@@ -72,8 +74,8 @@ whereas the converted to UML 1.4 models can be imported in:
   </scm>
 
   <issueManagement>
-    <system>Mantis 2.9.1</system>
-    <url>https://mdatools.net/mantis</url>
+    <system>Github</system>
+    <url>https://github.com/rpopov/modelant/issues</url>
   </issueManagement>
 
   <distributionManagement>
@@ -411,6 +413,18 @@ whereas the converted to UML 1.4 models can be imported in:
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
           <version>3.0.1</version>
+		  <configuration>
+		    <outputDirectory>${basedir}/site</outputDirectory>
+			<docencoding>UTF-8</docencoding>
+			<encoding>UTF-8</encoding>
+			<detectLinks>true</detectLinks>
+			
+			<!-- TODO: exclude the default package of the generated helpmojo classes -->
+			<!--
+			<excludePackageNames></excludePackageNames>
+              -->  
+			<sourcetab>2</sourcetab>
+		  </configuration>
         </plugin>  
       </plugins>
     </pluginManagement>
@@ -499,7 +513,7 @@ whereas the converted to UML 1.4 models can be imported in:
       <id>check-doc</id>
       <activation>
         <property>
-          <name>artifactId</name>
+          <name>project.artifactId</name>
 		  <value>modelant</value>
         </property>
       </activation>

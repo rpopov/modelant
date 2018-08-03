@@ -33,7 +33,7 @@ public class CompositeOrder implements Order {
   /**
    * List the nested comparators. Their order is significant - the earlier listed comparators
    * will be applied first.
-   * @param next
+   * @param next non-null order to apply
    */
   public void add(Order next) {
     nested.add( next );
