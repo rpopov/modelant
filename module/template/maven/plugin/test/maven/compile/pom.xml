@@ -2,14 +2,10 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>net.mdatools</groupId>
-    <artifactId>modelant.template.maven</artifactId>
-    <version>${revision}</version>
-    <relativePath>../..</relativePath>
-  </parent>
   
+  <groupId>net.mdatools</groupId>
   <artifactId>modelant.template.maven.plugin.test</artifactId>
+  <version>@project.version@</version>
 
   <description>Test Maven compiler for ModelAnt templates</description>
 
@@ -18,7 +14,7 @@
       <plugin>
         <groupId>net.mdatools</groupId>
         <artifactId>modelant.template.maven.plugin</artifactId>
-        <version>${project.version}</version>
+        <version>@project.version@</version>
         <executions>
           <execution>
             <goals>
@@ -29,6 +25,7 @@
         <configuration>
           <uniqueName>test</uniqueName>
           <keepGenerated>true</keepGenerated>
+		  <templateDirectory>src</templateDirectory>
         </configuration>
       </plugin>
     </plugins>
