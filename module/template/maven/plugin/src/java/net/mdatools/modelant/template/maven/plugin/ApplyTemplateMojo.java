@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import org.apache.maven.plugins.annotations.Execute;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 
 import net.mdatools.modelant.template.api.TemplateEngine;
 import net.mdatools.modelant.template.api.TemplateEngineFactory;
@@ -36,24 +37,21 @@ public class ApplyTemplateMojo extends CompilationContext {
 
   /**
    * The name of the template to apply
-   * @parameter
-   * @required
    */
+	@Parameter(required=true)
   private String template;
 
   /**
    * The file to produce
-   * @parameter
-   * @required
    */
+	@Parameter(required=true)
   private File targetFile;
 
   /**
-   * The name of the system (TODO check if there are others in MAVEN) property whose value to render
-   * @parameter
-   * @required
+   * The value (usually a maven property value) to render
    */
-  private String property;
+	@Parameter(required=true)
+  private Object targetObject;
 
 
   /**
@@ -61,9 +59,7 @@ public class ApplyTemplateMojo extends CompilationContext {
    */
   public final void execute() {
     TemplateEngine engine;
-    Object targetObject;
 
-    targetObject = System.getProperty( property ); // TODO USE THE COMMON MAVEN PROPERTIES
     try {
       engine = TemplateEngineFactory.construct( this );
       engine.render( targetFile, targetObject, template, null );

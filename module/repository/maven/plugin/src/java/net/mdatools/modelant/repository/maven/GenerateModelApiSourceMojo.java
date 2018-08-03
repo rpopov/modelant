@@ -15,6 +15,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Execute;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 
 import net.mdatools.modelant.repository.api.ModelRepository;
 import net.mdatools.modelant.repository.api.ModelRepositoryFactory;
@@ -33,33 +34,26 @@ public class GenerateModelApiSourceMojo extends AbstractMojo {
 
   /**
    * Where to generate the API sources
-   *
-   * @parameter property="project.build.sourceDirectory"
-   * @required
    */
+	@Parameter(property="project.build.sourceDirectory", required=true)
   private File sourceDirectory;
 
   /**
    * Where the metamodel is located
-   *
-   * @parameter
-   * @required
    */
+	@Parameter(required=true)
   private File metamodelFile;
 
   /**
    * Where the work files are located
-   *
-   * @parameter property="project.build.directory"
-   * @required
    */
+	@Parameter(property="project.build.directory", required=true)
   private File workDirectory;
 
   /**
    * The optional javadoc header to include in the generated sources
-   *
-   * @parameter
    */
+	@Parameter
   private File headerFile;
 
 

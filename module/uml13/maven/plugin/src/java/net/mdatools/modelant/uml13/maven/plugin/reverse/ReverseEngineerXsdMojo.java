@@ -16,6 +16,7 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Execute;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 
 import net.mdatools.modelant.core.api.Function;
 import net.mdatools.modelant.repository.api.ModelRepository;
@@ -52,22 +53,20 @@ public class ReverseEngineerXsdMojo extends AbstractMojo {
 
   /**
    * The schema file to reverse engineer
-   * @parameter
    */
+	@Parameter(required=true)
   private File schemaFile;
 
   /**
    * The name of the file where to export the produced UML 1.3 model in XMI 1.2 format
-   * @parameter
-   * @required
    */
+	@Parameter(required=true)
   private File outputFile;
 
   /**
    * The directory where to store the repository files
-   * @parameter property="project.build.directory"
-   * @required
    */
+	@Parameter(property="project.build.directory", required=true)
   private File workDir;
 
   /**

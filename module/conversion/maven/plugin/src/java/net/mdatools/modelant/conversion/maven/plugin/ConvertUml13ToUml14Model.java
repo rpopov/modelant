@@ -16,6 +16,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Execute;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 
 import net.mdatools.modelant.conversion.model.ConvertUml13ToUml14;
 import net.mdatools.modelant.repository.api.ModelFactory;
@@ -34,26 +35,20 @@ public class ConvertUml13ToUml14Model extends AbstractMojo {
 
   /**
    * Where to generate the API sources
-   *
-   * @parameter property="project.build.sourceDirectory"
-   * @required
    */
+	@Parameter(property="project.build.sourceDirectory", required=true)
   private File sourceModel;
 
   /**
    * Where the metamodel is located
-   *
-   * @parameter
-   * @required
    */
+	@Parameter(required=true)
   private File targetModel;
 
   /**
    * Where the work files are located
-   *
-   * @parameter property="project.build.directory"
-   * @required
    */
+	@Parameter(property="project.build.directory", required=true)
   private File workDirectory;
 
   public void execute() throws MojoExecutionException {

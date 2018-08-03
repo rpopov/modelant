@@ -19,6 +19,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugins.annotations.Execute;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 
 import net.mdatools.modelant.core.api.Function;
 import net.mdatools.modelant.repository.api.ModelRepository;
@@ -56,52 +57,45 @@ public class ReverseEngineerDatabaseMojo extends AbstractMojo {
 
   /**
    * Database driver-specific URL
-   * @parameter
-   * @required
    */
+	@Parameter(required=true)
   private String url;
 
   /**
    * Database user to connect the database
-   * @parameter
-   * @required
    */
+	@Parameter(required=true)
   private String user;
 
   /**
    * Database user's password
-   * @parameter
-   * @required
    */
+	@Parameter(required=true)
   private String password;
 
   /**
    * The java class name of the database driver to connect the database.
    * The .jar with that class file should be provided as a dependency of this plugin
-   * @parameter
-   * @required
    */
+	@Parameter(required=true)
   private String driver;
 
   /**
    * Database schemes to reverse engineer
-   * @parameter
-   * @required
    */
+	@Parameter(required=true)
   private String[] schema;
 
   /**
    * The name of the file where to export the produced UML 1.3 model in XMI 1.2 format
-   * @parameter
-   * @required
    */
+	@Parameter(required=true)
   private File outputFile;
 
   /**
    * The directory where to store the repository files
-   * @parameter property="project.build.directory"
-   * @required
    */
+	@Parameter(property="project.build.directory",required=true)
   private File workDir;
 
   /**

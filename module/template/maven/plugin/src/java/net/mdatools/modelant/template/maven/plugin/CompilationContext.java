@@ -8,11 +8,12 @@
 package net.mdatools.modelant.template.maven.plugin;
 
 import java.io.File;
-import java.util.List;
 
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.descriptor.PluginDescriptor;
+import org.apache.maven.plugins.annotations.Component;
+import org.apache.maven.plugins.annotations.Parameter;
 
 import net.mdatools.modelant.template.api.TemplateCompilationContext;
 
@@ -27,57 +28,53 @@ public abstract class CompilationContext extends AbstractMojo implements Templat
    * from any other set to compile in other projects. It also should avoid producing
    * standard package names that are forbidden for custom class loaders.
    * It should not be among the forbidden package names like: java, com.sun
-   * @parameter
-   * @required
    */
+	@Parameter(required=true)
   private String uniqueName;
 
   /**
    * Where the source files of the project templates are
-   * @parameter default-value="${project.build.sourceDirectory}/../template"
-   * @required
    */
+	@Parameter(defaultValue="${project.build.sourceDirectory}/../template", required=true)
   private File templateDirectory;
 
   /**
    * The directory where to hold the translated to JAVA templates
-   * @parameter default-value="${project.build.directory}/java"
-   * @required
    */
+	@Parameter(defaultValue="${project.build.directory}/java", required=true)
   private File javaSourceDirectory;
 
   /**
    * Where to hold the compilation result files - the standard classes directory
-   * @parameter property="project.build.outputDirectory"
-   * @readonly
-   * @required
    */
+	@Parameter(property="project.build.outputDirectory", required=true, readonly=true)
   private File classDirectory;
 
   /**
    * PLEXUS should inject here the descriptor of the plugin this MOJO is in,
    * so it could access its classpath
-   * @component role="org.apache.maven.plugin.descriptor.PluginDescriptor"
    */
+	@Component(role=org.apache.maven.plugin.descriptor.PluginDescriptor.class)
   private PluginDescriptor pluginDescriptor;
 
   /**
    * If the generated Java files from the templates should not be deleted
    * (for tracing purposes) set it to true
-   * @parameter alias="keepGenerated"
    */
+	@Parameter(alias="keepGenerated")
   private boolean shouldKeepGenerated;
 
   /**
    * If the compiler should include debug information, set it to true
-   * @parameter alias="compileForDebug"
+   * @parameter
    */
+	@Parameter(alias="compileForDebug")
   private boolean shouldCompileForDebug;
 
   /**
    * Encoding of the template files, default: ISO-8859-1
-   * @parameter default-value="ISO-8859-1"
    */
+	@Parameter(defaultValue="ISO-8859-1")
   private String templateEncoding;
 
   /**
@@ -121,7 +118,7 @@ public abstract class CompilationContext extends AbstractMojo implements Templat
 
     // concatenate all artifacts in the classparh
     result = new StringBuilder(512);
-    for (Artifact artifact: (List<Artifact>) pluginDescriptor.getArtifacts()) {
+    for (Artifact artifact: pluginDescriptor.getArtifacts()) {
       if (result.length() > 0) {
         result.append( File.pathSeparatorChar );
       }

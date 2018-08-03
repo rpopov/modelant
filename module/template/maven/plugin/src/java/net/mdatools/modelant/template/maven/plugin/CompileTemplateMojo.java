@@ -18,6 +18,7 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Execute;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.shared.model.fileset.FileSet;
 import org.apache.maven.shared.model.fileset.util.FileSetManager;
 
@@ -37,8 +38,8 @@ public class CompileTemplateMojo extends CompilationContext {
 
   /**
    * Selection of all ModelAnt Templates below sourceDirectory
-   * @parameter
    */
+	@Parameter
   private FileSet fileSet;
 
   /**
