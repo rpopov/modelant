@@ -25,7 +25,14 @@ whereas the converted to UML 1.4 models can be imported in:
 - Enterprise Architect
 - other
   </description>
+  <url>https://mdatools.net/</url>
+  <inceptionYear>2001</inceptionYear>
 
+  <organization>
+    <name>MDA Tools</name>
+    <url>https://mdatools.net/</url>
+  </organization>
+  
   <licenses>
     <license>
       <name>Eclipse Public License - v 2.0</name>
@@ -34,14 +41,6 @@ whereas the converted to UML 1.4 models can be imported in:
     </license>
   </licenses>
 
-  <organization>
-    <name>MDA Tools</name>
-    <url>https://mdatools.net/</url>
-  </organization>
-  
-  <url>https://mdatools.net/</url>
-  <inceptionYear>2001</inceptionYear>
-
   <developers>
     <developer>
       <name>Rusi Popov</name>
@@ -49,38 +48,34 @@ whereas the converted to UML 1.4 models can be imported in:
       <organization>MDA Tools</organization>
     </developer>
   </developers>
+  
+<!--
+  <prerequisites>
+    <maven>3.3.0</maven>
+  </prerequisites>
+-->
+
+  <modules>
+    <module>module/repository</module>
+    <module>module/core</module>
+    <module>module/template</module>
+    <module>module/mof14</module>
+    <module>module/uml13</module>
+    <module>module/uml14</module>
+    <module>module/conversion</module>
+  </modules>
+  
+  <scm>
+    <url>https://github.com/rpopov/modelant</url>
+    <connection>scm:git:https://github.com/rpopov/modelant.git</connection>
+    <developerConnection>scm:git:https://github.com/rpopov/modelant.git</developerConnection>
+  </scm>
 
   <issueManagement>
     <system>Mantis 2.9.1</system>
     <url>https://mdatools.net/mantis</url>
   </issueManagement>
 
-  <scm>
-    <url>https://github.com/rpopov/modelant</url>
-    <connection>scm:git:https://github.com/rpopov/modelant.git</connection>
-    <developerConnection>scm:git:https://github.com/rpopov/modelant.git</developerConnection>
-  </scm>
-<!--
-  <prerequisites>
-    <maven>3.3.0</maven>
-  </prerequisites>
--->
-  <pluginRepositories>
-    <pluginRepository>
-      <id>public-tools</id>
-      <name>Repository of any public/external maven plugins/tools. It is a local cache of Maven Central repository.</name>
-      <url>http://localhost:8081/repository/public-tools-maven/</url>
-      <layout>default</layout>
-    </pluginRepository>
-  </pluginRepositories>
-  <repositories>
-    <repository>
-      <id>public-components</id>
-      <name>Any external components of modelant. Separated for analysis of vulnerabilities. It is a local cache of Maven Central repository.</name>
-      <url>http://localhost:8081/repository/modelant-maven-public-component/</url>
-      <layout>default</layout>
-    </repository>
-  </repositories>
   <distributionManagement>
     <repository>
       <id>release</id>
@@ -95,16 +90,6 @@ whereas the converted to UML 1.4 models can be imported in:
       <uniqueVersion>true</uniqueVersion>
     </snapshotRepository>
   </distributionManagement>
-
-  <modules>
-    <module>module/repository</module>
-    <module>module/core</module>
-    <module>module/template</module>
-    <module>module/mof14</module>
-    <module>module/uml13</module>
-    <module>module/uml14</module>
-    <module>module/conversion</module>
-  </modules>
 
   <properties>
     <revision>3.3.0-SNAPSHOT</revision>
@@ -123,7 +108,7 @@ whereas the converted to UML 1.4 models can be imported in:
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-
+  
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -218,6 +203,23 @@ whereas the converted to UML 1.4 models can be imported in:
       <artifactId>junit</artifactId>
     </dependency>
   </dependencies>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>public-tools</id>
+      <name>Repository of any public/external maven plugins/tools. It is a local cache of Maven Central repository.</name>
+      <url>http://localhost:8081/repository/public-tools-maven/</url>
+      <layout>default</layout>
+    </pluginRepository>
+  </pluginRepositories>
+  <repositories>
+    <repository>
+      <id>public-components</id>
+      <name>Any external components of modelant. Separated for analysis of vulnerabilities. It is a local cache of Maven Central repository.</name>
+      <url>http://localhost:8081/repository/modelant-maven-public-component/</url>
+      <layout>default</layout>
+    </repository>
+  </repositories>
 
   <build>
     <sourceDirectory>${project.basedir}/src/java</sourceDirectory>
@@ -525,7 +527,10 @@ whereas the converted to UML 1.4 models can be imported in:
         <reportSets>
           <reportSet>
             <reports>
-              <report>javadoc-no-fork</report> <!-- aggregate -->
+              <report>aggregate</report> 
+			  <!--  
+              <report>javadoc-no-fork</report> 
+			  -->
               <!--report>aggregate-jar</report--> 
               <!--report>test-javadoc-no-fork</report-->
             </reports>
