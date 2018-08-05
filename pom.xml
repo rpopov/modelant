@@ -82,7 +82,7 @@ whereas the converted to UML 1.4 models can be imported in:
     <!-- see https://maven.apache.org/plugins/maven-site-plugin/examples/creating-content.html -->
     <site>
       <id>mdatools.net</id>
-      <url>scp://mdatools.net/www/product/${version}</url>
+      <url>scp://mdatools.net/www/product/${project.version}</url>
     </site>
     <repository>
       <id>release</id>
@@ -380,22 +380,6 @@ whereas the converted to UML 1.4 models can be imported in:
          </executions>
         </plugin>
 
-        <!--
-          Check plugin documentation
-          -->
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-docck-plugin</artifactId>
-          <version>1.1</version>
-          <executions>
-            <execution>
-              <goals>
-                <goal>check</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
-
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-plugin-plugin</artifactId>
@@ -409,6 +393,22 @@ whereas the converted to UML 1.4 models can be imported in:
               <id>help-goal</id>
               <goals>
                 <goal>helpmojo</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+        <!--
+          Check plugin documentation
+          -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-docck-plugin</artifactId>
+          <version>1.1</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>check</goal>
               </goals>
             </execution>
           </executions>
@@ -455,13 +455,12 @@ whereas the converted to UML 1.4 models can be imported in:
           <artifactId>maven-source-plugin</artifactId>
           <version>3.0.1</version>
           <executions>
-          <execution>
-            <id>attach-sources</id>
-            <goals>
-            <goal>jar</goal>
-            <!-- set the phase, see [C4] -->
-            </goals>
-          </execution>
+            <execution>
+              <id>attach-sources</id>
+              <goals>
+              <goal>jar</goal>
+              </goals>
+            </execution>
           </executions>
         </plugin>
 
