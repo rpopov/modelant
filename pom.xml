@@ -79,6 +79,11 @@ whereas the converted to UML 1.4 models can be imported in:
   </issueManagement>
 
   <distributionManagement>
+    <!-- see https://maven.apache.org/plugins/maven-site-plugin/examples/creating-content.html -->
+    <site>
+      <id>mdatools.net</id>
+      <url>scp://mdatools.net/www/product/${version}</url>
+    </site>  
     <repository>
       <id>release</id>
       <name>Repository of modelant releases</name>
@@ -109,6 +114,8 @@ whereas the converted to UML 1.4 models can be imported in:
     <maven.compiler.target>1.8</maven.compiler.target>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    
+    <javadocDirectory>${basedir}/src/javadoc</javadocDirectory>
   </properties>
 
   <dependencyManagement>
@@ -214,6 +221,7 @@ whereas the converted to UML 1.4 models can be imported in:
       <layout>default</layout>
     </pluginRepository>
   </pluginRepositories>
+
   <repositories>
     <repository>
       <id>public-components</id>
@@ -379,10 +387,6 @@ whereas the converted to UML 1.4 models can be imported in:
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-docck-plugin</artifactId>
           <version>1.1</version>
-          <configuration>
-            <!-- suppress checking the URLs -->
-            <offline>true</offline>
-          </configuration>
           <executions>
             <execution>
               <goals>
@@ -409,6 +413,7 @@ whereas the converted to UML 1.4 models can be imported in:
             </execution>
           </executions>
         </plugin>
+        
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
@@ -425,14 +430,15 @@ whereas the converted to UML 1.4 models can be imported in:
                     -->
 
             <!-- [C4] directories -->
-            <javadocDirectory>${basedir}/src/javadoc</javadocDirectory>
-            <overview>${javadocDirectory}/overview.html</overview>
-            <helpfile>${javadocDirectory}/help-doc.html</helpfile>
-            <stylesheetfile>${javadocDirectory}/stylesheet.css</stylesheetfile>
+            <javadocDirectory>${project.javadocDirectory}</javadocDirectory>
+            <overview>${project.javadocDirectory}/overview.html</overview>
+            <helpfile>${project.javadocDirectory}/help-doc.html</helpfile>
+            <stylesheetfile>${project.javadocDirectory}/stylesheet.css</stylesheetfile>
 
             <sourcetab>2</sourcetab>
-            </configuration>
-            <executions>
+            <version>${project.version}</version>
+          </configuration>
+          <executions>
             <execution>
               <id>attach-javadoc</id>
               <goals>
@@ -458,6 +464,12 @@ whereas the converted to UML 1.4 models can be imported in:
           </execution>
           </executions>
         </plugin>
+        
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.7.1</version>
+        </plugin>        
       </plugins>
     </pluginManagement>
 
@@ -564,7 +576,7 @@ whereas the converted to UML 1.4 models can be imported in:
         </property>
     -->
         <file>
-          <exists>modules/</exists>
+          <exists>module</exists>
         </file>
       </activation>
       <build>
