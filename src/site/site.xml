@@ -1,0 +1,98 @@
+<project xmlns="http://maven.apache.org/DECORATION/1.8.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 http://maven.apache.org/xsd/decoration-1.8.0.xsd"
+  name="modelant tool to support model-driven software development processes" 
+  >
+  <!-- combine.self="merge" -->
+  <!-- 
+   see 
+   https://maven.apache.org/doxia/doxia-sitetools/doxia-decoration-model/decoration.html#class_item 
+   https://maven.apache.org/plugins/maven-site-plugin/examples/sitedescriptor.html
+    -->
+  
+<!--  
+  <bannerLeft>
+    <name/>
+    <src/>
+    <alt/>
+    <href/>
+    <border/>
+    <width/>
+    <height/>
+    <title/>
+  </bannerLeft>
+  <bannerRight>
+    <name/>
+    <src/>
+    <alt/>
+    <href/>
+    <border/>
+    <width/>
+    <height/>
+    <title/>
+  </bannerRight>
+  <googleAdSenseClient/>
+  <googleAdSenseSlot/>
+-->  
+  <googleAnalyticsAccountId>google8f3731ad816f7abe</googleAnalyticsAccountId>
+ 
+  <publishDate position="left" format="yyyy-MM-dd"/>
+  
+  <version position="left"/>
+  
+<!--  
+  <edit>${project.scm.url}</edit>
+  -->
+ 
+  <poweredBy>
+    <logo name="modelant" href="https://mdatools.net/"
+          position="left" alt="https://mdatools.net/blog/wp-content/uploads/2012/10/logo4-e1399385230456.png" 
+          border="none" 
+          width="100" height="100" 
+          title="modelant" /> <!--  img=..  target=.. -->
+  </poweredBy>
+ 
+  <!-- see https://maven.apache.org/plugins/maven-site-plugin/examples/creatingskins.html -->
+<!--  
+  <skin>
+    <groupId/>
+    <artifactId/>
+    <version/>
+  </skin>
+ -->
+ 
+  <body>
+    <head/>
+    <links>
+      <item name="Link 1"/> <!-- href=.. img=.. position=.. alt=.. border=.. width=.. height=.. target=.. title=.. /> -->
+    </links>
+<!--    
+    <breadcrumbs>
+      <item name=.. href=.. img=.. position=.. alt=.. border=.. width=.. height=.. target=.. title=.. />
+    </breadcrumbs>
+ -->    
+     <menu name="Overview">
+      <item name="Introduction" href="index.html"/>
+      <item name="Goals" href="plugin-info.html"/>
+      <item name="Usage" href="usage.html"/>
+      <item name="FAQ" href="faq.html"/>
+    </menu>
+    <menu ref="modules" />   
+    <menu name="Examples">
+      <item name="description1" href="examples/example-one.html"/>
+      <item name="description2" href="examples/example-two.html"/>
+    </menu>
+ 
+ <!--
+    <menu name=.. inherit=.. inheritAsRef=.. ref=.. img=.. alt=.. position=.. border=.. width=.. height=.. title=.. >
+      <item collapse=.. ref=.. name=.. href=.. img=.. position=.. alt=.. border=.. width=.. height=.. target=.. title=.. >
+        <description/>
+        <item>...recursion...<item>
+      </item>
+    </menu>    
+-->    
+    <footer/>
+  </body>
+ 
+  <!-- https://maven.apache.org/plugins-archives/maven-site-plugin-3.1/examples/sitedescriptor.html -->
+  <custom/>
+</project>
