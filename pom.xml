@@ -32,7 +32,7 @@ whereas the converted to UML 1.4 models can be imported in:
     <name>MDA Tools</name>
     <url>https://mdatools.net/</url>
   </organization>
-  
+
   <licenses>
     <license>
       <name>Eclipse Public License - v 2.0</name>
@@ -48,15 +48,15 @@ whereas the converted to UML 1.4 models can be imported in:
       <organization>MDA Tools</organization>
     </developer>
   </developers>
-  
+
   <mailingLists>
     <mailingList>
       <subscribe>https://mdatools.net/blog/</subscribe>
       <unsubscribe>https://mdatools.net/blog/</unsubscribe>
       <archive>https://mdatools.net/blog/</archive>
-    </mailingList> 
-  </mailingLists> 
-    
+    </mailingList>
+  </mailingLists>
+
   <modules>
     <module>module/repository</module>
     <module>module/core</module>
@@ -66,7 +66,7 @@ whereas the converted to UML 1.4 models can be imported in:
     <module>module/uml14</module>
     <module>module/conversion</module>
   </modules>
-  
+
   <scm>
     <url>https://github.com/rpopov/modelant</url>
     <connection>scm:git:https://github.com/rpopov/modelant.git</connection>
@@ -110,7 +110,7 @@ whereas the converted to UML 1.4 models can be imported in:
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-  
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -374,15 +374,15 @@ whereas the converted to UML 1.4 models can be imported in:
 
         <!--
           Check plugin documentation
-          -->  
+          -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-docck-plugin</artifactId>
           <version>1.1</version>
-		  <configuration>
-		    <!-- suppress checking the URLs -->
-		    <offline>true</offline>
-		  </configuration>
+          <configuration>
+            <!-- suppress checking the URLs -->
+            <offline>true</offline>
+          </configuration>
           <executions>
             <execution>
               <goals>
@@ -391,7 +391,7 @@ whereas the converted to UML 1.4 models can be imported in:
             </execution>
           </executions>
         </plugin>
-		
+
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-plugin-plugin</artifactId>
@@ -409,23 +409,55 @@ whereas the converted to UML 1.4 models can be imported in:
             </execution>
           </executions>
         </plugin>
-		<plugin>
+        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
           <version>3.0.1</version>
-		  <configuration>
-		    <outputDirectory>${basedir}/site</outputDirectory>
-			<docencoding>UTF-8</docencoding>
-			<encoding>UTF-8</encoding>
-			<detectLinks>true</detectLinks>
-			
-			<!-- TODO: exclude the default package of the generated helpmojo classes -->
-			<!--
-			<excludePackageNames></excludePackageNames>
-              -->  
-			<sourcetab>2</sourcetab>
-		  </configuration>
-        </plugin>  
+          <configuration>
+            <quiet>true</quiet>
+            <docencoding>UTF-8</docencoding>
+            <encoding>UTF-8</encoding>
+            <detectLinks>true</detectLinks>
+
+            <!-- TODO: exclude the default package of the generated helpmojo classes -->
+            <!--
+            <excludePackageNames></excludePackageNames>
+                    -->
+
+            <!-- [C4] directories -->
+            <javadocDirectory>${basedir}/src/javadoc</javadocDirectory>
+            <overview>${javadocDirectory}/overview.html</overview>
+            <helpfile>${javadocDirectory}/help-doc.html</helpfile>
+            <stylesheetfile>${javadocDirectory}/stylesheet.css</stylesheetfile>
+
+            <sourcetab>2</sourcetab>
+            </configuration>
+            <executions>
+            <execution>
+              <id>attach-javadoc</id>
+              <goals>
+                <goal>javadoc-no-fork</goal>
+              <goal>jar</goal>
+              <!-- set the phase, see [C4] -->
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>3.0.1</version>
+          <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+            <goal>jar</goal>
+            <!-- set the phase, see [C4] -->
+            </goals>
+          </execution>
+          </executions>
+        </plugin>
       </plugins>
     </pluginManagement>
 
@@ -444,10 +476,21 @@ whereas the converted to UML 1.4 models can be imported in:
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>flatten-maven-plugin</artifactId>
       </plugin>
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
       </plugin>
+
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-javadoc-plugin</artifactId>
+     </plugin>
+
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-source-plugin</artifactId>
+    </plugin>
     </plugins>
   </build>
 
@@ -512,10 +555,17 @@ whereas the converted to UML 1.4 models can be imported in:
         -->
       <id>check-doc</id>
       <activation>
+      <!-- to be activated only in the root project -->
+    <!--  this does not work -->
+    <!--
         <property>
           <name>project.artifactId</name>
-		  <value>modelant</value>
+          <value>modelant</value>
         </property>
+    -->
+        <file>
+          <exists>modules/</exists>
+        </file>
       </activation>
       <build>
         <plugins>
@@ -526,31 +576,5 @@ whereas the converted to UML 1.4 models can be imported in:
         </plugins>
       </build>
     </profile>
-
   </profiles>
-
-  <reporting>
-    <excludeDefaults>true</excludeDefaults>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-		<configuration>
-		  <quiet>true</quiet>
-		</configuration>
-        <reportSets>
-          <reportSet>
-            <reports>
-              <report>aggregate</report> 
-			  <!--  
-              <report>javadoc-no-fork</report> 
-			  -->
-              <!--report>aggregate-jar</report--> 
-              <!--report>test-javadoc-no-fork</report-->
-            </reports>
-          </reportSet>
-        </reportSets>
-      </plugin>
-    </plugins>
-  </reporting>    
 </project>

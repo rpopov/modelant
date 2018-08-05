@@ -25,7 +25,7 @@
         <configuration>
           <uniqueName>test</uniqueName>
           <keepGenerated>true</keepGenerated>
-		  <templateDirectory>src</templateDirectory>
+		  <templateDirectory>src/template</templateDirectory>
         </configuration>
       </plugin>
     </plugins>
