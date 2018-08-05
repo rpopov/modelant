@@ -82,7 +82,7 @@ whereas the converted to UML 1.4 models can be imported in:
     <!-- see https://maven.apache.org/plugins/maven-site-plugin/examples/creating-content.html -->
     <site>
       <id>mdatools.net</id>
-      <url>scp://mdatools.net/www/product/${project.version}</url>
+      <url>scp://mdatools.net/product/${project.version}</url>
     </site>
     <repository>
       <id>release</id>
@@ -292,6 +292,7 @@ whereas the converted to UML 1.4 models can be imported in:
             </execution>
           </executions>
         </plugin>
+
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
@@ -468,6 +469,14 @@ whereas the converted to UML 1.4 models can be imported in:
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-site-plugin</artifactId>
           <version>3.7.1</version>
+          <dependencies>
+            <!-- see http://maven.apache.org/plugins/maven-site-plugin/examples/adding-deploy-protocol.html -->
+            <dependency><!-- add support for ssh/scp -->
+              <groupId>org.apache.maven.wagon</groupId>
+              <artifactId>wagon-ssh</artifactId>
+              <version>1.0</version>
+            </dependency>
+          </dependencies>
         </plugin>
 
         <plugin>
