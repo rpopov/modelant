@@ -416,6 +416,7 @@ whereas the converted to UML 1.4 models can be imported in:
         </plugin>
 
         <plugin>
+          <!-- generate javadoc -->
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
           <version>3.0.1</version>
@@ -466,6 +467,7 @@ whereas the converted to UML 1.4 models can be imported in:
         </plugin>
 
         <plugin>
+          <!-- publishing the reoports of project-info-reports plugin -->
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-site-plugin</artifactId>
           <version>3.7.1</version>
@@ -480,6 +482,7 @@ whereas the converted to UML 1.4 models can be imported in:
         </plugin>
 
         <plugin>
+          <!-- general reports, based on the pom.xml, not specialized for plugins -->
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
@@ -585,14 +588,7 @@ whereas the converted to UML 1.4 models can be imported in:
         -->
       <id>check-doc</id>
       <activation>
-      <!-- to be activated only in the root project -->
-    <!--  this does not work -->
-    <!--
-        <property>
-          <name>project.artifactId</name>
-          <value>modelant</value>
-        </property>
-    -->
+        <!-- to be activated only in the root project -->
         <file>
           <exists>module</exists>
         </file>
