@@ -561,6 +561,24 @@ whereas the converted to UML 1.4 models can be imported in:
           </plugin>
         </plugins>
       </build>
+      
+      <reporting>
+        <plugins>
+          <plugin>
+            <artifactId>maven-project-info-reports-plugin</artifactId>
+          </plugin>
+          <plugin>
+            <artifactId>maven-plugin-plugin</artifactId>
+            <reportSets>
+              <reportSet>
+                <reports>
+                  <report>report</report>
+                </reports>
+              </reportSet>
+            </reportSets>
+          </plugin>
+        </plugins>
+      </reporting>      
     </profile>
 
     <profile>
