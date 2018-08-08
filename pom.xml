@@ -607,9 +607,12 @@ whereas the converted to UML 1.4 models can be imported in:
       <id>check-doc</id>
       <activation>
         <!-- to be activated only in the root project -->
+        <!-- Satisfied as much as possible. Disabled -->
+        <!--
         <file>
           <exists>module</exists>
         </file>
+        -->
       </activation>
       <build>
         <plugins>

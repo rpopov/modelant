@@ -1,0 +1,6 @@
+.settings/
+target/
+*.bak
+.flattened-pom.xml
+.project
+.classpath
