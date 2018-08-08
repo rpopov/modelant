@@ -432,11 +432,12 @@ whereas the converted to UML 1.4 models can be imported in:
                     -->
 
             <!-- [C4] directories -->
+<!--            
             <javadocDirectory>${project.javadocDirectory}</javadocDirectory>
             <overview>${project.javadocDirectory}/overview.html</overview>
             <helpfile>${project.javadocDirectory}/help-doc.html</helpfile>
             <stylesheetfile>${project.javadocDirectory}/stylesheet.css</stylesheetfile>
-
+  -->
             <sourcetab>2</sourcetab>
             <version>${project.version}</version>
           </configuration>
@@ -445,9 +446,10 @@ whereas the converted to UML 1.4 models can be imported in:
               <id>attach-javadoc</id>
               <goals>
                 <goal>javadoc-no-fork</goal>
-              <goal>jar</goal>
-              <!-- set the phase, see [C4] -->
+                <goal>jar</goal>
               </goals>
+              <!-- Generate the jar after install, so that the frequient builds are fast. see the deploy plugin below -->
+              <phase>deploy</phase>  
             </execution>
           </executions>
         </plugin>
@@ -460,12 +462,42 @@ whereas the converted to UML 1.4 models can be imported in:
             <execution>
               <id>attach-sources</id>
               <goals>
-              <goal>jar</goal>
+                <goal>jar</goal>
               </goals>
+              <!-- Generate the jar after install, so that the frequient builds are fast. see the deploy plugin below -->
+              <phase>deploy</phase>  
             </execution>
           </executions>
         </plugin>
 
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <executions>
+            <execution>
+              <id>default-deploy</id>
+              <goals>
+                <goal>deploy</goal>
+              </goals>
+              <!-- Override and skip the default deploy goal in the default binding, until the source and javadoc archives are generated -->
+              <phase>deploy</phase>  
+              <configuration>
+                <skip>true</skip>
+              </configuration>
+            </execution>
+            <execution>
+              <id>deploy-all</id>
+              <goals>
+                <goal>deploy</goal>
+              </goals>
+              <!-- As there is no phase between install and deploy, this will be called last after the source and javadoc jars are generated -->
+              <phase>deploy</phase>  
+            </execution>
+          </executions>
+        </plugin>
+
+        
+        
         <plugin>
           <!-- publishing the reoports of project-info-reports plugin -->
           <groupId>org.apache.maven.plugins</groupId>
@@ -479,6 +511,7 @@ whereas the converted to UML 1.4 models can be imported in:
               <version>1.0</version>
             </dependency>
           </dependencies>
+              <!-- set the phase, see [C4], let it be after install, so that the frequient builds are fast -->
         </plugin>
 
         <plugin>
