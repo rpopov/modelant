@@ -82,7 +82,7 @@ whereas the converted to UML 1.4 models can be imported in:
     <!-- see https://maven.apache.org/plugins/maven-site-plugin/examples/creating-content.html -->
     <site>
       <id>mdatools.net</id>
-      <url>scp://mdatools.net/product/${project.version}</url>
+      <url>scp://mdatools.net:${site-port}/home/mdatools/public_html/product/${project.version}/</url>
     </site>
     <repository>
       <id>release</id>
@@ -385,23 +385,8 @@ whereas the converted to UML 1.4 models can be imported in:
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-plugin-plugin</artifactId>
           <version>3.5.1</version>
-          <executions>
-            <execution>
-              <id>default-descriptor</id>
-              <phase>process-classes</phase>
-            </execution>
-            <execution>
-              <id>help-goal</id>
-              <goals>
-                <goal>helpmojo</goal>
-              </goals>
-            </execution>
-          </executions>
         </plugin>
 
-        <!--
-          Check plugin documentation
-          -->
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-docck-plugin</artifactId>
@@ -429,17 +414,8 @@ whereas the converted to UML 1.4 models can be imported in:
             <!-- TODO: exclude the default package of the generated helpmojo classes -->
             <!--
             <excludePackageNames></excludePackageNames>
-                    -->
-
-            <!-- [C4] directories -->
-<!--            
-            <javadocDirectory>${project.javadocDirectory}</javadocDirectory>
-            <overview>${project.javadocDirectory}/overview.html</overview>
-            <helpfile>${project.javadocDirectory}/help-doc.html</helpfile>
-            <stylesheetfile>${project.javadocDirectory}/stylesheet.css</stylesheetfile>
-  -->
+              -->
             <sourcetab>2</sourcetab>
-            <version>${project.version}</version>
           </configuration>
           <executions>
             <execution>
@@ -449,7 +425,7 @@ whereas the converted to UML 1.4 models can be imported in:
                 <goal>jar</goal>
               </goals>
               <!-- Generate the jar after install, so that the frequient builds are fast. see the deploy plugin below -->
-              <phase>deploy</phase>  
+              <phase>deploy</phase>
             </execution>
           </executions>
         </plugin>
@@ -465,7 +441,7 @@ whereas the converted to UML 1.4 models can be imported in:
                 <goal>jar</goal>
               </goals>
               <!-- Generate the jar after install, so that the frequient builds are fast. see the deploy plugin below -->
-              <phase>deploy</phase>  
+              <phase>deploy</phase>
             </execution>
           </executions>
         </plugin>
@@ -480,7 +456,7 @@ whereas the converted to UML 1.4 models can be imported in:
                 <goal>deploy</goal>
               </goals>
               <!-- Override and skip the default deploy goal in the default binding, until the source and javadoc archives are generated -->
-              <phase>deploy</phase>  
+              <phase>deploy</phase>
               <configuration>
                 <skip>true</skip>
               </configuration>
@@ -491,13 +467,11 @@ whereas the converted to UML 1.4 models can be imported in:
                 <goal>deploy</goal>
               </goals>
               <!-- As there is no phase between install and deploy, this will be called last after the source and javadoc jars are generated -->
-              <phase>deploy</phase>  
+              <phase>deploy</phase>
             </execution>
           </executions>
         </plugin>
 
-        
-        
         <plugin>
           <!-- publishing the reoports of project-info-reports plugin -->
           <groupId>org.apache.maven.plugins</groupId>
@@ -505,13 +479,12 @@ whereas the converted to UML 1.4 models can be imported in:
           <version>3.7.1</version>
           <dependencies>
             <!-- see http://maven.apache.org/plugins/maven-site-plugin/examples/adding-deploy-protocol.html -->
-            <dependency><!-- add support for ssh/scp -->
+            <dependency>
               <groupId>org.apache.maven.wagon</groupId>
               <artifactId>wagon-ssh</artifactId>
-              <version>1.0</version>
+              <version>3.1.0</version>
             </dependency>
           </dependencies>
-              <!-- set the phase, see [C4], let it be after install, so that the frequient builds are fast -->
         </plugin>
 
         <plugin>
@@ -519,9 +492,6 @@ whereas the converted to UML 1.4 models can be imported in:
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
-          <configuration>
-            <version>${project.version}</version>
-          </configuration>
         </plugin>
 
       </plugins>
@@ -594,7 +564,7 @@ whereas the converted to UML 1.4 models can be imported in:
           </plugin>
         </plugins>
       </build>
-      
+
       <reporting>
         <plugins>
           <plugin>
@@ -611,7 +581,7 @@ whereas the converted to UML 1.4 models can be imported in:
             </reportSets>
           </plugin>
         </plugins>
-      </reporting>      
+      </reporting>
     </profile>
 
     <profile>
