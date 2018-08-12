@@ -10,13 +10,9 @@
   </parent>
 
   <artifactId>modelant.uml13.api</artifactId>
+  <description>JMI API for UML 1.3 models</description>
 
   <dependencies>
-    <!--dependency>
-      <groupId>net.mdatools</groupId>
-      <artifactId>modelant.uml13.metamodel</artifactId>
-      <version>${project.version}</version>
-    </dependency-->
     <dependency>
       <groupId>org.andromda.thirdparty.jmi</groupId>
       <artifactId>jmi</artifactId>

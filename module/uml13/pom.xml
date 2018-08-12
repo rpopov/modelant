@@ -12,6 +12,7 @@
 
   <artifactId>modelant.uml13</artifactId>
   <packaging>pom</packaging>
+  <description>Support of UML 1.3 models</description>
 
   <modules>
     <module>metamodel</module>

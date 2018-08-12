@@ -13,7 +13,6 @@
   <description>Archetype for building the default templates structure for ModelAnt Template Engine
     for a metamodel, written in MOF 1.4, XMI 1.1 or XMI 1.2, as of JMI (JCR-40).
     
-    The archetype requires providing parent project's Group, Artifact and Version.
     When other than the default values are provided, then the generated POM will 
     include a corresponding &lt;parent&gt; section.
   </description>

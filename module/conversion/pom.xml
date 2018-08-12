@@ -13,6 +13,8 @@
   <artifactId>modelant.conversion</artifactId>
   <packaging>pom</packaging>
 
+  <description>Convert models between modeling languages and formats, still keepoing their contents.</description>
+
   <modules>
     <module>model</module>
     <module>maven</module>

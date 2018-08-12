@@ -12,13 +12,13 @@
 
   <packaging>maven-plugin</packaging> <!-- activates the profile plugin from the root pom-->
 
-  <description>Maven plugin for ModelAnt repository tasks</description>
+  <description>Maven plugin to generate JMI model API wrapper clases.</description>
 
   <dependencies>
     <dependency>
       <groupId>net.mdatools</groupId>
       <artifactId>modelant.repository.api</artifactId>
-      <version>${project.version}</version>
+      <version>${revision}</version>
     </dependency>
   </dependencies>
 </project>

@@ -11,6 +11,7 @@
 
   <artifactId>modelant.repository</artifactId>
   <packaging>pom</packaging>
+  <description>JMI-compatible repository of metamodels and models.</description>
   
   <modules>
     <module>api</module>

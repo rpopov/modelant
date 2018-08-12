@@ -8,6 +8,7 @@
     <artifactId>modelant.template</artifactId>
     <version>${revision}</version>
   </parent>
+  <description>Template Engine API.</description>
 
   <artifactId>modelant.template.api</artifactId>
 

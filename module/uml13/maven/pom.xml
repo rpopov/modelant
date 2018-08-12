@@ -10,6 +10,7 @@
 
   <artifactId>modelant.uml13.maven</artifactId>
   <packaging>pom</packaging>
+  <description>Maven plugins to prduce and process UML 1.3 models</description>
   
   <modules>
     <module>plugin</module>

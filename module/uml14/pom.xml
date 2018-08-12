@@ -12,6 +12,7 @@
 
   <artifactId>modelant.uml14</artifactId>
   <packaging>pom</packaging>
+  <description>Support of UML 1.4 models</description>
 
   <modules>
     <module>metamodel</module>

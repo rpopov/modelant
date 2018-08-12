@@ -10,12 +10,13 @@
   </parent>
 
   <artifactId>modelant.repository.impl</artifactId>
+  <description>Implementation of the repository of metamodels and models.</description>
 
   <dependencies>  
     <dependency>
       <groupId>net.mdatools</groupId>
       <artifactId>modelant.repository.api</artifactId>
-      <version>${project.version}</version>
+      <version>${revision}</version>
     </dependency>
   </dependencies>  
  

@@ -10,7 +10,7 @@
   </parent>
 
   <artifactId>modelant.mof14.metamodel</artifactId>
-  <description>The MOF 1.4 meta-metamodel as a resource - an XMI file</description>
+  <description>MOF 1.4 meta-metamodel </description>
 
   <dependencies>
     <dependency>

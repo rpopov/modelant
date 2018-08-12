@@ -13,18 +13,20 @@
   <artifactId>modelant.core</artifactId>
   <packaging>pom</packaging>
 
+  <description>modelant core functionality.</description>
+
   <modules>
     <module>api</module>
     <module>impl</module>
     <module>test</module>
     <!--module>maven</module-->
-  </modules>  
-  
-  <dependencies>  
+  </modules>
+
+  <dependencies>
     <dependency>
       <groupId>net.mdatools</groupId>
       <artifactId>modelant.repository.api</artifactId>
       <version>${project.version}</version>
     </dependency>
-   </dependencies>  
+   </dependencies>
 </project>

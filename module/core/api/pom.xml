@@ -10,8 +10,9 @@
   </parent>
 
   <artifactId>modelant.core.api</artifactId>
+  <description>API and specification of the modelant core functionality.</description>
 
-  <dependencies> 
+  <dependencies>
     <dependency>
       <!-- javax.jmi.repository -->
       <groupId>org.andromda.thirdparty.jmi</groupId>
@@ -21,6 +22,6 @@
       <!-- javax.jmi.model -->
       <groupId>org.andromda.thirdparty.jmi</groupId>
       <artifactId>mof</artifactId>
-    </dependency>    
-  </dependencies>  
+    </dependency>
+  </dependencies>
 </project>

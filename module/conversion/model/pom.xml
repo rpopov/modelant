@@ -9,6 +9,7 @@
   </parent>
 
   <artifactId>modelant.conversion.model</artifactId>
+  <description>Models conversion implemetation as POJO.</description>
 
   <dependencies>
     <dependency>

@@ -10,18 +10,20 @@
   </parent>
 
   <artifactId>modelant.template.impl</artifactId>
+  <description>Template Engine and Compiler inmplementation.</description>
 
   <dependencies>
     <dependency>
       <groupId>net.mdatools</groupId>
       <artifactId>modelant.template.api</artifactId>
-      <version>${project.version}</version>
+      <version>${revision}</version>
     </dependency>
   </dependencies>
-  <!-- 
+
+  <!--
     TODO let it work out-of-process, then the test's classpath should not be fixed that hacky way
    -->
   <properties>
-     <forkCount>0</forkCount>  
-  </properties>  
+     <forkCount>0</forkCount>
+  </properties>
 </project>

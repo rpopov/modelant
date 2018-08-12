@@ -10,6 +10,7 @@
   </parent>
 
   <artifactId>modelant.core.test</artifactId>
+  <description>Integration tests of modelant core functionality.</description>
 
   <dependencies>  
     <dependency>

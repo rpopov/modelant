@@ -10,6 +10,8 @@
 
   <artifactId>modelant.conversion.maven</artifactId>
   <packaging>pom</packaging>
+
+  <description>Publishing as Maven plugin(s) the functionality to convert models between modeling languages and formats, still keepoing their contents.</description>
   
   <modules>
     <module>plugin</module>

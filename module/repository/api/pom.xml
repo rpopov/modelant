@@ -9,5 +9,8 @@
     <version>${revision}</version>
   </parent>
 
-  <artifactId>modelant.repository.api</artifactId> 
+  <artifactId>modelant.repository.api</artifactId>
+
+  <description>API of the repository of metamodels and models.</description>
+
 </project>

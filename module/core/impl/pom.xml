@@ -10,6 +10,7 @@
   </parent>
 
   <artifactId>modelant.core.impl</artifactId>
+  <description>Implementation of the modelant core functionality.</description>
 
   <dependencies>  
     <dependency>

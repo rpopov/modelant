@@ -18,17 +18,17 @@
     <dependency>
       <groupId>net.mdatools</groupId>
       <artifactId>modelant.repository.api</artifactId>
-      <version>${project.version}</version>
+      <version>${revision}</version>
     </dependency>
     <dependency>
       <groupId>net.mdatools</groupId>
       <artifactId>modelant.uml14.metamodel</artifactId>
-      <version>${project.version}</version>
+      <version>${revision}</version>
     </dependency>
     <dependency>
       <groupId>net.mdatools</groupId>
       <artifactId>modelant.core.impl</artifactId>
-      <version>${project.version}</version>
+      <version>${revision}</version>
     </dependency>
   </dependencies>
 </project>

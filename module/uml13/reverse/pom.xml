@@ -10,6 +10,7 @@
   </parent>
 
   <artifactId>modelant.uml13.reverse</artifactId>  
+  <description>Functionality for reverse engineering to UML 1.3 models, implemented as POJO.</description>
 
   <dependencies>
     <dependency>

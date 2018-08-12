@@ -10,6 +10,8 @@
 
   <artifactId>modelant.mof14.maven</artifactId>
   <packaging>pom</packaging>
+
+  <description>Publishing as Maven plugin(s) the functionality to convert models between modeling languages and formats.</description>
   
   <modules>
     <!--module>archetype</module-->

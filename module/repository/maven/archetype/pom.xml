@@ -10,14 +10,14 @@
 
   <artifactId>modelant.repository.maven.archetype</artifactId>
   
-  <description>Archetype - for building a API to access metamodel instances
+  <description>An archetype to build a API to access metamodel instances
     The metamodel should be written in MOF 1.4, XMI 1.1 or XMI 1.2, as of JMI (JCR-40).
     
     The archetype requires providing parent project's Group, Artifact and Version.
     When other than the default values are provided, then the generated POM will 
     include a corresponding &lt;parent&gt; section.
   
-    The generated project uses the NetBeans MDR (published in Central Maven Repository by AndroMDA)
+    The generated project uses the NetBeans MDR.
   </description>
 
   <build>
@@ -25,17 +25,7 @@
       <extension>
         <groupId>org.apache.maven.archetype</groupId>
         <artifactId>archetype-packaging</artifactId>
-        <version>3.0.1</version>
       </extension>
     </extensions>
-
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <artifactId>maven-archetype-plugin</artifactId>
-          <version>3.0.1</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
   </build>
 </project>

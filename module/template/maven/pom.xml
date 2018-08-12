@@ -11,6 +11,7 @@
 
   <artifactId>modelant.template.maven</artifactId>
   <packaging>pom</packaging>
+  <description>Maven plugin to apply a set of templates to an object / structure of objects.</description>
 
   <modules>
     <module>archetype</module>

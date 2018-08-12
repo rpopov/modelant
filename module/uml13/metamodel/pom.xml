@@ -10,6 +10,8 @@
   </parent>
 
   <artifactId>modelant.uml13.metamodel</artifactId>
+  <description>UML 1.3 metamodel</description>
+
   <dependencies>
     <dependency>
       <groupId>net.mdatools</groupId>

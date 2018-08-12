@@ -12,6 +12,7 @@
 
   <artifactId>modelant.mof14</artifactId>
   <packaging>pom</packaging>
+  <description>Support of MOF 1.4 as a regular metamodel.</description>
 
   <modules>
     <module>metamodel</module>
