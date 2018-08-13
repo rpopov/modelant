@@ -39,7 +39,7 @@
           <plugin>
             <groupId>net.mdatools</groupId>
             <artifactId>modelant.repository.maven.plugin</artifactId>
-            <version>${project.version}</version>
+            <version>@project.version@</version>
             
             <!--
                Include the repository's implementation in the classpath of the plugin
@@ -49,7 +49,7 @@
               <dependency>
                 <groupId>net.mdatools</groupId>
                 <artifactId>modelant.repository.impl</artifactId>
-                <version>${project.version}</version>
+                <version>@project.version@</version>
               </dependency>    
             </dependencies>
             
