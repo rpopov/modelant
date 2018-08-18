@@ -2,7 +2,6 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 http://maven.apache.org/xsd/decoration-1.8.0.xsd"
          name="${name}">
-  <!-- combine.self="merge" -->
   <!-- 
    see 
    https://maven.apache.org/doxia/doxia-sitetools/doxia-decoration-model/decoration.html#class_item 
@@ -20,21 +19,8 @@
     -->
     <title>modelant tool supports model-driven software development processes</title>    
   </bannerLeft>
-<!--
-  <bannerRight>
-    <name/>
-    <src/>
-    <alt/>
-    <href/>
-    <border/>
-    <width/>
-    <height/>
-    <title/>
-  </bannerRight>
-  <googleAdSenseClient/>
-  <googleAdSenseSlot/>
--->  
-  <googleAnalyticsAccountId>google8f3731ad816f7abe</googleAnalyticsAccountId>
+
+  <googleAnalyticsAccountId>${googleAnalyticsAccountId}</googleAnalyticsAccountId>
  
   <publishDate position="left" format="yyyy-MM-dd"/>  
   <version position="left"/>
@@ -52,20 +38,16 @@
     <version>1.7</version>
   </skin>
  -->
- 
   <body>
-<!--  
-    <head></head>
--->    
     <links>
       <item name="Home" href="/"/> <!--  img=.. position=.. alt=.. border=.. width=.. height=.. target=.. title=.. /> -->
     </links>
 
     <breadcrumbs>
-      <item name="${name}"/> <!-- href=.. img=.. position=.. alt=.. border=.. width=.. height=.. target=.. title=.. /> -->
+      <item name="MDA  Tools" href="/"/>
     </breadcrumbs>
-    
-     <menu name="Overview">
+
+    <menu name="Overview">
       <item name="Introduction" href="index.html"/>
       <item name="Usage" href="usage.html"/>
       <item name="FAQ" href="faq.html"/>
@@ -76,15 +58,5 @@
       <item name="description2" href="examples/example-two.html"/>
     </menu>
     <menu ref="reports"/>
- 
- <!--
-    <menu name=.. inherit=.. inheritAsRef=.. ref=.. img=.. alt=.. position=.. border=.. width=.. height=.. title=.. >
-      <item collapse=.. ref=.. name=.. href=.. img=.. position=.. alt=.. border=.. width=.. height=.. target=.. title=.. >
-        <description/>
-        <item>...recursion...<item>
-      </item>
-    </menu>    
-    <footer></footer>
--->    
   </body>
 </project>

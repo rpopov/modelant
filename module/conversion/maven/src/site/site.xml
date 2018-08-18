@@ -4,10 +4,14 @@
          name="${name}"
          combine.self="merge">
   <body>
-     <menu name="Overview">
+    <breadcrumbs>
+      <item name="${name}"/>
+    </breadcrumbs>    
+    <menu name="Overview">
       <item name="Introduction" href="index.html"/>
       <item name="Usage" href="usage.html"/>
       <item name="FAQ" href="faq.html"/>
     </menu>
+    <menu ref="modules"/>
   </body>
 </project>

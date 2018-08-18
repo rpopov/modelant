@@ -1,28 +1,11 @@
 <project xmlns="http://maven.apache.org/DECORATION/1.8.0" 
-	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 http://maven.apache.org/xsd/decoration-1.8.0.xsd"
-         name="${name}">
-	 
-  <bannerLeft>
-    <name>${artifactId}</name>
-    <src>https://mdatools.net/logo4.png</src>
-    <href>https://mdatools.net/</href>
-  </bannerLeft>
-
-  <bannerRight>
-    <src>https://mdatools.net/logo4.png</src>
-    <href>https://mdatools.net/</href>
-  </bannerRight>
-
-<!--  
-  <skin>
-    <groupId>org.apache.maven.skins</groupId>
-    <artifactId>maven-fluido-skin</artifactId>
-    <version>1.7</version>
-  </skin>
- -->
-
+         name="${name}">	 
   <body>
+    <breadcrumbs>
+      <item name="${name}"/>
+    </breadcrumbs>    
     <menu name="Overview">
       <item name="Introduction" href="index.html"/>
       <item name="Goals" href="plugin-info.html"/>
@@ -35,12 +18,10 @@
       <item name="Markdown Example" href="markdown.html"/>
       <item name="Markdown with Velocity Example" href="markdown-velocity.html"/>
     </menu>
-
     <menu name="Examples">
       <item name="Alternate Location for the changes.xml File" href="examples/alternate-changes-xml-location.html"/>
       <item name="SMTP Authentication" href="examples/smtp-authentication.html"/>
     </menu>
-
     <menu ref="reports" />
   </body>
 </project>
