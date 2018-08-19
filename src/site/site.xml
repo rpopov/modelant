@@ -25,6 +25,7 @@
 
     <menu name="Overview">
       <item name="About" href="index.html"/>
+      <item name="Architecture" href="architecture.html"/>
       <item name="Usage" href="usage.html"/>
       <item name="FAQ" href="faq.html"/>
     </menu>
