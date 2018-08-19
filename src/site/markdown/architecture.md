@@ -21,32 +21,32 @@ Then a script to generate the artifacts for a specific project should be a combi
 
   * **&lt;module name&gt;** - the Maven project containing the module's artifacts, namely:
     * **api** (API) module only with:
-      * the interfaces the actual module to implement
-      * a Factory class:
-        * named **&lt;Interface Name&gt;Factory**
-        * providing **construct** method(s), that use the idiom to load (and probably make Singleton or cache) an instance of the implementation (see below)
+        * the interfaces the actual module to implement
+        * a Factory class:
+            * named **&lt;Interface Name&gt;Factory**
+            * providing **construct** method(s), that use the idiom to load (and probably make Singleton or cache) an instance of the implementation (see below)
     * **impl** (implementation) module that:
-      * implements the API interfaces
-      * publishes the implementations as services, as of [Java standard Service Loader](https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html) mechanism:
-          * for each implemented service interface 
-          * define a file **src\resources\META-INF\services\&lt;interface name&gt;**
-            * the contents of the file is the qualified name of the implementation class
-            * this allows the ServiceLoader class (and the API's factory class) instantiate the concrete implementation
-      * defines unit tests in **test\java** directory
+        * implements the API interfaces
+        * publishes the implementations as services, as of [Java standard Service Loader](https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html) mechanism:
+            * for each implemented service interface 
+            * define a file **src\resources\META-INF\services\&lt;interface name&gt;**
+                * the contents of the file is the qualified name of the implementation class
+                * this allows the ServiceLoader class (and the API's factory class) instantiate the concrete implementation
+        * defines unit tests in **test\java** directory
     * **maven** (contains Maven plugins, archetypes, other artifacts as sub-modules) module with sub-modules:
-      * **plugin** - a general module that contains 
-        * MOJO implementations of the plugin 
-        * binds each MOJO as a Maven goal to a phase of the maven lifecycle 
-        * communicates only with the published services, provided by Plexus
-        * integration tests
-          * defined in **test\maven* directory, where each test is in a dedicated **&lt;test name&gt;** sub-directory, containing its **pom.xml**, as of \[C4\] below.
-          * using the plugins already published in the local host's repository
-            NOTE: The practice applied by *maven-invoker-plugin* to use a copy in a temporary local repository copy is considered as really complicating the testing and debugging, therefore it is avoided.
-      * **explicit plugin name** - in case the general module *plugin* is not enough
-      * **archetype"" - a module defining a Maven archetype
+        * **plugin** - a general module that contains 
+            * MOJO implementations of the plugin 
+            * binds each MOJO as a Maven goal to a phase of the maven lifecycle 
+            * communicates only with the published services, provided by Plexus
+            * integration tests
+                * defined in **test\maven* directory, where each test is in a dedicated **&lt;test name&gt;** sub-directory, containing its **pom.xml**, as of \[C4\] below.
+                * using the plugins already published in the local host's repository
+                  NOTE: The practice applied by *maven-invoker-plugin* to use a copy in a temporary local repository copy is considered as really complicating the testing and debugging, therefore it is avoided.
+        * **explicit plugin name** - in case the general module *plugin* is not enough
+        * **archetype** - a module defining a Maven archetype
     * **test** module that:
-      * does black-box, *integration testing* of the module, its sub-modules and the other required modules (dependencies) through module's public interfaces
-      * actually specifies the API and any of its implementations through executable tests
+        * does black-box, *integration testing* of the module, its sub-modules and the other required modules (dependencies) through module's public interfaces
+        * actually specifies the API and any of its implementations through executable tests
 
 **\[A5\]** Unit tests: 
 
@@ -74,9 +74,9 @@ Then a script to generate the artifacts for a specific project should be a combi
 
   * employs the **core** module to set up a transformation from it to UML 1.4, as of \[A9\]
   * publishes the transformation as a Maven plugin, which could be employed to transform the model to UML 1.4 in a phase 
-    * after the model load
-      and
-    * before the model's processing
+      * after the model load
+        and
+      * before the model's processing
 
 **\[A12\]** The **root pom.xml** uses:
 
