@@ -18,33 +18,49 @@ Then a script to generate the artifacts for a specific project should be a combi
 
 *\[A4\]* Organize every module of ModelAnt as Maven projects/modules with unified module names:
 
-* *<module name>* - the Maven project containing the module's artifacts, namely:
-** *api* (API) module only with:
-*** the *interfaces* the actual module to implement
-*** a Factory class:
-**** named *&lt;Interface Name&gt;Factory*
-**** providing *construct* method(s), that use the idiom to load (and probably make Singleton or cache) an instance of the implementation (see below)
-** *impl* (implementation) module that:
-*** *implements* the API interfaces
-*** publishes the implementations as services, as of [Java standard Service Loader](https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html) mechanism:
-**** for each implemented service interface 
-***** define a file *src\resources\META-INF\services\<interface name>*
-***** the contents of the file is the qualified name of the implementation class
-***** this allows the ServiceLoader class (and the API's factory class) instantiate the concrete implementation
-*** any client of the service uses the :
-** *maven* (contains Maven plugins, archetypes, other artifacts as sub-modules) module which:
-*** binds each MOJO as a Maven goal to a phase of the maven lifecycle 
-*** translates its participation in a phase as an event of ModelAnt
-*** communicates only with the published services, provided by Plexus
-*** when the module is a maven plugin, its tests are
-**** unit tests
-***** defined in *test\java* directory
-**** integration tests
-***** defined in *test\maven* directory, where each test is in a dedicated *<test name>* sub-directory, containing its *pom.xml*, as of \[C4\] below.
-***** using the plugins already published in the local host's repository<br/>NOTE: The practice applied by *maven-invoker-plugin* to use a copy in a temporary local repository copy is considered as really complicating the testing and debugging, therefore it is avoided.
-** *test* module that:
-*** does black-box, *integration testing* of the module, its sub-modules and the other required modules (dependencies) through module's public interfaces
-*** actually specifies the API and any of its implementations through executable tests
+  * *<module name>* - the Maven project containing the module's artifacts, namely:
+
+  ** *api* (API) module only with:
+
+  *** the *interfaces* the actual module to implement
+  *** a Factory class:
+
+  **** named *&lt;Interface Name&gt;Factory*
+  **** providing *construct* method(s), that use the idiom to load (and probably make Singleton or cache) an instance of the implementation (see below)
+
+  ** *impl* (implementation) module that:
+
+  *** *implements* the API interfaces
+  *** publishes the implementations as services, as of [Java standard Service Loader](https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html) mechanism:
+
+  **** for each implemented service interface 
+
+  ***** define a file *src\resources\META-INF\services\<interface name>*
+  ***** the contents of the file is the qualified name of the implementation class
+  ***** this allows the ServiceLoader class (and the API's factory class) instantiate the concrete implementation
+
+  *** any client of the service uses the :
+
+  ** *maven* (contains Maven plugins, archetypes, other artifacts as sub-modules) module which:
+
+  *** binds each MOJO as a Maven goal to a phase of the maven lifecycle 
+  *** translates its participation in a phase as an event of ModelAnt
+  *** communicates only with the published services, provided by Plexus
+  *** when the module is a maven plugin, its tests are
+
+  **** unit tests
+
+  ***** defined in *test\java* directory
+
+  **** integration tests
+
+  ***** defined in *test\maven* directory, where each test is in a dedicated *<test name>* sub-directory, containing its *pom.xml*, as of \[C4\] below.
+  ***** using the plugins already published in the local host's repository<br/>NOTE: The practice applied by *maven-invoker-plugin* to use a copy in a temporary local repository copy is considered as really complicating the testing and debugging, therefore it is avoided.
+
+  ** *test* module that:
+
+  *** does black-box, *integration testing* of the module, its sub-modules and the other required modules (dependencies) through module's public interfaces
+  *** actually specifies the API and any of its implementations through executable tests
 
 *\[A5\]* Unit tests: 
 
