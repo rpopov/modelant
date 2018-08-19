@@ -52,7 +52,7 @@ Then a script to generate the artifacts for a specific project should be a combi
 
 *\[A6\]* The modules of ModelAnt are either common or metamodel-specific ones. The metamodel-specific modules are separate in a **&lt;metamodel&gt;** module name to form a set of sub-modules, easy to compare with the sub-modules set for other metamodels.
 
-*\[A7\]* Let all modelant modules are collected in the **\module** directory in order to keep the modelant root directory small and not mix other directories with the modules. This provides a clean structure of the root project. The **module** directory contains all modules of ModelAnt in contrast to the Maven default directories structure that holds the modules in the root directory.
+*\[A7\]* &lt;withdrawn&gt;
 
 **\[A8\]** The following is the structure of ModelAnt 3.1.0 as tiers:
 
@@ -64,11 +64,11 @@ Then a script to generate the artifacts for a specific project should be a combi
   * uml14
   * conversion
 
-*\[A9\]* ModelAnt provides a common logic to the **UML 1.4** metamodel + **DI 1.0** (TODO: check!), as these are completed standards. Any other model for processing in ModelAnt must pass a **&lt;metamodel&gt;-to-UML 1.4** transformation.
+**\[A9\]** ModelAnt provides a common logic to the **UML 1.4** metamodel + **DI 1.0** (TODO: check!), as these are completed standards. Any other model for processing in ModelAnt must pass a **&lt;metamodel&gt;-to-UML 1.4** transformation.
 
-*\[A10\]* The **core** module of ModelAnt provides the model- and metamodel transformation mechanism. 
+**\[A10\]** The **core** module of ModelAnt provides the model- and metamodel transformation mechanism. 
 
-*\[A11\]* Every **metamodel** supported in ModelAnt:
+**\[A11\]** Every **metamodel** supported in ModelAnt:
 
   * employs the **core** module to set up a transformation from it to UML 1.4, as of \[A9\]
   * publishes the transformation as a Maven plugin, which could be employed to transform the model to UML 1.4 in a phase 
@@ -76,7 +76,7 @@ Then a script to generate the artifacts for a specific project should be a combi
       and
     * before the model's processing
 
-*\[A12\]* The **root pom.xml** uses:
+**\[A12\]** The **root pom.xml** uses:
 
   * **&lt;dependencyManagement&gt;** element to define the components' versions, so that the projects refer the dependencies just with group and artifact id
   * **&lt;pluginManagement&gt;** element to define the plugins' versions and setup parameters, so that the projects refer the locally used plugins just with group and artifact id and possibly override some parameters.
