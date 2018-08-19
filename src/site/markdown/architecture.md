@@ -32,16 +32,18 @@ Then a script to generate the artifacts for a specific project should be a combi
           * define a file **src\resources\META-INF\services\&lt;interface name&gt;**
             * the contents of the file is the qualified name of the implementation class
             * this allows the ServiceLoader class (and the API's factory class) instantiate the concrete implementation
-    * **maven** (contains Maven plugins, archetypes, other artifacts as sub-modules) module which:
-      * binds each MOJO as a Maven goal to a phase of the maven lifecycle 
-      * translates its participation in a phase as an event of ModelAnt
-      * communicates only with the published services, provided by Plexus
-      * when the module is a maven plugin, its tests are
-        * unit tests defined in **test\java** directory
+      * defines unit tests in **test\java** directory
+    * **maven** (contains Maven plugins, archetypes, other artifacts as sub-modules) module with sub-modules:
+      * **plugin** - a general module that contains 
+        * MOJO implementations of the plugin 
+        * binds each MOJO as a Maven goal to a phase of the maven lifecycle 
+        * communicates only with the published services, provided by Plexus
         * integration tests
           * defined in **test\maven* directory, where each test is in a dedicated **&lt;test name&gt;** sub-directory, containing its **pom.xml**, as of \[C4\] below.
           * using the plugins already published in the local host's repository
             NOTE: The practice applied by *maven-invoker-plugin* to use a copy in a temporary local repository copy is considered as really complicating the testing and debugging, therefore it is avoided.
+      * **explicit plugin name** - in case the general module *plugin* is not enough
+      * **archetype"" - a module defining a Maven archetype
     * **test** module that:
       * does black-box, *integration testing* of the module, its sub-modules and the other required modules (dependencies) through module's public interfaces
       * actually specifies the API and any of its implementations through executable tests
@@ -50,9 +52,9 @@ Then a script to generate the artifacts for a specific project should be a combi
 
   * The module's **unit tests** are included in the module's project itself in **test* directory
 
-*\[A6\]* The modules of ModelAnt are either common or metamodel-specific ones. The metamodel-specific modules are separate in a **&lt;metamodel&gt;** module name to form a set of sub-modules, easy to compare with the sub-modules set for other metamodels.
+**\[A6\]** The modules of ModelAnt are either common or metamodel-specific ones. The metamodel-specific modules are separate in a **&lt;metamodel&gt;** module name to form a set of sub-modules, easy to compare with the sub-modules set for other metamodels.
 
-*\[A7\]* &lt;withdrawn&gt;
+**\[A7\]** &lt;withdrawn&gt;
 
 **\[A8\]** The following is the structure of ModelAnt 3.1.0 as tiers:
 
