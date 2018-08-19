@@ -1,11 +1,15 @@
 # Origin
 
-ModelAnt, further referred as *modelant*, was an extension of Ant to manipulate models, described in the OMG's framework of metamodeling using MOF 1.4. Its Ant integration
-gave the name of the product. In order to ease its distribution, dependecies and version management, and integrate with standard scripting languages and apply industrial 
-standards and conventions, it was migrated to Maven. Nevertheless the "Ant" part of its name stays to provide continuity of the product name and indicate its power and
+ModelAnt, further referred as *modelant*, was an extension of Ant to manipulate models:
+* described in the OMG's metamodeling framework [Meta Object Facility/MOF 1.4](https://www.omg.org/cgi-bin/doc?formal/02-04-03)
+* exchanged in [XML Metadata Interchange XMI 1.1, 1.2](https://www.omg.org/cgi-bin/doc?formal/02-01-01)
+* through [Java Metadata Interface / JMI 1.0](https://jcp.org/en/jsr/detail?id=40)
+Its Ant integration gave the name of the product. In order to ease its distribution, dependecies and version management, integrate with standard scripting languages, and apply industrial 
+standards and conventions, it was migrated to Maven. Nevertheless the "Ant" part of its name stays to provide continuity of the product's name and indicate its power and
 strength.
 
-# Purpose 
+Purpose 
+-------
 
 Modelant provides JMI-compliant mechanism to read, process, export models in MOF 1.4, UML 1.3 and UML 1.4, including also an engine for generation of code (any texts) using Object-Oriented Programming
 and templates. It is an extensible framework allowing adding support of other languages, described using MOF 1.4 metamodels.
