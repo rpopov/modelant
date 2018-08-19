@@ -10,13 +10,6 @@
   
   <bannerLeft>
     <name>${artifactId}</name>
-    <!--
-    <src>https://mdatools.net/logo4.png</src>
-    <href>https://mdatools.net/</href>
-    <width>50</width>
-    <height>50</height>
-    <border/>
-    -->
     <title>modelant tool supports model-driven software development processes</title>    
   </bannerLeft>
 
@@ -24,27 +17,14 @@
  
   <publishDate position="left" format="yyyy-MM-dd"/>  
   <version position="left"/>
-  
-<!--  
-  <edit>${project.scm.url}</edit>
-  -->
-  
-  <!-- see https://maven.apache.org/plugins/maven-site-plugin/examples/creatingskins.html -->
-  <!-- see https://maven.apache.org/plugins-archives/maven-site-plugin-3.1/examples/sitedescriptor.html -->
-<!--  
-  <skin>
-    <groupId>org.apache.maven.skins</groupId>
-    <artifactId>maven-fluido-skin</artifactId>
-    <version>1.7</version>
-  </skin>
- -->
+
   <body>
     <links>
-      <item name="Home" href="/"/> <!--  img=.. position=.. alt=.. border=.. width=.. height=.. target=.. title=.. /> -->
+      <item name="Home" href="/"/>
     </links>
 
     <menu name="Overview">
-      <item name="Introduction" href="intro.html"/>
+      <item name="About" href="index.html"/>
       <item name="Usage" href="usage.html"/>
       <item name="FAQ" href="faq.html"/>
     </menu>

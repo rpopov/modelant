@@ -558,7 +558,8 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
           <reportSets>
             <reportSet>
               <reports><!-- select reports -->
-                <report>index</report>
+                <report>modules</report>
+                <!--report>index</report-->
                 <!--report>summary</report-->
                 <report>licenses</report>
                 <report>ci-management</report>
@@ -569,7 +570,6 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
                 <!--report>distribution-management</report-->
                 <report>issue-management</report>
                 <report>mailing-lists</report>
-                <!--report>modules</report-->
                 <!--report>plugin-management</report-->
                 <!--report>plugins</report-->
                 <report>team</report>
