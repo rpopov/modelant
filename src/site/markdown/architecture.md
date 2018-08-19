@@ -46,15 +46,15 @@ Then a script to generate the artifacts for a specific project should be a combi
       * does black-box, *integration testing* of the module, its sub-modules and the other required modules (dependencies) through module's public interfaces
       * actually specifies the API and any of its implementations through executable tests
 
-*\[A5\]* Unit tests: 
+**\[A5\]** Unit tests: 
 
-  * The module's *unit tests* are included in the module's project itself in *test* directory
+  * The module's **unit tests** are included in the module's project itself in **test* directory
 
 *\[A6\]* The modules of ModelAnt are either common or metamodel-specific ones. The metamodel-specific modules are separate in a **&lt;metamodel&gt;** module name to form a set of sub-modules, easy to compare with the sub-modules set for other metamodels.
 
 *\[A7\]* Let all modelant modules are collected in the **\module** directory in order to keep the modelant root directory small and not mix other directories with the modules. This provides a clean structure of the root project. The **module** directory contains all modules of ModelAnt in contrast to the Maven default directories structure that holds the modules in the root directory.
 
-*\[A8\]* The following is the structure of ModelAnt 3.1.0 as tiers:
+**\[A8\]** The following is the structure of ModelAnt 3.1.0 as tiers:
 
   * repository
   * core
