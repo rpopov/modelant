@@ -3,6 +3,7 @@ Usage in Maven environment
 
 Load the modelant API and components as regular dependencies of the client code, use the published Java API implementations.
 For example:
+
     <dependencies>
       ...
       <dependency>
