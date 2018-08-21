@@ -50,11 +50,11 @@ Maven Plugins
      * ...
      * @author Rusi Popov
      */
-    @Mojo(name="&lt;goal name of this mojo in kebab case&gt;",
+    @Mojo(name="<goal name of this mojo in kebab case>",
           defaultPhase=LifecyclePhase.COMPILE
     )
     @Execute(phase=LifecyclePhase.COMPILE)
-    public class &lt;Purpose of this Mojo&gt;Mojo extends CompilationContext ...
+    public class <Purpose of this Mojo>Mojo extends CompilationContext ...
 
 **\[C5.1\]**  Always use the javadoc style of Mojo annotation for parameters:
 
@@ -158,7 +158,7 @@ Maven Conventions
 
 **\[C30\]** The root Maven POM.xml defines the profiles to compile / build the artifacts in the whole set of modules. The activation of the profiles though, due to some Maven specifics, cannot be based on contents of the POM.xml itself, then the activation of the Maven profile will be based on the presence of file named like:
 
-    profile.&lt;profile name&gt;
+    profile.<profile name>;
 
 Examples:
 
@@ -183,4 +183,7 @@ For example:
 
 **Note:** This definition causes problems under Eclipse with default setup with default Java setup under Windows, because of the spaces in the path. Therefore apply the \[\[modelant - migration to maven#Eclipse_Setup_Procedure_for_Windows|Eclipse Setup Procedure for Windows\]\]
 
+GIT Branching
+-------------
 
+**\[C40\]** Name the branches, related to a specific issue in the issue tracking system, with the issue ID.
