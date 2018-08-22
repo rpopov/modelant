@@ -423,6 +423,9 @@ public class Uml13ModelFactory {
     if ( documentation == null ) {
       constructTag( otherClass, net.mdatools.modelant.uml13.metamodel.Convention.TAG_VALUE_DOCUMENTATION, contents );
 
+    } else if ( documentation.getValue() == null ) {
+      documentation.setValue(contents);
+
     } else if ( documentation.getValue().indexOf( contents ) < 0 ) {
       documentation.setValue(documentation.getValue()+"\n\r"+contents);
     }
