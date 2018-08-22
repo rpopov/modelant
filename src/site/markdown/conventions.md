@@ -12,8 +12,8 @@ GAV Coordinates
 
 **\[C3\]** The versioning is semantic **&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;** starting from 3 major version, as modelant for Maven is a completely new version of modelant 2.x
 
-Directories
------------
+Maven Directories
+-----------------
 
 **\[C4\]** Even though modelant is migrated to Maven, I decide not to follow the "Maven standard" directories structure in terms:
 
@@ -50,7 +50,7 @@ Directories
          * other specific files and directpries
       
   
-  **NOTE:** The practice applied by *maven-invoker-plugin* to use a copy in a temporary local repository copy is considered as really complicating the testing and debugging, therefore it is avoided. Instead, the maven plugin integration test use the plugins already published (installed) in the local host's repository.
+  **NOTE:** The practice applied by *maven-invoker-plugin* to use a copy in a temporary local repository copy is considered as really complicating the testing and debugging, therefore it is avoided. Instead, the maven plugin integration test use the plugins already published (installed) in the local host's repository. See: [Plugin testing](https://maven.apache.org/plugin-developers/plugin-testing.html)
   
 **\[C4.2\]** Testing the plugin uses the https://maven.apache.org/plugins/maven-invoker-plugin plugin defined in the **maven-plugin** profile.
               
@@ -59,6 +59,10 @@ Directories
   * the current artifact version is referred as **@project.version@**
   * the current version of the parent pom is referred as **@project.parent.version@**
   
+**\[C4.4\]** The root Maven POM.xml defines the profiles to compile / build the artifacts in the whole set of modules. 
+
+**\[C4.5\]** Due to some Maven specifics, the activation of the Maven profiles cannot be based on contents of the POM.xml itself. The activation of the **maven-plugin** Maven profile for plugin development uses the presence of **test/maven** directory. This wya there is no maven plugin development without a corresponding test procedure.
+
   
 Maven Plugins
 -------------
@@ -167,15 +171,8 @@ Product Documentation
 Maven Conventions
 -----------------
 
-**\[C30\]** The root Maven POM.xml defines the profiles to compile / build the artifacts in the whole set of modules. The activation of the profiles though, due to some Maven specifics, cannot be based on contents of the POM.xml itself, then the activation of the Maven profile will be based on the presence of file named like:
 
-    profile.<profile name>;
 
-Examples:
-
-    profile.maven-plugin - activates the maven-plugin profile for the artifact to build
-
-**\[C31\]** As of \[A5\], the maven plugin profile includes the mechanism **maven-invoker-plugin** to test  the maven plugins. See: [Plugin testing](https://maven.apache.org/plugin-developers/plugin-testing.html)
 
 **\[C32\]** As of [Maven Dependencies](https://maven.apache.org/pom.html#Dependencies), when referring the JAVA platform tools as **dependencies** (not published as Maven artifacts) use:
 

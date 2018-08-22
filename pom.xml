@@ -640,12 +640,12 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
     
     <profile>
       <!--
-        The way to compile the maven plugins in the ModelAnt project
+        Maven profile for plugins development
         -->
       <id>maven-plugin</id>
       <activation>
         <file>
-          <exists>profile.maven-plugin</exists>
+          <exists>test/maven</exists>
         </file>
       </activation>
       <dependencies>
@@ -664,9 +664,13 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
       </dependencies>
       <build>
         <plugins>
-          <plugin>
+          <plugin> <!-- plugin packaging -->
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-plugin-plugin</artifactId>
+          </plugin>
+          <plugin> <!-- testing  -->
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-invoker-plugin</artifactId>
           </plugin>
         </plugins>
       </build>
@@ -686,25 +690,6 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
           </plugin>
         </plugins>
       </reporting>
-    </profile>
-
-    <profile>
-      <!--
-        The way to test the maven plugins in the ModelAnt project
-        -->
-      <id>maven-test</id>
-      <activation>
-        <file>
-          <exists>test/maven/</exists>
-        </file>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-invoker-plugin</artifactId>
-          </plugin>
-        </plugins>
-      </build>
     </profile>
 
     <profile>
