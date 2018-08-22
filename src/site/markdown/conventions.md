@@ -15,7 +15,7 @@ GAV Coordinates
 Directories
 -----------
 
-**\[C4\]** Even though modelant is migrated Maven, I decide not to follow the "Maven standard" directories structure in terms:
+**\[C4\]** Even though modelant is migrated to Maven, I decide not to follow the "Maven standard" directories structure in terms:
 
   * "main" is no more alternative/opposition of "test" directory name
   * all languages are treated equally
@@ -33,7 +33,7 @@ Directories
   * **test/&lt;language&gt;** directory contains the source code in the corresponding language:
     * java
     * maven (see \[A5\], \[C8\]) 
-    * ...
+    * ...    
   * **test/resources** directory contains the test resources to be included directly in the test artifact
   * **target/site** directory contains the generated site/javadoc **for the component** (as of maven convention), because:
     * the site is not the source code, but it is derived from it, like the compiled code
@@ -41,6 +41,25 @@ Directories
     * the component's source code is zipped and published with the component in order to support development with and debug of modelant is a third party component
   * any components are published in the Maven repositories, thus no **lib** directory is needed. In case components / libraries cannot be found in any public repository, extract them as modules and define their POM to export them in a public repositories.
 
+**\[C4.1\]** Maven plugin integration tests are in 
+
+   * **test/maven** directory, containing:
+      * **setting.xml** file for the maven instance to run for the integration tests    
+      * **&lt;test or issue name&gt;** sub-directory for **each test**, containing: 
+         * **pom.xml**, as of \[C4\] below.
+         * other specific files and directpries
+      
+  
+  **NOTE:** The practice applied by *maven-invoker-plugin* to use a copy in a temporary local repository copy is considered as really complicating the testing and debugging, therefore it is avoided. Instead, the maven plugin integration test use the plugins already published (installed) in the local host's repository.
+  
+**\[C4.2\]** Testing the plugin uses the https://maven.apache.org/plugins/maven-invoker-plugin plugin defined in the **maven-plugin** profile.
+              
+**\[C4.3\]** As the Maven invoker/test plugin copies the pom.xml and all test files to the **target** directory, these files may use project properties, that are inlined while copying, for example:
+
+  * the current artifact version is referred as **@project.version@**
+  * the current version of the parent pom is referred as **@project.parent.version@**
+  
+  
 Maven Plugins
 -------------
 
@@ -117,24 +136,9 @@ Maven Plugins
 
 Maven will use the default phase from the class' annotation to bind the plugin in \[http://maven.apache.org/guides/mini/guide-configuring-plugins.html#Mapping_Complex_Objects Mapping Complex Objects in Maven\]
 
-**\[C8\]** Testing the plugin uses the https://maven.apache.org/plugins/maven-invoker-plugin plugin defined in the **maven-plugin** profile, where:
-        
-  * **test/maven** directory contains
-    * **settings.xml** for all the test cases / issues below, an alternative to the central settings.xml file, just for those specific tests
-    * **&lt;issue id&gt;** directory contains
-      * **pom.xml** that runs the specific test case
-      
-**\[C8.1\]** As the Maven invoker/test plugin copies the pom.xml and all test files to the **target** directory, these files may use project properties, that are inlined while copying, for example:
+**\[C8\]** &lt;moved to C4.2&gt;
 
-  * the current artifact version is referred as **@project.version@**
-  * the current version of the parent pom is referred as **@project.parent.version@**
-
-**\[C9\]** When publishing/distributing modelant, publish the source code and javadoc too. This will support the further development based on those components and IDE integration:
-
-  * https://maven.apache.org/plugin-developers/cookbook/attach-source-javadoc-artifacts.html
-  * Verify the generated documentation, according to https://maven.apache.org/plugin-developers/plugin-documenting.html&lt;br/&gt;The maven-docck-plugin can be run:
-
-    mvn docck:check
+**\[C9\]** &lt;moved as C12&gt;
 
 Best Practices
 --------------
@@ -142,6 +146,13 @@ Best Practices
 **\[C10\]** Integrate the unit tests in the development (implementation) module, whereas the API module does not provide any tests. This way the API can be compiled first and independently of the implementation(s), avoiding cyclic dependencies and monolith development.
 
 **\[C11\]** Extract an **integration test** module, consisting only of the **API test code**, with all needed dependencies and (default) implementations. There is no need of other than test/java directory. This module can be compiled later than the API, considering its dependencies, whereas its compilation does not produce new artifacts.
+
+**\[C12\]** Publish modelant with its code and javadoc too. This will support the further development based on those components and IDE integration:
+
+  * https://maven.apache.org/plugin-developers/cookbook/attach-source-javadoc-artifacts.html
+  * Verify the generated documentation, according to https://maven.apache.org/plugin-developers/plugin-documenting.html&lt;br/&gt;The maven-docck-plugin can be run:
+
+    mvn docck:check
 
 Product Documentation
 ---------------------
