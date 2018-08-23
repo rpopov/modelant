@@ -64,8 +64,8 @@ Maven Directories
 **\[C4.5\]** Due to some Maven specifics, the activation of the Maven profiles cannot be based on contents of the POM.xml itself. The activation of the **maven-plugin** Maven profile for plugin development uses the presence of **test/maven** directory. This wya there is no maven plugin development without a corresponding test procedure.
 
 
-Best Practices
---------------
+Testing
+-------
 
 **\[C10\]** Integrate the unit tests in the development (implementation) module, whereas the API module does not provide any tests. This way the API can be compiled first and independently of the implementation(s), avoiding cyclic dependencies and monolith development.
 
@@ -78,8 +78,9 @@ Best Practices
 
     mvn docck:check
 
-Product Documentation
----------------------
+Documentation
+-------------
+
 **\[C20\]** Any product documentation is part of the product, stored in **src/site/markdown** directory, under the same source control as the rest of the product or module it is for.
 
 **Note** that the markdown was chosen as documentation format because it is naturally rendered by GitHub where modelant is published, this way allowing review of the documentation and its history in (almost) the same human-readable presentation, as when it is published.
