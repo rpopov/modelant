@@ -1,3 +1,6 @@
+Identified Practices
+====================
+
 Writing Maven Plugins
 ---------------------
 

@@ -1,5 +1,5 @@
 Java Conventions
------------------------
+================
 
 **\[JC1\]** For each language supported (i.e. metamodel), there are:
 
