@@ -1,6 +1,8 @@
 Identified Practices
 ====================
 
+<!-- MACRO{toc} -->
+
 Writing Maven Plugins
 ---------------------
 
@@ -16,7 +18,7 @@ Writing Maven Plugins
     @Execute(phase=LifecyclePhase.COMPILE)
     public class <Purpose of this Mojo>Mojo extends CompilationContext ...
 
-**\[P1.2\]**  Always use the javadoc style of Mojo annotation for parameters:
+**\[P1.2\]**  Always use the java Mojo annotations for parameters:
 
     /**
      * The file to produce
@@ -75,7 +77,7 @@ Writing Maven Plugins
       </execution>
     </executions>
 
-Maven will use the default phase from the class' annotation to bind the plugin in \[http://maven.apache.org/guides/mini/guide-configuring-plugins.html#Mapping_Complex_Objects Mapping Complex Objects in Maven\]
+Maven will use the default phase from the [class' annotation to bind the plugin](http://maven.apache.org/guides/mini/guide-configuring-plugins.html#Mapping_Complex_Objects Mapping Complex Objects in Maven).
 
 
 Java Libraries as Dependencies in Maven

@@ -22,3 +22,9 @@ whereas the converted to UML 1.4 models can be imported in:
 as they employ MOF 1.4 and XMI 1.1 and XMI 1.2.
 
 Modelant wraps the NetBeans Meta-Data Repository (MDR).
+
+Documentation
+-------------
+  * [Architecture](src/site/markdown/architecture.md)
+  * [Conventions](src/site/markdown/conventions.md)
+  * [Java Conventions](src/site/markdown/java-conventions.md)  

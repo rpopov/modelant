@@ -1,43 +1,110 @@
- ------
- Introduction
- ------
- Jason van Zyl
- ------
- 2010-04-26
- ------
+Core
+-----
 
-Maven 2 SuperDuper Plugin
+The **ModelRepository** allows locating the different metamodel factories, this way supporting the load of models in different languages. 
 
-  This plugin is used to transform your development life. Don't bother with self-help
-  books on how to get over your build-time blues. Just use this plugin and
-  everything will miraculously change.
+Example:
 
-* Goals Overview
+```
+ModelRepository repository;
+ModelFactory modelFactory;
+RefPackage modelExtent;  
+...
+repository = ModelRepositoryFactory.construct(workDirectory);
 
-  * {{{./superduper-transform.html}superduper:transform}} performs the miraculous build transformation.
+modelFactory = repository.loadMetamodel("UML13");
 
-  []
+modelExtent = modelFactory.instantiate("model extent name");  
+repository.readIntoExtent(modelExtent, "model file path" );
+  or
+modelFactory.readExtent(modelExtent, new File("model file path"));
+...
+modelFactory.writeExtent(modelExtent, new File("model file path"));
+```
 
-* Usage
+Query Models
+-----
 
-  General instructions on how to use the SuperDuper Plugin can be found on the {{{./usage.html}usage page}}. Some more
-  specific use cases are described in the examples given below.
+The **core** package provides the **Select** interface, whose implementations are queries over the contents of a model repository.  
 
-  In case you still have questions regarding the plugin's usage, please have a look at the {{{./faq.html}FAQ}} and feel
-  free to contact the {{{./mail-lists.html}user mailing list}}. The posts to the mailing list are archived and could
-  already contain the answer to your question as part of an older thread. Hence, it is also worth browsing/searching
-  the {{{./mail-lists.html}mail archive}}.
+Compare Models
+-----
 
-  If you feel like the plugin is missing a feature or has a defect, you can fill a feature request or bug report in our
-  {{{./issue-tracking.html}issue tracker}}. When creating a new issue, please provide a comprehensive description of your
-  concern. Especially for fixing bugs it is crucial that the developers can reproduce your problem. For this reason,
-  entire debug logs, POMs or most preferably little demo projects attached to the issue are very much appreciated.
-  Of course, patches are welcome, too. Contributors can check out the project from our
-  {{{./source-repository.html}source repository}}.
+It turned out that:
 
-* Examples
+  * the implemented model comparison algorithm compares the UML 1.3 models very well, so the following models matching criteria are enough:
+    * net.mdatools.modelant.core.api.match.MatchingCriteria.NAME_AND_NAMESPACE_MATCH
+    * net.mdatools.modelant.core.api.match.MatchingCriteria.NAME_MATCH
+  * the comparison of MOF models (metamodels) requires skipping / disregarding some fields, like **qualifiedName** derived attribute:
+    * the comparison requires specifying attributes and associations to exclude from the exact match comparison 
+  * Added explicit interface net.mdatools.modelant.core.api.diff.Export for exporting the results of models comparison (instances of net.mdatools.modelant.core.api.diff.ModelComparisonResult):
+    * Provided a default export mechanism - the net.mdatools.modelant.core.operation.model.ModelComparisonResultImpl.toString() method
+    * Provided a structured text export mechanism - net.mdatools.modelant.core.operation.model.export.StructuredTextExport which exports the contents in a JSON-like structure
+    * The model comparison result combines the added (deleted) model elements, considering their nesting, defined  in the matching criteria, so that added (deleted) are indicated the whole composites, instead of reporting  their parts.
 
-  To provide you with better understanding of some usages of the SuperDuper Plugin,
-  you can take a look at the following examples:
+Use the CompareModels operation:
 
-  * {{{./examples/sample-example.html}Sample Example}}
+```
+// compare the models without a priori known correspondence
+compare = new CompareModels( MatchingCriteria.NAME_MATCH,
+                             MatchingCriteria.NONE,
+                             ConsideredEqual.toList( new HashMap<>() ),
+                             sourceModel );
+comparisonResult = compare.execute( targetModel );
+```
+
+Copy Model
+-----
+
+Example:
+```
+copy = new CopyModel( sourceModel );
+correspondence = copy.execute( targetModel );
+```
+Copy a Model from Metamodel X to Metamodel Y
+-----
+
+Example:
+```
+copy = new CopyToMetaModel( sourceModel, metamodelMapping );
+correspondence = copy.execute( targetModel );
+```
+Actually Copy Model is a CopyToMetaModel with IDENTITY transformation of the metamodel.
+
+Compilation Dependencies
+-----
+
+Project dependencies:
+
+```
+<dependencies>  
+  <dependency>
+    <groupId>net.mdatools</groupId>
+    <artifactId>modelant.repository.api</artifactId>
+    <version>3.1.0-SNAPSHOT</version>
+  </dependency>
+  <dependency>
+    <groupId>net.mdatools</groupId>
+    <artifactId>modelant.core.api</artifactId>
+    <version>3.1.0-SNAPSHOT</version>
+  </dependency>    
+</dependencies>  
+```
+Execution Dependencies
+-----
+
+Project dependencies:
+```
+<dependencies>  
+  <dependency>
+    <groupId>net.mdatools</groupId>
+    <artifactId>modelant.repository.impl</artifactId>
+    <version>3.1.0-SNAPSHOT</version>
+  </dependency>
+  <dependency>
+    <groupId>net.mdatools</groupId>
+    <artifactId>modelant.core.impl</artifactId>
+    <version>3.1.0-SNAPSHOT</version>
+  </dependency>    
+</dependencies>
+```

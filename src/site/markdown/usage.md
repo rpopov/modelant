@@ -1,3 +1,5 @@
+<!-- MACRO{toc} -->
+
 Usage in Maven environment
 --------------------------
 

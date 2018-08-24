@@ -1,21 +1,21 @@
-<project xmlns="http://maven.apache.org/DECORATION/1.8.0" 
+<project xmlns="http://maven.apache.org/DECORATION/1.8.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 http://maven.apache.org/xsd/decoration-1.8.0.xsd"
          name="${name}">
-  <!-- 
-   see 
-   https://maven.apache.org/doxia/doxia-sitetools/doxia-decoration-model/decoration.html#class_item 
+  <!--
+   see
+   https://maven.apache.org/doxia/doxia-sitetools/doxia-decoration-model/decoration.html#class_item
    https://maven.apache.org/plugins/maven-site-plugin/examples/sitedescriptor.html
     -->
-  
+
   <bannerLeft>
     <name>${artifactId}</name>
-    <title>modelant tool supports model-driven software development processes</title>    
+    <title>modelant tool supports model-driven software development processes</title>
   </bannerLeft>
 
   <googleAnalyticsAccountId>${googleAnalyticsAccountId}</googleAnalyticsAccountId>
- 
-  <publishDate position="left" format="yyyy-MM-dd"/>  
+
+  <publishDate position="left" format="yyyy-MM-dd"/>
   <version position="left"/>
 
   <body>
@@ -27,12 +27,13 @@
       <item name="About" href="index.html"/>
       <item name="Architecture" href="architecture.html"/>
       <item name="Conventions" href="conventions.html"/>
-      <item name="Java Conventions" href="java-conventions.html"/>      
-      <item name="Practices" href="practices.html"/>      
+      <item name="Java Conventions" href="java-conventions.html"/>
+      <item name="Procedures" href="procedures.html"/>
+      <item name="Practices" href="practices.html"/>
       <item name="Usage" href="usage.html"/>
       <item name="FAQ" href="faq.html"/>
     </menu>
-    <menu ref="modules" />   
+    <menu ref="modules" />
     <menu name="Examples">
       <item name="description1" href="examples/example-one.html"/>
       <item name="description2" href="examples/example-two.html"/>

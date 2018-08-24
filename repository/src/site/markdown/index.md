@@ -1,43 +1,19 @@
- ------
- Introduction
- ------
- Jason van Zyl
- ------
- 2010-04-26
- ------
+Repository
+----------
 
-Maven 2 SuperDuper Plugin
+The **repository** component of [modelant](/) contains:
 
-  This plugin is used to transform your development life. Don't bother with self-help
-  books on how to get over your build-time blues. Just use this plugin and
-  everything will miraculously change.
-
-* Goals Overview
-
-  * {{{./superduper-transform.html}superduper:transform}} performs the miraculous build transformation.
-
-  []
-
-* Usage
-
-  General instructions on how to use the SuperDuper Plugin can be found on the {{{./usage.html}usage page}}. Some more
-  specific use cases are described in the examples given below.
-
-  In case you still have questions regarding the plugin's usage, please have a look at the {{{./faq.html}FAQ}} and feel
-  free to contact the {{{./mail-lists.html}user mailing list}}. The posts to the mailing list are archived and could
-  already contain the answer to your question as part of an older thread. Hence, it is also worth browsing/searching
-  the {{{./mail-lists.html}mail archive}}.
-
-  If you feel like the plugin is missing a feature or has a defect, you can fill a feature request or bug report in our
-  {{{./issue-tracking.html}issue tracker}}. When creating a new issue, please provide a comprehensive description of your
-  concern. Especially for fixing bugs it is crucial that the developers can reproduce your problem. For this reason,
-  entire debug logs, POMs or most preferably little demo projects attached to the issue are very much appreciated.
-  Of course, patches are welcome, too. Contributors can check out the project from our
-  {{{./source-repository.html}source repository}}.
-
-* Examples
-
-  To provide you with better understanding of some usages of the SuperDuper Plugin,
-  you can take a look at the following examples:
-
-  * {{{./examples/sample-example.html}Sample Example}}
+  * **api** module with the interfaces of the Repository module
+  * **impl** module with the implementation of the API, following [A4]
+  * **maven** module with:
+    * a maven archetype **modelant.repository.maven.archetype 3.1.0** to generate the directories structure and files of a modelant maven project for a specific modeling language:
+       * it provides a pom.xml stating:
+          * the plugin needed to generate the sources as part of the build
+          * the dependencies needed to compile the API sources
+       * it compiles and installs the model JMI API for that language         
+       NOTE: As the maven archetypes **do not provide working** mechanism for post-processing (archetype-post-generate.groovy), the generation of the API source will be just the first phase of the generated POM (generate sources) through a corresponding plugin<br/>
+    * a plugin to generate the API for a metamodel, set up in a POM
+      * parameters:
+        * **metamodelUrl** - where to load the metamodel from
+        * **sourceDirectory** - where to generate the API sources
+        * **workDirectory** - where to keep the work / temp files

@@ -1,43 +1,140 @@
- ------
- Introduction
- ------
- Jason van Zyl
- ------
- 2010-04-26
- ------
+UML 1.3
+====
 
-Maven 2 SuperDuper Plugin
+<!-- MACRO{toc} -->
 
-  This plugin is used to transform your development life. Don't bother with self-help
-  books on how to get over your build-time blues. Just use this plugin and
-  everything will miraculously change.
+Convert a DTD to XSD
+-----
+```
+<plugin>
+  <groupId>net.mdatools</groupId>
+  <artifactId>modelant.conversion.maven.plugin</artifactId>
+  <version>3.2.0</version>
+  <executions>
+    <execution>
+      <phase>compile</phase>
+      <goals>
+        <goal>dtd-to-xsd/goal>
+      </goals>
+      <configuration>
+        <dtdFile>...</dtdFile>
+        <xsdFile>...</xsdFile>
+      </configuration>
+    </execution>
+  </executions>
+</plugin>
+```
 
-* Goals Overview
+where:
 
-  * {{{./superduper-transform.html}superduper:transform}} performs the miraculous build transformation.
+  * **dtdFile**  The DTD file to convert to XSD
+  * **xsdFile**  The name of the XSD file to produce.
 
-  []
+NOTE: The used **compile** phase is the defaulut and recommended only. Any other phase would work too.
 
-* Usage
+Reverse engineering of XSD to UML 1.3 model
+-------------------------------------------
 
-  General instructions on how to use the SuperDuper Plugin can be found on the {{{./usage.html}usage page}}. Some more
-  specific use cases are described in the examples given below.
+```
+<plugin>
+  <groupId>net.mdatools</groupId>
+  <artifactId>modelant.uml13.maven.plugin</artifactId>
+  <version>3.2.0</version>
+  <executions>
+    <execution>
+      <phase>compile</phase>
+      <goals>
+        <goal>xsd-to-uml13</goal>
+      </goals>
+      <configuration>
+        <schemaFile>...</schemaFile>
+        <outputFile>...</outputFile>
+      </configuration>
+    </execution>
+  </executions>
+</plugin>
+```
 
-  In case you still have questions regarding the plugin's usage, please have a look at the {{{./faq.html}FAQ}} and feel
-  free to contact the {{{./mail-lists.html}user mailing list}}. The posts to the mailing list are archived and could
-  already contain the answer to your question as part of an older thread. Hence, it is also worth browsing/searching
-  the {{{./mail-lists.html}mail archive}}.
+where:
 
-  If you feel like the plugin is missing a feature or has a defect, you can fill a feature request or bug report in our
-  {{{./issue-tracking.html}issue tracker}}. When creating a new issue, please provide a comprehensive description of your
-  concern. Especially for fixing bugs it is crucial that the developers can reproduce your problem. For this reason,
-  entire debug logs, POMs or most preferably little demo projects attached to the issue are very much appreciated.
-  Of course, patches are welcome, too. Contributors can check out the project from our
-  {{{./source-repository.html}source repository}}.
+  * **schemaFile**  The schema file to reverse engineer.
+  * **outputFile**  The name of the file where to export the produced UML 1.3 model in XMI 1.2 format
 
-* Examples
+NOTE: The used **compile** phase is default and recommended only. Any other phase would work too.
 
-  To provide you with better understanding of some usages of the SuperDuper Plugin,
-  you can take a look at the following examples:
+Reverse engineer a database schema to UML 1.3 model
+---------------------------------------------------
 
-  * {{{./examples/sample-example.html}Sample Example}}
+```
+<plugin>
+  <groupId>net.mdatools</groupId>
+  <artifactId>modelant.uml13.maven.plugin</artifactId>
+  <version>3.2.0</version>
+  <executions>
+    <execution>
+      <phase>compile</phase>
+      <goals>
+        <goal>reverseEngineerDatabaseInUml13</goal>
+      </goals>
+      <configuration>
+        <driver>...</driver>
+        <url>...</url>
+        <user>...</user>
+        <password>...</password>
+        <schema>...</schema>
+        <outputFile>...</outputFile>
+      </configuration>
+    </execution>
+  </executions>
+</plugin>
+```
+
+where:
+  * **driver**  The java class name of the database driver to connect the database. The .jar with that class file should be provided as a dependency of this plugin
+  * **outputFile**  The name of the file where to export the produced UML 1.3 model in XMI 1.2 format
+  * **password**  Database user's password
+  * **schema**  Database schema to reverse engineer
+  * **url**  Database driver-specific URL
+  * **user**  Database user to connect the database
+  * **workDir**  The directory where to store the repository files
+  * **outputFile**  The name of the file where to export the produced UML 1.3 model in XMI 1.2 format
+
+NOTE: The used **compile** phase is recommended only. Any other phase would work too.
+
+Reverse engineer Java sources to UML 1.3 model
+----------------------------------------------
+
+```
+  <plugin>
+    <groupId>net.mdatools</groupId>
+    <artifactId>modelant.uml13.maven.javauml</artifactId>
+    <version>3.2.0</version>        
+    <executions>
+      <execution>
+        <phase>compile</phase>
+        <goals>
+          <goal>reverseEngineerJavaInUml13</goal>
+        </goals>
+        <configuration>
+          <sourcepath>...</sourcepath>
+          <outputDirectory>...</outputDirectory>
+          <includeDependencySources>false</includeDependencySources>
+          <includeTransitiveDependencySources>false</includeTransitiveDependencySources>
+          <debug>true</debug>
+          <verbose>true</verbose>              
+        </configuration>
+      </execution>
+    </executions>
+  </plugin>
+```
+
+  * **sourcepath**  The source paths where the subpackages are located. The sourcepath can contain multiple paths by separating them with a colon (:) or a semi-colon (;).
+  * **outputDirectory**  The destination directory where to store the generated model file.
+
+All parameters are listed with 
+
+```
+  mvn help:describe -Dplugin=net.mdatools:modelant.uml13.maven.javauml:3.3.0 -Ddetail
+```
+
+NOTE: The compile phase is set by default, so in &lt;execution&gt; we overwrite it.

@@ -1,7 +1,10 @@
 Conventions
 ===========
 
-Elicited conventions and lessons learned
+Elicited conventions and lessons learned on:
+
+<!-- MACRO{toc} -->
+
 
 GAV Coordinates
 ---------------

@@ -14,6 +14,9 @@ Java Conventions
 
 **\[JC3\]**  Selectors naming convention: **Select\[&lt;adjective&gt;\]&lt;direct object&gt;** as a special case of Function
 
+
+TODO: DEFINE
+
 https://gist.github.com/goldbattle/9283399
 
 https://www.oracle.com/technetwork/java/codeconventions-150003.pdf

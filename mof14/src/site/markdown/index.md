@@ -1,43 +1,84 @@
- ------
- Introduction
- ------
- Jason van Zyl
- ------
- 2010-04-26
- ------
+MOF 1.4
+=======
 
-Maven 2 SuperDuper Plugin
+<!-- MACRO{toc} -->
 
-  This plugin is used to transform your development life. Don't bother with self-help
-  books on how to get over your build-time blues. Just use this plugin and
-  everything will miraculously change.
+Usage
+-----
 
-* Goals Overview
+Even though, the metamodel of MOF 1.4 is built in the Repository, there is still a way to treat MOF metamodels as models and them explicitly using the common mechanisms of Modelant:
 
-  * {{{./superduper-transform.html}superduper:transform}} performs the miraculous build transformation.
+```
+modelFactory = modelRepository.initialize("MOF14");
+model = modelFactory.instantiate("model extent name");
+... 
+modelRepository.readIntoExtent(model, "model file path");
+  or
+modelFactory.readModel(model, "model file path");
+```
 
-  []
+When processing MOF metamodels (which are models, written in MOF 1.4), then use the pattern:
 
-* Usage
+```
+sourceExtent = repository.constructMofExtent( "SOURCE" );
+repository.readIntoExtent( sourceExtent, sourceMetamodel );
+```
 
-  General instructions on how to use the SuperDuper Plugin can be found on the {{{./usage.html}usage page}}. Some more
-  specific use cases are described in the examples given below.
+For example, when comparing two metamodels:
 
-  In case you still have questions regarding the plugin's usage, please have a look at the {{{./faq.html}FAQ}} and feel
-  free to contact the {{{./mail-lists.html}user mailing list}}. The posts to the mailing list are archived and could
-  already contain the answer to your question as part of an older thread. Hence, it is also worth browsing/searching
-  the {{{./mail-lists.html}mail archive}}.
+```
+repository.readIntoExtent( sourceExtent, sourceMetamodel );
+repository.readIntoExtent( targetExtent, targetMetamodel );
+compare = new CompareMof14Models(bindings, sourceExtent);
+result = compare.execute( targetExtent );
+```
 
-  If you feel like the plugin is missing a feature or has a defect, you can fill a feature request or bug report in our
-  {{{./issue-tracking.html}issue tracker}}. When creating a new issue, please provide a comprehensive description of your
-  concern. Especially for fixing bugs it is crucial that the developers can reproduce your problem. For this reason,
-  entire debug logs, POMs or most preferably little demo projects attached to the issue are very much appreciated.
-  Of course, patches are welcome, too. Contributors can check out the project from our
-  {{{./source-repository.html}source repository}}.
+Maven Plugin: Compare MOF 1.4 Metamodels
+-----
 
-* Examples
+Usage:
+```
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>net.mdatools</groupId>
+        <artifactId>modelant.mof14.maven.plugin</artifactId>
+        <version>${revision}</version>
+        <executions>
+          <execution>
+            <phase>compile</phase>
+            <goals>
+              <goal>compare-metamodels</goal>
+            </goals>
+            <configuration>
+              <sourceMetamodel>...</sourceMetamodel>
+              <targetMetamodel>...</targetMetamodel>
+              <equals>
+                <equal>
+                   <source>Foundation::Data_Types</source>
+                   <target>Data_Types</target>
+                </equal>
+                ...
+                <export implementation="net.mdatools.modelant.core.operation.model.export.StructuredTextExport"/>
+              </equals>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+```
 
-  To provide you with better understanding of some usages of the SuperDuper Plugin,
-  you can take a look at the following examples:
+where:
 
-  * {{{./examples/sample-example.html}Sample Example}}
+  * **sourceMetamodel**  refers the XMI file of the definition of the metamodel, considered as old/previous version/source in the comparison
+  * **targetMetamodel**  refers the XMI file of the definition of the metamodel, considered as new/current version/target in the comparison
+  * **equals**  a list of externally defined mathed elements, overriding the uniform comparison rules
+  * **equal**  defines a single match of a set of source metamodel elements to a set of target metamodel elements, that should be considered equal, overriding the comparison rules
+  * **source**  the qualified name of an element in the source metamodel, in the format: &lt;owner name&gt;{::&lt;owner name&gt;}::&lt;element name&gt;
+  * **target**  the qualified name of an element in the target metamodel, in the format: &lt;owner name&gt;{::&lt;owner name&gt;}::&lt;element name&gt;
+  * **export**  Define the mechanism to export the results of the models comparison. The default implementation uses its toString(). Alternative:
+```  
+  <export implementation="net.mdatools.modelant.core.operation.model.export.StructuredTextExport"/>
+```
+  It exports the text in a JSON-like format, suitable for collapsing/expanding and manual analysis.
