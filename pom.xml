@@ -229,8 +229,12 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
   <pluginRepositories>
     <pluginRepository>
       <id>public-tools</id>
-      <name>Repository of any public/external maven plugins/tools. It is a local cache of Maven Central repository.</name>
-      <url>http://localhost:8081/repository/public-tools-maven/</url>
+      <name>
+         Repository of any public/external maven plugins/tools.
+         When runnig modelant publicly, the Maven Central repository is used.
+         For local development and analysis of vulnerabilities use a local mirror set in settings.xml
+        </name>
+      <url>https://repo1.maven.org/maven2/</url>
       <layout>default</layout>
     </pluginRepository>
   </pluginRepositories>
@@ -238,8 +242,12 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
   <repositories>
     <repository>
       <id>public-components</id>
-      <name>Any external components of modelant. Separated for analysis of vulnerabilities. It is a local cache of Maven Central repository.</name>
-      <url>http://localhost:8081/repository/modelant-maven-public-component/</url>
+      <name>
+         Any external components of modelant.
+         When runnig modelant publicly, the Maven Central repository is used.
+         For local development and analysis of vulnerabilities use a local mirror set in settings.xml
+      </name>
+      <url>https://repo1.maven.org/maven2/</url>
       <layout>default</layout>
     </repository>
   </repositories>
@@ -464,7 +472,7 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
             </execution>
           </executions>
         </plugin>
-        
+
         <!--
           Sign out the artifacts to deploy, run only in deploy phase for efficiency
           See: https://central.sonatype.org/pages/apache-maven.html
@@ -483,7 +491,7 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
             </execution>
           </executions>
         </plugin>
-        
+
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-deploy-plugin</artifactId>
@@ -565,12 +573,12 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
       </plugin>
-      
+
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-gpg-plugin</artifactId>
       </plugin>
-      
+
     </plugins>
   </build>
 
@@ -662,7 +670,7 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
         </plugins>
       </reporting>
     </profile>
-    
+
     <profile>
       <!--
         Maven profile for plugins development
@@ -701,7 +709,7 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
       </build>
 
       <reporting>
-        <plugins>          
+        <plugins>
           <!-- run plugin-specific reports of goals, parameters, etc. -->
           <plugin>
             <artifactId>maven-plugin-plugin</artifactId>
