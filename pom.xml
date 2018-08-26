@@ -97,18 +97,6 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
       <id>mdatools.net</id>
       <url>scp://mdatools.net:${site-port}/home/mdatools/public_html/product/${project.version}/</url>
     </site>
-    <repository>
-      <id>release</id>
-      <name>Repository of modelant releases</name>
-      <url>http://localhost:8081/repository/modelant-maven-release/</url>
-      <uniqueVersion>false</uniqueVersion>
-    </repository>
-    <snapshotRepository>
-      <id>snapshot</id>
-      <name>Repository of temporary modelant snapshots</name>
-      <url>http://localhost:8081/repository/modelant-maven-snapshot/</url>
-      <uniqueVersion>true</uniqueVersion>
-    </snapshotRepository>
   </distributionManagement>
 
   <properties>
@@ -225,32 +213,6 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
       <artifactId>junit</artifactId>
     </dependency>
   </dependencies>
-
-  <pluginRepositories>
-    <pluginRepository>
-      <id>public-tools</id>
-      <name>
-         Repository of any public/external maven plugins/tools.
-         When runnig modelant publicly, the Maven Central repository is used.
-         For local development and analysis of vulnerabilities use a local mirror set in settings.xml
-        </name>
-      <url>https://repo1.maven.org/maven2/</url>
-      <layout>default</layout>
-    </pluginRepository>
-  </pluginRepositories>
-
-  <repositories>
-    <repository>
-      <id>public-components</id>
-      <name>
-         Any external components of modelant.
-         When runnig modelant publicly, the Maven Central repository is used.
-         For local development and analysis of vulnerabilities use a local mirror set in settings.xml
-      </name>
-      <url>https://repo1.maven.org/maven2/</url>
-      <layout>default</layout>
-    </repository>
-  </repositories>
 
   <build>
     <sourceDirectory>${project.basedir}/src/java</sourceDirectory>
@@ -747,6 +709,95 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
           </plugin>
         </plugins>
       </build>
+    </profile>
+
+    <!-- Deployment in local binary repository / Nexus -->
+    <profile>
+      <id>local-development</id>
+      
+      <activation>
+        <!-- Always active. Note: this is not the same as activeByDefault -->
+        <file>
+          <exists>pom.xml</exists>
+        </file>
+      </activation>
+
+      <pluginRepositories>
+        <pluginRepository>
+          <id>public-tools</id>
+          <name>Repository of any public/external maven plugins/tools.</name>
+          <url>http://localhost:8081/repository/public-tools-maven/</url>
+        </pluginRepository>
+      </pluginRepositories>
+
+      <repositories>
+        <repository>
+          <id>public-components</id>
+          <name>
+             Any external components of modelant.
+             It is isolated to allow analysis of vulnerabilities, licenses, etc. imposed through dependencies
+          </name>
+          <url>http://localhost:8081/repository/modelant-maven-public-component/</url>
+        </repository>
+      </repositories>
+
+      <distributionManagement>
+        <repository>
+          <id>release</id>
+          <name>Repository of modelant releases</name>
+          <url>http://localhost:8081/repository/modelant-maven-release/</url>
+          <uniqueVersion>false</uniqueVersion>
+        </repository>
+        <snapshotRepository>
+          <id>snapshot</id>
+          <name>Repository of temporary modelant snapshots</name>
+          <url>http://localhost:8081/repository/modelant-maven-snapshot/</url>
+          <uniqueVersion>true</uniqueVersion>
+        </snapshotRepository>
+      </distributionManagement>
+    </profile>
+
+    <!--
+      Activate it explicitly in order to deploy in Maven Central:
+
+        mvn deploy -P production
+      -->
+    <profile>
+      <id>production</id>
+
+      <pluginRepositories>
+        <pluginRepository>
+          <id>public-tools</id>
+          <name>
+             Repository of any public/external maven plugins/tools.
+             When runnig modelant publicly, the Maven Central repository is used.
+            </name>
+          <url>https://repo1.maven.org/maven2/</url>
+        </pluginRepository>
+      </pluginRepositories>
+
+      <repositories>
+        <repository>
+          <id>public-components</id>
+          <name>Any external components of modelant</name>
+          <url>https://repo1.maven.org/maven2/</url>
+        </repository>
+      </repositories>
+
+      <distributionManagement>
+        <repository>
+          <id>production-release</id>
+          <name>Repository of modelant releases</name>
+          <url>https://repo1.maven.org/maven2/</url>
+          <uniqueVersion>false</uniqueVersion>
+        </repository>
+        <snapshotRepository>
+          <id>production-snapshot</id>
+          <name>Repository of temporary modelant snapshots</name>
+          <url>https://repo1.maven.org/maven2/</url>
+          <uniqueVersion>true</uniqueVersion>
+        </snapshotRepository>
+      </distributionManagement>
     </profile>
   </profiles>
 </project>

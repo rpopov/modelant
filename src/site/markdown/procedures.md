@@ -1,10 +1,10 @@
 Procedures
-=====
+==========
 
 <!-- MACRO{toc} -->
 
 Java Setup Procedure for Windows 
------
+--------------------------------
 
 In Control Panel \ System \ Advanced \ Environment Variables define the global variable:
 
@@ -13,7 +13,7 @@ In Control Panel \ System \ Advanced \ Environment Variables define the global v
 Note that the **\Program Files** directory is referred using its 8:3 file name, **excluding any spaces in the path**.
 
 Eclipse Setup Procedure for Windows 
------
+-----------------------------------
 
 As of http://wiki.eclipse.org/Eclipse.ini Eclipse uses the PATH to search the JVM to run. In Windows the path to the default installation of JAVA executable contains a space, **which causes problems in resolving Maven dependencies referring ${java.home}** in Eclipse environment. Therefore it is needed to set the path to JAVA using the 8:3 file names:
 
@@ -27,8 +27,7 @@ As of http://wiki.eclipse.org/Eclipse.ini Eclipse uses the PATH to search the JV
 where the path is an example of the 8:3 reference to the javaw.exe of of the JVM to use.
 
 Maven Setup Procedure for Windows 
------
-
+---------------------------------
 
   * Install Maven in a directory
   * Set the environment variable:
@@ -60,7 +59,7 @@ Maven Setup Procedure for Windows
     set MAVEN_DEBUG_OPTS=-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=%DEBUG_SUSPEND%,address=%DEBUG_PORT%
     
 Compile and Deploy Skipping tests 
------
+---------------------------------
 
 Facts:
 
@@ -94,7 +93,7 @@ Thus, run as **separate commands**:
     mvn install
     
 Install, Skip Tests 
------
+-------------------
 
 As of https://maven.apache.org/surefire/maven-surefire-plugin/examples/skipping-tests.html
 
@@ -109,7 +108,7 @@ As of https://maven.apache.org/surefire/maven-surefire-plugin/examples/skipping-
     mvn install -Dmaven.test.skip=true
 
 Debug a Test 
------
+------------
 
 The default in Modelant project is Maven to run the tests in a dedicated JVM. The control on the debug port and suspend of that JVM is done through the POM properties:
 
@@ -121,7 +120,7 @@ Usage:
     mvn test -DDEBUG_SUSPEND=y
 
 Debug a Maven Plugin 
------
+--------------------
 
 Maven runs the plugins in the same JVM that runs Maven. According to the setup procedure, the control of the Maven JVM is done through the OS environment variables:
 
@@ -134,7 +133,7 @@ Usage:
     mvn test
 
 Publishing an archetype 
------
+-----------------------
 
 Implemented following the process in 
 
@@ -146,7 +145,7 @@ Implemented following the process in
     mvn clean install archetype:update-local-catalog
 
 Build the modelant site 
------
+-----------------------
 
 Use the "sites" generated for the modelant's modules and combine them in a single site by calling the site plugin:
   
@@ -162,7 +161,22 @@ Or just call the **site-deploy** phase of the **site** lifecycle:
 
     mvn site-deploy
 
+Publish in Maven Central
+------------------------
+
+In order to publish the modelant components in Maven Central (through OSSHR) activate the **production** profile:
+
+  mvn deploy -P production
+
+
+Disable a profile
+-----------------
+
+  mvn .... -P !profile-name
+
+
+  
 Analyze the Maven phase-to-plugin & goal bindings 
------
+-------------------------------------------------
 
     mvn fr.jcgay.maven.plugins:buildplan-maven-plugin:list-phase
