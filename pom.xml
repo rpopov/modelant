@@ -464,7 +464,26 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
             </execution>
           </executions>
         </plugin>
-
+        
+        <!--
+          Sign out the artifacts to deploy, run only in deploy phase for efficiency
+          See: https://central.sonatype.org/pages/apache-maven.html
+          -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-gpg-plugin</artifactId>
+          <version>1.5</version>
+          <executions>
+            <execution>
+              <id>sign-artifacts</id>
+              <phase>deploy</phase>
+              <goals>
+                <goal>sign</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-deploy-plugin</artifactId>
@@ -546,6 +565,12 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-source-plugin</artifactId>
       </plugin>
+      
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+      </plugin>
+      
     </plugins>
   </build>
 
