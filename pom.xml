@@ -713,7 +713,7 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
 
     <!-- Deployment in local binary repository / Nexus -->
     <profile>
-      <id>local-development</id>
+      <id>development</id>
 
       <activation>
         <!-- Always active. Note: this is not the same as activeByDefault -->
@@ -722,32 +722,13 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
         </file>
       </activation>
 
-      <pluginRepositories>
-        <pluginRepository>
-          <id>public-tools</id>
-          <name>Repository of any public/external maven plugins/tools.</name>
-          <url>http://localhost:8081/repository/public-tools-maven/</url>
-        </pluginRepository>
-      </pluginRepositories>
-
-      <repositories>
-        <repository>
-          <id>public-components</id>
-          <name>
-             Any external components of modelant.
-             It is isolated to allow analysis of vulnerabilities, licenses, etc. imposed through dependencies
-          </name>
-          <url>http://localhost:8081/repository/modelant-maven-public-component/</url>
-        </repository>
-      </repositories>
-
       <distributionManagement>
         <repository>
           <id>development</id>
           <url>http://localhost:8081/repository/modelant-maven-release/</url>
         </repository>
         <snapshotRepository>
-          <id>local</id>
+          <id>development</id>
           <url>http://localhost:8081/repository/modelant-maven-snapshot/</url>
         </snapshotRepository>
       </distributionManagement>
@@ -767,25 +748,6 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
       -->
     <profile>
       <id>production</id>
-
-      <pluginRepositories>
-        <pluginRepository>
-          <id>public-tools</id>
-          <name>
-             Repository of any public/external maven plugins/tools.
-             When runnig modelant publicly, the Maven Central repository is used.
-            </name>
-          <url>https://repo1.maven.org/maven2/</url>
-        </pluginRepository>
-      </pluginRepositories>
-
-      <repositories>
-        <repository>
-          <id>public-components</id>
-          <name>Any external components of modelant</name>
-          <url>https://repo1.maven.org/maven2/</url>
-        </repository>
-      </repositories>
 
       <distributionManagement>
         <repository>
