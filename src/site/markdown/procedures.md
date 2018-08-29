@@ -31,32 +31,27 @@ Maven Setup Procedure for Windows
 
   * Install Maven in a directory
   * Set the environment variable:
-
-  
-    M2_HOME = <Maven installation directory in **8:3 name format**>
+```  
+M2_HOME = <Maven installation directory in **8:3 name format**>
+```
 
   * Include in the environment PATH:
 
-  
-    PATH=%M2_HOME%\bin;%PATH%
+```  
+PATH=%M2_HOME%\bin;%PATH%
+```
 
-  * Edit the %M2_HOME%\bin\mvn.cmd file (Windows) and include
-   **after** the line 
+  * Edit the **%M2_HOME%\bin\mvn.cmd** file (Windows) **after** the line 
+```   
+@setlocal
+```    
+   insert the lines:
 
-   
-    @setlocal
-    
-   **before** the line
-
-   
-    set ERROR_CODE=0
-    
-   the lines:
-
-   
-    if "%DEBUG_PORT%" == "" set DEBUG_PORT=8000
-    if "%DEBUG_SUSPEND%" == "" set DEBUG_SUSPEND=n
-    set MAVEN_DEBUG_OPTS=-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=%DEBUG_SUSPEND%,address=%DEBUG_PORT%
+```   
+if "%DEBUG_PORT%" == "" set DEBUG_PORT=8000
+if "%DEBUG_SUSPEND%" == "" set DEBUG_SUSPEND=n
+set MAVEN_DEBUG_OPTS=-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=%DEBUG_SUSPEND%,address=%DEBUG_PORT%
+```
     
 Compile and Deploy Skipping tests 
 ---------------------------------
@@ -79,18 +74,21 @@ Thus, run as **separate commands**:
 
   * In the components projects:
   
-  
-    mvn clean deploy
+``` 
+mvn clean deploy
+```
 
   * In the integration test project:
 
-  
-    mvn test
+```  
+mvn test
+```
 
   * Or just in the common root project:
 
-
-    mvn install
+```
+mvn install
+```
     
 Install, Skip Tests 
 -------------------
@@ -99,13 +97,14 @@ As of https://maven.apache.org/surefire/maven-surefire-plugin/examples/skipping-
 
   * Skip running the tests, but compile them:
 
-  
-    mvn install -DskipTests
-
+``` 
+mvn install -DskipTests
+```
   * Skip even compiling the tests:
 
-  
-    mvn install -Dmaven.test.skip=true
+```
+mvn install -Dmaven.test.skip=true
+```
 
 Debug a Test 
 ------------
@@ -132,18 +131,17 @@ Usage:
     set DEBUG_SUSPEND=y  
     mvn test
 
-Publishing an archetype 
------------------------
+Disable a profile
+-----------------
 
-Implemented following the process in 
-
-  * https://maven.apache.org/archetype/maven-archetype-plugin/advanced-usage.html
-  * https://maven.apache.org/archetype/maven-archetype-plugin/specification/archetype-metadata.html
-  * https://maven.apache.org/archetype/archetype-models/archetype-descriptor/archetype-descriptor.html
+    mvn .... -P !profile-name
 
   
-    mvn clean install archetype:update-local-catalog
+Analyze the Maven phase-to-plugin & goal bindings 
+-------------------------------------------------
 
+    mvn fr.jcgay.maven.plugins:buildplan-maven-plugin:list-phase
+    
 Build the modelant site 
 -----------------------
 
@@ -161,22 +159,43 @@ Or just call the **site-deploy** phase of the **site** lifecycle:
 
     mvn site-deploy
 
+Publishing an archetype 
+-----------------------
+
+Implemented following the process in 
+
+  * https://maven.apache.org/archetype/maven-archetype-plugin/advanced-usage.html
+  * https://maven.apache.org/archetype/maven-archetype-plugin/specification/archetype-metadata.html
+  * https://maven.apache.org/archetype/archetype-models/archetype-descriptor/archetype-descriptor.html
+
+  
+    mvn clean install archetype:update-local-catalog
+
 Publish in Maven Central
 ------------------------
 
 In order to publish the modelant components in Maven Central (through OSSHR) activate the **production** profile:
 
-  mvn deploy -P production
+  * In root pom.xml change the modelant version to a release version - remove the -SNAPSHOT suffix
+  * Run 
 
-
-Disable a profile
------------------
-
-  mvn .... -P !profile-name
-
-
+```
+mvn clean deploy -P production
+```
+  * Log in [OSSRH/Sonatype staging repository](https://oss.sonatype.org/service/local/staging/deploy/maven2)
+  * In Build Promotion \ Staging Repositories menu find the **net.mdatools** repository
+  * **Close** the repository
+  * In the **Activity** tab review the status of the components if they pass the quality gates. 
+  * If the artifacts did not pass the quality gates:
+    * drop the repository
+    * fix the problems locally
+    * repeat the procedure    
+  * In case the of passed quality gates, the components will be uploaded to Maven Central
   
-Analyze the Maven phase-to-plugin & goal bindings 
--------------------------------------------------
-
-    mvn fr.jcgay.maven.plugins:buildplan-maven-plugin:list-phase
+References:
+  
+  * [Based on](https://www.youtube.com/watch?v=dXR4pJ_zS-0&feature=youtu.be)
+  * [Release](https://central.sonatype.org/pages/apache-maven.html#performing-a-release-deployment)
+  * [Resolve the identified problems](https://www.youtube.com/watch?v=N7KXuvi_2SE&feature=youtu.be)
+  * [See also](https://central.sonatype.org/articles/2016/Feb/02/free-video-series-easy-publishing-to-the-central-repository/)
+  

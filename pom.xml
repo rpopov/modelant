@@ -714,7 +714,7 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
     <!-- Deployment in local binary repository / Nexus -->
     <profile>
       <id>local-development</id>
-      
+
       <activation>
         <!-- Always active. Note: this is not the same as activeByDefault -->
         <file>
@@ -743,16 +743,12 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
 
       <distributionManagement>
         <repository>
-          <id>release</id>
-          <name>Repository of modelant releases</name>
+          <id>development</id>
           <url>http://localhost:8081/repository/modelant-maven-release/</url>
-          <uniqueVersion>false</uniqueVersion>
         </repository>
         <snapshotRepository>
-          <id>snapshot</id>
-          <name>Repository of temporary modelant snapshots</name>
+          <id>local</id>
           <url>http://localhost:8081/repository/modelant-maven-snapshot/</url>
-          <uniqueVersion>true</uniqueVersion>
         </snapshotRepository>
       </distributionManagement>
     </profile>
@@ -761,6 +757,13 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
       Activate it explicitly in order to deploy in Maven Central:
 
         mvn deploy -P production
+
+      Sonatype:
+        Deploy snapshot artifacts into repository https://oss.sonatype.org/content/repositories/snapshots
+        Deploy release artifacts into the staging repository https://oss.sonatype.org/service/local/staging/deploy/maven2
+        Promote staged artifacts into repository 'Releases'
+        Download snapshot and release artifacts from group https://oss.sonatype.org/content/groups/public
+        Download snapshot, release and staged artifacts from staging group https://oss.sonatype.org/content/groups/staging
       -->
     <profile>
       <id>production</id>
@@ -786,16 +789,12 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
 
       <distributionManagement>
         <repository>
-          <id>production-release</id>
-          <name>Repository of modelant releases</name>
-          <url>https://repo1.maven.org/maven2/</url>
-          <uniqueVersion>false</uniqueVersion>
+          <id>production</id>
+          <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
         </repository>
         <snapshotRepository>
-          <id>production-snapshot</id>
-          <name>Repository of temporary modelant snapshots</name>
-          <url>https://repo1.maven.org/maven2/</url>
-          <uniqueVersion>true</uniqueVersion>
+          <id>production</id>
+          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
       </distributionManagement>
     </profile>

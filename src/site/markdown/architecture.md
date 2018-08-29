@@ -1,5 +1,5 @@
 Architecture
-------------
+============
 
 **\[A1\]** modelant provides a set of Maven plugins to generate the specific artifacts of another (target) project like:
 

@@ -26,18 +26,14 @@
     <menu name="Overview">
       <item name="About" href="index.html"/>
       <item name="Architecture" href="architecture.html"/>
+      <item name="Organization" href="project-organization.html"/>
       <item name="Conventions" href="conventions.html"/>
-      <item name="Java Conventions" href="java-conventions.html"/>
       <item name="Procedures" href="procedures.html"/>
       <item name="Practices" href="practices.html"/>
       <item name="Usage" href="usage.html"/>
       <item name="FAQ" href="faq.html"/>
     </menu>
     <menu ref="modules" />
-    <menu name="Examples">
-      <item name="description1" href="examples/example-one.html"/>
-      <item name="description2" href="examples/example-two.html"/>
-    </menu>
     <menu ref="reports"/>
   </body>
 </project>

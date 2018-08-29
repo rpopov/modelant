@@ -1,15 +1,19 @@
+modelant
+========
+
+<!-- MACRO{toc} -->
+
 Origin
 ------
 
-ModelAnt, further referred as *modelant*, was an extension of Ant to manipulate models:
+*modelant* provides means to manipulates **models**:
 
 * described in the OMG's metamodeling framework [Meta Object Facility/MOF 1.4](https://www.omg.org/cgi-bin/doc?formal/02-04-03)
 * exchanged in [XML Metadata Interchange XMI 1.1, 1.2](https://www.omg.org/cgi-bin/doc?formal/02-01-01)
 * through [Java Metadata Interface / JMI 1.0](https://jcp.org/en/jsr/detail?id=40)
+* or through Maven plugins
 
-Its integration wth Ant gave the name of the product. In order to ease its distribution, dependecies and version management, integrate with standard scripting languages, and apply industrial 
-standards and conventions, it was migrated to Maven. Nevertheless the "Ant" part of its name stays to provide continuity of the product's name and indicate its power and
-strength.
+Up to version 2.27 modelant was an extension of **Ant**. Its integration wth Ant gave the name of the product. In version 3.+ modelant was migrated to Maven to ease its distribution, dependecies and version management, integrate with standard scripting languages, and apply industrial standards and conventions. Nevertheless the "Ant" part of its name stays to provide continuity of the product's name and indicate its power and strength.
 
 Purpose 
 -------
