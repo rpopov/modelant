@@ -8,7 +8,9 @@ Java Setup Procedure for Windows
 
 In Control Panel \ System \ Advanced \ Environment Variables define the global variable:
 
-    JAVA_HOME=C:\PROGRA~1\Java\jdk1.8.0_172\
+```
+JAVA_HOME=C:\PROGRA~1\Java\jdk1.8.0_172\
+```
   
 Note that the **\Program Files** directory is referred using its 8:3 file name, **excluding any spaces in the path**.
 
@@ -20,9 +22,10 @@ As of http://wiki.eclipse.org/Eclipse.ini Eclipse uses the PATH to search the JV
   * Edit **eclipse.ini** file in the Eclipe's root directory:
   * Add before the **-vmargs** line the contents:
 
-  
-    -vm
-    C:\PROGRA~1\Java\jdk1.8.0_172\bin\javaw.exe
+```  
+-vm
+C:\PROGRA~1\Java\jdk1.8.0_172\bin\javaw.exe
+```
   
 where the path is an example of the 8:3 reference to the javaw.exe of of the JVM to use.
 
@@ -41,11 +44,7 @@ M2_HOME = <Maven installation directory in **8:3 name format**>
 PATH=%M2_HOME%\bin;%PATH%
 ```
 
-  * Edit the **%M2_HOME%\bin\mvn.cmd** file (Windows) **after** the line 
-```   
-@setlocal
-```    
-   insert the lines:
+  * Edit the **%M2_HOME%\bin\mvn.cmd** file (Windows) **after @setlocal** insert the lines:
 
 ```   
 if "%DEBUG_PORT%" == "" set DEBUG_PORT=8000
@@ -53,6 +52,20 @@ if "%DEBUG_SUSPEND%" == "" set DEBUG_SUSPEND=n
 set MAVEN_DEBUG_OPTS=-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=%DEBUG_SUSPEND%,address=%DEBUG_PORT%
 ```
     
+Maven settings.xml Setup Procedure
+----------------------------------
+
+Edit the **%MAVEN_HOME%\config\settings.xml** file and add:
+
+* A common **settings** profile for any installation-wide sproperties
+* The Active Profiles section 
+
+```
+<activeProfiles>
+  <activeProfile>settings</activeProfile>
+</activeProfiles>
+```
+ 
 Compile and Deploy Skipping tests 
 ---------------------------------
 
@@ -93,7 +106,7 @@ mvn install
 Install, Skip Tests 
 -------------------
 
-As of https://maven.apache.org/surefire/maven-surefire-plugin/examples/skipping-tests.html
+As of [Skipping Tests](https://maven.apache.org/surefire/maven-surefire-plugin/examples/skipping-tests.html):
 
   * Skip running the tests, but compile them:
 
@@ -111,31 +124,34 @@ Debug a Test
 
 The default in Modelant project is Maven to run the tests in a dedicated JVM. The control on the debug port and suspend of that JVM is done through the POM properties:
 
-    DEBUG_PORT (default: 7000)
-    DEBUG_SUSPEND (default: n)
+```
+DEBUG_PORT (default: 7000)
+DEBUG_SUSPEND (default: n)
+```
     
 Usage:
 
-    mvn test -DDEBUG_SUSPEND=y
+```
+mvn test -DDEBUG_SUSPEND=y
+```
 
 Debug a Maven Plugin 
 --------------------
 
 Maven runs the plugins in the same JVM that runs Maven. According to the setup procedure, the control of the Maven JVM is done through the OS environment variables:
 
-    DEBUG_PORT (default: 8000)
-    DEBUG_SUSPEND (default: n)
+```
+DEBUG_PORT (default: 8000)
+DEBUG_SUSPEND (default: n)
+```
     
 Usage:
 
-    set DEBUG_SUSPEND=y  
-    mvn test
-
-Disable a profile
------------------
-
-    mvn .... -P !profile-name
-
+```
+set DEBUG_SUSPEND=y  
+mvn test
+```
+    
   
 Analyze the Maven phase-to-plugin & goal bindings 
 -------------------------------------------------
@@ -168,8 +184,9 @@ Implemented following the process in
   * https://maven.apache.org/archetype/maven-archetype-plugin/specification/archetype-metadata.html
   * https://maven.apache.org/archetype/archetype-models/archetype-descriptor/archetype-descriptor.html
 
-  
-    mvn clean install archetype:update-local-catalog
+```  
+mvn clean install archetype:update-local-catalog
+```
 
 Publish in Maven Central
 ------------------------
@@ -182,6 +199,7 @@ In order to publish the modelant components in Maven Central (through OSSHR) act
 ```
 mvn clean deploy -P production
 ```
+
   * Log in [OSSRH/Sonatype staging repository](https://oss.sonatype.org/service/local/staging/deploy/maven2)
   * In Build Promotion \ Staging Repositories menu find the **net.mdatools** repository
   * **Close** the repository
@@ -191,10 +209,11 @@ mvn clean deploy -P production
     * fix the problems locally
     * repeat the procedure    
   * In case the of passed quality gates, the components will be uploaded to Maven Central
-  
+    
 References:
   
   * [Based on](https://www.youtube.com/watch?v=dXR4pJ_zS-0&feature=youtu.be)
+  * [Described](https://central.sonatype.org/pages/releasing-the-deployment.html)
   * [Release](https://central.sonatype.org/pages/apache-maven.html#performing-a-release-deployment)
   * [Resolve the identified problems](https://www.youtube.com/watch?v=N7KXuvi_2SE&feature=youtu.be)
   * [See also](https://central.sonatype.org/articles/2016/Feb/02/free-video-series-easy-publishing-to-the-central-repository/)

@@ -96,3 +96,10 @@ GIT Branching
 -------------
 
 **\[C40\]** Name the branches, related to a specific issue in the issue tracking system, with the issue ID.
+
+Maven Profiles
+--------------
+
+* [Maven profiles](http://maven.apache.org/guides/introduction/introduction-to-profiles.html)
+* [POM](http://maven.apache.org/pom.html#Activation)
+* [Configuring Maven](http://maven.apache.org/guides/mini/guide-configuring-maven.html)

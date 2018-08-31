@@ -97,6 +97,14 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
       <id>mdatools.net</id>
       <url>scp://mdatools.net:${site-port}/home/mdatools/public_html/product/${project.version}/</url>
     </site>
+    <repository>
+      <id>development</id>
+      <url>http://localhost:8081/repository/modelant-maven-release/</url>
+    </repository>
+    <snapshotRepository>
+      <id>development</id>
+      <url>http://localhost:8081/repository/modelant-maven-snapshot/</url>
+    </snapshotRepository>
   </distributionManagement>
 
   <properties>
@@ -368,19 +376,6 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-plugin-plugin</artifactId>
           <version>3.5.1</version>
-        </plugin>
-
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-docck-plugin</artifactId>
-          <version>1.1</version>
-          <executions>
-            <execution>
-              <goals>
-                <goal>check</goal>
-              </goals>
-            </execution>
-          </executions>
         </plugin>
 
         <plugin>
@@ -687,64 +682,10 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
       </reporting>
     </profile>
 
-    <profile>
-      <!--
-        Check the documentation only in the root project
-        -->
-      <id>check-doc</id>
-      <activation>
-        <!-- to be activated only in the root project -->
-        <!-- Satisfied as much as possible. Disabled -->
-        <!--
-        <file>
-          <exists>module</exists>
-        </file>
-        -->
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-docck-plugin</artifactId>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-
-    <!-- Deployment in local binary repository / Nexus -->
-    <profile>
-      <id>development</id>
-
-      <activation>
-        <!-- Always active. Note: this is not the same as activeByDefault -->
-        <file>
-          <exists>pom.xml</exists>
-        </file>
-      </activation>
-
-      <distributionManagement>
-        <repository>
-          <id>development</id>
-          <url>http://localhost:8081/repository/modelant-maven-release/</url>
-        </repository>
-        <snapshotRepository>
-          <id>development</id>
-          <url>http://localhost:8081/repository/modelant-maven-snapshot/</url>
-        </snapshotRepository>
-      </distributionManagement>
-    </profile>
-
     <!--
       Activate it explicitly in order to deploy in Maven Central:
 
         mvn deploy -P production
-
-      Sonatype:
-        Deploy snapshot artifacts into repository https://oss.sonatype.org/content/repositories/snapshots
-        Deploy release artifacts into the staging repository https://oss.sonatype.org/service/local/staging/deploy/maven2
-        Promote staged artifacts into repository 'Releases'
-        Download snapshot and release artifacts from group https://oss.sonatype.org/content/groups/public
-        Download snapshot, release and staged artifacts from staging group https://oss.sonatype.org/content/groups/staging
       -->
     <profile>
       <id>production</id>
