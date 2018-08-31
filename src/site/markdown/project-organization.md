@@ -5,7 +5,6 @@ Elicited conventions and lessons learned on:
 
 <!-- MACRO{toc} -->
 
-
 GAV Coordinates
 ---------------
 
@@ -79,7 +78,9 @@ Testing
   * https://maven.apache.org/plugin-developers/cookbook/attach-source-javadoc-artifacts.html
   * Verify the generated documentation, according to https://maven.apache.org/plugin-developers/plugin-documenting.html&lt;br/&gt;The maven-docck-plugin can be run:
 
-    mvn docck:check
+```
+mvn docck:check
+```
 
 Documentation
 -------------
@@ -97,8 +98,8 @@ GIT Branching
 
 **\[C40\]** Name the branches, related to a specific issue in the issue tracking system, with the issue ID.
 
-Maven Profiles
---------------
+References
+----------
 
 * [Maven profiles](http://maven.apache.org/guides/introduction/introduction-to-profiles.html)
 * [POM](http://maven.apache.org/pom.html#Activation)

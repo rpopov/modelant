@@ -6,18 +6,18 @@ Procedures
 Java Setup Procedure for Windows 
 --------------------------------
 
-In Control Panel \ System \ Advanced \ Environment Variables define the global variable:
+In Winodws' **Control Panel \ System \ Advanced \ Environment Variables** define the global variable:
 
 ```
 JAVA_HOME=C:\PROGRA~1\Java\jdk1.8.0_172\
 ```
   
-Note that the **\Program Files** directory is referred using its 8:3 file name, **excluding any spaces in the path**.
+Note that the **\Program Files** directory is referred using its 8:3 file name, in order to **exclude any spaces from the path**, which cause scripting problems.
 
 Eclipse Setup Procedure for Windows 
 -----------------------------------
 
-As of http://wiki.eclipse.org/Eclipse.ini Eclipse uses the PATH to search the JVM to run. In Windows the path to the default installation of JAVA executable contains a space, **which causes problems in resolving Maven dependencies referring ${java.home}** in Eclipse environment. Therefore it is needed to set the path to JAVA using the 8:3 file names:
+As of http://wiki.eclipse.org/Eclipse.ini Eclipse uses the PATH environment variable to search the JVM to run. In Windows the path to the default installation of JAVA executable contains a space, **which causes problems in resolving Maven dependencies referring ${java.home}** in Eclipse environment. Therefore it is needed to set the path to JAVA using the 8:3 file names:
 
   * Edit **eclipse.ini** file in the Eclipe's root directory:
   * Add before the **-vmargs** line the contents:
@@ -51,20 +51,48 @@ if "%DEBUG_PORT%" == "" set DEBUG_PORT=8000
 if "%DEBUG_SUSPEND%" == "" set DEBUG_SUSPEND=n
 set MAVEN_DEBUG_OPTS=-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=%DEBUG_SUSPEND%,address=%DEBUG_PORT%
 ```
-    
-Maven settings.xml Setup Procedure
-----------------------------------
-
-Edit the **%MAVEN_HOME%\config\settings.xml** file and add:
-
-* A common **settings** profile for any installation-wide sproperties
-* The Active Profiles section 
+  * Edit the **%MAVEN_HOME%\config\settings.xml** file and add a common active **settings** profile for any installation-wide sproperties, where **...** are replaced with actual values:
 
 ```
+</profiles>
+  <profile>
+    <id>settings</id>
+
+    <pluginRepositories>
+      <pluginRepository>
+        <id>public-tools</id>
+        <name>Repository of any public/external maven plugins/tools.</name>
+        <url>....</url>
+      </pluginRepository>
+    </pluginRepositories>
+
+    <repositories>
+      <repository>
+        <id>public-components</id>
+        <name>
+           Any external components of modelant.
+           It is isolated to allow analysis of vulnerabilities, licenses, etc. imposed through dependencies
+        </name>
+        <url>....</url>
+      </repository>
+    </repositories>
+
+    <properties>      
+      <googleAnalyticsAccountId>....</googleAnalyticsAccountId>
+      <gpg.passphrase>....</gpg.passphrase>      
+    </properties>
+  </profile>
+</profiles>
 <activeProfiles>
   <activeProfile>settings</activeProfile>
 </activeProfiles>
 ```
+ 
+NOTE: The components (transitive dependencies) of the modelant, that are  used in runtime, are collected in the **public-components** repository, separated from the components of Maven (any other tools) used in compile time. This allows analyzing them as the whole repository contents for vulberabilities and security risks. Nexus provides such analysis.
+
+References:
+* [Introduction to Maven profiles](https://maven.apache.org/guides/introduction/introduction-to-profiles.html)
+* [Maven repositories](https://maven.apache.org/guides/introduction/introduction-to-repositories.html)
  
 Compile and Deploy Skipping tests 
 ---------------------------------
@@ -175,8 +203,8 @@ Or just call the **site-deploy** phase of the **site** lifecycle:
 
     mvn site-deploy
 
-Publishing an archetype 
------------------------
+Publish an archetype locally
+----------------------------
 
 Implemented following the process in 
 
@@ -212,9 +240,9 @@ mvn clean deploy -P production
     
 References:
   
-  * [Based on](https://www.youtube.com/watch?v=dXR4pJ_zS-0&feature=youtu.be)
-  * [Described](https://central.sonatype.org/pages/releasing-the-deployment.html)
-  * [Release](https://central.sonatype.org/pages/apache-maven.html#performing-a-release-deployment)
-  * [Resolve the identified problems](https://www.youtube.com/watch?v=N7KXuvi_2SE&feature=youtu.be)
-  * [See also](https://central.sonatype.org/articles/2016/Feb/02/free-video-series-easy-publishing-to-the-central-repository/)
+  * [A video on the release steps](https://www.youtube.com/watch?v=dXR4pJ_zS-0&feature=youtu.be)
+  * [Release deployment - Repository perspective](https://central.sonatype.org/pages/releasing-the-deployment.html)
+  * [Release deployment - Maven perspective](https://central.sonatype.org/pages/apache-maven.html#performing-a-release-deployment)
+  * [Resolve the identified publishing problems](https://www.youtube.com/watch?v=N7KXuvi_2SE&feature=youtu.be)
+  * [Sonatype videos on publishing to Maven Central](https://central.sonatype.org/articles/2016/Feb/02/free-video-series-easy-publishing-to-the-central-repository/)
   
