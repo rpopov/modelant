@@ -1,9 +1,9 @@
-Maven support for modelant repository
---------------------------------------
+Maven support for JMI
+---------------------
 
-The **repository.maven** module provides:
-* a Maven archetype [modelant.repository.maven.archetype](modelant.repository.maven.archetype/index.html) to generate the directories structure and files of a modelant maven project for a specific modeling language
-* a Maven plugin [modelant.repository.maven.plugin](modelant.repository.maven.plugon/index.html) to generate the API for a metamodel.
+The **modelant.repository.maven** module means to generate the JMI-compliant interfaces for a metamodel.
+
+<!-- MACRO{toc} -->
 
 Generate a Maven project for a metamodel API module
 ---------------------------------------------------
@@ -23,3 +23,9 @@ mvn archetype:generate -DarchetypeGroupId=net.mdatools
 ```
 mvn clean install
 ```
+
+Modules
+-------
+
+* [A Maven archetype for a metamodel API project](modelant.repository.maven.archetype/index.html)
+* [A Maven plugin to generate the JMI API for a metamodel](modelant.repository.maven.plugin/index.html)

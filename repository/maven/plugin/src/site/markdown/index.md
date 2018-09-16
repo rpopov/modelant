@@ -1,8 +1,11 @@
-Maven support for modelant repository
---------------------------------------
+Generate JMI API for a metamodel
+================================
 
-The Maven plugin [modelant.repository.maven.plugin](modelant.repository.maven.plugon/index.html) to generate the API for a metamodel, set up in a POM
-  * parameters:
+This is a Maven plugin to generate the JMI API for a metamodel in OMG MOF 1.4, XMI 1.1/1.2. It reuses the implementation provided by Netbeans Metadata Repository (MDR).
+
+* parameters:
     * **metamodelUrl** - where to load the metamodel from
     * **sourceDirectory** - where to generate the API sources
     * **workDirectory** - where to keep the work / temp files
+    
+See: [Goals](./plugin-info.html)    
