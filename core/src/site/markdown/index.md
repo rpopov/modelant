@@ -1,27 +1,3 @@
-Core
------
-
-The **ModelRepository** allows locating the different metamodel factories, this way supporting the load of models in different languages. 
-
-Example:
-
-```
-ModelRepository repository;
-ModelFactory modelFactory;
-RefPackage modelExtent;  
-...
-repository = ModelRepositoryFactory.construct(workDirectory);
-
-modelFactory = repository.loadMetamodel("UML13");
-
-modelExtent = modelFactory.instantiate("model extent name");  
-repository.readIntoExtent(modelExtent, "model file path" );
-  or
-modelFactory.readExtent(modelExtent, new File("model file path"));
-...
-modelFactory.writeExtent(modelExtent, new File("model file path"));
-```
-
 Query Models
 -----
 
@@ -108,3 +84,10 @@ Project dependencies:
   </dependency>    
 </dependencies>
 ```
+
+Modules
+-------
+
+* [Core API](core.api/index.html)
+* [Core Implementation](core.impl/index.html)
+* [Core Tests/Specification](core.test/index.html)

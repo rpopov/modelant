@@ -69,8 +69,8 @@ import net.mdatools.modelant.repository.api.ModelRepositoryFactory;
   }
 ```    
 
-See also
---------
+Modules
+-------
 
 * [Repository API](repository.api/index.html)
 * [Repository Implementation](repository.impl/index.html)
