@@ -8,7 +8,10 @@ The modules of modelant are Java libraries, that are to be integrated in modelan
 Overview
 --------
 
-As of **[\[A4\]](../architecture.html)**, use the **ModelRepositoryFactory** to initialize and instantiate the Model repository (wrapping the Netbeans Metamodel Repository). The repository constructs **ModelFactory** instances, each as a factory to produce **extents** in a specific **metamodel**, i.e. modeling language. Each extent is a **javax.jmi.reflect.RefPackage** instance, that stores an instance (model) of that metamodel, this way supporting the creation, load, processing and writing models in different modeling languages. The modeling lanugaes (metamodels), supported by modelant 3+ are only those in OMG MOF 1.4 and XMI 1.1/XMI 1.2. Some specific selfcontained processes are also published as Maven plugins, this way reducing the need to write code and hiding the described complexity.
+The modeling lanugaes (metamodels), supported by modelant 3+ are only those in OMG MOF 1.4 and XMI 1.1/XMI 1.2. The use of modelant follows some patterns:
+
+* In Java - as of **[\[A4\]](./architecture.html)**, use the **ModelRepositoryFactory** to initialize and instantiate the Model repository (wrapping the Netbeans Metamodel Repository). The repository constructs **ModelFactory** instances, each as a factory to produce **extents** in a specific **metamodel**, i.e. modeling language. Each extent is a **javax.jmi.reflect.RefPackage** instance, that stores an instance (model) of that metamodel, this way supporting the creation, load, processing and writing models in different modeling languages. 
+* In Maven - some specific selfcontained processes are also published as Maven plugins, this way reducing the need to write code and hiding the described complexity.
 
 Example usage of modelant in code
 ---------------------------------
@@ -38,8 +41,8 @@ use the modelant core and the metamodel implementation to query and manipulate t
 modelFactory.writeExtent(modelExtent, new File("model file path"));
 ```
 
-Example of modelant Maven plugin
---------------------------------
+Example usage of modelant Maven plugin
+--------------------------------------
 
 **modelant** provides Maven plugins that publish complete processes on models. See the corresponding documentation.
 
