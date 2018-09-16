@@ -1,7 +1,22 @@
 Architecture
 ============
+The [software architecture](https://en.wikipedia.org/wiki/Software_architecture) identifies the components of the program system and states the general rules to provide uniform use, collaboration and implementation of the components.
 
-**\[A1\]** modelant provides a set of Maven plugins to generate the specific artifacts of another (target) project like:
+<!-- MACRO{toc} -->
+
+Typing Conventions
+------------------
+* Any rules, conventions and decisons are assigned explicit unique references in the format **\[&lt;letter&gt;+.&lt;digit&gt;+\]**. They are referred in the source code and the other documents, using that reference. The letters indicate the document in which the referred statement is, like:
+    * **A** refers the Architecture document (this)
+    * **C** refers the [Organization document](./project-organization.html)
+    * **CC** refers the [Code Conventions](./conventions.html)
+    * **P** refers the [Practices](./practices.html)
+
+Overall Rules
+-------------
+**\[A1\]** modelant is implemented as a set interface components and their implementation components, published in the Maven Central repository, usable through Maven-compatible dependency management tools.
+
+**\[A1.1\]** modelant provides a set of Maven plugins to generate the specific artifacts of another (target) project like:
 
   * a plugin to generate the domain classes
   * a plugin to generate POJO
@@ -12,7 +27,7 @@ Then a script to generate the artifacts for a specific project should be a combi
 
 **\[A2\]** The Maven project for modelant sets dependencies between the project's modules. If the execution environment would be Maven through Maven plugins, they would use the same dependencies. Then, organize modelant as a set of plugins to call the contents of the dependencies behind the scenes, **assuming** that the separate Maven plugins will share the classpath and the dependent components in it.
 
-**\[A3\]** In the long run the migration of modelant to Maven would be just a migration for itself. It does not bring better knowledge of the platforms - it is just another experience with IoC (Plexus) and dependency tracking and spending time in Maven's internals. Maven is closed by itself, so the integration of modelant in anything else would require new migration efforts. 
+**\[A3\]** In the long run the migration of modelant to Maven would be just a migration for itself. It does not bring better knowledge of the platforms - it is just another experience with IoC (Plexus) and dependency tracking and spending time in Maven's internals. 
 
 **Note:**
     Reading the [documentation of Nexus](https://books.sonatype.com/mcookbook/reference/index.html) I see that the OSGi platform is started as a separate process, so that any communication with it would require developing web services in OSGi and their client(s) in Maven. This seems to be a big leap to make. Thus, in order to have quickly the needed result, migrate modelant to Maven as plugins **\[A3\]**.
