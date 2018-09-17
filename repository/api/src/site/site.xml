@@ -4,7 +4,6 @@
          name="${name}"
          combine.self="merge">
   <body>
-    
      <menu ref="parent"/>
      <menu name="Overview">
       <item name="About" href="index.html"/>

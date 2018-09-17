@@ -4,11 +4,9 @@
          name="${name}"
          combine.self="merge">
   <body>
-    
      <menu ref="parent"/>
      <menu name="Overview">
       <item name="About" href="index.html"/>
-      <item name="Usage" href="usage.html"/>
       <item name="FAQ" href="faq.html"/>
     </menu>
     <menu ref="modules"/>
