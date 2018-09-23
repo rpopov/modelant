@@ -7,11 +7,14 @@
    https://maven.apache.org/doxia/doxia-sitetools/doxia-decoration-model/decoration.html#class_item
    https://maven.apache.org/plugins/maven-site-plugin/examples/sitedescriptor.html
     -->
-
+<!--
   <bannerLeft>
     <name>${artifactId}</name>
-    <title>modelant tool supports model-driven software development processes</title>
+    <src>http://mdatools.net/logo_size_icon.jpg</src>
+    <href>http://mdatools.net/product/${this.version}</href>
+    <title>Support for model-driven software development processes</title>
   </bannerLeft>
+-->
 
   <googleAnalyticsAccountId>${googleAnalyticsAccountId}</googleAnalyticsAccountId>
 

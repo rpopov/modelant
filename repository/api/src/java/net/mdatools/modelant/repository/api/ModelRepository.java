@@ -119,6 +119,8 @@ public interface ModelRepository {
    * @param modelExtentName non-empty name of the MOF extent where to lookup the metamodel package to instantiate a model repository
    * @param metaPackageName non-empty name of the metamodel package to instantiate and create a model repository
    * @return non-null extent created
+   * @throws IllegalArgumentException
+   * @throws CreationFailedException
    */
   RefPackage constructModelExtent(String mofExtentName,
                                   String metaPackageName,
@@ -131,6 +133,8 @@ public interface ModelRepository {
    * @param modelExtentName non-empty name of the MOF extent where to lookup the metamodel package to instantiate a model repository
    * @param metaPackageName non-empty name of the metamodel package to instantiate and create a model repository
    * @return non-null extent created
+   * @throws IllegalArgumentException
+   * @throws CreationFailedException
    */
   RefPackage constructModelExtent(ModelPackage mofExtent,
                                   String metaPackageName,
@@ -261,8 +265,8 @@ public interface ModelRepository {
 
 
   /**
-   * @param mofId
-   * @return
+   * @param mofId not null
+   * @return possibly null model element with the provided repository-unique MOF ID
    */
   Object getByMofId(String mofId);
 
@@ -279,6 +283,9 @@ public interface ModelRepository {
 
   /**
    * Creates metamodel API (JMI mapping) as compiled classes.
+   * @param dir not null directory where to generate the interfaces as Java files
+   * @param extentName non-null name of a metamodel extent, e.g. ModelFactory initialized with the metamodel
+   *         for which to generate the API
    * @throws IOException
    */
   void mapClasses(File dir, String extentName) throws IOException;
