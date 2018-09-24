@@ -24,7 +24,7 @@ import net.mdatools.modelant.core.operation.model.CompareModels;
  *
  *   System.err.println(result);
  * </pre>
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class CompareUml14Models extends CompareModels {
 

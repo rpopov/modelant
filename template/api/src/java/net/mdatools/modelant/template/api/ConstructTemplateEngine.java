@@ -13,7 +13,7 @@ import java.io.IOException;
  * A constructor service for template engine instances. The TemplateEngineFactory delegates to it
  * the instantiation of the engine with specific parameters.
  *
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface ConstructTemplateEngine {
 

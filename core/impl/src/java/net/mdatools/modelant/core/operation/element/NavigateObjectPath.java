@@ -44,7 +44,7 @@ import net.mdatools.modelant.core.util.Navigator;
  *   OPACKAGE retrieves the outer-most package (the extent) where object processed is in
  *
  * </pre>
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public abstract class NavigateObjectPath<R> implements Function<RefFeatured, R> {
 

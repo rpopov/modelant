@@ -13,7 +13,7 @@ import net.mdatools.modelant.core.api.model.ConstructOperation;
 
 /**
  * Refer a model Struct,
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface StructName extends Name<Name<?>> {
 

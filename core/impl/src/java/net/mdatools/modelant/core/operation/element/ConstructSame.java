@@ -13,7 +13,7 @@ import net.mdatools.modelant.core.api.Operation;
 
 /**
  * Instantiate a the model element's class.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class ConstructSame implements Operation<RefObject> {
 

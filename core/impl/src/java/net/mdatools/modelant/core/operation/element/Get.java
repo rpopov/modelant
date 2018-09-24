@@ -11,7 +11,7 @@ import javax.jmi.reflect.RefFeatured;
 
 /**
  * Navigate down the path and retrieve the referred attribute/association's value
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class Get extends NavigateObjectPath<Object> {
 

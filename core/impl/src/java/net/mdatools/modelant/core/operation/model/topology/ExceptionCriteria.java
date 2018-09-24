@@ -16,7 +16,7 @@ import net.mdatools.modelant.core.api.match.MatchingCriteria;
 
 /**
  * This class represents a list of criteria (like class or other list criteria)
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class ExceptionCriteria implements MatchingCriteria {
 

@@ -28,7 +28,7 @@ import net.mdatools.modelant.template.api.TemplateEngineFactory;
 /**
  * Compile the listed ModelAnt Templates, this way allowing their validation
  * as part of the build process.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 @Mojo(name="compile-templates",
 defaultPhase=LifecyclePhase.COMPILE

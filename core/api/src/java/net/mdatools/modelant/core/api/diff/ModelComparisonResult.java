@@ -17,7 +17,7 @@ import net.mdatools.modelant.core.api.match.MatchingCriteria;
 
 /**
  * The data structure of the result of model comparison.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface ModelComparisonResult {
 

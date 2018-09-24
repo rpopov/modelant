@@ -19,7 +19,7 @@ import java.util.Set;
  *   map(getRepresentative(b))=getRepresentative(a)
  * </pre>
  * @param <V> the class of the elements in the mapped sets.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface EquivalenceClassesMap<V> {
 

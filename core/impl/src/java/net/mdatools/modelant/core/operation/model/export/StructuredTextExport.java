@@ -28,7 +28,7 @@ import net.mdatools.modelant.core.util.Navigator;
 
 /**
  * Export the results of models comparison in a JSON-like structured text
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class StructuredTextExport implements Export {
 

@@ -22,7 +22,7 @@ import net.mdatools.modelant.core.api.name.PackageName;
 
 /**
  * A key in package/type/value mapping
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class EnumValueNameImpl extends NameImpl<Name<?>> implements EnumValueName {
 

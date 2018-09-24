@@ -24,7 +24,7 @@ import net.mdatools.modelant.core.api.wrap.WrapperFactory;
  * </ul>
  * Additional methods (not related actually to the wrapping function of this class) are added to ease the
  * use of this class for code generation.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public abstract class BaseWrapper<A> implements Serializable, Wrapper<A> {
 

@@ -17,7 +17,7 @@ import net.mdatools.modelant.core.api.Operation;
 
 /**
  * Convert a DTD into an XSD
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class ConvertDtd2Xsd implements Operation<File> {
 

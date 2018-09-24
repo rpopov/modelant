@@ -17,7 +17,7 @@ import net.mdatools.modelant.core.util.Navigator;
 /**
  * Instantiate a the model class, which is the class of a specific model element,
  * in the the wrapped extent.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class ConstructSameInExtent implements Operation<RefObject> {
 

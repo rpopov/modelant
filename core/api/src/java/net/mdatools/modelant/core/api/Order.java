@@ -14,7 +14,7 @@ import javax.jmi.reflect.RefBaseObject;
 /**
  * Comparator of model and metamodel elements (instances) so that they can be ordered
  * according specific criteria.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface Order extends Comparator<RefBaseObject> {
 

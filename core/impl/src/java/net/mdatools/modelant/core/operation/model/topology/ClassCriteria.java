@@ -21,7 +21,7 @@ import net.mdatools.modelant.core.api.match.MatchingCriteria;
  * This class represents criteria based on the target object's class, i.e. if the target object/model element
  * is not of the class this criteria represents, then it just returns no associations.
  * This is a composite criteria
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class ClassCriteria implements MatchingCriteria {
 

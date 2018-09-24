@@ -23,7 +23,7 @@ import java.util.List;
  * NOTE: There is no single class/interface parameter, one for allmethods in this interface, as
  *       this is a factory wrapping several different hierarchies of classes/interfaces (due to the
  *       specifics of the MOF and UML metamodels, where there is no common root notion).
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface WrapperFactory {
 

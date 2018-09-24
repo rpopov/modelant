@@ -34,7 +34,7 @@ import net.mdatools.modelant.core.util.map.MapToSet;
  *
  * NOTE: The instances should not be reused
  *
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class ModelTopology {
 

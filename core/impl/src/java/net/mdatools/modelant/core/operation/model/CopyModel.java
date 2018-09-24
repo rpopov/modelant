@@ -22,7 +22,7 @@ import net.mdatools.modelant.core.operation.model.transform.IdentityNameMapping;
  *   copy.execute(toExtent);
  * </pre>
  * @see CopyToMetaModel#execute(RefPackage)
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class CopyModel extends CopyToMetaModel {
 

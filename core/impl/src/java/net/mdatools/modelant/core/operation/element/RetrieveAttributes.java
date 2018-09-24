@@ -20,7 +20,7 @@ import net.mdatools.modelant.core.api.Function;
 
 /**
  * Retrieve all attributes of the model element, either defined in it or inherited
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class RetrieveAttributes implements Function<RefObject, Collection<String>> {
 

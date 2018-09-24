@@ -13,7 +13,7 @@ import java.io.File;
  * The settings needed for the compilation of a set of Templates.
  * The unique name identifies the template sets and makes their templates unique.
  * The implementation should be provided by the client of of the Template Engine.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface TemplateCompilationContext {
 

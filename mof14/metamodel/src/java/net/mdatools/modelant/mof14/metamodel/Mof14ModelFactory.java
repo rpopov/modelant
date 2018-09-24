@@ -22,7 +22,7 @@ import net.mdatools.modelant.repository.spi.BaseModelFactory;
  *    or
  *   metamodelFactory.readModel(model, "model file path");
  * </pre>
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public final class Mof14ModelFactory extends BaseModelFactory {
 

@@ -14,7 +14,7 @@ import net.mdatools.modelant.core.api.Function;
 
 /**
  * Compose 2 filters
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public final class ComposeFilter<T> implements Filter<T> {
 

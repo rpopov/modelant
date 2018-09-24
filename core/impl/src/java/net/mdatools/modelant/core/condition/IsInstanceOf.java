@@ -17,7 +17,7 @@ import net.mdatools.modelant.core.util.Navigator;
 
 /**
  * Check if a model element is of a meta-model class.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class IsInstanceOf implements Condition<RefObject> {
 

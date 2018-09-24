@@ -9,7 +9,7 @@ package net.mdatools.modelant.core.operation.format;
 
 /**
  * Concatenate the words without separators, where every word is with first letter capitalized
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class FormatFirstCapital extends FormatWordsString {
 

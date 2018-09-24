@@ -14,7 +14,7 @@ import net.mdatools.modelant.template.api.Template;
 /**
  * Annotates a template (instance) with the class, name, filename and timestamp of its compilation.
  * Holds metadata on a template instance and "meta-logic" - decisions on that instance.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class TemplateDescriptor {
   /**

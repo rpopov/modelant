@@ -9,7 +9,7 @@ package net.mdatools.modelant.core.operation.model.topology;
 
 /**
  * Criteria how to compare instances of a the same metaclass and find them equal.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class Equals extends ClassCriteria {
   /**

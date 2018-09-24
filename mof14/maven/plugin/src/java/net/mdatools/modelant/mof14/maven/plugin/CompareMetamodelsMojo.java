@@ -30,7 +30,7 @@ import net.mdatools.modelant.repository.api.ModelRepositoryFactory;
 
 /**
  * Compare two metamodels and report the differences, that are needed to convert the source metamodel into the target one
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 @Mojo(name="compare-mof14-metamodels",
       defaultPhase=LifecyclePhase.COMPILE

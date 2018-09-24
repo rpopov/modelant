@@ -46,7 +46,7 @@ import net.mdatools.modelant.template.api.TemplateEngine;
  *       TemplateEngine.render( this, request, response );
  *     }
  * </pre>
- * @author Rusi Popov, 2002, 2012, 2017
+ * @author Rusi Popov (popovr@mdatools.net), 2002, 2012, 2017
  */
 class TemplateEngineImpl implements TemplateEngine {
 

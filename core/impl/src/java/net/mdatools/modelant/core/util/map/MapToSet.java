@@ -14,7 +14,7 @@ import java.util.HashSet;
  * Map each key to a set of values
  * @param <Key> the class of the key
  * @param <Value> the class of the elements held in the set
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class MapToSet<Key, Value> extends MapToCollection<Key, Value> {
 

@@ -24,7 +24,7 @@ import net.mdatools.modelant.core.api.name.PackageName;
 
 /**
  * A key in class mapping
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class ClassNameImpl extends NameImpl<Name<?>> implements ClassName {
   public ClassNameImpl(String packageName) {

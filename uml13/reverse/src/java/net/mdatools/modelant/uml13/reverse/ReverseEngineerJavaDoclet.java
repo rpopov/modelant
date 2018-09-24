@@ -69,7 +69,7 @@ import net.mdatools.modelant.uml13.metamodel.Convention;
  * <li>target - file name where to store the model. Assumed to be created in targetDir
  * <li>workDir - (optional) the absolute path to the directory where to create the temporary files
  * </ul>
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class ReverseEngineerJavaDoclet extends Doclet {
 

@@ -23,7 +23,7 @@ The compilation against the model repository needs only the dependency:
 
 Execution Dependencies
 ----------------------
-In order to use the model repository integrated in modelant out-of-the-box, needed are the following dependencies:
+In order to use the default model repository integrated in modelant out-of-the-box, needed are the following dependencies:
 
 ```
 <dependencies>

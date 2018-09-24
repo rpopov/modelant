@@ -19,7 +19,7 @@ package net.mdatools.modelant.core.api;
  * </pre>
  * Implement the {@link Object#toString()} method in order to describe the problem
  * @param <A> argument type
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface Procedure<A> {
 

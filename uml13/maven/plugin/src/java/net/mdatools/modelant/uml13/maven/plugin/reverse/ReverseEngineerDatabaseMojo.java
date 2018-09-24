@@ -47,7 +47,7 @@ import net.mdatools.modelant.uml13.reverse.ReverseDatabaseOperation;
  * <li>Each attribute pertaining to the table's primary key is bound a 'primary_key' tagged value
  * Its value is the sequence order of the column in the tible's primary key.
  * </ol>
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 @Mojo(name="database-to-uml13",
   defaultPhase=LifecyclePhase.COMPILE

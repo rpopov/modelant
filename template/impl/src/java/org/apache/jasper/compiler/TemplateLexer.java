@@ -29,7 +29,7 @@ import java.net.URL;
  *   <li> the closing lexem of the code actually produces the CODE generator
  * </ul>
  * </ul>
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 class TemplateLexer {
 

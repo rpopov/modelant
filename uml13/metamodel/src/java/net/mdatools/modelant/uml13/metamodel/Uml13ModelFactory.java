@@ -19,7 +19,7 @@ import net.mdatools.modelant.repository.spi.BaseModelFactory;
  * repository.readIntoExtent( sourceExtent, sourceModel );
  *
  * </pre>
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public final class Uml13ModelFactory extends BaseModelFactory {
 

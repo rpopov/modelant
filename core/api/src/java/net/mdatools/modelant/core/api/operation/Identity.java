@@ -11,7 +11,7 @@ import net.mdatools.modelant.core.api.Operation;
 
 /**
  * Identity Operation. Applies Null Object pattern.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public final class Identity<T> implements Operation<T> {
 

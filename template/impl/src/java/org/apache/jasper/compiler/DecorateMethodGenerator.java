@@ -9,7 +9,7 @@ package org.apache.jasper.compiler;
 
 /**
  * Generate comments around the contents of the wrapped generator
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 class DecorateMethodGenerator extends DecorateGenerator {
   /**

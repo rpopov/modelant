@@ -13,7 +13,7 @@ import javax.jmi.reflect.RefFeatured;
 
 /**
  * Replace an association or attribute value of a model element and return that updated model element.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class Set extends NavigateObjectPath<RefFeatured> {
 

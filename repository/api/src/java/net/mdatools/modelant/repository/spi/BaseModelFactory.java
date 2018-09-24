@@ -30,7 +30,7 @@ import net.mdatools.modelant.repository.api.ModelRepository;
  * repository.readIntoExtent( sourceExtent, sourceModel );
  *
  * </pre>
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public abstract class BaseModelFactory implements ModelFactory, MetamodelFactorySetup {
 

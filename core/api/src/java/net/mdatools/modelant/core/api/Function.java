@@ -19,7 +19,7 @@ package net.mdatools.modelant.core.api;
  * </pre>
  * @param <A> argument type
  * @param <R> result type
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface Function<A,R> {
 

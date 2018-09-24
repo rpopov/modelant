@@ -10,7 +10,7 @@ package org.apache.jasper.compiler;
 /**
  * The lexems in the template language.
  * @see TemplateLexer
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 enum Lexem {
   END("eof",

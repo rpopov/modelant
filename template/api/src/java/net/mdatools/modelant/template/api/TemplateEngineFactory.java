@@ -15,7 +15,7 @@ import java.util.ServiceLoader;
 /**
  * A well known factory of initialized Template Engines, according to the
  * provided implementation, found in classpath. See [A4]
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public final class TemplateEngineFactory {
 

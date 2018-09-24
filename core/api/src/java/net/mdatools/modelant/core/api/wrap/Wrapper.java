@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Any wrapper of instances of <b>A</b>, used for compile time control of objects' wrapping
  * @param <A> the wrapped type
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface Wrapper<A> {
 

@@ -37,7 +37,7 @@ import net.mdatools.modelant.core.api.name.StructName;
  * <li> direct parent package name-to-name mapping and deriving the specific name-to-name mapping for nested elements
  * <li> explicit name-to-transformation mapping
  * </ul>
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class RenamingMapping implements NameMapping {
 

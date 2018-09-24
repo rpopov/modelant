@@ -15,7 +15,7 @@ import net.mdatools.modelant.core.api.Function;
  * Wrap the provided text by adding the prefix to all lines. If the text is empty,
  * defaultVal is returned.
  *
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class FormatWrapText implements Function<String,String>{
 

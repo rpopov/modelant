@@ -29,7 +29,7 @@ import net.mdatools.modelant.core.util.key.Hash;
 /**
  * A key in package/type/value mapping
  * @param <P> the type of the parent/owner name
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class NameImpl<P extends Name<?>> implements Name<P> {
 

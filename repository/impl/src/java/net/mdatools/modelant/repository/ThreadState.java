@@ -12,7 +12,7 @@ package net.mdatools.modelant.repository;
  * represents.
  * Requires explicit synchronization on access.
  *
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 class ThreadState {
   /**

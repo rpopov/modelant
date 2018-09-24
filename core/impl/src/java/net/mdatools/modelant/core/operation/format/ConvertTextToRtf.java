@@ -11,7 +11,7 @@ import net.mdatools.modelant.core.api.Operation;
 
 /**
  * Convert some known HTML tags to corresponding RTF tags
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class ConvertTextToRtf implements Operation<String> {
 

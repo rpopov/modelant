@@ -26,7 +26,7 @@ import net.mdatools.modelant.repository.api.ModelRepositoryFactory;
 /**
  * Compare two different exports of the same model. We know that Rose XMI Export plugin
  * always generate unique IDs and references.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class CompareDifferentExportsOfTheSameModelTest extends TestCase {
 

@@ -22,7 +22,7 @@ import java.util.Map;
  *    name = constructUniqueName( name_suggestion );
  *
  * </pre>
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class UniqueNamesGenerator {
 

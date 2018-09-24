@@ -13,7 +13,7 @@ import net.mdatools.modelant.core.api.diff.ModelComparisonResult;
 
 /**
  * Compare same model, loaded in 2 separate extents
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class CompareSameMof14ModelsTest extends CompareMof14ModelsBase {
 

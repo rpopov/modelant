@@ -13,7 +13,7 @@ package net.mdatools.modelant.core.operation.format;
  * <li>Add the whole last word to the abbreviated name, with first letter in upper case
  * <li>Restrict the name up to <b>length</b> characters
  * </ol>
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class FormatAbbreviated extends FormatWordsString {
 

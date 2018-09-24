@@ -14,7 +14,7 @@ import net.mdatools.modelant.core.api.Selector;
 
 /**
  * Compose a filter on a selector
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public final class FilterSelect<A,T> implements Selector<A,T> {
 

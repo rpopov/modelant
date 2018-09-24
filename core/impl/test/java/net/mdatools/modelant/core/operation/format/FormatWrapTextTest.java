@@ -12,7 +12,7 @@ import net.mdatools.modelant.core.api.Function;
 
 /**
  * Test the FormatWrapText operation
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class FormatWrapTextTest extends TestCase {
 

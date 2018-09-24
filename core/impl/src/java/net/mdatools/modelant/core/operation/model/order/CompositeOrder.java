@@ -24,7 +24,7 @@ import net.mdatools.modelant.core.api.Order;
  *       &lt;orderByQualifedName&gt;...&lt;/orderByQualifedName&gt;
  *     &lt;/orderBy&gt;
  * </pre>
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class CompositeOrder implements Order {
 

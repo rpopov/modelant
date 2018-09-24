@@ -17,7 +17,7 @@ import java.util.Set;
  * This class is a composite Map implementation, so that when creating a
  * new map form another, this implementation does not copy the original,
  * but any access is delegated to the wrapped one.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class CompositeMap<K,V> implements Map<K,V> {
 

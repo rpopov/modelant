@@ -53,7 +53,7 @@ import net.mdatools.modelant.repository.api.ModelRepository;
  * Its value is the sequence order of the column in the tible's primary key.
  * </ol>
  *
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class ReverseDatabaseOperation implements Function<Connection, RefPackage>{
 

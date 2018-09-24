@@ -35,7 +35,7 @@ import net.mdatools.modelant.repository.api.ModelRepositoryFactory;
  * The problem is the way how MOF is instantiated - there is no root package to start navigating from.
  * Instead, the source and target extents are instanvces of Model. Thus, in order to make MOF compatible
  * with the other metamodels, they are wrapped in a package mock.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class CopyMetamodelTest extends TestCase {
 

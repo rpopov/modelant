@@ -14,7 +14,7 @@ import java.io.PrintWriter;
  * <li> type safe parameters
  * <li> output stream
  * </ul>
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface TemplateContext {
   /**

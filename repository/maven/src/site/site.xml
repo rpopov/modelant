@@ -3,8 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 http://maven.apache.org/xsd/decoration-1.8.0.xsd"
          name="${name}"
          combine.self="merge">
-  <body>
-    
+  <body>    
      <menu ref="parent"/>
      <menu name="Overview">
       <item name="About" href="index.html"/>

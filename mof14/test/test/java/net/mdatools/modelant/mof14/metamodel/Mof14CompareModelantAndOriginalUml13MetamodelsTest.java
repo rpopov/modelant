@@ -14,7 +14,7 @@ import net.mdatools.modelant.core.api.diff.ModelComparisonResult;
 
 /**
  * Test the metamodels comparison by comparing UML 1.3 definition for modelant and the OMG original
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class Mof14CompareModelantAndOriginalUml13MetamodelsTest extends Mof14CompareMetamodelsBase {
 

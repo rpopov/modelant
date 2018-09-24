@@ -28,7 +28,7 @@ import net.mdatools.modelant.core.api.name.PackageName;
 import net.mdatools.modelant.core.api.name.StructName;
 
 /**
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class StructNameImpl extends NameImpl<Name<?>> implements StructName {
   public StructNameImpl(String packageName) {

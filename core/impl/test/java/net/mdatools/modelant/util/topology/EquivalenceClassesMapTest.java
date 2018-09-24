@@ -12,7 +12,7 @@ import net.mdatools.modelant.core.operation.model.topology.EquivalenceClassesMap
 import net.mdatools.modelant.core.operation.model.topology.EquivalenceClassesMapImpl;
 
 /**
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class EquivalenceClassesMapTest extends TestCase {
 

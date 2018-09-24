@@ -9,7 +9,7 @@ package net.mdatools.modelant.core.util.key;
 
 /**
  * This is an effectively hashed string key for use hashed data structures.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public final class StringKey {
 

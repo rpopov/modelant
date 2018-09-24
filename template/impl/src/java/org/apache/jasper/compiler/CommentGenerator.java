@@ -9,7 +9,7 @@ package org.apache.jasper.compiler;
 
 /**
  * Generate a comment in the code of the translated template
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class CommentGenerator implements Generator {
 

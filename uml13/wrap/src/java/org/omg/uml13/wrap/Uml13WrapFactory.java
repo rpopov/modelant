@@ -38,7 +38,7 @@ import net.mdatools.modelant.uml13.wrap.TaggedValuesCache;
  * This class maps Model Classes to corresponding wrapper classes.
  * Uses externally provided uml13.properties file for translation and type mapping purposes,
  * which is looked up in classpath.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class Uml13WrapFactory extends BaseWrapperFactory implements Convention {
 

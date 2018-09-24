@@ -12,7 +12,7 @@ import java.util.Collection;
 /**
  * Filter the collection result of a selector and produce a sub-collection of it
  * @param <T> the type of the argument and result collections' contents
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface Filter<T> extends Selector<Collection<T>, T> {
 }

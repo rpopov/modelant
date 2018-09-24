@@ -32,7 +32,7 @@ import net.mdatools.modelant.repository.spi.MetamodelFactorySetup;
  * repository.readIntoExtent( sourceExtent, sourceModel );
  * </pre>
  * @see ModelRepository
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface ModelFactory {
 

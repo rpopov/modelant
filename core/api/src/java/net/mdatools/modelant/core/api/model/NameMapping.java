@@ -26,7 +26,7 @@ import net.mdatools.modelant.core.api.name.StructName;
  * A map from the instances of metamodel packages, classes, structs, enums and values from one metamodel
  * to another, effectively defining correspondence from a source model in a source metamodel into a target model
  * in a target metamodel.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface NameMapping {
   /**

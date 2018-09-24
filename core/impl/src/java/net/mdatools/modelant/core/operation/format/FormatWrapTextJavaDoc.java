@@ -11,7 +11,7 @@ package net.mdatools.modelant.core.operation.format;
  * Wrap and format the text to be included in javadoc (multi-line) comments for class features
  * (methods and fields).
  *
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class FormatWrapTextJavaDoc extends FormatWrapText {
 

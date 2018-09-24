@@ -43,7 +43,7 @@ import net.mdatools.modelant.uml13.reverse.ReverseXsdOperation;
  *     values. These tagged values are compatible with the Rose's approach to documentation. They are
  *     optional.
  * </ul>
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 @Mojo(name="xsd-to-uml13",
   defaultPhase=LifecyclePhase.COMPILE

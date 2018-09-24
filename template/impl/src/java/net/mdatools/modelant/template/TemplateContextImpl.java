@@ -19,7 +19,7 @@ import net.mdatools.modelant.template.api.TemplateContext;
  * 
  * TODO: decide if overwriting / setting of parameters is allowed
  * 
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class TemplateContextImpl implements TemplateContext {
 

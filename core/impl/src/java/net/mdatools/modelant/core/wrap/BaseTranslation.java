@@ -13,7 +13,7 @@ import net.mdatools.modelant.core.api.wrap.WrapperFactory;
 /**
  * A general mechanism for factory-specific names mapping.
  * Allows defining names translation, names' plural forms and any other factory-specific proeprties
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class BaseTranslation implements Translate {
 

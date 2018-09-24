@@ -9,7 +9,7 @@ package net.mdatools.modelant.core.operation.format;
 
 /**
  * Concatenate the words without separators, where all words are in upper case, separated by "_"
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class FormatAllCapital extends FormatWordsString {
 

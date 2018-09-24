@@ -22,7 +22,7 @@ import net.mdatools.modelant.core.operation.element.PrintElementRestricted;
  *
  *   toString = print.execute(mof14ModelElement); // as many times as needed
  * </pre>
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class PrintMof14ModelElement extends PrintElementRestricted {
 

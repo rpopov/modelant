@@ -13,7 +13,7 @@ import net.mdatools.modelant.core.api.Operation;
  * This is a constant operation, returning one and the same constant value.
  * Used with decorators and composites.
  * @param <T> the type of the constant this operation represents
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class Constant<T> implements Operation<T> {
 

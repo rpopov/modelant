@@ -16,7 +16,7 @@ import net.mdatools.modelant.core.util.Navigator;
 
 /**
  * Instantiate a model element of a metamodel.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class Create implements Function<String, RefObject> {
 

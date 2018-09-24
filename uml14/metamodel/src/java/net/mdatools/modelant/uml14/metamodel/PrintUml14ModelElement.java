@@ -16,7 +16,7 @@ import net.mdatools.modelant.core.operation.element.PrintElementRestricted;
 /**
  * Print UML 1.3 model elements, considering their nesting and most important, e.g. identifying
  * attributes and associations.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class PrintUml14ModelElement extends PrintElementRestricted {
 

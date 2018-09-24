@@ -14,7 +14,7 @@ import net.mdatools.modelant.repository.api.ModelRepositoryFactory;
 
 /**
  * Initialize the MetaData Repository to work in.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface ModelRepositorySetup extends ModelRepository {
 

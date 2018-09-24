@@ -14,7 +14,7 @@ import net.mdatools.modelant.core.util.NameTokenizer;
 
 /**
  * Extract the words from the string, format them ad concatenate them according
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public abstract class FormatWordsString implements Operation<String> {
 

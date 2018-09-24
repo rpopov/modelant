@@ -17,7 +17,7 @@ import java.util.List;
  * from a specific object (A).
  * @param <A> the type of the object to start the selection from
  * @param <T> the type of the objects to retrieve
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface Selector<A, T> extends Function<A, Collection<T>> {
 
@@ -29,7 +29,7 @@ public interface Selector<A, T> extends Function<A, Collection<T>> {
 
   /**
    * Select a predefined constant set of elements
-   * @author Rusi Popov
+   * @author Rusi Popov (popovr@mdatools.net)
    */
   public class SelectFixedElements<A,T> implements Selector<A, T> {
 

@@ -16,7 +16,7 @@ import net.mdatools.modelant.core.api.Operation;
  * <li>Restrict the name up to <b>length</b> characters
  * </ol>
  * @see FormatAbbreviated
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class FormatMaxLength implements Operation<String> {
 

@@ -21,7 +21,7 @@ import com.thaiopensource.relaxng.translate.Driver;
 
 /**
  * Convert a DTD into an XSD, using TRANG
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 @Mojo(name="dtd-to-xsd",
   defaultPhase=LifecyclePhase.COMPILE

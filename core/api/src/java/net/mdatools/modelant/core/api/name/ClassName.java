@@ -20,7 +20,7 @@ import javax.jmi.reflect.RefPackage;
  * </ul>
  * While we still represent the Enums and Structs as Class Names, the parent cannot be
  * just a single type, thus Name is set as parent.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface ClassName extends Name<Name<?>> {
 

@@ -10,7 +10,7 @@ package net.mdatools.modelant.core.operation.format;
 /**
  * Concatenate the words without separators, where first one is in lower case, any next one
  * is with first letter capitalized
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class FormatFirstLower extends FormatWordsString {
 

@@ -48,7 +48,7 @@ import net.mdatools.modelant.core.util.Navigator;
  * </ul>
  * Model elements, for which there are no criteria (attributes or associations) specified for their class
  * are treated as NOT EQUAL.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class CompareModels implements Function<RefPackage, ModelComparisonResult> {
 

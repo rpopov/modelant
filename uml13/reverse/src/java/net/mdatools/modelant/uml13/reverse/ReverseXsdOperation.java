@@ -87,7 +87,7 @@ import net.mdatools.modelant.repository.api.ModelRepository;
  *     values. These tagged values are compatible with the Rose's approach to documentation. They are
  *     optional.
  * </ul>
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class ReverseXsdOperation implements Function<File,RefPackage> {
 

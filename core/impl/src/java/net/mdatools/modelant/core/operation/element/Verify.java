@@ -18,7 +18,7 @@ import net.mdatools.modelant.core.api.Function;
 /**
  * Verify the model element it is called for against the validation rules form the metamodel.
  * Any violations are reported in the task log.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class Verify implements Function<RefBaseObject, String> {
 

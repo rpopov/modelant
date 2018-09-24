@@ -22,7 +22,7 @@ import net.mdatools.modelant.template.api.TemplateEngineFactory;
 /**
  * Apply the named template on the value of the named system property, in order to produce the contents of
  * the target file.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 @Mojo(name="apply-templates",
       defaultPhase=LifecyclePhase.COMPILE

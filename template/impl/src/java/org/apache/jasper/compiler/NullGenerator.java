@@ -9,7 +9,7 @@ package org.apache.jasper.compiler;
 
 /**
  * Null Object pattern
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class NullGenerator implements Generator {
 

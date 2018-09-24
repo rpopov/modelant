@@ -31,7 +31,7 @@ import net.mdatools.modelant.uml14.metamodel.CompareUml14Models;
 
 /**
  * Compare two UML 1.4 models and report the differences, that are needed to convert the source model into the target one
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 @Mojo(name="compare-uml14-models",
 defaultPhase=LifecyclePhase.COMPILE

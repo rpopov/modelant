@@ -27,7 +27,7 @@ import net.mdatools.modelant.core.operation.model.transform.CopyAttributeImpl;
 
 /**
  * A key in field mapping
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class FieldNameImpl extends NameImpl<ClassName> implements FieldName {
   public FieldNameImpl(String name) {

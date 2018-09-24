@@ -23,7 +23,7 @@ import net.mdatools.modelant.repository.spi.BaseModelFactory;
  *   modelFactory.readModel(model, "model file path");
  *
  * </pre>
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public final class Uml14ModelFactory extends BaseModelFactory {
 

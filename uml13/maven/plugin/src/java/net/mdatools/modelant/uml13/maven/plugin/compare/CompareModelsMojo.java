@@ -32,7 +32,7 @@ import net.mdatools.modelant.uml13.metamodel.CompareUml13Models;
 /**
  * Compare two UML 1.3 models and report the differences, that are needed to convert the source model
  * into the target one.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 @Mojo(name="compare-uml13-models",
 defaultPhase=LifecyclePhase.COMPILE

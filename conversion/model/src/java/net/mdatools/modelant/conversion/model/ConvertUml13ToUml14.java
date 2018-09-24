@@ -14,7 +14,7 @@ import net.mdatools.modelant.core.operation.model.CopyToMetaModel;
 /**
  * Convert an UML 1.3 model to UML 1.4 as a transformation defined at metamodel level
  * @see  "https://mdatools.net/wiki/index.php?title=Modelant_-_migration_to_maven#Convert_UML_1.3_to_UML_1.4"
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class ConvertUml13ToUml14 extends CopyToMetaModel {
 

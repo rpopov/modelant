@@ -15,7 +15,7 @@ import net.mdatools.modelant.core.api.model.NameMapping;
 /**
  * A qualified name of a model element, with its own methods, ready to be searched for.
  *
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface Name<P extends Name<?>> {
 

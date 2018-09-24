@@ -23,7 +23,7 @@ import net.mdatools.modelant.core.api.diff.ModelComparisonResult;
 
 /**
  * Introduce attribute changes (value differences) and verify they are detected
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class CompareChangedNamesTest extends CompareChangedModelsBase {
 

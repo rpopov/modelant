@@ -19,7 +19,7 @@ import net.mdatools.modelant.template.api.TemplateCompilationContext;
 
 /**
  * The Template Compilation Context set up through MOJO properties
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public abstract class CompilationContext extends AbstractMojo implements TemplateCompilationContext {
 

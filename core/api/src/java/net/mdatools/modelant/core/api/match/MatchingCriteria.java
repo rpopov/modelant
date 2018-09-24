@@ -16,7 +16,7 @@ import javax.jmi.reflect.RefObject;
 /**
  * This class represents the criteria to use when matching model elements.
  * So far it allows matching by attribute(s) and association(s)
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface MatchingCriteria {
 

@@ -14,7 +14,7 @@ import net.mdatools.modelant.core.api.diff.ModelComparisonResult;
 
 /**
  * Test the metamodels comparison by comparing UML 1.4 to itself
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class Mof14CompareSameUml14MetamodelsTest extends Mof14CompareMetamodelsBase {
 	

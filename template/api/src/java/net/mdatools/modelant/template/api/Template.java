@@ -45,7 +45,7 @@ import java.io.IOException;
  * the wrapped object, including rendering it through other ModelAnt Templates or rendering other objects.
  * </ul></ul>
  * @param <W> The type of the wrapped object
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface Template<W> {
 

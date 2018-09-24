@@ -18,7 +18,7 @@ import org.omg.uml13.wrap.foundation.core.WrapClassifier;
 
 /**
  * This condition checks if a model class, specified in the 'property' attribute is a subclass of another one.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class IsSubclassOf extends StackedTask implements Condition {
 

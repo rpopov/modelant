@@ -25,7 +25,7 @@ import net.mdatools.modelant.repository.api.ModelRepositoryFactory;
 
 /**
  * Convert the source UML 1.3 model to UML 1.4 and export it in XMI 1.2
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 @Mojo(name="uml13-to-uml14",
 defaultPhase=LifecyclePhase.COMPILE

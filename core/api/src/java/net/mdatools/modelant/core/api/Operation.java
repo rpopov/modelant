@@ -12,7 +12,7 @@ import net.mdatools.modelant.core.api.operation.Identity;
 /**
  * The unary operation is a single argument function (mapping) from one set to itself
  * @param <T> the type of the argument and result
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface Operation<T> extends Function<T, T> {
   Operation<?> DEFAULT = new Identity<>();

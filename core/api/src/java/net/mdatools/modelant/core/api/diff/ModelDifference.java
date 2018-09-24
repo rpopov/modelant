@@ -16,7 +16,7 @@ import javax.jmi.reflect.RefObject;
  * A change in the model caused either by adding or deleting a model element to a model, which has no correspondent
  * in the other model compared.
  * The role of this difference indicates it is added/deleted, whereas the difference by itself does not.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface ModelDifference {
 

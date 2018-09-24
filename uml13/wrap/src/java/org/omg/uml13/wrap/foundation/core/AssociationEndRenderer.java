@@ -17,7 +17,7 @@ import net.mdatools.modelant.template.Render;
  * This class invokes the renderXtoY&lt;suffix&gt;() method for each association end,
  * where the suffix is a parameter of the class, this way serving all renderings with
  * a single class.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class AssociationEndRenderer implements Render {
 

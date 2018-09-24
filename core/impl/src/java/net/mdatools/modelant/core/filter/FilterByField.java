@@ -16,7 +16,7 @@ import net.mdatools.modelant.core.api.Filter;
 
 /**
  * Filter the collection based on the contents of "name" field, if any
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class FilterByField<T extends RefObject> implements Filter<T> {
 

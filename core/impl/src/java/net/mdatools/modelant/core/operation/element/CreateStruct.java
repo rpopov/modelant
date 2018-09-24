@@ -18,7 +18,7 @@ import net.mdatools.modelant.core.util.Navigator;
 
 /**
  * Instantiate a model Structure.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class CreateStruct implements Function<RefPackage, RefStruct> {
 

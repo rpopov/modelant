@@ -21,7 +21,7 @@ import net.mdatools.modelant.core.api.Order;
  * State a list of metamodel classes to order their instances.
  * The instances of different (listed) classes are ordered according to the positions of those classes in the list.
  * Instances of not listed classes are just kept as they are, after any instances of listed classes.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class OrderByClass implements Order {
 

@@ -15,7 +15,7 @@ import net.mdatools.modelant.core.util.Navigator;
 
 /**
  * Retrieve an enumerated literal of a (meta)type provided
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class GetEnum implements Function<RefPackage, RefEnum> {
 

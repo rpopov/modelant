@@ -13,7 +13,7 @@ import net.mdatools.modelant.repository.api.ModelRepository;
 /**
  * The internal interface to initialize the factory and set it up to collaborate with the model repository.
  * Called only by the ModelRepository when looking it up.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface MetamodelFactorySetup {
 

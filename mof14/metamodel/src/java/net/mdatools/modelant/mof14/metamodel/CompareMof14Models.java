@@ -20,7 +20,7 @@ import net.mdatools.modelant.core.operation.model.topology.ListCriteria;
 
 /**
  * Compare MOF 1.4 models (e.g. metamodels)
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class CompareMof14Models extends CompareModels {
 

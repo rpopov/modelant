@@ -10,7 +10,7 @@ package net.mdatools.modelant.core.operation.format;
 /**
  * Concatenate the words "." separators, where all words are in lower case.
  * The letter case change, the spaces and "_" are NOT treated as words separators.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class FormatPackageName extends FormatWordsString {
 

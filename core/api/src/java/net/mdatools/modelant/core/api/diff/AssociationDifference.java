@@ -13,7 +13,7 @@ import javax.jmi.reflect.RefObject;
 
 /**
  * The differences found in a single association on X and Y matching objects
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface AssociationDifference {
 

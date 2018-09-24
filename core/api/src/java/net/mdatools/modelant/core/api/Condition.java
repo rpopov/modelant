@@ -19,7 +19,7 @@ package net.mdatools.modelant.core.api;
  *    condition.eval(argument) as many times as needed
  * </pre>
  * @param <A> the type of the argument to evaluate the condition on
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface Condition<A> {
 

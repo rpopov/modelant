@@ -29,7 +29,7 @@ import net.mdatools.modelant.core.util.Navigator;
 /**
  * Print model elements showing only their "important" attributes
  * and associations closer to the human language
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class PrintElementRestricted implements Function<Object, String> {
 

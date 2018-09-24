@@ -17,7 +17,7 @@ import net.mdatools.modelant.core.selector.SelectByQualifiedName;
 /**
  * A pair of correspondent classes in the metamodels to compare, that should be considered equal
  * Used as &lt;metaclass&gt; element in the plugin's configuration.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class Equal implements ConsideredEqual {
 

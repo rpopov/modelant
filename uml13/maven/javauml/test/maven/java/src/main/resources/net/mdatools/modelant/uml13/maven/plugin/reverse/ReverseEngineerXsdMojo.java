@@ -42,7 +42,7 @@ import net.mdatools.modelant.uml13.reverse.ReverseXsdOperation;
  * @goal reverseEngineerXsdInUml13
  * @phase generate-sources
  * @execute phase="generate-sources"
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class ReverseEngineerXsdMojo extends AbstractMojo {
 

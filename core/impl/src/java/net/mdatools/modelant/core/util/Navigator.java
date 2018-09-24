@@ -35,7 +35,7 @@ import net.mdatools.modelant.core.operation.element.PrintModelElement;
  * Retrieve associated model elements, a single model element, or a single
  * attribute value, starting from the current model being processed, down an explicit
  * path provided.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class Navigator {
 

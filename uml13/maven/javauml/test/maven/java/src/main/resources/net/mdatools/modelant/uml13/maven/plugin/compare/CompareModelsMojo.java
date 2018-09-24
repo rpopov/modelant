@@ -31,7 +31,7 @@ import net.mdatools.modelant.uml13.metamodel.CompareUml13Models;
  * @goal compare-models
  * @phase process-sources
  * @execute phase="process-sources"
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class CompareModelsMojo extends AbstractMojo {
 

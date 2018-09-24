@@ -46,7 +46,7 @@ import net.mdatools.modelant.core.util.Navigator;
  * <li> the derived associations are not copied
  * <li> the non-changeable attributes are not copied
  * </ul>
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class CopyToMetaModel implements Function<RefPackage, Map<RefObject, RefObject>> {
   /**

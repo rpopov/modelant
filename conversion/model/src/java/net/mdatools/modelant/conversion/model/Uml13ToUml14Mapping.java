@@ -30,7 +30,7 @@ import net.mdatools.modelant.core.operation.model.transform.RenamingMapping;
 /**
  * The mapping rules to convert a UML 1.3 model to a UML 1.4 model.
  *
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public final class Uml13ToUml14Mapping extends RenamingMapping {
 

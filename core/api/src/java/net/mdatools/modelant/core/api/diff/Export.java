@@ -9,7 +9,7 @@ package net.mdatools.modelant.core.api.diff;
 
 /**
  * A general mechanism to export a result of models comparison
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface Export {
 

@@ -27,7 +27,7 @@ import net.mdatools.modelant.core.api.name.PackageName;
 
 /**
  * A mechanism to locate a RefAssociation by its qualified name in the metamodel
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class AssociationNameImpl extends NameImpl<PackageName> implements AssociationName {
 

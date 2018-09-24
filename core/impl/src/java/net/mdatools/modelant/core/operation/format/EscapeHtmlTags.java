@@ -11,7 +11,7 @@ import net.mdatools.modelant.core.api.Operation;
 
 /**
  * Replace the &lt; start-of-tag and &gt; end-of-tag characters by corresponding HTML entities.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class EscapeHtmlTags implements Operation<String> {
 

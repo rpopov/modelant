@@ -37,7 +37,7 @@ import net.mdatools.modelant.core.api.Function;
  *
  * System.err.println( "model element ="+ new ModelElementPrinter().execute( modelElement ) );
  * </pre>
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class PrintModelElement implements Function<Object, String>{
   /**

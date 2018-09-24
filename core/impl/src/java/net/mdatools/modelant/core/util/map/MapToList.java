@@ -14,7 +14,7 @@ import java.util.Collection;
  * Map each key to a list of values
  * @param <K> the class of the key
  * @param <V> the class of the elements held in the list
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class MapToList<K, V> extends MapToCollection<K, V> {
 

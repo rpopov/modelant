@@ -24,7 +24,7 @@ import net.mdatools.modelant.repository.api.ModelRepositoryFactory;
  * Creates the JMI API packages for a metamodel, creates corresponding JARs, generates JAVADOC and zips it.
  * Use it to establish new metamodels like UML 1.3, UML 1.4, CWM,...
  *
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 @Mojo(name="generate-model-api",
       defaultPhase=LifecyclePhase.PROCESS_SOURCES

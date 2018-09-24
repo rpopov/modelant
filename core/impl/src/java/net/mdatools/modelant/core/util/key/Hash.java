@@ -8,7 +8,7 @@
 package net.mdatools.modelant.core.util.key;
 
 /**
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class Hash {
 

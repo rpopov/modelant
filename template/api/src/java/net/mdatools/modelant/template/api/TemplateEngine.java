@@ -38,7 +38,7 @@ import java.util.Map;
  *     this will use the renderXYZ template to process *this* object
  * </pre>
  * @see Template
- * @author Rusi Popov, 2002, 2012, 2017
+ * @author Rusi Popov (popovr@mdatools.net), 2002, 2012, 2017
  */
 public interface TemplateEngine {
 

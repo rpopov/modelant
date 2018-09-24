@@ -15,7 +15,7 @@ import net.mdatools.modelant.template.api.TemplateEngine;
 
 /**
  * The published service to instantiate and initialized a template engine, as of [A4]
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class ConstructTemplateEngineImpl implements ConstructTemplateEngine {
 

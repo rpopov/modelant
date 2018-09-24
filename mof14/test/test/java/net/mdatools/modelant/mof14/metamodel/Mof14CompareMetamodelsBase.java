@@ -21,7 +21,7 @@ import net.mdatools.modelant.repository.api.ModelRepositoryFactory;
 
 /**
  * A common mechanism to test metamodels comparison
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 abstract class Mof14CompareMetamodelsBase extends TestCase {
 

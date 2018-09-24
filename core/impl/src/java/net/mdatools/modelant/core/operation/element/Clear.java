@@ -15,7 +15,7 @@ import net.mdatools.modelant.core.util.Navigator;
 
 /**
  * Clear the association or attribute value of a model element and return that updated model element.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class Clear extends NavigateObjectPath<RefFeatured> {
 

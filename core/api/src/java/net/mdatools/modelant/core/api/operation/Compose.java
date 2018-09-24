@@ -12,7 +12,7 @@ import net.mdatools.modelant.core.api.Operation;
 /**
  * The implementation of the Decorator design pattern on Operations.
  * Let any decorator subclass it.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public final class Compose<T> implements Operation<T> {
 

@@ -15,7 +15,7 @@ import net.mdatools.modelant.core.util.key.Hash;
 /**
  * This class represents a key<level, MOF class> in order to split by class and thus reduce
  * the set of objects to compare for matching.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 final class Key {
   private final int level;

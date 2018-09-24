@@ -18,7 +18,7 @@ import net.mdatools.modelant.core.api.match.MatchingCriteria;
 /**
  * A list of criteria (like class or other list criteria) to compare or print model elements.
  * Collect the results of all nested matching criteria, that are applicable.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class ListCriteria implements MatchingCriteria {
 

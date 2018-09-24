@@ -12,7 +12,7 @@ import java.io.IOException;
 /**
  * Mode of parsing - text parsing until any open lexem + the lexem itself
  * or parsing code until closing lexem + the lexem itself
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 interface Mode {
   /**

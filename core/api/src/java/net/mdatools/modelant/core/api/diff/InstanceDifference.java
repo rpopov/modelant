@@ -14,7 +14,7 @@ import javax.jmi.reflect.RefObject;
 
 /**
  * The differences identified on a single object X compared with another object Y
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface InstanceDifference {
 

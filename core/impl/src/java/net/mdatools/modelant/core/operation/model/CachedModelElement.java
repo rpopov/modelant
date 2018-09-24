@@ -19,7 +19,7 @@ import javax.jmi.reflect.RefObject;
  * Once the access to the attributes and associations of the model elements is slow,
  * especially when the detecting changes,
  * this class represents a cache of the model element's attributes and associations.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 class CachedModelElement {
 

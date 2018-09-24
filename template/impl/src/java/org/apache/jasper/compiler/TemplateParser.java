@@ -60,7 +60,7 @@ import java.util.List;
 
 /**
  * Parse the Template and produce a list Generator instances to represent the abstract syntax tree
- * @author Rusi Popov (popovr@mdatools.net)
+ * @author Rusi Popov (popovr@mdatools.net) (popovr@mdatools.net)
  * @see TemplateLexer
  */
 public class TemplateParser {

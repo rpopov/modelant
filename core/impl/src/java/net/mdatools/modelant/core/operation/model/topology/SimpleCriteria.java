@@ -18,7 +18,7 @@ import net.mdatools.modelant.core.api.match.MatchingCriteria;
 /**
  * A simple matching criteria for model elements, just by providing the same list of
  * attributes and associations to all objects.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class SimpleCriteria implements MatchingCriteria {
 

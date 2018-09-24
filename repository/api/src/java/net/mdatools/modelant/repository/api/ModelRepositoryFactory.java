@@ -14,7 +14,7 @@ import net.mdatools.modelant.repository.spi.ModelRepositorySetup;
 
 /**
  * A factory of Model Repositories
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public final class ModelRepositoryFactory {
 

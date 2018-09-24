@@ -48,7 +48,7 @@ import net.mdatools.modelant.uml13.reverse.ReverseDatabaseOperation;
  * @goal reverseEngineerDatabaseInUml13
  * @phase generate-sources
  * @execute phase="generate-sources"
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class ReverseEngineerDatabaseMojo extends AbstractMojo {
 

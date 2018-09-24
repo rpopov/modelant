@@ -9,7 +9,7 @@ package net.mdatools.modelant.core.operation.format;
 
 /**
  * Concatenate the words without separators, where all words are in lower case
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class FormatAllLower extends FormatWordsString {
 

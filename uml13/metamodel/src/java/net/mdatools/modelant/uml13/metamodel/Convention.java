@@ -10,7 +10,7 @@ package net.mdatools.modelant.uml13.metamodel;
 
 /**
  * All model specific naming conventions
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface Convention {
 

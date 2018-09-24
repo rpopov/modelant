@@ -9,7 +9,7 @@ package net.mdatools.modelant.template.api;
 
 /**
  * This interface defines the common properties and convenient settings
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface Convention {
 

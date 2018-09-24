@@ -17,7 +17,7 @@ import net.mdatools.modelant.template.api.TemplateCompilationContext;
 import net.mdatools.modelant.template.api.TemplateEngine;
 
 /**
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class TemplateEngineTest extends TestCase {
 

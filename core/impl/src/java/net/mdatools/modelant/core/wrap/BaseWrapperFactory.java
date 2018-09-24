@@ -27,7 +27,7 @@ import net.mdatools.modelant.core.api.wrap.WrapperFactory;
  *      </pre>
  * <li> The subclasses must provide the mapping from wrapped to wrapper classes.
  * </ul>
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public abstract class BaseWrapperFactory implements WrapperFactory {
 

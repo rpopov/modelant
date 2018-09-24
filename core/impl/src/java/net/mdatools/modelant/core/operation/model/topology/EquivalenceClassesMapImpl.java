@@ -16,7 +16,7 @@ import java.util.Map;
 
 /**
  * @param <V> is the class of the mapped elements
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class EquivalenceClassesMapImpl<V> implements EquivalenceClassesMap<V> {
 

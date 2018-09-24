@@ -16,7 +16,7 @@ import net.mdatools.modelant.core.api.Procedure;
 
 /**
  * A mechanism to construct procedures in the context of model transformation.
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface ConstructProcedure<T> {
   /**

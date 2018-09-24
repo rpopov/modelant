@@ -10,7 +10,7 @@ package net.mdatools.modelant.core.operation.format;
 /**
  * Concatenate the words separated by a space, where first one starts with upper case, any next one
  * is in lower case
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class FormatHumanReadable extends FormatWordsString {
 

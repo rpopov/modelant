@@ -21,7 +21,7 @@ import org.netbeans.mdr.util.TransactionMutex;
  *     When the last write lock is released, the transaction must be committed/rolled back
  * <li>
  * </ul>
- * @author Rusi Popov
+ * @author Rusi Popov (popovr@mdatools.net)
  */
 public class ReadWriteMutex extends TransactionMutex {
 
