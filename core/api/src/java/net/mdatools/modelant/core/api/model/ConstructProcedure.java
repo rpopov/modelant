@@ -20,10 +20,10 @@ import net.mdatools.modelant.core.api.Procedure;
  */
 public interface ConstructProcedure<T> {
   /**
-   * @param sourceExtent TODO
+   * @param sourceExtent not null source model extent
    * @param targetExtent not null target model extent
    * @param objectsMap not null source-to-target model elements map
-   * @param valueMapping TODO
+   * @param valueMapping not null existing mapping of source to target objects
    * @return a non-null procedure to process instances of T and produce corresponding elements of the
    *         target model and bind the correspondence in the objectsMap
    */

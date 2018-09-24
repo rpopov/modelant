@@ -1,3 +1,59 @@
+core
+=====
+
+The **modelant core** implements the core algotithms on models of modelant.
+
+<!-- MACRO{toc} -->
+
+Intefaces
+---------
+
+The **modelant core** tries to isolate as much as possible the individualt functions (methods) and opertaions on models, alloowing them to be composed in other functions and operations, still allowing them to evolve independently of other methods and reasons for change. This approach tries to apply the Single Responsibility Principle in a pure form, therefore the operations on models are provided as implementations of the follwoing interfaces:
+
+* net.mdatools.modelant.core.api.Function, defined as
+```
+public interface Function<A,R> {
+
+  /**
+   * @param argument to apply this function (instance) on
+   * @return the result of applying the function on the provided argument
+   * @throws RuntimeException
+   * @throws IllegalArgumentException when the operation is not defined for the provided arguments
+   */
+  R execute(A argument) throws RuntimeException, IllegalArgumentException;
+}
+```
+* net.mdatools.modelant.core.api.Operation, defined as:
+```
+/**
+ * The unary operation is a single argument function (mapping) from one set to itself
+ * @param <T> the type of the argument and result
+ */
+public interface Operation<T> extends Function<T, T> {
+  Operation<?> DEFAULT = new Identity<>();
+}
+```
+* net.mdatools.modelant.core.api.Condition 
+```
+public interface Condition<A> {
+
+  /**
+   * @param argument the argument to apply this condition (instance) to
+   * @return true if this condition set up represents a tautology and false otherwise.
+   * @throws IllegalArgumentException when the condition is not defined for the provided arguments
+   * @throws RuntimeException in any case of failed processing
+   */
+  boolean eval(A argument) throws RuntimeException, IllegalArgumentException;
+}
+```
+
+The common principle applied is that any implementations of these interfaces are:
+
+* constructed with all additional parameters, that should never change
+* immutable, providing stateless operation
+
+Together with the net.mdatools.modelant.core.api.operation.Compose (high order) operation on Operations, these interfaces allow applying more functional programming model, focused on clear desigm avoiding coupling, clear responsibilites. 
+
 Query Models
 -----
 

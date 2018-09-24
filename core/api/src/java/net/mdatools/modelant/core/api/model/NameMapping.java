@@ -53,7 +53,7 @@ public interface NameMapping {
    * Retrieve the procedure to produce the corresponding instance(s) in the target model and bind them
    * in the provided objectsMap
    * @param classifier not null metaobject describing a model element of the source model
-   * @param sourceExtent TODO
+   * @param sourceExtent not null source extent
    * @param targetExtent not null target model
    * @param objectsMap not null correspondence between source and target model elements
    * @return the non-null procedure to produce
@@ -66,7 +66,7 @@ public interface NameMapping {
    * If the target/mapped attribute is DERIVED, the produced procedure should not set/produce links in it
    * </b>
    * @param association not null metaobject describing a model element of the source model
-   * @param sourceExtent TODO
+   * @param sourceExtent not null source extent
    * @param targetExtent not null target model
    * @param objectsMap non-null mapping of original model objects to target model objects
    * @return the non-null function to produce a new association link from the original one, the target model extent and the mapping between original and produced objectss
@@ -81,7 +81,7 @@ public interface NameMapping {
    * If the target/mapped attribute is NOT CHANGEABLE, the produced procedure should not set it
    * </b>
    * @param feature not null
-   * @param sourceExtent TODO
+   * @param sourceExtent not null source extent
    * @param targetExtent not null target model
    * @param objectsMap
    * @return the non-null function/procedure to update the object(s) of the target model

@@ -26,7 +26,7 @@ public interface Condition<A> {
   /**
    * @param argument the argument to apply this condition (instance) to
    * @return true if this condition set up represents a tautology and false otherwise.
-   * @throws IllegalArgumentException in any case of misconfiguration
+   * @throws IllegalArgumentException when the condition is not defined for the provided arguments
    * @throws RuntimeException in any case of failed processing
    */
   boolean eval(A argument) throws RuntimeException, IllegalArgumentException;

@@ -25,9 +25,9 @@ public interface Function<A,R> {
 
   /**
    * @param argument to apply this function (instance) on
-   * @return the operation's result, if any
+   * @return the result of applying the function on the provided argument
    * @throws RuntimeException
-   * @throws IllegalArgumentException when the operation is not set up
+   * @throws IllegalArgumentException when the operation is not defined for the provided arguments
    */
   R execute(A argument) throws RuntimeException, IllegalArgumentException;
 
