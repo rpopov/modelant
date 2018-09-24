@@ -62,9 +62,12 @@ The **match** package defines the parameters of and how to do the models compari
 
 model
 -----
-model\ConstructOperation
-model\ConstructProcedure
-model\NameMapping
+
+Specific mapping of model elements, values, literals
+
+* model\ConstructOperation
+* model\ConstructProcedure
+* model\NameMapping
 
 name
 -----
