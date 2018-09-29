@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ServiceLoader;
 
+import net.mdatools.modelant.template.spi.TemplateEngineSetup;
+
 /**
  * A well known factory of initialized Template Engines, according to the
  * provided implementation, found in classpath. See [A4]
@@ -36,13 +38,13 @@ public final class TemplateEngineFactory {
    */
   public synchronized static TemplateEngine construct(TemplateCompilationContext compilationContext) throws RuntimeException {
     TemplateEngine result;
-    ConstructTemplateEngine construct;
+    TemplateEngineSetup construct;
     String key;
 
     key = compilationContext.getUniqueName();
     result = engines.get( key );
     if ( result == null ) {
-      construct = ServiceLoader.load(ConstructTemplateEngine.class).iterator().next(); // not null
+      construct = ServiceLoader.load(TemplateEngineSetup.class).iterator().next(); // not null
 
       try {
         result = construct.constructTemplateEngine(compilationContext);

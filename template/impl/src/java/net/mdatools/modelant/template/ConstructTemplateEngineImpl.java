@@ -9,18 +9,18 @@ package net.mdatools.modelant.template;
 
 import java.io.IOException;
 
-import net.mdatools.modelant.template.api.ConstructTemplateEngine;
 import net.mdatools.modelant.template.api.TemplateCompilationContext;
 import net.mdatools.modelant.template.api.TemplateEngine;
+import net.mdatools.modelant.template.spi.TemplateEngineSetup;
 
 /**
  * The published service to instantiate and initialized a template engine, as of [A4]
  * @author Rusi Popov (popovr@mdatools.net)
  */
-public class ConstructTemplateEngineImpl implements ConstructTemplateEngine {
+public class ConstructTemplateEngineImpl implements TemplateEngineSetup {
 
   /**
-   * @see net.mdatools.modelant.template.api.ConstructTemplateEngine#constructTemplateEngine(TemplateCompilationContext)
+   * @see net.mdatools.modelant.template.spi.TemplateEngineSetup#constructTemplateEngine(TemplateCompilationContext)
    */
   public TemplateEngine constructTemplateEngine(TemplateCompilationContext context) throws IOException {
     TemplateEngineImpl result;

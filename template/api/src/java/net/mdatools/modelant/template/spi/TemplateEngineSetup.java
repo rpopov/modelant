@@ -5,9 +5,12 @@
  * Eclipse Public License v2.0 which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v20.html
  */
-package net.mdatools.modelant.template.api;
+package net.mdatools.modelant.template.spi;
 
 import java.io.IOException;
+
+import net.mdatools.modelant.template.api.TemplateCompilationContext;
+import net.mdatools.modelant.template.api.TemplateEngine;
 
 /**
  * A constructor service for template engine instances. The TemplateEngineFactory delegates to it
@@ -15,7 +18,7 @@ import java.io.IOException;
  *
  * @author Rusi Popov (popovr@mdatools.net)
  */
-public interface ConstructTemplateEngine {
+public interface TemplateEngineSetup {
 
   /**
    * The only constructor of template engines. Its implementation should be provided externally.

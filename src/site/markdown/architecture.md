@@ -36,15 +36,20 @@ Then a script to generate the artifacts for a specific project should be a combi
 
   * **&lt;module name&gt;** - the Maven project containing the module's artifacts, namely:
     * **api** (API) module only with:
-        * the interfaces the actual module to implement
-        * a Factory class:
-            * named **&lt;Interface Name&gt;Factory**
-            * providing **construct** method(s), that use the idiom to load (and probably make Singleton or cache) an instance of the implementation (see below)
+        * **api** package, containing public API of the module:
+            * the interfaces the actual module to implement
+            * a Factory class:
+                * named **&lt;Service Name&gt;Factory**
+                * providing **construct** method(s), that use the idiom to load (and probably make Singleton or cache) an instance of the implementation (see below)
+        * **spi** package, containing the interfaces of the **services** this module **uses**
+            * a **&lt;Service Name&gt;Setup** interface:
+                * any implementation of the module's service should implement it in order the **&lt;Service Name&gt;Factory** class to locate, instantiate and set up that service using the [Java standard Service Loader](https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html) mechanism. 
+                * The **impl** module provides the default implementation of the module's service(s), still allowing their lookup (as these implemengtations are an another .jar) and their replacement with external implementations
     * **impl** (implementation) module that:
         * implements the API interfaces
-        * publishes the implementations as services, as of [Java standard Service Loader](https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html) mechanism:
+        * publishes the default implementations of the module's services, as of [Java standard Service Loader](https://docs.oracle.com/javase/6/docs/api/java/util/ServiceLoader.html) mechanism:
             * for each implemented service interface 
-            * define a file **src\resources\META-INF\services\\&lt;interface name&gt;**
+            * define a file **src\resources\META-INF\services\\&lt;Service name&gt;Setup**
                 * the contents of the file is the qualified name of the implementation class
                 * this allows the ServiceLoader class (and the API's factory class) instantiate the concrete implementation
         * defines unit tests in **test\java** directory
