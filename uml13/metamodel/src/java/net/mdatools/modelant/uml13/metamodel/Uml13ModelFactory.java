@@ -24,7 +24,7 @@ import net.mdatools.modelant.repository.spi.BaseModelFactory;
 public final class Uml13ModelFactory extends BaseModelFactory {
 
   /**
-   * @see net.mdatools.modelant.repository.spi.MetamodelFactorySetup#getMetamodelName()
+   * @see net.mdatools.modelant.repository.spi.ModelFactorySetup#getMetamodelName()
    */
   public String getMetamodelName() {
     return "UML13";

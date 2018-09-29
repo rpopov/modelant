@@ -15,7 +15,7 @@ import net.mdatools.modelant.repository.api.ModelRepository;
  * Called only by the ModelRepository when looking it up.
  * @author Rusi Popov (popovr@mdatools.net)
  */
-public interface MetamodelFactorySetup {
+public interface ModelFactorySetup {
 
   /**
    * @return the non-null name of the metamodel this factory is for

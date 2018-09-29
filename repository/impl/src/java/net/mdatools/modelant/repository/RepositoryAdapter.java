@@ -44,7 +44,7 @@ import org.netbeans.lib.jmi.mapping.JMIMapperCFImpl;
 import org.netbeans.lib.jmi.mapping.JMIMapperImpl;
 
 import net.mdatools.modelant.repository.api.ModelFactory;
-import net.mdatools.modelant.repository.spi.MetamodelFactorySetup;
+import net.mdatools.modelant.repository.spi.ModelFactorySetup;
 import net.mdatools.modelant.repository.spi.ModelRepositorySetup;
 
 /**
@@ -568,8 +568,8 @@ public final class RepositoryAdapter implements ModelRepositorySetup {
    */
   public ModelFactory loadMetamodel(String metamodelName, ClassLoader loader) throws IllegalStateException, IllegalArgumentException {
     ModelFactory result;
-    MetamodelFactorySetup factorySpi;
-    Iterator<MetamodelFactorySetup> factorySpiIterator;
+    ModelFactorySetup factorySpi;
+    Iterator<ModelFactorySetup> factorySpiIterator;
 
     if ( !isInitialized() ) {
       throw new IllegalStateException("Expected this repository adapter has been initialized");
@@ -581,7 +581,7 @@ public final class RepositoryAdapter implements ModelRepositorySetup {
 
     result = METAMODEL_FACTORIES.get( metamodelName );
     if ( result == null ) { // no ready made factories, construct one
-      factorySpiIterator = ServiceLoader.load( MetamodelFactorySetup.class, loader ).iterator();
+      factorySpiIterator = ServiceLoader.load( ModelFactorySetup.class, loader ).iterator();
       while ( result == null && factorySpiIterator.hasNext() ) {
         factorySpi = factorySpiIterator.next();
 

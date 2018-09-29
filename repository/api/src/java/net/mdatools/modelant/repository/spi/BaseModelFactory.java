@@ -32,7 +32,7 @@ import net.mdatools.modelant.repository.api.ModelRepository;
  * </pre>
  * @author Rusi Popov (popovr@mdatools.net)
  */
-public abstract class BaseModelFactory implements ModelFactory, MetamodelFactorySetup {
+public abstract class BaseModelFactory implements ModelFactory, ModelFactorySetup {
 
   /**
    * The owner repository
@@ -45,7 +45,7 @@ public abstract class BaseModelFactory implements ModelFactory, MetamodelFactory
   private ModelPackage mofExtent;
 
   /**
-   * @see MetamodelFactorySetup#construct(ModelRepository, ClassLoader)
+   * @see ModelFactorySetup#construct(ModelRepository, ClassLoader)
    */
   public final ModelFactory construct(ModelRepository repository, ClassLoader loader) {
     if ( this.repository != null ) {

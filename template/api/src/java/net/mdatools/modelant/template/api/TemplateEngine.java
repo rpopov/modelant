@@ -15,19 +15,13 @@ import java.util.Map;
 
 /**
  * This class gives a simple interface to the ModelAnt Object-Oriented templates mechanism.
- * Some notions:<ul>
- * <li><b>context</b> is a named set of templates for a set of classes
- * </ul><pre>
+ * <pre>
  * Usage:
  *   To generate and initiate the output creation:
  *
  *     targetFile = new File( fileName );
- *     TemplateEngine.render( targetFile, targetObject, template, getProperties() );
+ *     templateEngine.render( targetFile, targetObject, template, getProperties() );
  *
- *
- *   In Templates use:
- *
- *       TemplateEngine.render( target object, template name, context );
  *
  *   In regular Java classes use as part of output creation:
  *

@@ -14,14 +14,14 @@ import javax.jmi.reflect.InvalidNameException;
 import javax.jmi.reflect.RefPackage;
 import javax.jmi.xmi.MalformedXMIException;
 
-import net.mdatools.modelant.repository.spi.MetamodelFactorySetup;
+import net.mdatools.modelant.repository.spi.ModelFactorySetup;
 
 /**
  * Any metamodel management should be represented as an instance of this interface.
  * Load the metamodel-specific instance of this interface through the ModelRepository,
  * which guarantees that the repository is operational.
- * The instances of this interface must also implement the {@link MetamodelFactorySetup}
- * interface for integration with the  repository. Note that {@link MetamodelFactorySetup} is an
+ * The instances of this interface must also implement the {@link ModelFactorySetup}
+ * interface for integration with the  repository. Note that {@link ModelFactorySetup} is an
  * internal interface, not for use by client applications, therefore this interface <b>does not</b>
  * implement it.<pre>
  * Usage:
