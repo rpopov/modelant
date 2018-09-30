@@ -6,10 +6,6 @@ Provided are the pure java implementation(s) of operations in terms of **\[A20\]
 
 <!-- MACRO{toc} -->
 
-See also:
-
-* [modelant core operations](../../modelant.core/index.html)
-
 Operation: Convert UML 1.3 to UML 1.4
 -------------------------------------
 
@@ -52,3 +48,8 @@ Maven dependencies:
 </dependencies>
 ```
 Note: the repository implementation could be replaced.
+
+See also
+--------
+
+* [modelant core operations](../../modelant.core/index.html)
