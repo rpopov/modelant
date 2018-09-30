@@ -1,3 +1,25 @@
+Template API
+============
+
+The modelant Templates mechanism provides a default implementation in the **modelant.template.impl** module. Nevertheless, it allows plugging in another implementation of the modelan Templates API, as of **\[A4\]**.
+
+<!-- MACRO{toc} -->
+
+Usage
+-----
+
+As of the **\[A4\]**, convention:
+
+  * Construct a Template Engine with the unique name stated in the template compilation context:
+```
+engine = TemplateEngineFactory.constructEngine(templateCompilationContext)
+```
+  * Lookup the Template Engine after its instantiation, as many times as needed:
+```
+engine = TemplateEngineFactory.getEngine(uniqueName)
+```
+  * The implementation class should be provided in the META-INF\services\net.mdatools.modelant.template.spi.TemplateEngineSetup
+  
 Template Compilation Context
 ----------------------------
 

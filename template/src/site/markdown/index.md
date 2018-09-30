@@ -106,3 +106,10 @@ The use of modelant Templates can be integrated in modelant or independent of mo
   </dependency>
 </dependencies>
 ```
+
+Modules
+-------
+
+* [modelant Template API](modelant.template.api/index.html)
+* [modelant Template Implementation](modelant.template.impl/index.html)
+* [modelant Template Maven Integration](modelant.template.maven/index.html)
