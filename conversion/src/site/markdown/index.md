@@ -1,12 +1,97 @@
 Conversion 
-=====
+==========
 
 The '''conversion''' modules treat the specific model conversions between different metamodels, effectively translating the models in one modeling language to other modeling languages.
 
-Conversion of UML 1.3 models to UML 1.4 models 
-----------------------------------------------
+<!-- MACRO{toc} -->
 
-Decisions:
+Conversion of UML 1.3 models to UML 1.4 models 
+==============================================
+
+The implemented convesion mechanisms are:
+
+* Conversion of UML 1.3 models to UML 1.4
+
+Maven Plugin: Convert UML 1.3 to UML 1.4
+----------------------------------------
+
+The goal '''convertUml13ToUml14''' of the '''modelant.conversion.maven.plugin''' converts UML 1.3 models to UML 1.4 as XMI 1.1/1.2 files.
+
+```
+<build>
+  <plugins>
+    <plugin>
+      <groupId>net.mdatools</groupId>
+      <artifactId>modelant.conversion.maven.plugin</artifactId>
+      <version>${revision}</version>
+      <executions>
+        <execution>
+          <phase>compile</phase>
+          <goals>
+            <goal>convertUml13ToUml14</goal>
+          </goals>
+          <configuration>
+            <sourceModel>...</sourceModel>
+            <targetModel>...</targetModel>
+          </configuration>
+        </execution>
+      </executions>
+    </plugin>
+  </plugins>
+</build>
+```
+
+  * **sourceModel** the path to the source UML 1.3 model in XMI 1.1/1.2 format
+  * **targetModel** the path to the target UML 1.4 model in XMI 1.2 format to create
+    
+Operation: Convert UML 1.3 to UML 1.4
+-------------------------------------
+
+Use this snippet to convert a UML 1.3 model to UML 1.4 programatically:
+
+```
+convert = new ConvertUml13ToUml14(sourceUml13Extent);
+mappings = convert.execute(targetUml14Extent);
+```
+
+Maven dependencies:
+
+```
+<dependencies>
+  <dependency>
+    <groupId>net.mdatools</groupId>
+    <artifactId>modelant.conversion.model</artifactId>
+    <version>${revision}</version>
+  </dependency>
+  <dependency>
+    <groupId>net.mdatools</groupId>
+    <artifactId>modelant.uml13.metamodel</artifactId>
+    <version>${revision}</version>
+  </dependency>
+  <dependency>
+    <groupId>net.mdatools</groupId>
+    <artifactId>modelant.uml14.metamodel</artifactId>
+    <version>${revision}</version>
+  </dependency>
+  <dependency>
+    <groupId>net.mdatools</groupId>
+    <artifactId>modelant.core.impl</artifactId>
+    <version>${revision}</version>
+  </dependency>
+  <dependency>
+    <groupId>net.mdatools</groupId>
+    <artifactId>modelant.repository.impl</artifactId>
+    <version>${revision}</version>
+  </dependency>
+</dependencies>
+```
+Note: the repository implementation could be replaced.
+
+
+Mapping UML 1.3 to UML 1.4 models
+---------------------------------
+
+With the help of the [model comparison plugin](../modelant.core.maven.plugin/index.html) the following mapping of UML 1.3 to UML 1.4 models was identified. Please note that **there is no formal definition** of such transformation provided by [OMG](http://www.omg.org) or anyone else, so it was identified using the tools provided bby modelant and proven in other projects.
 
   * the deleted in UML 1.4 Reference '''Foundation::Extension_Mechanisms::Stereotype::extendedElement''' is compensated by the added in UML 1.4 Reference '''Core::ModelElement::stereotype''' which actually reverses the navigability of the ModelElement-to-Stereotype association '''A_stereotype_extendedElement''' from Stereotype->ModelElement in UML 1.3 to ModelElement->Stereotype in UML 1.4
     * the deleted references will not be used in the conversion from UML 1.3 to UML 1.4, thus it is not mapped
@@ -120,77 +205,10 @@ Decisions:
   * VisibilityKind values mapping:
     * no UML 1.3 value for UML 1.4 vk_package
 
-Operation: Convert UML 1.3 to UML 1.4
--------------------------------------
 
-Use this snippet to convert a UML 1.3 model to UML 1.4 programatically:
+Modules
+-------
 
-```
-convert = new ConvertUml13ToUml14(sourceUml13Extent);
-mappings = convert.execute(targetUml14Extent);
-```
-
-Maven dependencies:
-
-```
-<dependencies>
-  <dependency>
-    <groupId>net.mdatools</groupId>
-    <artifactId>modelant.conversion.model</artifactId>
-    <version>${revision}</version>
-  </dependency>
-  <dependency>
-    <groupId>net.mdatools</groupId>
-    <artifactId>modelant.uml13.metamodel</artifactId>
-    <version>${revision}</version>
-  </dependency>
-  <dependency>
-    <groupId>net.mdatools</groupId>
-    <artifactId>modelant.uml14.metamodel</artifactId>
-    <version>${revision}</version>
-  </dependency>
-  <dependency>
-    <groupId>net.mdatools</groupId>
-    <artifactId>modelant.core.impl</artifactId>
-    <version>${revision}</version>
-  </dependency>
-  <dependency>
-    <groupId>net.mdatools</groupId>
-    <artifactId>modelant.repository.impl</artifactId>
-    <version>${revision}</version>
-  </dependency>
-</dependencies>
-```
-Note: the repository implementation could be replaced.
-
-Maven Plugin: Convert UML 1.3 to UML 1.4
------
-
-The goal '''convertUml13ToUml14''' of the '''modelant.conversion.maven.plugin''' converts UML 1.3 models to UML 1.4 as XMI 1.1/1.2 files.
-
-```
-<build>
-  <plugins>
-    <plugin>
-      <groupId>net.mdatools</groupId>
-      <artifactId>modelant.conversion.maven.plugin</artifactId>
-      <version>${revision}</version>
-      <executions>
-        <execution>
-          <phase>compile</phase>
-          <goals>
-            <goal>convertUml13ToUml14</goal>
-          </goals>
-          <configuration>
-            <sourceModel>...</sourceModel>
-            <targetModel>...</targetModel>
-          </configuration>
-        </execution>
-      </executions>
-    </plugin>
-  </plugins>
-</build>
-```
-
-  * **sourceModel** the path to the source UML 1.3 model in XMI 1.1/1.2 format
-  * **targetModel** the path to the target UML 1.4 model in XMI 1.2 format to create
+* [Conversion API](modelant.conversion.model/index.html)
+* [Conversion Maven plubins](modelant.conversion.maven/index.html)
+  

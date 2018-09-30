@@ -144,6 +144,6 @@ Project dependencies:
 Modules
 -------
 
-* [Core API](core.api/index.html)
-* [Core Implementation](core.impl/index.html)
-* [Core Tests/Specification](core.test/index.html)
+* [Core API](modelant.core.api/index.html)
+* [Core Implementation](modelant.core.impl/index.html)
+* [Core Tests/Specification](modelant.core.test/index.html)
