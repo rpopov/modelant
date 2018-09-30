@@ -71,8 +71,8 @@ public final class TemplateFactory {
    * </ul>
    * @param targetClass not null
    * @param templateName not null, not empty
-   * @return the template with the provided name defined for the target class or null when not found
-   * @throws IOException when load or template compilation problems are found
+   * @return the non-null template with the provided name defined for the target class or null when not found
+   * @throws IOException when load or template compilation problems are found, or no template found
    */
   public <T> Template<? extends T> getTemplate(Class<T> targetClass, String templateName) throws IOException {
     Template<? extends T> result;
@@ -108,10 +108,10 @@ public final class TemplateFactory {
             result = (Template<? extends T>) templateDescriptor.getTemplate();
 
           } else { // there is no template
-            result = null;
+            throw new IOException("No template found for "+key);
           }
         } else { // already decided that the template does not exist
-          result = null;
+          throw new IOException("No template cached for "+key);
         }
       }
     }

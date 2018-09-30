@@ -38,4 +38,15 @@ class TemplateKey {
               && this.ownerClass == ((TemplateKey) other).ownerClass
               && this.templateName.equals( ((TemplateKey) other).templateName);
   }
+
+  /**
+   * @see java.lang.Object#toString()
+   */
+  public String toString() {
+    StringBuilder builder = new StringBuilder();
+
+    builder.append( "TemplateKey[ownerClass=" ).append( ownerClass ).append( ", templateName=" ).append( templateName )
+           .append( "]" );
+    return builder.toString();
+  }
 }

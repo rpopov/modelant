@@ -52,6 +52,9 @@ public interface Template<W> {
   /**
    * The template method to call
    * @param wrapped is the non-null object to apply the object to
+   * @param engine not null engine to use to render any inlined templates
+   * @param context not null
+   * @throws IOException
    */
   void render(W wrapped, TemplateEngine engine, TemplateContext context) throws IOException;
 

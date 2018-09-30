@@ -144,16 +144,11 @@ class TemplateEngineImpl implements TemplateEngine {
                            String method,
                            TemplateContext templateContext) throws IOException {
     Template template;
-    Class targetClass;
 
     if ( targetObject == null ) {
       throw new IllegalArgumentException("Expected a npon-null object to render");
     }
-    targetClass = targetObject.getClass();
-    template = templateFactory.getTemplate( targetClass, method );
-
-    // TODO: IMPLEMENT THE DYNAMIC LOOKUP OF TEMPLATES & INHERITANCE FROM SUPERCLASS/SUPERINTERFACE
-
+    template = templateFactory.getTemplate(targetObject.getClass(), method);
     template.render( targetObject, this, templateContext );
   }
 
