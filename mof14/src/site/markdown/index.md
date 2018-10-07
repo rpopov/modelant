@@ -82,3 +82,12 @@ where:
   <export implementation="net.mdatools.modelant.core.operation.model.export.StructuredTextExport"/>
 ```
   It exports the text in a JSON-like format, suitable for collapsing/expanding and manual analysis.
+
+Modules
+=======
+
+  * [modelant.mof14.maven](./modelant.mof14.maven/index.html)
+  * [modelant.mof14.maven.plugin](./modelant.mof14.maven/modelant.mof14.maven.plugin/index.html)
+  * [modelant.mof14.metamodel](./modelant.mof14.metamodel/index.html)
+  * [modelant.mof14.test](./modelant.mof14.test/index.html)
+  

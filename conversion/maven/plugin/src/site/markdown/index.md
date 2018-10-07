@@ -1,7 +1,7 @@
 modelant.convension.maven.plugin
 ================================
 
-Any operations in terms of **\[A20\]** from [modelant.conversion.model](../modelant.conversion.model/index.html) are published as maven plugins.
+Any operations in terms of **\[A20\]** from [modelant.conversion.model](../../modelant.conversion.model/index.html) are published as maven plugins.
 Possible are the following use cases:
 
 * convert a UML 1.3 model to UML 1.4 model - use the [uml13-to-uml14](./plugin-info.html) maven plugin

@@ -91,7 +91,7 @@ Note: the repository implementation could be replaced.
 Mapping UML 1.3 to UML 1.4 models
 ---------------------------------
 
-With the help of the [model comparison plugin](../modelant.core.maven.plugin/index.html) the following mapping of UML 1.3 to UML 1.4 models was identified. Please note that **there is no formal definition** of such transformation provided by [OMG](http://www.omg.org) or anyone else, so it was identified using the tools provided bby modelant and proven in other projects.
+With the help of the [model comparison plugin](../modelant.core.maven.plugin/index.html) the following mapping of UML 1.3 to UML 1.4 models was identified. Please note that **there is no formal definition** of such transformation provided by [OMG](http://www.omg.org) or anyone else, but [the tracking changes in UML 1.4 formal definition](https://www.omg.org/cgi-bin/doc?formal/01-09-67), so it was identified using the tools provided bby modelant and proven in other projects.
 
   * the deleted in UML 1.4 Reference '''Foundation::Extension_Mechanisms::Stereotype::extendedElement''' is compensated by the added in UML 1.4 Reference '''Core::ModelElement::stereotype''' which actually reverses the navigability of the ModelElement-to-Stereotype association '''A_stereotype_extendedElement''' from Stereotype->ModelElement in UML 1.3 to ModelElement->Stereotype in UML 1.4
     * the deleted references will not be used in the conversion from UML 1.3 to UML 1.4, thus it is not mapped
@@ -205,6 +205,8 @@ With the help of the [model comparison plugin](../modelant.core.maven.plugin/ind
   * VisibilityKind values mapping:
     * no UML 1.3 value for UML 1.4 vk_package
 
+[See also](http://www.lysator.liu.se/xenofarm/argouml/work/argouml/www/documentation/umlsupport/uml_changes.html).    
+    
 
 Modules
 -------
