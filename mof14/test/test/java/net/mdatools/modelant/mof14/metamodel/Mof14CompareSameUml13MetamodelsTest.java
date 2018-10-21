@@ -13,7 +13,9 @@ import java.util.logging.Logger;
 import net.mdatools.modelant.core.api.diff.ModelComparisonResult;
 
 /**
- * Test the metamodels comparison by comparing UML 1.3 tpo itself
+ * Test the metamodels comparison by comparing UML 1.3 to itself. Prove the model comparison
+ * algorithm works correctly by finding no differences.
+ *
  * @author Rusi Popov (popovr@mdatools.net)
  */
 public class Mof14CompareSameUml13MetamodelsTest extends Mof14CompareMetamodelsBase {

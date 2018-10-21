@@ -15,6 +15,11 @@ import net.mdatools.modelant.core.api.diff.ModelComparisonResult;
 import net.mdatools.modelant.core.api.match.ConsideredEqual;
 import net.mdatools.modelant.core.operation.model.match.Equal;
 
+/**
+ * Compare the UML 1.3 and UML 1.4 metamodels considered as models (instances) of MOF 1.4 metamodel,
+ * providing initial obvious elements correspondence.
+ * @author Rusi Popov
+ */
 public class CompareMof14ModelsUml13toUml14WithEqualTest extends CompareMof14ModelsBase {
 
   public CompareMof14ModelsUml13toUml14WithEqualTest() {

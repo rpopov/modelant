@@ -40,7 +40,6 @@ public class Mof14CompareModelantAndOriginalUml13MetamodelsTest extends Mof14Com
    * @see net.mdatools.modelant.mof14.metamodel.Mof14CompareMetamodelsBase#verify(net.mdatools.modelant.core.api.diff.ModelComparisonResult)
    */
   protected void verify(ModelComparisonResult comparisonResult) {
-    
   	LOGGER.log(Level.FINE, "Result of comparison: {0}", comparisonResult );
 
     assertFalse( "Expected cahnges found", comparisonResult.isExactMatch() );

@@ -11,6 +11,11 @@ import java.util.logging.Level;
 
 import net.mdatools.modelant.core.api.diff.ModelComparisonResult;
 
+/**
+ * Compare the UML 1.3 and UML 1.4 metamodels considered as models (instances) of MOF 1.4 metamodel,
+ * providing no initial elements correspondence.
+ * @author Rusi Popov
+ */
 public class CompareMof14ModelsUml13toUml14Test extends CompareMof14ModelsBase {
 
   public CompareMof14ModelsUml13toUml14Test() {
