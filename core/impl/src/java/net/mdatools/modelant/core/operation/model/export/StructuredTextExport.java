@@ -237,6 +237,9 @@ public class StructuredTextExport implements Export {
 
   /**
    * Compare model elements by class and qualified name
+   * NOTE: MDR does not support attributes like name, qualifiedNames in the MOF 1.4's
+   *       metaobjects, which changes the way MOF metamodels are ordered, compared
+   *       to the UML and other models.
    * @param element1 not null
    * @param element2 not null
    * @return int indicating the order of element1 vs element2
@@ -246,14 +249,24 @@ public class StructuredTextExport implements Export {
 
     result = Navigator.getMetaClassName(element1)
                       .compareTo( Navigator.getMetaClassName( element2) );
+    if (result == 0 ) {
+      result =  getQualifiedName( element1 )
+                  .compareTo( getQualifiedName( element2 ) );
+    }
+    return result;
+  }
 
-    if (result == 0) {
-      result =  element1
-                 .refGetValue( ATTRIBUTE_QUALIFIED_NAME )
-                 .toString()
-                 .compareTo( element2
-                               .refGetValue( ATTRIBUTE_QUALIFIED_NAME )
-                               .toString() );
+  /**
+   * @param element not null
+   * @return not null qualified name of the element
+   */
+  private static String getQualifiedName(RefObject element) {
+    String result;
+
+    try {
+      result = element.refGetValue( ATTRIBUTE_QUALIFIED_NAME ).toString();
+    } catch (Exception ex) { // comparing MOF models in MDR, which does not provide names of
+      result = "";
     }
     return result;
   }

@@ -91,10 +91,11 @@ modelant already provides the metamodels of UML 1.4 and UML 1.4, so making them 
 
 As a result, the following changes from UML 1.3 to UML 1.4 were reported:
 
-### Formatting the differences printout for specific further processing 
+### Pre-defined correspondence and formatting the differences printout 
 
-
-Usage:
+In this example the MOF 1.4 ModelElement in the source model with name "Data_Types", found in the ModelElement with name "Foundation" (as a namespace) corresponds to the MOF 1.4 ModelElement in the target model, named "Data_Types". The resported outcome is in a JSON-like format. 
+  
+```
   <build>
     <plugins>
       <plugin>
@@ -124,18 +125,8 @@ Usage:
       </plugin>
     </plugins>
   </build>
+```
 
-where:
-;sourceMetamodel: refers the XMI file of the definition of the metamodel, considered as old/previous version/source in the comparison
-;targetMetamodel: refers the XMI file of the definition of the metamodel, considered as new/current version/target in the comparison
-;equals: a list of externally defined mathed elements, overriding the uniform comparison rules
-;equal: defines a single match of a set of source metamodel elements to a set of target metamodel elements, that should be considered equal, overriding the comparison rules
-;source: the qualified name of an element in the source metamodel, in the format: &lt;owner name&gt;{::&lt;owner name&gt;}::&lt;element name&gt;
-;target: the qualified name of an element in the target metamodel, in the format: &lt;owner name&gt;{::&lt;owner name&gt;}::&lt;element name&gt;
-;export: Define the mechanism to export the results of the models comparison. The default implementation uses its toString(). Alternative:
-  <export implementation="net.mdatools.modelant.core.operation.model.export.StructuredTextExport"/>
-It exports the text in a JSON-like format, suitable for collapsing/expanding and manual analysis.
-
-
+The outcome 
 
 Based on the report above, the [changes from UML 1.3 to UML 1.4](../../../modelant.conversion/index.html) are identified.

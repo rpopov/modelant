@@ -28,6 +28,7 @@ import net.mdatools.modelant.core.operation.element.PrintModelElement;
 import net.mdatools.modelant.core.operation.element.RetrieveAssociations;
 import net.mdatools.modelant.core.operation.element.RetrieveAttributes;
 import net.mdatools.modelant.core.operation.element.Set;
+import net.mdatools.modelant.core.operation.model.export.StructuredTextExport;
 
 /**
  * Introduce attribute changes (value differences) and verify they are detected
