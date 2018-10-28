@@ -45,3 +45,9 @@ The converted to UML 1.4 models can be imported in:
 as they employ MOF 1.4 and XMI 1.1 and XMI 1.2.
 
 Modelant wraps the [NetBeans Meta-Data Repository / MDR](https://netbeans.org/download/5_5/javadoc/org-netbeans-api-mdr/architecture-summary.html).
+
+Still to provide
+----------------
+
+* The wrapper classes for the the JMI interfaces are still not published.
+* The common code generation templates are still not migrated from 2.25 version.   

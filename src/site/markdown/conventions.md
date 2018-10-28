@@ -19,12 +19,12 @@ Java Code Conventions
 
 **\[CC3\]**  Selectors naming convention: **Select\[&lt;adjective&gt;\]&lt;direct object&gt;** as a special case of Function
 
+Use https://www.oracle.com/technetwork/java/codeconventions-150003.pdf until more precise is defined.
 
+<!--
 TODO: DEFINE
 
 https://gist.github.com/goldbattle/9283399
-
-https://www.oracle.com/technetwork/java/codeconventions-150003.pdf
 
 https://google.github.io/styleguide/javaguide.html
 
@@ -33,6 +33,7 @@ https://github.com/raywenderlich/java-style-guide/blob/master/README.markdown
 https://github.com/twitter/commons/blob/master/src/java/com/twitter/common/styleguide.md
 
 https://www.javacodegeeks.com/2012/10/java-coding-conventions-considered-harmful.html
+-->
 
 Documentation Conventions
 -------------------------

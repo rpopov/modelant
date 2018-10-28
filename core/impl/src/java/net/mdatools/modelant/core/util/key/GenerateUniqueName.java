@@ -22,9 +22,10 @@ import java.util.Map;
  *    name = constructUniqueName( name_suggestion );
  *
  * </pre>
+ * As it is statefull, it cannot be defined as an Operation
  * @author Rusi Popov (popovr@mdatools.net)
  */
-public class UniqueNamesGenerator {
+public class GenerateUniqueName {
 
   /**
    * Maps:

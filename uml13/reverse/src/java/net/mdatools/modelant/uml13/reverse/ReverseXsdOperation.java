@@ -63,7 +63,7 @@ import com.sun.xml.xsom.parser.AnnotationParserFactory;
 import com.sun.xml.xsom.parser.XSOMParser;
 
 import net.mdatools.modelant.core.api.Function;
-import net.mdatools.modelant.core.util.key.UniqueNamesGenerator;
+import net.mdatools.modelant.core.util.key.GenerateUniqueName;
 import net.mdatools.modelant.repository.api.ModelFactory;
 import net.mdatools.modelant.repository.api.ModelRepository;
 
@@ -118,7 +118,7 @@ public class ReverseXsdOperation implements Function<File,RefPackage> {
   /**
    * Generates unique class names for anonymous XSD types
    */
-  private final UniqueNamesGenerator uniqueNamesGenerator = new UniqueNamesGenerator();
+  private final GenerateUniqueName uniqueNamesGenerator = new GenerateUniqueName();
 
   /**
    * The common type AnyType, string provided by the schema implementation

@@ -415,18 +415,10 @@ public class Navigator {
   }
 
   /**
-   * @param refPackage
-   * @return the qualified name of the class provided
-   */
-  public static String constructQualifiedName(RefPackage refPackage) {
-    return constructQualifiedName((ModelElement) refPackage.refMetaObject());
-  }
-
-  /**
    * @param metaObject this is a MOF object
    * @return the qualified name of the MOF element, calculated down the containment relation
    */
-  public static String constructQualifiedName(ModelElement metaObject) {
+  private static String constructQualifiedName(ModelElement metaObject) {
     StringBuilder result = new StringBuilder(256);
 
     insertQualifiedName( metaObject, result );

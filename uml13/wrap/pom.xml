@@ -20,17 +20,17 @@
     </dependency>
     <dependency>
       <groupId>net.mdatools</groupId>
-      <artifactId>modelant.core</artifactId>
+      <artifactId>modelant.core.api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>net.mdatools</groupId>
-      <artifactId>modelant.repository</artifactId>
+      <artifactId>modelant.repository.api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>net.mdatools</groupId>
-      <artifactId>modelant.template</artifactId>
+      <artifactId>modelant.template.api</artifactId>
       <version>${project.version}</version>
     </dependency>
 <!--     
