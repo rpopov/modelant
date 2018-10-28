@@ -32,7 +32,7 @@ import net.mdatools.modelant.repository.api.ModelRepository;
  * </pre>
  * @author Rusi Popov (popovr@mdatools.net)
  */
-public abstract class BaseModelFactory implements ModelFactory, ModelFactorySetup {
+public abstract class BaseModelFactory<P extends RefPackage> implements ModelFactory<P>, ModelFactorySetup {
 
   /**
    * The owner repository
@@ -73,18 +73,18 @@ public abstract class BaseModelFactory implements ModelFactory, ModelFactorySetu
 	/**
    * @see net.mdatools.modelant.repository.api.ModelFactory#instantiate(java.lang.String)
    */
-  public final RefPackage instantiate() {
+  public final P instantiate() {
     return instantiate(getMetamodelName()+System.currentTimeMillis());
   }
 
   /**
    * @see net.mdatools.modelant.repository.api.ModelFactory#instantiate(java.lang.String)
    */
-  public final RefPackage instantiate(String extentName) {
-    RefPackage result;
+  public final P instantiate(String extentName) {
+    P result;
 
     try {
-      result = repository.constructModelExtent(mofExtent, getModelPackageName(), extentName );
+      result = (P) repository.constructModelExtent(mofExtent, getModelPackageName(), extentName );
     } catch (Exception ex) {
       throw new IllegalArgumentException("The instantiation of the metamodel "+getMetamodelName()+" caused: "+ex);
     }
@@ -106,11 +106,11 @@ public abstract class BaseModelFactory implements ModelFactory, ModelFactorySetu
   /**
    * @see net.mdatools.modelant.repository.api.ModelFactory#readModel(javax.jmi.reflect.RefPackage, java.lang.String)
    */
-  public final void readModel(RefPackage model, String modelUrl) throws IOException, MalformedXMIException {
+  public final void readModel(P model, String modelUrl) throws IOException, MalformedXMIException {
     readModel( model, modelUrl, getClass().getClassLoader() );
   }
 
-  public final void readModel(RefPackage model, String modelUrl, ClassLoader loader) throws IOException, MalformedXMIException {
+  public final void readModel(P model, String modelUrl, ClassLoader loader) throws IOException, MalformedXMIException {
     repository.readIntoExtent( model, modelUrl, loader );
 
   }
@@ -125,21 +125,21 @@ public abstract class BaseModelFactory implements ModelFactory, ModelFactorySetu
   /**
    * @see net.mdatools.modelant.repository.api.ModelRepository#readIntoExtent(javax.jmi.reflect.RefPackage, java.io.File)
    */
-  public final void readModel(RefPackage extent, File file) throws IOException, MalformedXMIException {
+  public final void readModel(P extent, File file) throws IOException, MalformedXMIException {
     repository.readIntoExtent( extent, file );
   }
 
   /**
    * @see net.mdatools.modelant.repository.api.ModelFactory#writeExtent(javax.jmi.reflect.RefPackage, java.io.File)
    */
-  public final void writeExtent(RefPackage extent, File file) throws IOException, InvalidNameException {
+  public final void writeExtent(P extent, File file) throws IOException, InvalidNameException {
     repository.writeExtent( extent, file, ModelRepository.DEFAULT_XMI_VERSION );
   }
 
   /**
    * @see net.mdatools.modelant.repository.api.ModelFactory#writeExtent(javax.jmi.reflect.RefPackage, java.io.File, java.lang.String)
    */
-  public final void writeExtent(RefPackage extent, File file, String xmiVersion) throws IOException, InvalidNameException {
+  public final void writeExtent(P extent, File file, String xmiVersion) throws IOException, InvalidNameException {
     repository.writeExtent( extent, file, xmiVersion );
   }
 }

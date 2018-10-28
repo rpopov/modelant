@@ -24,7 +24,7 @@ import net.mdatools.modelant.repository.spi.BaseModelFactory;
  * </pre>
  * @author Rusi Popov (popovr@mdatools.net)
  */
-public final class Mof14ModelFactory extends BaseModelFactory {
+public final class Mof14ModelFactory extends BaseModelFactory<javax.jmi.model.ModelPackage> {
 
   /**
    * @see net.mdatools.modelant.repository.spi.ModelFactorySetup#getMetamodelName()

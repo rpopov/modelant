@@ -31,10 +31,11 @@ import net.mdatools.modelant.repository.spi.ModelFactorySetup;
  * sourceExtent = metamodelFactory.instantiate("SOURCE");
  * repository.readIntoExtent( sourceExtent, sourceModel );
  * </pre>
+ * @param M the model's root JMI package interface, which gives access to the loaded model
  * @see ModelRepository
  * @author Rusi Popov (popovr@mdatools.net)
  */
-public interface ModelFactory {
+public interface ModelFactory<P extends RefPackage> {
 
   /**
    * @return non-null extent where the metamodel is loaded
@@ -47,7 +48,7 @@ public interface ModelFactory {
    * @throws IllegalArgumentException in case the extent is not available or the metamodel load failed
    * @see #readModel(RefPackage, File)
    */
-  RefPackage instantiate();
+  P instantiate();
 
   /**
    * Instantiate the metamodel in the provided extent
@@ -56,7 +57,7 @@ public interface ModelFactory {
    * @throws IllegalArgumentException in case the extent is not available or the metamodel load failed
    * @see #readModel(RefPackage, File)
    */
-  RefPackage instantiate(String extentName);
+  P instantiate(String extentName);
 
   /**
    * Read the model in the provided extent
@@ -66,7 +67,7 @@ public interface ModelFactory {
    * @throws MalformedXMIException
    * @throws IOException
    */
-  void readModel(RefPackage model, String modelUrl) throws IOException, MalformedXMIException;
+  void readModel(P model, String modelUrl) throws IOException, MalformedXMIException;
 
   /**
    * Read the model in the provided extent
@@ -76,7 +77,7 @@ public interface ModelFactory {
    * @throws MalformedXMIException
    * @throws IOException
    */
-  void readModel(RefPackage model, String modelUrl, ClassLoader loader) throws IOException, MalformedXMIException;
+  void readModel(P model, String modelUrl, ClassLoader loader) throws IOException, MalformedXMIException;
 
   /**
    * Read a metamodel or a model into an extent.
@@ -94,7 +95,7 @@ public interface ModelFactory {
    * @throws IOException
    * @throws MalformedXMIException
    */
-  void readModel(RefPackage extent, File file) throws IOException, MalformedXMIException;
+  void readModel(P extent, File file) throws IOException, MalformedXMIException;
 
 
   /**
@@ -104,7 +105,7 @@ public interface ModelFactory {
    * @throws IOException
    * @throws InvalidNameException
    */
-  void writeExtent(RefPackage extent, File file) throws IOException, InvalidNameException;
+  void writeExtent(P extent, File file) throws IOException, InvalidNameException;
 
 
   /**
@@ -115,6 +116,6 @@ public interface ModelFactory {
    * @throws IOException
    * @throws InvalidNameException
    */
-  void writeExtent(RefPackage extent, File file, String xmiVersion) throws IOException, InvalidNameException;
+  void writeExtent(P extent, File file, String xmiVersion) throws IOException, InvalidNameException;
 
 }

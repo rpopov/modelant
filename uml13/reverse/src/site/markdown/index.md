@@ -15,7 +15,7 @@ The ```net.mdatools.modelant.uml13.reverse.ReverseDatabaseOperation``` class imp
 
 Conventions on the produced model:
 
-  * The database column types are converted to DataType instances named: ```&lt;type name&gt;[_&lt;column size&gt;[_&lt;column precision&gt;]]```. Additionally **length** and **scale** Tagged Values are bound to the actual DataType instance.
+  * The database column types are converted to DataType instances named: ```<type name>[_<column size>[_<column precision>]]```. Additionally **length** and **scale** Tagged Values are bound to the actual DataType instance.
     * The **length** Tagged Value is mandatory, indicating the positions or characters needed to represent the value.  
     * The **scale** Tagged Value is optional. When not provided, the decimal places should be treated as 0.
   * Any comments found while reverse engineering the database are bound as **documentation** Tagged Value.
@@ -28,9 +28,9 @@ The ```net.mdatools.modelant.uml13.reverse.ReverseXsdOperation``` implements the
 
 Conventions on the produced model:
 
- * The model elements (classes, association names) that represent elements in the output XML are marked with ```&lt;&lt;element&gt;&gt;``` stereotype.
- * For representation purposes local types (UML classes) could be introduced for XSD groups, unions, local / inlined types. All of them are marked with ```&lt;&lt;local type&gt;&gt;``` stereotype
- * The column types are converted to DataType instances named: ```&lt;type name&gt;[_&lt;column size&gt;[_&lt;column precision&gt;]]```. Additionally **length** and **scale** Tagged Values are bound to the actual DataType instance.
+ * The model elements (classes, association names) that represent elements in the output XML are marked with ```<<element>>``` stereotype.
+ * For representation purposes local types (UML classes) could be introduced for XSD groups, unions, local / inlined types. All of them are marked with ```<<local type>>``` stereotype
+ * The column types are converted to DataType instances named: ```<type name>[_<column size>[_<column precision>]]```. Additionally **length** and **scale** Tagged Values are bound to the actual DataType instance.
     * The **length** Tagged Value is mandatory, indicating the positions or characters needed to represent the value.  
     * The **scale** Tagged Value is optional. When not provided, the decimal places should be treated as 0. 
  * Any comments found while reverse engineering the XSD are bound as 'documentation' tagged values. These tagged values are compatible with the Rose's approach to documentation. They are optional.

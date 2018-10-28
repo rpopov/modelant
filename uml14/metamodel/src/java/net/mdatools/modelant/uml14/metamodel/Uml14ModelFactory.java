@@ -25,7 +25,7 @@ import net.mdatools.modelant.repository.spi.BaseModelFactory;
  * </pre>
  * @author Rusi Popov (popovr@mdatools.net)
  */
-public final class Uml14ModelFactory extends BaseModelFactory {
+public final class Uml14ModelFactory extends BaseModelFactory<org.omg.uml14.Uml14Package> {
 
   /**
    * @see net.mdatools.modelant.repository.spi.ModelFactorySetup#getMetamodelName()

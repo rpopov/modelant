@@ -16,35 +16,6 @@ Please note:
  * the dtd-to-xsd plugin, composed with xsd-to-uml13 allows reverse engineering of DTDs to UML 1.3 
  * that the [UML 1.4 plugin](../../../modelant.uml14/modelant.uml14.maven/modelant.uml14.maven.plugin/index.html) allows converting the UML 1.3 models to UML 1.4, which transfers these features to UML 1.4 too. 
 
-Convert a DTD to XSD
---------------------
-```
-<plugin>
-  <groupId>net.mdatools</groupId>
-  <artifactId>modelant.conversion.maven.plugin</artifactId>
-  <version>3.2.0</version>
-  <executions>
-    <execution>
-      <phase>compile</phase>
-      <goals>
-        <goal>dtd-to-xsd/goal>
-      </goals>
-      <configuration>
-        <dtdFile>...</dtdFile>
-        <xsdFile>...</xsdFile>
-      </configuration>
-    </execution>
-  </executions>
-</plugin>
-```
-
-where:
-
-  * **dtdFile**  The DTD file to convert to XSD
-  * **xsdFile**  The name of the XSD file to produce.
-
-NOTE: The used **compile** phase is the defaulut and recommended only. Any other phase would work too.
-
 Reverse engineering of XSD to UML 1.3 model
 -------------------------------------------
 
@@ -74,6 +45,8 @@ where:
   * **outputFile**  The name of the file where to export the produced UML 1.3 model in XMI 1.2 format
 
 NOTE: The used **compile** phase is default and recommended only. Any other phase would work too.
+
+See [modelant.uml13.reverse](../../modelant.uml13.reverse/index.html) module for details.
 
 Reverse engineer a database schema to UML 1.3 model
 ---------------------------------------------------
@@ -115,6 +88,7 @@ where:
 
 NOTE: The used **compile** phase is recommended only. Any other phase would work too.
 
+See [modelant.uml13.reverse](../../modelant.uml13.reverse/index.html) module for details.
 
 Reverse engineer Java sources to UML 1.3 model
 ----------------------------------------------
@@ -150,6 +124,36 @@ where:
 
 NOTE: The compile phase is set by default, so in &lt;execution&gt; we overwrite it.
 
+See [modelant.uml13.reverse](../../modelant.uml13.reverse/index.html) module for details.
+
+Convert a DTD to XSD
+--------------------
+```
+<plugin>
+  <groupId>net.mdatools</groupId>
+  <artifactId>modelant.conversion.maven.plugin</artifactId>
+  <version>3.2.0</version>
+  <executions>
+    <execution>
+      <phase>compile</phase>
+      <goals>
+        <goal>dtd-to-xsd/goal>
+      </goals>
+      <configuration>
+        <dtdFile>...</dtdFile>
+        <xsdFile>...</xsdFile>
+      </configuration>
+    </execution>
+  </executions>
+</plugin>
+```
+
+where:
+
+  * **dtdFile**  The DTD file to convert to XSD
+  * **xsdFile**  The name of the XSD file to produce.
+
+NOTE: The used **compile** phase is the defaulut and recommended only. Any other phase would work too.
 
 Comparison of UML 1.3 models
 ----------------------------

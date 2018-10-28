@@ -4,21 +4,11 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/DECORATION/1.8.0 http://maven.apache.org/xsd/decoration-1.8.0.xsd">
   <body>
+    <menu ref="parent"/>
     <menu name="Overview">
       <item name="About" href="index.html"/>
       <item name="Goals" href="plugin-info.html"/>
-      <item name="Usage" href="usage.html"/>
       <item name="FAQ" href="faq.html"/>
-    </menu>
-    <menu name="Samples">
-      <item name="Sample Changes Report" href="changes-report.html"/>
-      <item name="Live JIRA Report" href="jira-report.html"/>
-      <item name="Markdown Example" href="markdown.html"/>
-      <item name="Markdown with Velocity Example" href="markdown-velocity.html"/>
-    </menu>
-    <menu name="Examples">
-      <item name="Alternate Location for the changes.xml File" href="examples/alternate-changes-xml-location.html"/>
-      <item name="SMTP Authentication" href="examples/smtp-authentication.html"/>
     </menu>
     <menu ref="reports" />
   </body>

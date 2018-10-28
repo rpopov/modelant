@@ -14,3 +14,8 @@ repository.readIntoExtent(modelExtent, "model file path" );
   or
 modelFactory.readModel(modelExtent, "model file path");
 ```
+
+Compare UML 1.4 models
+----------------------
+
+See [modelant.uml14.maven.plugin](modelant.uml14.maven/modelant.uml14.maven.plugin/index.html) module

@@ -40,19 +40,19 @@ defaultPhase=LifecyclePhase.COMPILE
 public class CompareModelsMojo extends AbstractMojo {
 
   /**
-   * Where to generate the API sources
+   * The name of the file with the source (original) model
    */
 	@Parameter(property="project.build.sourceDirectory", required=true)
   private File sourceModel;
 
   /**
-   * Where the metamodel is located
+   * The name of the file with the target (changed) model
    */
 	@Parameter(required=true)
   private File targetModel;
 
   /**
-   * Where the work files are located
+   * The directory where the temporary internal files are located
    */
 	@Parameter(property="project.build.directory", required=true)
   private File workDirectory;
