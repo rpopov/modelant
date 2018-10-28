@@ -11,6 +11,36 @@ Possible are the following use cases:
 
 <!-- MACRO{toc} -->
 
+Convert a DTD to XSD
+--------------------
+```
+<plugin>
+  <groupId>net.mdatools</groupId>
+  <artifactId>modelant.conversion.maven.plugin</artifactId>
+  <version>3.2.0</version>
+  <executions>
+    <execution>
+      <phase>compile</phase>
+      <goals>
+        <goal>dtd-to-xsd/goal>
+      </goals>
+      <configuration>
+        <dtdFile>...</dtdFile>
+        <xsdFile>...</xsdFile>
+      </configuration>
+    </execution>
+  </executions>
+</plugin>
+```
+
+where:
+
+  * **dtdFile**  The DTD file to convert to XSD
+  * **xsdFile**  The name of the XSD file to produce.
+
+NOTE: The used **compile** phase is the defaulut and recommended only. Any other phase would work too.
+
+
 See also
 --------
 * [modelant maven plugin goals](./plugin-info.html)

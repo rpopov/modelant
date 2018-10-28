@@ -40,53 +40,12 @@ The goal '''convertUml13ToUml14''' of the '''modelant.conversion.maven.plugin'''
   </plugins>
 </build>
 ```
+where:
 
   * **sourceModel** the path to the source UML 1.3 model in XMI 1.1/1.2 format
   * **targetModel** the path to the target UML 1.4 model in XMI 1.2 format to create
     
-Operation: Convert UML 1.3 to UML 1.4
--------------------------------------
-
-Use this snippet to convert a UML 1.3 model to UML 1.4 programatically:
-
-```
-convert = new ConvertUml13ToUml14(sourceUml13Extent);
-mappings = convert.execute(targetUml14Extent);
-```
-
-Maven dependencies:
-
-```
-<dependencies>
-  <dependency>
-    <groupId>net.mdatools</groupId>
-    <artifactId>modelant.conversion.model</artifactId>
-    <version>${revision}</version>
-  </dependency>
-  <dependency>
-    <groupId>net.mdatools</groupId>
-    <artifactId>modelant.uml13.metamodel</artifactId>
-    <version>${revision}</version>
-  </dependency>
-  <dependency>
-    <groupId>net.mdatools</groupId>
-    <artifactId>modelant.uml14.metamodel</artifactId>
-    <version>${revision}</version>
-  </dependency>
-  <dependency>
-    <groupId>net.mdatools</groupId>
-    <artifactId>modelant.core.impl</artifactId>
-    <version>${revision}</version>
-  </dependency>
-  <dependency>
-    <groupId>net.mdatools</groupId>
-    <artifactId>modelant.repository.impl</artifactId>
-    <version>${revision}</version>
-  </dependency>
-</dependencies>
-```
-Note: the repository implementation could be replaced.
-
+See also [Operation: Convert UML 1.3 to UML 1.4](modelant.conversion.model/index.html)
 
 Mapping UML 1.3 to UML 1.4 models
 ---------------------------------

@@ -156,7 +156,7 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
       <dependency>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.0.0</version>
+        <version>3.0.1</version>
       </dependency>
       <dependency>
         <!-- javax.jmi.repository -->
@@ -211,6 +211,11 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
         <version>1.8</version>
         <scope>system</scope>
         <systemPath>${java.home}/../lib/tools.jar</systemPath>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.plexus</groupId>
+        <artifactId>plexus-container-default</artifactId>
+        <version>1.7.1</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
