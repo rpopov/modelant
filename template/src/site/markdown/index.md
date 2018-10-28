@@ -34,6 +34,8 @@ engine.render(targetFile, targetObject, templateName, bindings)
 engine.render(targetObject, templateName, context)
 ```
 
+The template is identified by the **class name** of the object to render and the **template name** (when provided explicitly) or the **name of the calling method** in ```engine.render(targetObject, context)```.
+
 Template Syntax
 ---------------
 
@@ -74,6 +76,8 @@ The templates are stored in files with **.jsp** extension in order to reuse exis
   For example:
     * java/lang/String/hello.jsp is a template rendering instances of java.lang.String
     * java/util/ArrayList/world.jsp is a template rendering instances of java.util.ArrayList
+    
+NOTE: The syntax of of the templates is changed (simplified), compared to the syntax in 2.25 version.     
 
 Project Directories
 -------------------
