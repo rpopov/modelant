@@ -39,26 +39,29 @@ import net.mdatools.modelant.repository.api.ModelRepositoryFactory;
 public class CompareMetamodelsMojo extends AbstractMojo {
 
   /**
-   * Where to generate the API sources
+   * The name of the file with the source (original) model
    */
 	@Parameter(property="project.build.sourceDirectory", required=true)
   private File sourceMetamodel;
 
   /**
-   * Where the metamodel is located
+   * The name of the file with the target (changed) model
    */
 	@Parameter(required=true)
   private File targetMetamodel;
 
   /**
-   * Where the work files are located
+   * The directory where the temporary internal files are located
    */
 	@Parameter(property="project.build.directory", required=true)
   private File workDirectory;
 
   /**
-   * Pairs of &lt;metaclass&gt;, &lt;metapackage&gt; as pairs of source and target metamodel classes,
-   * that should be considered equal.
+   * Pairs of source and target model elements, that should be considered equal.
+   * The model elements are referred by their qualified name, reflecting their nesting in other model
+   * elements as namespaces. For example: Foundation::Core refers the MOF 1.4 model element named
+   * "Core", nested in the model element named "Foundation" (as its namespace), which is a top-level
+   * model element (not nested in anything).
    */
 	@Parameter
   private List<ConsideredEqual> equals;

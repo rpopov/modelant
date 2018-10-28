@@ -93,7 +93,9 @@ public class StructuredTextExport implements Export {
     print = new PrintModelElement(indent+indent(6));
 
     out.print( indent );
-    out.print( "{" );
+    out.println( "{" );
+
+    out.print( indent );
     out.print( "xObject = " );
     out.print( print.execute( diff.getXObject() ) );
     out.println(",");
@@ -212,7 +214,7 @@ public class StructuredTextExport implements Export {
 
     Collections.sort( diffs, new OrderInstanceDifferences() );
 
-    out.print( "{" );
+    out.println( "{" );
     first = true;
     for (InstanceDifference diff : diffs) {
       if ( !first) {
