@@ -217,6 +217,11 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
         <artifactId>plexus-container-default</artifactId>
         <version>1.7.1</version>
       </dependency>
+      <dependency>
+        <groupId>org.apache.maven.doxia</groupId>
+        <artifactId>doxia-site-renderer</artifactId>
+        <version>1.8.1</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
