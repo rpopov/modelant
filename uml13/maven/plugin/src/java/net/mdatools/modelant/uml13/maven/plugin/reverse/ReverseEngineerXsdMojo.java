@@ -24,7 +24,7 @@ import net.mdatools.modelant.repository.api.ModelRepositoryFactory;
 import net.mdatools.modelant.uml13.reverse.ReverseXsdOperation;
 
 /**
- * This class implements reverse engineering logic for XML schemas and storing the results as UML
+ * Reverse engineer a XML schema and storing the results as UML
  * 1.3 objects. The model produced is in fact a Platform Specific Model, which might need additional
  * processing and tuning.
  * <p>

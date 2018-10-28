@@ -1,10 +1,12 @@
 UML 1.3
 =======
 
+The whole support of modelant for UML 1.3 through Maven plugins is presented in details in the [plugin module](modeant.uml13.maven.plugin/index.html).
+
 <!-- MACRO{toc} -->
 
 Convert a DTD to XSD
------
+--------------------
 ```
 <plugin>
   <groupId>net.mdatools</groupId>
@@ -90,6 +92,7 @@ Reverse engineer a database schema to UML 1.3 model
 ```
 
 where:
+
   * **driver**  The java class name of the database driver to connect the database. The .jar with that class file should be provided as a dependency of this plugin
   * **outputFile**  The name of the file where to export the produced UML 1.3 model in XMI 1.2 format
   * **password**  Database user's password
@@ -127,6 +130,8 @@ Reverse engineer Java sources to UML 1.3 model
     </executions>
   </plugin>
 ```
+
+where:
 
   * **sourcepath**  The source paths where the subpackages are located. The sourcepath can contain multiple paths by separating them with a colon (:) or a semi-colon (;).
   * **outputDirectory**  The destination directory where to store the generated model file.

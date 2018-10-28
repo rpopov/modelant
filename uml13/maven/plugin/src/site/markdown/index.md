@@ -1,41 +1,184 @@
 modelant.uml13.maven.plugin
 ===========================
 
-Modelant publishes a Maven plugin that compares two models written in MOF 1.4. The regular practice is to use such models
-as metamodels - definitions of other modeling languages. Thus, changes in the MOF 1.4 metamodels define the changes in the 
-modeling languages. As an example, the differences between UML 1.3 and UML 1.4 metamodels, define the UML 1.4 language changes since UML 1.3. 
- 
-The goal ```compare-mof14-metamodels``` of the ```net.mdatools:modelant.mof14.maven:3.1.0``` plugin compares two models and reports the differences, that are needed to convert the source model into the target one.
+modelant publishes a Maven plugin ```net.mdatools:modelant.uml13.maven:3.1.0``` with the following goals:
+
+ * ```dtd-to-xsd``` - convert DTD to XSD
+ * ```xsd-to-uml13``` - reverse engineer an XML Schema to UML 1.3 model
+ * ```db-to-uml13``` - reverse engineer a relational database to UML 1.3 model
+ * ```java-to-uml13``` - reverse engineer java code to UML 1.3 model
+ * ```compare-uml13-models``` - identify the changes of a source (original) model needed to convert it into a target model  
 
 <!-- MACRO{toc} -->
 
+Please note:
 
-Below are provided two usage scenarios 
+ * the dtd-to-xsd plugin, composed with xsd-to-uml13 allows reverse engineering of DTDs to UML 1.3 
+ * that the [UML 1.4 plugin](../../../modelant.uml14/modelant.uml14.maven/modelant.uml14.maven.plugin/index.html) allows converting the UML 1.3 models to UML 1.4, which transfers these features to UML 1.4 too. 
 
-General Usage Scenario
-----------------------
-
-If both (meta)models are provided in the plugin's classpath, the simplest way to compare them is just to provide the relative path to them. The plugin will report the detected changes in a basic form:
-
+Convert a DTD to XSD
+--------------------
 ```
 <plugin>
   <groupId>net.mdatools</groupId>
-  <artifactId>modelant.mof14.maven.plugin</artifactId>
-  <version>3.3.0</version>
+  <artifactId>modelant.conversion.maven.plugin</artifactId>
+  <version>3.2.0</version>
   <executions>
     <execution>
       <phase>compile</phase>
       <goals>
-        <goal>compare-mof14-metamodels</goal>
+        <goal>dtd-to-xsd/goal>
       </goals>
       <configuration>
-        <sourceMetamodel>src/resource/01-12-02_Diff_modelant.xml</sourceMetamodel>
-        <targetMetamodel>src/resource/01-02-15_Diff_modelant.xml</targetMetamodel>
+        <dtdFile>...</dtdFile>
+        <xsdFile>...</xsdFile>
       </configuration>
     </execution>
   </executions>
-</plugin>      
+</plugin>
 ```
+
+where:
+
+  * **dtdFile**  The DTD file to convert to XSD
+  * **xsdFile**  The name of the XSD file to produce.
+
+NOTE: The used **compile** phase is the defaulut and recommended only. Any other phase would work too.
+
+Reverse engineering of XSD to UML 1.3 model
+-------------------------------------------
+
+```
+<plugin>
+  <groupId>net.mdatools</groupId>
+  <artifactId>modelant.uml13.maven.plugin</artifactId>
+  <version>3.2.0</version>
+  <executions>
+    <execution>
+      <phase>compile</phase>
+      <goals>
+        <goal>xsd-to-uml13</goal>
+      </goals>
+      <configuration>
+        <schemaFile>...</schemaFile>
+        <outputFile>...</outputFile>
+      </configuration>
+    </execution>
+  </executions>
+</plugin>
+```
+
+where:
+
+  * **schemaFile**  The schema file to reverse engineer.
+  * **outputFile**  The name of the file where to export the produced UML 1.3 model in XMI 1.2 format
+
+NOTE: The used **compile** phase is default and recommended only. Any other phase would work too.
+
+Reverse engineer a database schema to UML 1.3 model
+---------------------------------------------------
+
+```
+<plugin>
+  <groupId>net.mdatools</groupId>
+  <artifactId>modelant.uml13.maven.plugin</artifactId>
+  <version>3.2.0</version>
+  <executions>
+    <execution>
+      <phase>compile</phase>
+      <goals>
+        <goal>reverseEngineerDatabaseInUml13</goal>
+      </goals>
+      <configuration>
+        <driver>...</driver>
+        <url>...</url>
+        <user>...</user>
+        <password>...</password>
+        <schema>...</schema>
+        <outputFile>...</outputFile>
+      </configuration>
+    </execution>
+  </executions>
+</plugin>
+```
+
+where:
+
+  * **driver**  The java class name of the database driver to connect the database. The .jar with that class file should be provided as a dependency of this plugin
+  * **outputFile**  The name of the file where to export the produced UML 1.3 model in XMI 1.2 format
+  * **password**  Database user's password
+  * **schema**  Database schema to reverse engineer
+  * **url**  Database driver-specific URL
+  * **user**  Database user to connect the database
+  * **workDir**  The directory where to store the repository files
+  * **outputFile**  The name of the file where to export the produced UML 1.3 model in XMI 1.2 format
+
+NOTE: The used **compile** phase is recommended only. Any other phase would work too.
+
+
+Reverse engineer Java sources to UML 1.3 model
+----------------------------------------------
+
+```
+  <plugin>
+    <groupId>net.mdatools</groupId>
+    <artifactId>modelant.uml13.maven.javauml</artifactId>
+    <version>3.2.0</version>        
+    <executions>
+      <execution>
+        <phase>compile</phase>
+        <goals>
+          <goal>reverseEngineerJavaInUml13</goal>
+        </goals>
+        <configuration>
+          <sourcepath>...</sourcepath>
+          <outputDirectory>...</outputDirectory>
+          <includeDependencySources>false</includeDependencySources>
+          <includeTransitiveDependencySources>false</includeTransitiveDependencySources>
+          <debug>true</debug>
+          <verbose>true</verbose>              
+        </configuration>
+      </execution>
+    </executions>
+  </plugin>
+```
+
+where:
+
+  * **sourcepath**  The source paths where the subpackages are located. The sourcepath can contain multiple paths by separating them with a colon (:) or a semi-colon (;).
+  * **outputDirectory**  The destination directory where to store the generated model file.
+
+NOTE: The compile phase is set by default, so in &lt;execution&gt; we overwrite it.
+
+
+Comparison of UML 1.3 models
+----------------------------
+
+```
+<build>
+  <plugins>
+    <plugin>
+      <groupId>net.mdatools</groupId>
+      <artifactId>modelant.uml13.maven.plugin</artifactId>
+      <version>3.3.0</version>
+      <executions>
+        <execution>
+          <phase>compile</phase>
+          <goals>
+            <goal>compare-uml13-models</goal>
+          </goals>
+          <configuration>
+            <sourceMetamodel>src/resource/source.xml</sourceMetamodel>
+            <targetMetamodel>src/resource/target.xml</targetMetamodel>
+            <export implementation="net.mdatools.modelant.core.operation.model.export.StructuredTextExport"/>
+          </configuration>
+        </execution>
+      </executions>
+    </plugin>      
+  </plugins>      
+</build>
+```
+
 where:
 
   * **sourceMetamodel**: refers the XMI file of the definition of the metamodel, considered as old/previous version/source in the comparison
@@ -49,50 +192,6 @@ where:
   ```<export implementation="net.mdatools.modelant.core.operation.model.export.StructuredTextExport"/>``` 
 It exports the text in a JSON-like format, suitable for collapsing/expanding and manual analysis. See below.
 
-Comparison of UML 1.3 and UML 1.4 metamodels
---------------------------------------------
-
-modelant already provides the metamodels of UML 1.4 and UML 1.4, so making them available in the plugin's classpath is just referrng them as project dependencies:
-
-```
-<dependencies>
-  <dependency>
-    <groupId>net.mdatools</groupId>
-    <artifactId>modelant.mof14.metamodel</artifactId>
-    <version>3.3.0</version>
-  </dependency>
-  <dependency>
-    <groupId>net.mdatools</groupId>
-    <artifactId>modelant.mof14.maven.plugin</artifactId>
-    <version>3.3.0</version>
-  </dependency> 
-</dependencies>
-
-<build>
-  <plugins>
-    <plugin>
-      <groupId>net.mdatools</groupId>
-      <artifactId>modelant.mof14.maven.plugin</artifactId>
-      <version>3.3.0</version>
-      <executions>
-        <execution>
-          <phase>compile</phase>
-          <goals>
-            <goal>compare-mof14-metamodels</goal>
-          </goals>
-          <configuration>
-            <sourceMetamodel>src/resource/01-12-02_Diff_modelant.xml</sourceMetamodel>
-            <targetMetamodel>src/resource/01-02-15_Diff_modelant.xml</targetMetamodel>
-            <export implementation="net.mdatools.modelant.core.operation.model.export.StructuredTextExport"/>
-          </configuration>
-        </execution>
-      </executions>
-    </plugin>      
-  </plugins>      
-</build>
-```
-
-As a result, the following changes from UML 1.3 to UML 1.4 were reported:
 
 Pre-defined correspondence and formatting the differences printout 
 ------------------------------------------------------------------
@@ -104,21 +203,21 @@ In this example the MOF 1.4 ModelElement in the source model with name "Data_Typ
   <plugins>
     <plugin>
       <groupId>net.mdatools</groupId>
-      <artifactId>modelant.mof14.maven.plugin</artifactId>
-      <version>${revision}</version>
+      <artifactId>modelant.uml13.maven.plugin</artifactId>
+      <version>3.3.0</version>
       <executions>
         <execution>
           <phase>compile</phase>
           <goals>
-            <goal>compare-metamodels</goal>
+            <goal>compare-uml13-models</goal>
           </goals>
           <configuration>
             <sourceMetamodel>...</sourceMetamodel>
             <targetMetamodel>...</targetMetamodel>
             <equals>
               <equal>
-                 <source>Foundation::Data_Types</source>
-                 <target>Data_Types</target>
+                 <source>Logical_View::domain</source>
+                 <target>domain</target>
               </equal>
               ...
               <export implementation="net.mdatools.modelant.core.operation.model.export.StructuredTextExport"/>
@@ -132,6 +231,7 @@ In this example the MOF 1.4 ModelElement in the source model with name "Data_Typ
 ```
 
 The outcome of model comparison formatted by ```net.mdatools.modelant.core.operation.model.export.StructuredTextExport``` is like:
+
 ```
 {
   deleted = {list of source model elements, that do not exist in the target model},
@@ -139,6 +239,4 @@ The outcome of model comparison formatted by ```net.mdatools.modelant.core.opera
   changed = {list of pairs of corresponding source and target model elements, that have some of the attributes or associations changed},
   exactMatch = {list of pairs of corresponding source and target model elements, that match exactly}
 }
-```   
-
-Based on the report above, the [changes from UML 1.3 to UML 1.4](../../../modelant.conversion/index.html) are identified.
+```

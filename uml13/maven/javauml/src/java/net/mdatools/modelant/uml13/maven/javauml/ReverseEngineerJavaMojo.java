@@ -53,7 +53,7 @@ public class ReverseEngineerJavaMojo extends JavadocJar {
    */
 
   /**
-   * Where the work files are located
+   * The directory where to store the work/temporary files
    *
    * @parameter expression="${project.build.directory}"
    */
