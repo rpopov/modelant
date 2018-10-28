@@ -90,17 +90,9 @@ public interface Convention {
 
   /**
    * The name of a tagged value that indicates if an attribute/column pertains to the table's
-   * primary key. It is bound to the sequence order of the column in the promary key. This tagged
-   * value is compatible with Rose's Data Modeler edition.
+   * primary key. It is bound to the sequence order of the column in the primary key.
    */
-  String TAG_VALUE_PRIMARY_KEY = "RationalRose$Data Modeler:ConstraintType";
-
-  /**
-   * The name of a tagged value that indicates if an attribute/column pertains to the table's
-   * primary key. It is bound to the sequence order of the column in the promary key. This value is
-   * compatible with Rose's Data Modeler edition.
-   */
-  String TAG_VALUE_PRIMARY_KEY_VALUE = "Primary Key";
+  String TAG_VALUE_PRIMARY_KEY = "primary_key";
 
   /**
    * The name of a tagged value this process binds to classes to indicate their original qualified name

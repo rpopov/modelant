@@ -24,7 +24,11 @@ import junit.framework.TestCase;
 import net.mdatools.modelant.repository.api.ModelRepository;
 import net.mdatools.modelant.repository.api.ModelRepositoryFactory;
 
-public abstract class TestModel extends TestCase {
+/**
+ * Base class for the reverse engineering tests
+ * @author Rusi Popov
+ */
+abstract class TestModel extends TestCase {
 
   protected ModelRepository modelRepository;
   protected Uml13Package extent;

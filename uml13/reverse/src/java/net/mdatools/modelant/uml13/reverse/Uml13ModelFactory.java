@@ -481,10 +481,10 @@ public class Uml13ModelFactory {
                  net.mdatools.modelant.uml13.metamodel.Convention.TAG_VALUE_PERSISTENCE_VALUE );
   }
 
-  public void constructTagPrimaryKey(Attribute attribute) {
+  public void constructTagPrimaryKey(Attribute attribute, int order) {
     constructTag(attribute,
                  net.mdatools.modelant.uml13.metamodel.Convention.TAG_VALUE_PRIMARY_KEY,
-                 net.mdatools.modelant.uml13.metamodel.Convention.TAG_VALUE_PRIMARY_KEY_VALUE );
+                 Integer.toString( order ));
   }
 
   /**

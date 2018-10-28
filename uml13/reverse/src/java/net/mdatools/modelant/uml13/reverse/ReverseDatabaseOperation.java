@@ -39,18 +39,16 @@ import net.mdatools.modelant.repository.api.ModelRepository;
  * <ol>
  * <li>The database column types are converted to DataType instances named: &lt;type
  * name&gt;[_&lt;column size&gt;[_&lt;column precision&gt;]]. Additionally as tagged values named
- * TAG_VALUE_DATA_TYPE_SIZE and TAG_VALUE_DATA_TYPE_PRECISION these values are bound to the concrete
- * data type.
- * <li>The TAG_VALUE_DATA_TYPE_PRECISION tagged value is optional. When not provided, the precision
+ * {@link net.mdatools.modelant.uml13.metamodel.Convention.TAG_VALUE_DATA_LENGTH} and {@link net.mdatools.modelant.uml13.metamodel.Convention.TAG_VALUE_DATA_TYPE_PRECISION}
+ * these values are bound to the concrete data type.
+ * <li>The {@link net.mdatools.modelant.uml13.metamodel.Convention.TAG_VALUE_DATA_TYPE_PRECISION} tagged value is optional. When not provided, the precision
  * should be treated as 0
- * <li>The TAG_VALUE_DATA_TYPE_SIZE tagged value is mandatory.
- * <li>Any comments found while reverse engineering the database are bound as 'documentaion' tagged
+ * <li>The {@link net.mdatools.modelant.uml13.metamodel.Convention.TAG_VALUE_DATA_LENGTH} tagged value is mandatory.
+ * <li>Any comments found while reverse engineering the database are bound as 'documentation' tagged
  * values. These tagged values are compatible with the Rose's approach to documentation. They are
  * optional.
- * <li>Each attribute created might have TAG_VALUE_NULLABLE tagged value assigned. When provided it
- * contains 'false' to indicate attributes that cannot be null. True values are not provided.
- * <li>Each attribute pertaining to the table's primary key is bound a 'primary_key' tagged value
- * Its value is the sequence order of the column in the tible's primary key.
+ * <li>Each attribute pertaining to the table's primary key is bound a {@link net.mdatools.modelant.uml13.metamodel.Convention.TAG_VALUE_PRIMARY_KEY} tagged value
+ * with "Primaty Key" value. Its value is the sequence order of the column in the tible's primary key.
  * </ol>
  *
  * @author Rusi Popov (popovr@mdatools.net)
@@ -387,7 +385,7 @@ public class ReverseDatabaseOperation implements Function<Connection, RefPackage
           // check for primary key
           sequence = primaryKeys.get( columnName );
           if ( sequence != null ) { // the column pertains to the primary key of this table
-            factory.constructTagPrimaryKey( attribute );
+            factory.constructTagPrimaryKey( attribute, sequence.intValue() );
           }
         }
       } finally {
