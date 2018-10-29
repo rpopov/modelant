@@ -395,6 +395,8 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
           <version>3.0.1</version>
           <configuration>
             <quiet>true</quiet>
+            <failOnError>false</failOnError>
+            <failOnWarnings>false</failOnWarnings>
             <docencoding>UTF-8</docencoding>
             <encoding>UTF-8</encoding>
             <detectLinks>true</detectLinks>
