@@ -9,6 +9,7 @@
   </parent>
 
   <artifactId>modelant.repository.maven.archetype</artifactId>
+  <name>modelant.repository.maven.archetype</name>
   
   <description>An archetype to build a API to access metamodel instances
     The metamodel should be written in MOF 1.4, XMI 1.1 or XMI 1.2, as of JMI (JCR-40).

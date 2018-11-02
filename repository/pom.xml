@@ -9,6 +9,7 @@
   </parent>
 
   <artifactId>modelant.repository</artifactId>
+  <name>modelant.repository</name>
   <packaging>pom</packaging>
   <description>JMI-compatible repository of metamodels and models.</description>
   

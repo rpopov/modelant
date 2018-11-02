@@ -10,6 +10,7 @@
   </parent>
 
   <artifactId>modelant.repository.api</artifactId>
+  <name>modelant.repository.api</name>
 
   <description>API of the repository of metamodels and models.</description>
 

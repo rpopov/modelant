@@ -10,6 +10,7 @@
   </parent>
 
   <artifactId>modelant.uml13.api</artifactId>
+  <name>modelant.uml13.api</name>
   <description>JMI API for UML 1.3 models</description>
 
   <dependencies>

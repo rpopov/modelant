@@ -10,6 +10,7 @@
   </parent>
 
   <artifactId>modelant.uml14.api</artifactId>
+  <name>modelant.uml14.api</name>
   <description>JMI API for UML 1.4 models</description>
 
   <dependencies>      

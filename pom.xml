@@ -5,6 +5,7 @@
 
   <groupId>net.mdatools</groupId>
   <artifactId>modelant</artifactId>
+
   <version>${revision}</version>
 
   <packaging>pom</packaging>
@@ -268,16 +269,12 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
           <artifactId>flatten-maven-plugin</artifactId>
           <version>1.0.1</version>
           <configuration>
-            <!--
-            Strip the internal details and inline the inheritance to simplify (slightly) the use
-            -->
             <updatePomFile>true</updatePomFile>
-
+            <flattenMode>ossrh</flattenMode>
             <!--
               As of https://www.mojohaus.org/flatten-maven-plugin/flatten-mojo.html
               make maven FLAT plugin include the dependencies from the applied profiles by default
-           -->
-            <flattenMode>ossrh</flattenMode>
+           -->            
             <embedBuildProfileDependencies>true</embedBuildProfileDependencies>
           </configuration>
           <executions>

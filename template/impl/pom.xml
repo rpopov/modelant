@@ -10,6 +10,7 @@
   </parent>
 
   <artifactId>modelant.template.impl</artifactId>
+  <name>modelant.template.impl</name>
   <description>Template Engine and Compiler implementation.</description>
 
   <dependencies>

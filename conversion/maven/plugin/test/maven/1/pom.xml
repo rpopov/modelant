@@ -5,6 +5,7 @@
 
   <groupId>net.mdatools</groupId>
   <artifactId>modelant.conversion.maven.test</artifactId>
+  <name>modelant.conversion.maven.test</name>
   <version>@project.parent.version@</version>
 
   <description>Maven plugin for model conversion tests</description>

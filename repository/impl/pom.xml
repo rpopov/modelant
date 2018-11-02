@@ -10,6 +10,7 @@
   </parent>
 
   <artifactId>modelant.repository.impl</artifactId>
+  <name>modelant.repository.impl</name>
   <description>Implementation of the repository of metamodels and models.</description>
 
   <dependencies>  

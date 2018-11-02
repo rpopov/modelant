@@ -9,6 +9,7 @@
   </parent>
 
   <artifactId>modelant.mof14.maven</artifactId>
+  <name>modelant.mof14.maven</name>
   <packaging>pom</packaging>
 
   <description>Publishing as Maven plugin(s) the functionality to convert models between modeling languages and formats.</description>

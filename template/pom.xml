@@ -10,6 +10,7 @@
   </parent>
 
   <artifactId>modelant.template</artifactId>
+  <name>modelant.template</name>
   <packaging>pom</packaging>
   <description>Templates and template engine allowing OOP in templates and templates in OOP.</description>
 

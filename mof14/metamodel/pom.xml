@@ -10,6 +10,7 @@
   </parent>
 
   <artifactId>modelant.mof14.metamodel</artifactId>
+  <name>modelant.mof14.metamodel</name>
   <description>MOF 1.4 meta-metamodel </description>
 
   <dependencies>

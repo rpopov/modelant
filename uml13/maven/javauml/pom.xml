@@ -8,6 +8,7 @@
   </parent>
 
   <artifactId>modelant.uml13.maven.javauml</artifactId>
+  <name>modelant.uml13.maven.javauml</name>
 
   <packaging>maven-plugin</packaging>
 

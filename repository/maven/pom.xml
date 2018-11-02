@@ -9,6 +9,7 @@
   </parent>
 
   <artifactId>modelant.repository.maven</artifactId>
+  <name>modelant.repository.maven</name>
   <description>Maven integration of the repository of metamodels and models.</description>
 
   <packaging>pom</packaging>

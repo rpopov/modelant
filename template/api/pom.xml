@@ -11,5 +11,6 @@
   <description>Template Engine API.</description>
 
   <artifactId>modelant.template.api</artifactId>
+  <name>modelant.template.api</name>
 
 </project>

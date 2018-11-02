@@ -5,6 +5,7 @@
 
   <groupId>net.mdatools</groupId>
   <artifactId>modelant.uml13.maven.test</artifactId>
+  <name>modelant.uml13.maven.test</name>
   <version>@project.version@</version>
 
   <description>The MOF 1.4 maven plugin tests</description>

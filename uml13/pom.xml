@@ -10,6 +10,7 @@
   </parent>
 
   <artifactId>modelant.uml13</artifactId>
+  <name>modelant.uml13</name>
   <packaging>pom</packaging>
   <description>Support of UML 1.3 models</description>
 

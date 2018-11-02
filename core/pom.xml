@@ -10,6 +10,7 @@
   </parent>
 
   <artifactId>modelant.core</artifactId>
+  <name>modelant.core</name>
   <packaging>pom</packaging>
 
   <description>modelant core functionality.</description>

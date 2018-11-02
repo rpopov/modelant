@@ -9,6 +9,7 @@
   </parent>
   
   <artifactId>modelant.repository.maven.plugin</artifactId>
+  <name>modelant.repository.maven.plugin</name>
 
   <packaging>maven-plugin</packaging> <!-- activates the profile plugin from the root pom-->
 

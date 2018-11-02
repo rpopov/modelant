@@ -5,6 +5,7 @@
   
   <groupId>net.mdatools</groupId>
   <artifactId>modelant.template.maven.plugin.test</artifactId>
+  <name>modelant.template.maven.plugin.test</name>
   <version>@project.version@</version>
 
   <description>Test Maven compiler for ModelAnt templates</description>

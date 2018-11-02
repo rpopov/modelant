@@ -9,6 +9,7 @@
   </parent>
   
   <artifactId>modelant.template.maven.plugin</artifactId>
+  <name>modelant.template.maven.plugin</name>
 
   <packaging>maven-plugin</packaging>  <!-- Activates the plugin profile, defined in the root pom -->
 

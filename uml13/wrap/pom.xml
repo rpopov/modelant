@@ -10,6 +10,7 @@
   </parent>
 
   <artifactId>modelant.uml13.wrap</artifactId>
+  <name>modelant.uml13.wrap</name>
   <description>Wrapper classes of the JMI UML 1.3 API allowed to extend the standard with custom OOP features.</description>
 
   <dependencies>  

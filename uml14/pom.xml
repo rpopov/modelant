@@ -10,6 +10,7 @@
   </parent>
 
   <artifactId>modelant.uml14</artifactId>
+  <name>modelant.uml14</name>
   <packaging>pom</packaging>
   <description>Support of UML 1.4 models</description>
 

@@ -13,6 +13,7 @@
 #end  
   <groupId>${groupId}</groupId>
   <artifactId>${artifactId}</artifactId>
+  <name>${artifactId}</name>
   <version>${version}</version>
 
   <description>JMI (JCP-40) API to access ${metamodelUrl} models</description>

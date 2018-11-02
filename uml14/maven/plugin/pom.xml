@@ -9,6 +9,7 @@
   </parent>
   
   <artifactId>modelant.uml14.maven.plugin</artifactId>
+  <name>modelant.uml14.maven.plugin</name>
 
   <packaging>maven-plugin</packaging> <!-- activates the profile plugin from the root pom-->
 

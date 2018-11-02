@@ -10,6 +10,7 @@
   </parent>
 
   <artifactId>modelant.core.api</artifactId>
+  <name>modelant.core.api</name>
   <description>API and specification of the modelant core functionality.</description>
 
   <dependencies>

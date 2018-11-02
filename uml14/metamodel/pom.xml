@@ -10,6 +10,7 @@
   </parent>
 
   <artifactId>modelant.uml14.metamodel</artifactId>
+  <name>modelant.uml14.metamodel</name>
   <description>UML 1.4 metamodel</description>
   
   <dependencies>

@@ -10,6 +10,7 @@
   </parent>
 
   <artifactId>modelant.mof14.test</artifactId>
+  <name>modelant.mof14.test</name>
   <description>Integration tests of MOF 1.4 and meta-metamodeling functionality.</description>
 
   <dependencies>

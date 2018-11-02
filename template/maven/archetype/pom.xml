@@ -9,6 +9,7 @@
   </parent>
 
   <artifactId>modelant.template.maven.archetype</artifactId>
+  <name>modelant.template.maven.archetype</name>
   
   <description>Archetype for building the default templates structure for ModelAnt Template Engine
     for a metamodel, written in MOF 1.4, XMI 1.1 or XMI 1.2, as of JMI (JCR-40).

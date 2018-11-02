@@ -9,6 +9,7 @@
   </parent>
 
   <artifactId>modelant.uml14.maven</artifactId>
+  <name>modelant.uml14.maven</name>
   <packaging>pom</packaging>
   <description>Maven plugins to prduce and process UML 1.4 models</description>
   

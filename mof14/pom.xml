@@ -10,6 +10,7 @@
   </parent>
 
   <artifactId>modelant.mof14</artifactId>
+  <name>modelant.mof14</name>
   <packaging>pom</packaging>
   <description>Support of MOF 1.4 as a regular metamodel.</description>
 
