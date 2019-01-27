@@ -27,4 +27,6 @@ Documentation
 -------------
   * [Architecture](src/site/markdown/architecture.md)
   * [Conventions](src/site/markdown/conventions.md)
-  * [Java Conventions](src/site/markdown/java-conventions.md)  
+  * [Java Conventions](src/site/markdown/java-conventions.md)
+  
+[![DepShield Badge](https://depshield.sonatype.org/badges/popovr/modelant/depshield.svg)](https://depshield.github.io)  

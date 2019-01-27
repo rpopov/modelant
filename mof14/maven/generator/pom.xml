@@ -1,0 +1,39 @@
+  <project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>net.mdatools</groupId>
+    <artifactId>modelant.mof14.maven</artifactId>
+    <version>${revision}</version>
+  </parent>
+
+  <artifactId>modelant.mof14.maven.generator</artifactId>
+  <name>modelant.mof14.maven.generator</name>
+  <packaging>maven-plugin</packaging>
+    
+  <description>Generate wrapper classes from a MOF 1.4 metamodel.</description>
+
+  <build>
+    <plugins>
+      <!-- compile templates -->
+      <plugin>
+        <groupId>net.mdatools</groupId>
+        <artifactId>modelant.template.maven.plugin</artifactId>
+        <version>${revision}</version>        
+        <executions>
+          <execution>
+            <id>compile-jsp</id>
+            <goals>
+              <goal>compile-templates</goal>
+            </goals>  
+            <configuration>
+              <uniqueName>mof</uniqueName>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>  
+  </build>  
+</project>

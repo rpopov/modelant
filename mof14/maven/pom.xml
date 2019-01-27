@@ -17,5 +17,6 @@
   <modules>
     <!--module>archetype</module-->
     <module>plugin</module>
+    <module>generator</module>
   </modules>
 </project>

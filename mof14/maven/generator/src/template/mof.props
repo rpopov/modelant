@@ -1,0 +1,9 @@
+## --------------------------------------------------------
+## Parameters of Jasper servlet engine provided in the
+## servlet context / config
+## --------------------------------------------------------
+
+# Used by Jasper. To be suplied in the servlet configuration file.
+# Do you want to keep the generated Java files around?
+# true/false
+keepGenerated=true
