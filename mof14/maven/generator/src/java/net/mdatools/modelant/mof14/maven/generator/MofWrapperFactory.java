@@ -7,7 +7,7 @@
  *
  * Created on 25.02.2010
  */
-package net.mdatools.modelant.mof;
+package net.mdatools.modelant.mof14.maven.generator;
 
 import javax.jmi.model.EnumerationType;
 

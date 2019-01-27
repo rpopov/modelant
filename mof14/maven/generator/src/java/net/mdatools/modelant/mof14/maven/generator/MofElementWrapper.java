@@ -7,7 +7,7 @@
  * 
  * Created on 16.02.2010
  */
-package net.mdatools.modelant.mof;
+package net.mdatools.modelant.mof14.maven.generator;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

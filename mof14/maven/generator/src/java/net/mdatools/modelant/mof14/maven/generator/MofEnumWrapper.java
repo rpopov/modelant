@@ -7,7 +7,7 @@
  * 
  * Created on 12.06.2012
  */
-package net.mdatools.modelant.mof;
+package net.mdatools.modelant.mof14.maven.generator;
 
 import net.mdatools.modelant.core.wrap.Factory;
 
