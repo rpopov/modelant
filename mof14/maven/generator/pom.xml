@@ -15,6 +15,44 @@
     
   <description>Generate wrapper classes from a MOF 1.4 metamodel.</description>
 
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-plugin-api</artifactId>
+      <version>3.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven</groupId>
+      <artifactId>maven-plugin-descriptor</artifactId>
+      <version>2.2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.plugin-tools</groupId>
+      <artifactId>maven-plugin-annotations</artifactId>
+      <version>3.5.1</version>
+    </dependency>
+    <dependency>
+      <groupId>net.mdatools</groupId>
+      <artifactId>modelant.repository.impl</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>net.mdatools</groupId>
+      <artifactId>modelant.mof14.metamodel</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>net.mdatools</groupId>
+      <artifactId>modelant.template.api</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>net.mdatools</groupId>
+      <artifactId>modelant.template.impl</artifactId>
+      <version>${project.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+  </dependencies>
   <build>
     <plugins>
       <!-- compile templates -->

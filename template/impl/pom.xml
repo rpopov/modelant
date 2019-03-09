@@ -20,11 +20,8 @@
       <version>${revision}</version>
     </dependency>
    <dependency>
-     <groupId>java.tools</groupId>
-     <artifactId>dt</artifactId>
-     <version>1.8</version>
-     <scope>system</scope>
-     <systemPath>${java.home}/../lib/tools.jar</systemPath>
+      <groupId>com.sun</groupId>
+      <artifactId>tools</artifactId>
    </dependency>
  </dependencies>
 

@@ -9,6 +9,7 @@ package net.mdatools.modelant.core.api.wrap;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Any wrapper of instances of <b>A</b>, used for compile time control of objects' wrapping
@@ -16,6 +17,12 @@ import java.util.List;
  * @author Rusi Popov (popovr@mdatools.net)
  */
 public interface Wrapper<A> {
+
+  /**
+   * A common logger for all wrappers
+   */
+  Logger LOGGER = Logger.getLogger( Wrapper.class.getName() );
+
 
   /**
    * CONVENTION:<ul>

@@ -109,7 +109,7 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
   </distributionManagement>
 
   <properties>
-    <revision>3.4.0</revision>
+    <revision>3.4.0-SNAPSHOT</revision>
 
     <!--
       Test debug options

@@ -4,7 +4,7 @@
  * This SOURCE CODE FILE, which has been provided by i:FAO AG as part
  * of a product of i:FAO AG for use ONLY by licensed users of the product,
  * includes CONFIDENTIAL and PROPRIETARY information.
- * 
+ *
  * Created on 16.02.2010
  */
 package net.mdatools.modelant.mof14.maven.generator;
@@ -27,19 +27,19 @@ import javax.jmi.model.Namespace;
 import javax.jmi.model.Tag;
 import javax.jmi.reflect.RefClass;
 import javax.jmi.reflect.RefPackage;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 
-import net.mdatools.modelant.core.wrap.Factory;
-import net.mdatools.modelant.core.wrap.Wrapper;
-import net.mdatools.modelant.template.TemplateEngine;
+import net.mdatools.modelant.core.api.wrap.Wrapper;
+import net.mdatools.modelant.core.api.wrap.WrapperFactory;
+import net.mdatools.modelant.core.wrap.BaseWrapper;
+import net.mdatools.modelant.template.api.TemplateContext;
+import net.mdatools.modelant.template.api.TemplateEngine;
 
 /**
  * This class holds common methods to manage / query a MOF Objects repository
- * 
+ *
  * @author Rusi Popov
  */
-public class MofElementWrapper extends Wrapper {
+public class MofElementWrapper extends BaseWrapper<ModelElement> {
 
   /**
    * The <code>JAVAX_JMI_SUBSTITUTE_NAME</code> JMI standard tag ID for name substitution
@@ -66,16 +66,8 @@ public class MofElementWrapper extends Wrapper {
 
   /**
    */
-  public MofElementWrapper(Object wrapped, Factory factory) {
+  public MofElementWrapper(ModelElement wrapped, WrapperFactory factory) {
     super( wrapped, factory );
-  }
-
-
-  /**
-   * @see net.mdatools.modelant.core.wrap.Wrapper#getWrapped()
-   */
-  public ModelElement getWrapped() {
-    return (ModelElement) super.getWrapped();
   }
 
 
@@ -85,10 +77,10 @@ public class MofElementWrapper extends Wrapper {
   public Namespace getNamespace() {
     return getWrapped().getContainer();
   }
-  
+
   /**
    * Retrieves the tag assigned to the MOF object provided
-   * 
+   *
    * @param tagId is the non null tag Id as defined in JMI 1.0/MOF 1.4 to search tag with
    * @return the MOF Tag associated with the model element
    */
@@ -119,7 +111,7 @@ public class MofElementWrapper extends Wrapper {
 
   /**
    * Retrieves the tag assigned to the MOF object provided
-   * 
+   *
    * @return the MOF Tag associated with the provided element
    */
   public final Collection<Tag> getAllTags() {
@@ -175,13 +167,13 @@ public class MofElementWrapper extends Wrapper {
   public String calculatePackageName() {
     String result;
     StringBuffer resultBuffer = new StringBuffer( 256 );
-  
+
     ((MofElementWrapper) wrap( getWrapped().getContainer() )).constructRawQualifiedName( resultBuffer );
-  
+
     // additionally format according to Java rules
     result = resultBuffer.toString().replaceAll( "[^a-zA-Z0-9.$]", "" );
     result = result.toLowerCase();
-  
+
     return result;
   }
 
@@ -191,13 +183,13 @@ public class MofElementWrapper extends Wrapper {
    */
   public String calculateQualifiedClassName() {
     StringBuffer result = new StringBuffer( 256 );
-  
+
     result.append( calculatePackageName() );
     if ( result.length() > 0 ) {
       result.append( "." );
     }
     result.append( calculateSimpleClassName() );
-  
+
     return result.toString();
   }
 
@@ -231,18 +223,18 @@ public class MofElementWrapper extends Wrapper {
   /**
    * Calculates the proper package name, regarding the name substitution and the package name
    * prefix.
-   * @param wrapperPackage is the non-null, not empty package name where to generate all wrapper classes. 
+   * @param wrapperPackage is the non-null, not empty package name where to generate all wrapper classes.
    * @return the non-null qualified name of the namespace of the wrapper class
    */
   public String calculateWrapperPackageName(String wrapperPackage) {
     String result;
-    
-    assert wrapperPackage != null && !wrapperPackage.trim().isEmpty() 
+
+    assert wrapperPackage != null && !wrapperPackage.trim().isEmpty()
            : "Expected a non-empty package name";
-    
+
     wrapperPackage = wrapperPackage.trim().replaceAll( "[^a-zA-Z0-9]", "" ).toLowerCase();
 
-    result = calculatePackageName().replaceAll( "^([a-z0-9]*\\.[a-z0-9]*\\.[a-z0-9]*)\\.(.*)$", 
+    result = calculatePackageName().replaceAll( "^([a-z0-9]*\\.[a-z0-9]*\\.[a-z0-9]*)\\.(.*)$",
                                                 "$1."+wrapperPackage+".$2" );
     return result;
   }
@@ -251,19 +243,19 @@ public class MofElementWrapper extends Wrapper {
   /**
    * Calculates the proper package name, regarding the name substitution and the package name
    * prefix.
-   * @param wrapperPackage is the not null, not empty package name where to generate all wrapper classes. 
+   * @param wrapperPackage is the not null, not empty package name where to generate all wrapper classes.
    * @return the non-null qualified name of the namespace of the wrapper class
    */
   public String calculateBaseWrapperPackageName(String wrapperPackage) {
     String result;
 
-    assert wrapperPackage != null && !wrapperPackage.trim().isEmpty() 
+    assert wrapperPackage != null && !wrapperPackage.trim().isEmpty()
           : "Expected a non-empty package name";
- 
+
     wrapperPackage = wrapperPackage.trim().replaceAll( "[^a-zA-Z0-9]", "" ).toLowerCase();
-    
-    result = calculatePackageName().replaceAll( "^([a-z0-9]*\\.[a-z0-9]*\\.[a-z0-9]*)\\.(.*)$", 
-                                                "$1."+wrapperPackage+".base.$2" );    
+
+    result = calculatePackageName().replaceAll( "^([a-z0-9]*\\.[a-z0-9]*\\.[a-z0-9]*)\\.(.*)$",
+                                                "$1."+wrapperPackage+".base.$2" );
     return result;
   }
 
@@ -272,9 +264,9 @@ public class MofElementWrapper extends Wrapper {
    * This method calculates qualified name of a wrapper class for this model element
    * Convention:
    * The package prefix is inserted between 3rd and 4th package names, this way forming an unique namespace for the
-   * wrapper classes. 
-   * @param prefix the simple package name where to generate the wrapper classes. If null or empty provided, this 
-   *        method is equal to {@link #calculateQualifiedClassName()}} 
+   * wrapper classes.
+   * @param prefix the simple package name where to generate the wrapper classes. If null or empty provided, this
+   *        method is equal to {@link #calculateQualifiedClassName()}}
    */
   public String calculateQualifiedWrapperClassName(String prefix) {
     StringBuffer result = new StringBuffer( 256 );
@@ -288,30 +280,30 @@ public class MofElementWrapper extends Wrapper {
     return result.toString();
   }
 
-  
+
   /**
    * This method calculates the qualified name of the base wrapper class for this model element
    * Convention:
    * The package prefix is inserted between 3rd and 4th package names, this way forming an unique namespace for the
-   * wrapper classes. 
-   * @param prefix the non-null, not empty simple package name where to generate the wrapper classes. 
+   * wrapper classes.
+   * @param prefix the non-null, not empty simple package name where to generate the wrapper classes.
    */
   public String calculateQualifiedBaseWrapperClassName(String prefix) {
     StringBuffer result = new StringBuffer( 256 );
-    
+
     result.append( calculateBaseWrapperPackageName( prefix ) );
     if ( result.length() > 0 ) {
       result.append( "." );
     }
     result.append( calculateSimpleBaseWrapperClassName() );
-  
+
     return result.toString();
   }
 
-  
+
   /**
    * Identifies the name of the wrapper super class
-   * @param prefix is the non-null, not empty name of the package prefix this delagtor classs is in 
+   * @param prefix is the non-null, not empty name of the package prefix this delagtor classs is in
    * @return a non-null, not empty
    */
   public String calculateQualifiedSuperclassWrapperName(String prefix) {
@@ -322,7 +314,7 @@ public class MofElementWrapper extends Wrapper {
 
     } else { // retrieve and format the superclass' name
 
-      result = ((MofElementWrapper) wrap( ((GeneralizableElement) getWrapped()).getSupertypes().get( 0 ) )).calculateQualifiedWrapperClassName( prefix );
+      result = ((MofElementWrapper) wrap((ModelElement) ((GeneralizableElement) getWrapped()).getSupertypes().get( 0 ) )).calculateQualifiedWrapperClassName( prefix );
     }
     return result;
   }
@@ -330,7 +322,7 @@ public class MofElementWrapper extends Wrapper {
   /**
    * Appends to resultBuffer the qualified name of the wrapped model element/namespace, considered as a Java
    * package name
-   * 
+   *
    * @param resultBuffer is not null
    */
   private void constructRawQualifiedName(StringBuffer resultBuffer) {
@@ -347,20 +339,20 @@ public class MofElementWrapper extends Wrapper {
         resultBuffer.append( tag.getValues().get( 0 ) );
 
       } else {
-        // check for JMI package prefix tag
+        // check for JMI package prefix insertion
         tag = getTag( JAVAX_JMI_PACKAGE_PREFIX );
         if ( tag != null ) {
           resultBuffer.append( tag.getValues().get( 0 ) ).append( "." ).append( namespace.getName() );
 
         } else {
-          // check for OMG IDL prefix tag
+          // check for OMG IDL prefix insertion
           tag = getTag( ORG_OMG_MOF_IDL_PREFIX );
           if ( tag != null ) {
             resultBuffer.append( tag.getValues().get( 0 ) ).append( "." ).append( namespace.getName() );
 
           } else { // no name substitution - direct calculation
             container = namespace.getContainer();
-            
+
             if ( container != null ) {
               ((MofElementWrapper) wrap( container )).constructRawQualifiedName( resultBuffer );
             }
@@ -374,7 +366,7 @@ public class MofElementWrapper extends Wrapper {
     }
   }
 
-  
+
   /**
    * Support method to collect the namespaces starting from outer-most
    * @param wrapped
@@ -384,12 +376,12 @@ public class MofElementWrapper extends Wrapper {
     Namespace owner;
     String name;
     Tag tag;
-    
+
     owner = getWrapped().getContainer();
     if ( owner != null ) {
       ((MofElementWrapper) wrap( owner )).collectMofNames( result );
     }
-    
+
     // check direct name substitution
     tag = getTag( JAVAX_JMI_SUBSTITUTE_NAME );
     if ( tag != null ) {
@@ -398,17 +390,17 @@ public class MofElementWrapper extends Wrapper {
       name = getWrapped().getName().replaceAll( "[^a-zA-Z0-9.$]", "" );
     }
     result.add( name );
-  }  
-  
+  }
+
   /**
    * @return the qualified class name of this MOF element in the terms of MOF, i.e. a non-null
-   *         list of names from the outer-most namespace (element 0) to the name of the class itself (element N) 
+   *         list of names from the outer-most namespace (element 0) to the name of the class itself (element N)
    */
   public List<String> calculateQualifiedMofName() {
     List<String> result = new ArrayList<String>();
-    
+
     collectMofNames( result );
-    
+
     return result;
   }
 
@@ -418,96 +410,96 @@ public class MofElementWrapper extends Wrapper {
    */
   public boolean isAbstract() {
     boolean result;
-    
+
     result = getWrapped() instanceof GeneralizableElement
              && ((GeneralizableElement) getWrapped()).isAbstract();
-    
+
     return result;
   }
-  
-  
+
+
   /**
    * @return true if the wrapped MOF class describes a model class with no supertype
    */
   public boolean isRoot() {
     boolean result;
-    
+
     result = getWrapped() instanceof GeneralizableElement
              && ((GeneralizableElement) getWrapped()).getSupertypes().isEmpty();
     return result;
-  }  
-  
+  }
+
   /**
-   * This method renders methods that are delegated to the wrapped delegate object. The methods are only those
+   * Render the methods that are delegated to the wrapped delegate object. The methods are only those
    * public methods declared in the delegate class.
    * ASSUMPTION:<ul>
    * <li> we are building parallel hierarchies of classes one delegation to the other
    * <li> if the class, this model element describes, has no superclass, then there will be no more superclasses
    *      to generate. Thus, if the wrapper implements the same interfaces as the wrapped class, then it must
-   *      wrap all wrapper's public methods, no matter if they were declared in it or inherited. 
-   * </ul> 
+   *      wrap all wrapper's public methods, no matter if they were declared in it or inherited.
+   * </ul>
    */
-  public final void renderDelegatedDeclaredMethods(String delegateClassName, ServletRequest request, ServletResponse response) {
+  public final void renderDelegatedDeclaredMethods(TemplateEngine engine, String delegateClassName, TemplateContext context) {
     Class delegateClass;
     List<Method> uniqueMethods;
     Method[] methodsToDelegateTo;
-    
+
     uniqueMethods = new ArrayList<Method>();
     try {
       delegateClass = this.getClass().forName( delegateClassName );
-            
+
       if ( !delegateClass.isInterface()                     // wrapping a class
-           || delegateClass.getInterfaces().length <= 1 ) { // or wrapping an interface, inheriting from (no more than ) 1 interface 
-                     
+           || delegateClass.getInterfaces().length <= 1 ) { // or wrapping an interface, inheriting from (no more than ) 1 interface
+
         if ( !(getWrapped() instanceof GeneralizableElement)
              || ((GeneralizableElement) getWrapped()).getSupertypes().isEmpty() ) { // no superclasses to generate
-         
+
           addUniqueMethods( uniqueMethods, delegateClass.getMethods() );
-         
-        } else { // the inherited methods of the delegate are handled in the superclass of the wrapper/delegator  
+
+        } else { // the inherited methods of the delegate are handled in the superclass of the wrapper/delegator
           addUniqueMethods( uniqueMethods, delegateClass.getDeclaredMethods() );
-         
+
           // filter only the unique methods from the superfclass
           delegateClass = delegateClass.getSuperclass();
           if ( isBaseWrapper( delegateClass ) ) {
             addUniqueMethods( uniqueMethods, delegateClass.getDeclaredMethods() );
-          }        
-        }          
+          }
+        }
       } else { // wrapping an interface with multiple inheritance
                // then we just delegate ALL methods in that interface, not just the specifically declared ones,
-               // no matter that we might override inherited methods  
-        addUniqueMethods( uniqueMethods, delegateClass.getMethods() );        
-      }        
-      
+               // no matter that we might override inherited methods
+        addUniqueMethods( uniqueMethods, delegateClass.getMethods() );
+      }
+
       // guarantee a determined order of rendered methods
       Collections.sort( uniqueMethods, new Comparator<Method>() {
 
         public int compare(Method m1, Method m2) {
           int result;
-          
+
           result = m1.toString().compareTo( m2.toString() );
-          
+
           return result;
-        }        
+        }
       });
-      
-      for (Method methodToDelegate : uniqueMethods) {          
-        TemplateEngine.render( methodToDelegate, request, response );
+
+      for (Method methodToDelegate : uniqueMethods) {
+        engine.render( methodToDelegate, context);
       }
     } catch (Exception ex) {
       LOGGER.log( Level.SEVERE, "Rendering the delagate methods of " + delegateClassName + " caused: ", ex );
     }
   }
-  
+
   /**
    * @return true if the class is a Base Wrapper class as of the conventions in this class
    */
   private boolean isBaseWrapper(Class delegateClass) {
     boolean result;
-    
+
     result = delegateClass != null
              && delegateClass.getSimpleName().startsWith( WRAPPER_CLASS_BASE_PREFIX );
-    
+
     return result;
   }
 
@@ -515,28 +507,28 @@ public class MofElementWrapper extends Wrapper {
   /**
    * Add to uniqueMethods only the methods, not already added (considering the name and parameter types, skipping overrides) there:<ul>
    * <li> skip synthetic methods, because they actually refer overriding methods (from different classes), which causes names collisions
-   * <li> skip service methods for wrappers 
+   * <li> skip service methods for wrappers
    * </ul>
    * @param uniqueMethods
-   * @param methods 
+   * @param methods
    */
   private void addUniqueMethods(List<Method> uniqueMethods, Method[] methods) {
     boolean found;
     Iterator<Method> uniquesInteratror;
     Method unique;
-    
+
     for (Method methodToDelegate : methods) {
-      
+
       if ( Modifier.isPublic( methodToDelegate.getModifiers())
            && !methodToDelegate.isSynthetic()
-           && methodToDelegate.getDeclaringClass() != Object.class 
+           && methodToDelegate.getDeclaringClass() != Object.class
            && methodToDelegate.getDeclaringClass() != Wrapper.class) {
-        
+
         found = false;
         uniquesInteratror = uniqueMethods.iterator();
         while ( !found && uniquesInteratror.hasNext() ) {
           unique = uniquesInteratror.next();
-              
+
           found = unique.getName().equals( methodToDelegate.getName())
                   && Arrays.equals( unique.getParameterTypes(),
                                     methodToDelegate.getParameterTypes());
@@ -551,56 +543,56 @@ public class MofElementWrapper extends Wrapper {
 
   /**
    * This method renders methods that are delegated to the wrapped delegate object. The methods are only those
-   * public methods declared in the delegate class. 
+   * public methods declared in the delegate class.
    */
-  public final void renderDelegatedDeclaredConstants(String delegateClassName, ServletRequest request, ServletResponse response) {
+  public final void renderDelegatedDeclaredConstants(TemplateEngine engine, String delegateClassName, TemplateContext context) {
     Class delegateClass;
     Field[] fieldsToDelegateTo;
-    
+
     try {
       delegateClass = this.getClass().forName( delegateClassName );
       fieldsToDelegateTo = delegateClass.getDeclaredFields();
-      
+
       for (Field fieldToDelegate : fieldsToDelegateTo) {
-        if ( Modifier.isPublic( fieldToDelegate.getModifiers()) 
+        if ( Modifier.isPublic( fieldToDelegate.getModifiers())
              && Modifier.isStatic( fieldToDelegate.getModifiers())
              && Modifier.isFinal( fieldToDelegate.getModifiers())) {
-          TemplateEngine.render( fieldToDelegate, request, response );
+          engine.render( fieldToDelegate, context );
         }
       }
     } catch (Exception ex) {
       LOGGER.log( Level.SEVERE, "Rendering the delagate fields of " + delegateClassName + " caused: ", ex );
     }
   }
-  
+
   /**
-   * This method renders interfaces implemented by the delegate class 
+   * This method renders interfaces implemented by the delegate class
    */
-  public final void renderImplementedInterfaces(String delegateClassName, ServletRequest request, ServletResponse response) {
+  public final void renderImplementedInterfaces(TemplateEngine engine, String delegateClassName, TemplateContext context) {
     Class delegateClass;
     List <Class> implementedInterfaces;
-    
+
     implementedInterfaces = new ArrayList<Class>();
     try {
       delegateClass = this.getClass().forName( delegateClassName );
-      
+
       if ( delegateClass.isInterface() ) { // the wrapped class is actually an interface, the wrapper implements exactly it
         implementedInterfaces.add( delegateClass );
-        
+
       } else { // the wrapped is a class, so the wrapper implements its interfaces (but cannot "implement the class")
         implementedInterfaces.addAll( Arrays.asList( delegateClass.getInterfaces() ));
-        
+
         delegateClass = delegateClass.getSuperclass();
         if ( isBaseWrapper( delegateClass ) ) { // the actual interfaces to inherit are in the Base* class, unexpectedly not listed for the class itself
           implementedInterfaces.addAll( Arrays.asList( delegateClass.getInterfaces() ));
         }
       }
-      
+
       if ( implementedInterfaces.size() > 0 ) {
-        TemplateEngine.render( implementedInterfaces, request, response );
+        engine.render( implementedInterfaces, context );
       }
     } catch (Exception ex) {
       LOGGER.log( Level.SEVERE, "Rendering the interfaces of " + delegateClassName + " caused: ", ex );
     }
-  }  
+  }
 }

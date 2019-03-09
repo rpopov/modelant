@@ -11,13 +11,13 @@ package net.mdatools.modelant.mof14.maven.generator;
 
 import javax.jmi.model.EnumerationType;
 
-import net.mdatools.modelant.core.wrap.Factory;
+import net.mdatools.modelant.core.wrap.BaseWrapperFactory;
 
 /**
  * This class is a factory of wrapper objects for each MOF model object
  * @author Rusi Popov
  */
-public class MofWrapperFactory extends Factory {
+public class MofWrapperFactory extends BaseWrapperFactory {
 
   /**
    * @see net.mdatools.modelant.core.wrap.Factory#getMappedClass(java.lang.Class)
@@ -35,16 +35,9 @@ public class MofWrapperFactory extends Factory {
   }
 
   /**
-   * @see net.mdatools.modelant.core.wrap.Factory#getProperty(java.lang.String)
+   * @see net.mdatools.modelant.core.api.wrap.WrapperFactory#getProperty(java.lang.String)
    */
   public String getProperty(String name) {
     return null;
-  }
-
-  /**
-   * @see net.mdatools.modelant.core.wrap.Factory#getMappedRootClasses()
-   */
-  protected Class[] getMappedRootClasses() {
-    return new Class[]{javax.jmi.model.ModelElement.class};
   }
 }
