@@ -19,7 +19,7 @@ As of the convention above:
 
   * Construct a Template Engine with the unique name stated in the template compilation context:
 ```
-engine = TemplateEngineFactory.constructEngine(templateCompilationContext)
+engine = TemplateEngineFactory.construct(templateCompilationContext)
 ```
   * Lookup the Template Engine after its instantiation, as many times as needed:
 ```

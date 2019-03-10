@@ -144,6 +144,12 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
       </dependency>
       <dependency>
         <groupId>org.apache.maven</groupId>
+        <artifactId>maven-core</artifactId>
+        <version>3.2.5</version>
+        <!--scope>provided</scope-->
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven</groupId>
         <artifactId>maven-plugin-descriptor</artifactId>
         <version>2.2.1</version>
         <!--scope>provided</scope-->
@@ -267,7 +273,7 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
         <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>flatten-maven-plugin</artifactId>
-          <version>1.0.1</version>
+          <version>1.1.0</version>
           <configuration>
             <updatePomFile>true</updatePomFile>
             <flattenMode>ossrh</flattenMode>
@@ -676,6 +682,9 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
           <plugin> <!-- testing  -->
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-invoker-plugin</artifactId>
+            <configuration>
+              <showErrors>true</showErrors>
+            </configuration>
           </plugin>
         </plugins>
       </build>
