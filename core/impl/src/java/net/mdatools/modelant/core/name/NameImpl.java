@@ -107,10 +107,10 @@ public class NameImpl<P extends Name<?>> implements Name<P> {
                                   metaObject.getName());
     } else if ( metaObject instanceof Association ) {
       result = new AssociationNameImpl( (PackageNameImpl) constructQualifiedElementName( metaObject.getContainer() ),
-                              				  metaObject.getName());
+                                        metaObject.getName());
     } else if ( metaObject instanceof Classifier ) {
       result = new ClassNameImpl( (PackageNameImpl) constructQualifiedElementName( metaObject.getContainer() ),
-                              		metaObject.getName());
+                                  metaObject.getName());
     } else {
       result = null;
     }
@@ -196,12 +196,12 @@ public class NameImpl<P extends Name<?>> implements Name<P> {
     return result;
   }
 
-	/**
-	 * @see net.mdatools.modelant.core.api.name.Name#constructName(net.mdatools.modelant.core.api.name.Name, java.lang.String)
-	 */
-	public Name<P> constructName(P parent, String name) {
-		return new NameImpl<P>(parent, name);
-	}
+  /**
+   * @see net.mdatools.modelant.core.api.name.Name#constructName(net.mdatools.modelant.core.api.name.Name, java.lang.String)
+   */
+  public Name<P> constructName(P parent, String name) {
+    return new NameImpl<P>(parent, name);
+  }
 
   /**
    * @see net.mdatools.modelant.core.api.name.Name#constructNoTransfromation()

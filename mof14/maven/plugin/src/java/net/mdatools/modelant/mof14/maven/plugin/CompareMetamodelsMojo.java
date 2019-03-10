@@ -41,19 +41,19 @@ public class CompareMetamodelsMojo extends AbstractMojo {
   /**
    * The name of the file with the source (original) model
    */
-	@Parameter(property="project.build.sourceDirectory", required=true)
+  @Parameter(required=true)
   private File sourceMetamodel;
 
   /**
    * The name of the file with the target (changed) model
    */
-	@Parameter(required=true)
+  @Parameter(required=true)
   private File targetMetamodel;
 
   /**
    * The directory where the temporary internal files are located
    */
-	@Parameter(property="project.build.directory", required=true)
+  @Parameter(property="project.build.directory", required=true)
   private File workDirectory;
 
   /**
@@ -63,13 +63,13 @@ public class CompareMetamodelsMojo extends AbstractMojo {
    * "Core", nested in the model element named "Foundation" (as its namespace), which is a top-level
    * model element (not nested in anything).
    */
-	@Parameter
+  @Parameter
   private List<ConsideredEqual> equals;
 
   /**
    * The mechanism to export the result of models comparison. Default: print the string representation
-   * @parameter
    */
+  @Parameter
   private Export export = Export.DEFAULT;
 
   public void execute() throws MojoExecutionException {

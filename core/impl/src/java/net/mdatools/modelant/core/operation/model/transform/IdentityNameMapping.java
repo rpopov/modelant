@@ -34,22 +34,22 @@ import net.mdatools.modelant.core.api.name.StructName;
  */
 public final class IdentityNameMapping implements NameMapping {
 
-	/**
-	 * @see NameMapping#mapMetaClass(ClassName, RefPackage, RefPackage, Map)
-	 */
-	public Procedure<RefObject> mapMetaClass(ClassName name, RefPackage sourceExtent, RefPackage targetExtent, Map<RefObject, RefObject> objectsMap) {
-		RefClass targetRefClass;
+  /**
+   * @see NameMapping#mapMetaClass(ClassName, RefPackage, RefPackage, Map)
+   */
+  public Procedure<RefObject> mapMetaClass(ClassName name, RefPackage sourceExtent, RefPackage targetExtent, Map<RefObject, RefObject> objectsMap) {
+    RefClass targetRefClass;
 
-		targetRefClass = name.getMetaClass(targetExtent);
+    targetRefClass = name.getMetaClass(targetExtent);
 
-		return new Procedure<RefObject>() {
-			public void execute(RefObject sourceObject) throws RuntimeException, IllegalArgumentException {
-			  RefObject result;
+    return new Procedure<RefObject>() {
+      public void execute(RefObject sourceObject) throws RuntimeException, IllegalArgumentException {
+        RefObject result;
 
-			  result = targetRefClass.refCreateInstance(null);
+        result = targetRefClass.refCreateInstance(null);
 
-			  objectsMap.put( sourceObject, result );
-			}
+        objectsMap.put( sourceObject, result );
+      }
 
       /**
        * @see java.lang.Object#toString()
@@ -57,32 +57,32 @@ public final class IdentityNameMapping implements NameMapping {
       public String toString() {
         return "identity mapMetaClass: "+name;
       }
-		};
-	}
+    };
+  }
 
-	/**
-	 * @see NameMapping#mapMetaAssociation(AssociationName, RefPackage, RefPackage, Map)
-	 */
-	public Procedure<RefAssociationLink> mapMetaAssociation(AssociationName association, RefPackage sourceExtent, RefPackage targetExtent, Map<RefObject, RefObject> objectsMap) {
-	  Procedure<RefAssociationLink> result;
-		RefAssociation assoc;
+  /**
+   * @see NameMapping#mapMetaAssociation(AssociationName, RefPackage, RefPackage, Map)
+   */
+  public Procedure<RefAssociationLink> mapMetaAssociation(AssociationName association, RefPackage sourceExtent, RefPackage targetExtent, Map<RefObject, RefObject> objectsMap) {
+    Procedure<RefAssociationLink> result;
+    RefAssociation assoc;
 
-		assoc = association.getMetaAssociation(targetExtent);
+    assoc = association.getMetaAssociation(targetExtent);
 
-		if (((Association) assoc.refMetaObject()).isDerived()) { // the derived associations are not copied!
-		  result = Procedure.EMPTY;
+    if (((Association) assoc.refMetaObject()).isDerived()) { // the derived associations are not copied!
+      result = Procedure.EMPTY;
 
-		} else {
-  		result = new Procedure<RefAssociationLink>() {
-  			public void execute(RefAssociationLink source) throws RuntimeException, IllegalArgumentException {
-  				RefObject targetFirst;
-  				RefObject targetSecond;
+    } else {
+      result = new Procedure<RefAssociationLink>() {
+        public void execute(RefAssociationLink source) throws RuntimeException, IllegalArgumentException {
+          RefObject targetFirst;
+          RefObject targetSecond;
 
-  				targetFirst = objectsMap.get(source.refFirstEnd());
-  				targetSecond = objectsMap.get(source.refSecondEnd());
+          targetFirst = objectsMap.get(source.refFirstEnd());
+          targetSecond = objectsMap.get(source.refSecondEnd());
 
-  				assoc.refAddLink(targetFirst, targetSecond);
-  			}
+          assoc.refAddLink(targetFirst, targetSecond);
+        }
 
         /**
          * @see java.lang.Object#toString()
@@ -90,19 +90,19 @@ public final class IdentityNameMapping implements NameMapping {
         public String toString() {
           return "identity mapMetaAssociation: "+association;
         }
-  		};
-		}
-		return result;
-	}
+      };
+    }
+    return result;
+  }
 
-	/**
-	 * @see NameMapping#mapMetaFieldName(FieldName, RefPackage, RefPackage, Map)
-	 */
-	public Procedure<RefObject> mapMetaFieldName(FieldName name,
-	                                             RefPackage sourceExtent,
-	                                             RefPackage targetExtent, Map<RefObject, RefObject> objectsMap) {
+  /**
+   * @see NameMapping#mapMetaFieldName(FieldName, RefPackage, RefPackage, Map)
+   */
+  public Procedure<RefObject> mapMetaFieldName(FieldName name,
+                                               RefPackage sourceExtent,
+                                               RefPackage targetExtent, Map<RefObject, RefObject> objectsMap) {
     return (Procedure<RefObject>) name.constructTransfromation().construct( sourceExtent, targetExtent, objectsMap, this );
-	}
+  }
 
   /**
    * @see NameMapping#mapEnum(net.mdatools.modelant.core.api.name.EnumValueName)

@@ -23,6 +23,7 @@ import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.descriptor.PluginDescriptor;
+import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.javadoc.AbstractJavadocMojo;
 import org.apache.maven.plugins.javadoc.JavadocJar;
 import org.apache.maven.plugins.javadoc.options.DocletArtifact;
@@ -54,17 +55,15 @@ public class ReverseEngineerJavaMojo extends JavadocJar {
 
   /**
    * The directory where to store the work/temporary files
-   *
-   * @parameter expression="${project.build.directory}"
    */
+  @Parameter(property="project.build.directory")
   private File workDirectory;
 
 
   /**
    * The file path and name of the model to produce
-   *
-   * @parameter expression="${project.build.directory}/model.xml"
    */
+  @Parameter(defaultValue="${project.build.directory}/model.xml")
   private File modelFile;
 
   /**

@@ -31,9 +31,9 @@ public interface ClassName extends Name<Name<?>> {
    */
   RefClass getMetaClass(RefPackage rootPackage) throws JmiException;
 
-	default RefAssociation locateAssociation(RefPackage targetExtent) {
-		RefAssociation result;
-		RefPackage newMetaPackage;
+  default RefAssociation locateAssociation(RefPackage targetExtent) {
+    RefAssociation result;
+    RefPackage newMetaPackage;
 
     if ( getOwner() instanceof PackageName ) {
       newMetaPackage = ((PackageName) getOwner()).getMetaPackage( targetExtent );
@@ -41,6 +41,6 @@ public interface ClassName extends Name<Name<?>> {
     } else {
       throw new IllegalArgumentException(this + " should be a class name in order to lookup the corresponding *AssociationClass instance");
     }
-		return result;
-	}
+    return result;
+  }
 }

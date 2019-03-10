@@ -54,8 +54,6 @@ public class ReverseEngineerDatabaseMojo extends AbstractMojo {
 
   /**
    * Database driver-specific URL
-   * @parameter
-   * @required
    */
   private String url;
 

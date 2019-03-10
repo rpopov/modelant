@@ -43,32 +43,32 @@ public class CompareModelsMojo extends AbstractMojo {
   /**
    * The name of the file with the source (original) model
    */
-	@Parameter(property="project.build.sourceDirectory", required=true)
+  @Parameter(required=true)
   private File sourceModel;
 
   /**
    * The name of the file with the target (changed) model
    */
-	@Parameter(required=true)
+  @Parameter(required=true)
   private File targetModel;
 
   /**
    * The directory where the temporary internal files are located
    */
-	@Parameter(property="project.build.directory", required=true)
+  @Parameter(property="project.build.directory", required=true)
   private File workDirectory;
 
   /**
    * Pairs of &lt;metaclass&gt;, &lt;metapackage&gt; as pairs of source and target metamodel classes,
    * that should be considered equal.
    */
-	@Parameter
+  @Parameter
   private List<ConsideredEqual> equals;
 
   /**
    * The mechanism to export the result of models comparison. Default: print the string representation
    */
-	@Parameter
+  @Parameter
   private Export export = Export.DEFAULT;
 
   public void execute() throws MojoExecutionException {

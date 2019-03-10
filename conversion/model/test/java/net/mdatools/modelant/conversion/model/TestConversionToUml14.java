@@ -61,14 +61,14 @@ public class TestConversionToUml14 extends TestCase {
    * Convert the loaded model and validate the result structure
    */
   public void testConvert() {
-  	ConvertUml13ToUml14 convert;
-  	Map<RefObject, RefObject> objectsMapping;
+    ConvertUml13ToUml14 convert;
+    Map<RefObject, RefObject> objectsMapping;
 
-  	convert = new ConvertUml13ToUml14(sourceModel);
+    convert = new ConvertUml13ToUml14(sourceModel);
 
-  	objectsMapping = convert.execute(targetModel);
+    objectsMapping = convert.execute(targetModel);
 
-  	assertTrue(!objectsMapping.isEmpty());
+    assertTrue(!objectsMapping.isEmpty());
   }
 
 

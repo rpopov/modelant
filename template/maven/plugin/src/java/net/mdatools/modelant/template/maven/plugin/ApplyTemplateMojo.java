@@ -38,19 +38,19 @@ public class ApplyTemplateMojo extends CompilationContext {
   /**
    * The name of the template to apply
    */
-	@Parameter(required=true)
+  @Parameter(required=true)
   private String template;
 
   /**
    * The file to produce
    */
-	@Parameter(required=true)
+  @Parameter(required=true)
   private File targetFile;
 
   /**
    * The value (usually a maven property value) to render
    */
-	@Parameter(required=true)
+  @Parameter(required=true)
   private Object targetObject;
 
 

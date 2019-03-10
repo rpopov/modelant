@@ -10,6 +10,8 @@ package net.mdatools.modelant.core.operation.model.match;
 import javax.jmi.reflect.RefObject;
 import javax.jmi.reflect.RefPackage;
 
+import org.apache.maven.plugins.annotations.Parameter;
+
 import net.mdatools.modelant.core.api.Selector;
 import net.mdatools.modelant.core.api.match.ConsideredEqual;
 import net.mdatools.modelant.core.selector.SelectByQualifiedName;
@@ -23,16 +25,14 @@ public class Equal implements ConsideredEqual {
 
   /**
    * Qualified name of the source class in the metamodel
-   * @parameter
-   * @required
    */
+  @Parameter(required=true) 
   private String source;
 
   /**
    * Qualified name of the target class in the metamodel
-   * @parameter
-   * @required
    */
+  @Parameter(required=true) 
   private String target;
 
   /**

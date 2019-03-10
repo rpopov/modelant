@@ -28,32 +28,32 @@ import net.mdatools.modelant.repository.api.ModelRepositoryFactory;
  */
 @Mojo(name="generate-model-api",
       defaultPhase=LifecyclePhase.PROCESS_SOURCES
-		)
+    )
 @Execute(phase=LifecyclePhase.PROCESS_SOURCES)
 public class GenerateModelApiSourceMojo extends AbstractMojo {
 
   /**
    * Where to generate the API sources
    */
-	@Parameter(property="project.build.sourceDirectory", required=true)
+  @Parameter(property="project.build.sourceDirectory", required=true)
   private File sourceDirectory;
 
   /**
    * Where the metamodel is located
    */
-	@Parameter(required=true)
+  @Parameter(required=true)
   private File metamodelFile;
 
   /**
    * Where the work files are located
    */
-	@Parameter(property="project.build.directory", required=true)
+  @Parameter(property="project.build.directory", required=true)
   private File workDirectory;
 
   /**
    * The optional javadoc header to include in the generated sources
    */
-	@Parameter
+  @Parameter
   private File headerFile;
 
 

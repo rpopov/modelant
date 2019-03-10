@@ -253,14 +253,14 @@ public class Navigator {
 
 
     process(sourceExtent,
-		    new ProcessPackage() {
-					public RefPackage execute(RefPackage refPackage) throws RuntimeException, IllegalArgumentException {
-				    for (RefClass metaClass : (Collection<RefClass>) refPackage.refAllClasses()) {
-				      result.addAll( metaClass.refAllOfClass() );
-				    }
-						return null;
-					}
-				});
+        new ProcessPackage() {
+          public RefPackage execute(RefPackage refPackage) throws RuntimeException, IllegalArgumentException {
+            for (RefClass metaClass : (Collection<RefClass>) refPackage.refAllClasses()) {
+              result.addAll( metaClass.refAllOfClass() );
+            }
+            return null;
+          }
+        });
     return result;
   }
 
@@ -274,12 +274,12 @@ public class Navigator {
     result = new ArrayList<>();
 
     process(sourceExtent,
-    		    new ProcessPackage() {
-							public RefPackage execute(RefPackage refPackage) throws RuntimeException, IllegalArgumentException {
-								result.addAll( refPackage.refAllAssociations() );
-								return null;
-							}
-						});
+            new ProcessPackage() {
+              public RefPackage execute(RefPackage refPackage) throws RuntimeException, IllegalArgumentException {
+                result.addAll( refPackage.refAllAssociations() );
+                return null;
+              }
+            });
     return result;
   }
 
@@ -294,12 +294,12 @@ public class Navigator {
     result = new ArrayList<>();
 
     process(sourceExtent,
-				    new ProcessPackage() {
-							public RefPackage execute(RefPackage refPackage) throws RuntimeException, IllegalArgumentException {
-								result.addAll( refPackage.refAllClasses() );
-								return null;
-							}
-						});
+            new ProcessPackage() {
+              public RefPackage execute(RefPackage refPackage) throws RuntimeException, IllegalArgumentException {
+                result.addAll( refPackage.refAllClasses() );
+                return null;
+              }
+            });
     return result;
   }
 

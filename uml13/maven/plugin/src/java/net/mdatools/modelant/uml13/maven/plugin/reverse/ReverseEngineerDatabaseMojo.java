@@ -57,44 +57,44 @@ public class ReverseEngineerDatabaseMojo extends AbstractMojo {
   /**
    * Database driver-specific URL
    */
-	@Parameter(required=true)
+  @Parameter(required=true)
   private String url;
 
   /**
    * Database user to connect the database
    */
-	@Parameter(required=true)
+  @Parameter(required=true)
   private String user;
 
   /**
    * Database user's password
    */
-	@Parameter(required=true)
+  @Parameter(required=true)
   private String password;
 
   /**
    * The java class name of the database driver to connect the database.
    * The .jar with that class file should be provided as a dependency of this plugin
    */
-	@Parameter(required=true)
+  @Parameter(required=true)
   private String driver;
 
   /**
    * A comma-separated list of database schemes to reverse engineer into a dingle model
    */
-	@Parameter(required=true)
+  @Parameter(required=true)
   private String[] schema;
 
   /**
    * The name of the file where to export the produced UML 1.3 model in XMI 1.2 format
    */
-	@Parameter(required=true)
+  @Parameter(required=true)
   private File outputFile;
 
   /**
    * The directory where to store the repository files
    */
-	@Parameter(property="project.build.directory",required=true)
+  @Parameter(property="project.build.directory",required=true)
   private File workDir;
 
   /**

@@ -56,7 +56,7 @@ public interface Name<P extends Name<?>> {
    * @param name not null
    * @return not null instance of the same Name implementation class with the name and parent provided
    */
-	Name<P> constructName(P parent, String name);
+  Name<P> constructName(P parent, String name);
 
   /**
    * As of the requirements of JMI 1.0 {@link NameMapping#mapMetaAssociation(AssociationName, RefPackage, RefPackage, java.util.Map)} and
@@ -65,10 +65,10 @@ public interface Name<P extends Name<?>> {
    *
    * @return non-null method to produce the transformation of a source model object into a target model object
    */
-	ConstructProcedure<?> constructTransfromation();
+  ConstructProcedure<?> constructTransfromation();
 
   /**
    * @return non-null method to produce the transformation of a source model object into a target model object
    */
-	ConstructProcedure<?> constructNoTransfromation();
+  ConstructProcedure<?> constructNoTransfromation();
 }

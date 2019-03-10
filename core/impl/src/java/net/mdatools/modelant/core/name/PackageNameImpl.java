@@ -30,7 +30,7 @@ public class PackageNameImpl extends NameImpl<PackageName> implements PackageNam
 
   public PackageNameImpl(Namespace container) {
     super(container.getContainer() == null ? null: new PackageNameImpl(container.getContainer()),
-    		  container.getName());
+          container.getName());
   }
 
 
@@ -79,10 +79,10 @@ public class PackageNameImpl extends NameImpl<PackageName> implements PackageNam
     return result;
   }
 
-	/**
-	 * @see net.mdatools.modelant.core.api.name.Name#constructName(net.mdatools.modelant.core.api.name.Name, java.lang.String)
-	 */
-	public Name<PackageName> constructName(PackageName parent, String name) {
-		return new PackageNameImpl(parent, name);
-	}
+  /**
+   * @see net.mdatools.modelant.core.api.name.Name#constructName(net.mdatools.modelant.core.api.name.Name, java.lang.String)
+   */
+  public Name<PackageName> constructName(PackageName parent, String name) {
+    return new PackageNameImpl(parent, name);
+  }
 }

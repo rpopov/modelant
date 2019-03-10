@@ -23,16 +23,16 @@ public interface AssociationName extends Name<PackageName> {
    */
   RefAssociation getMetaAssociation(RefPackage rootPackage) throws JmiException;
 
-	/**
-	 * @return non-null producer of transformations of source model links to target model links in the same direction, e.g. the source of the produced
-	 *         link is the object that corresponds to the source of the original link, the same is for link targets
-	 */
-	public ConstructProcedure<RefAssociationLink> newForwardLinkProduction();
+  /**
+   * @return non-null producer of transformations of source model links to target model links in the same direction, e.g. the source of the produced
+   *         link is the object that corresponds to the source of the original link, the same is for link targets
+   */
+  public ConstructProcedure<RefAssociationLink> newForwardLinkProduction();
 
-	/**
-	 * @return non-null producer of transformations of source model links to target model links in the opposite direction, e.g. the source of the produced
-	 *         link is the object that corresponds to the target of the original link, the same is for link targets
-	 */
-	public ConstructProcedure<RefAssociationLink> newBackwardLinkProduction();
+  /**
+   * @return non-null producer of transformations of source model links to target model links in the opposite direction, e.g. the source of the produced
+   *         link is the object that corresponds to the target of the original link, the same is for link targets
+   */
+  public ConstructProcedure<RefAssociationLink> newBackwardLinkProduction();
 
 }

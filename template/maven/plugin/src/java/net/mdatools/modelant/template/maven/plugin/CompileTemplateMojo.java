@@ -39,7 +39,7 @@ public class CompileTemplateMojo extends CompilationContext {
   /**
    * Selection of all ModelAnt Templates below sourceDirectory
    */
-	@Parameter
+  @Parameter
   private FileSet fileSet;
 
   /**

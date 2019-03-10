@@ -29,52 +29,51 @@ public abstract class CompilationContext extends AbstractMojo implements Templat
    * standard package names that are forbidden for custom class loaders.
    * It should not be among the forbidden package names like: java, com.sun
    */
-	@Parameter(required=true)
+  @Parameter(required=true)
   private String uniqueName;
 
   /**
    * Where the source files of the project templates are
    */
-	@Parameter(defaultValue="${project.build.sourceDirectory}/../template", required=true)
+  @Parameter(defaultValue="${project.build.sourceDirectory}/../template", required=true)
   private File templateDirectory;
 
   /**
    * The directory where to hold the translated to JAVA templates
    */
-	@Parameter(defaultValue="${project.build.directory}/java", required=true)
+  @Parameter(defaultValue="${project.build.directory}/java", required=true)
   private File javaSourceDirectory;
 
   /**
    * Where to hold the compilation result files - the standard classes directory
    */
-	@Parameter(property="project.build.outputDirectory", required=true, readonly=true)
+  @Parameter(property="project.build.outputDirectory", required=true, readonly=true)
   private File classDirectory;
 
   /**
    * PLEXUS should inject here the descriptor of the plugin this MOJO is in,
    * so it could access its classpath
    */
-	@Component(role=org.apache.maven.plugin.descriptor.PluginDescriptor.class)
+  @Component(role=org.apache.maven.plugin.descriptor.PluginDescriptor.class)
   private PluginDescriptor pluginDescriptor;
 
   /**
    * If the generated Java files from the templates should not be deleted
    * (for tracing purposes) set it to true
    */
-	@Parameter(alias="keepGenerated")
+  @Parameter(alias="keepGenerated")
   private boolean shouldKeepGenerated;
 
   /**
    * If the compiler should include debug information, set it to true
-   * @parameter
    */
-	@Parameter(alias="compileForDebug")
+  @Parameter(alias="compileForDebug")
   private boolean shouldCompileForDebug;
 
   /**
    * Encoding of the template files, default: ISO-8859-1
    */
-	@Parameter(defaultValue="ISO-8859-1")
+  @Parameter(defaultValue="ISO-8859-1")
   private String templateEncoding;
 
   /**

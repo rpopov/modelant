@@ -35,16 +35,14 @@ public class ConvertDtd2XsdMojo extends AbstractMojo  {
 
   /**
    * The DTD file to convert
-   * @parameter
-   * @required
    */
-	@Parameter(required=true)
+  @Parameter(required=true)
   private File dtdFile;
 
   /**
    * The XSD file to convert into
    */
-	@Parameter(required=true)
+  @Parameter(required=true)
   private File xsdFile;
 
   /**

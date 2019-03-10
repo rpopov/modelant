@@ -115,7 +115,7 @@ public class RenamingMapping implements NameMapping {
     nameToMethodMap.put( key, translate );
   }
 
-	/**
+  /**
    * Map an association to a transfer procedure.
    *
    * As of the requirements of {@link NameMapping#mapMetaAssociation(AssociationName, RefPackage, RefPackage, Map)}, the
@@ -132,33 +132,33 @@ public class RenamingMapping implements NameMapping {
     nameToMethodMap.put( key, translate );
   }
 
-	/**
+  /**
    * Mark an association as mapped to the target one in the same direction of the links
    * @param key not null qualified name of the original association
    * @param target not null qualified name
    */
   protected final void setForward(AssociationName key, AssociationName target) {
-		assert key != null : "Expected a non-null key provided";
-		assert target != null : "Expected a non-null target provided";
+    assert key != null : "Expected a non-null key provided";
+    assert target != null : "Expected a non-null target provided";
 
     set( key,
-    		 target.newForwardLinkProduction());
+         target.newForwardLinkProduction());
   }
 
-	/**
+  /**
    * Mark an association as mapped to the target one in the opposite direction of the links
    * @param key not null qualified name of the original association
    * @param target not null qualified name
    */
   protected final void setBackward(AssociationName key, AssociationName target) {
-		assert key != null : "Expected a non-null key provided";
-		assert target != null : "Expected a non-null target provided";
+    assert key != null : "Expected a non-null key provided";
+    assert target != null : "Expected a non-null target provided";
 
     set( key,
-    		 target.newBackwardLinkProduction());
+         target.newBackwardLinkProduction());
   }
 
-	/**
+  /**
    * Map a class to a conversion procedure
    * @param key
    * @param translate
@@ -184,46 +184,46 @@ public class RenamingMapping implements NameMapping {
     nameToOperationMap.put( key, translate );
   }
 
-	/**
-	 * @see NameMapping#mapMetaClass(ClassName, RefPackage, RefPackage, Map)
-	 */
-	public final Procedure<RefObject> mapMetaClass(ClassName className,
-	                                               RefPackage sourceExtent,
-	                                               RefPackage targetExtent,
-	                                               Map<RefObject, RefObject> objectsMap) {
-	  ConstructProcedure<RefObject> mapped;
+  /**
+   * @see NameMapping#mapMetaClass(ClassName, RefPackage, RefPackage, Map)
+   */
+  public final Procedure<RefObject> mapMetaClass(ClassName className,
+                                                 RefPackage sourceExtent,
+                                                 RefPackage targetExtent,
+                                                 Map<RefObject, RefObject> objectsMap) {
+    ConstructProcedure<RefObject> mapped;
 
-	  mapped	= (ConstructProcedure<RefObject>) lookupName(className);
+    mapped  = (ConstructProcedure<RefObject>) lookupName(className);
 
-	  return mapped.construct( sourceExtent, targetExtent, objectsMap, this );
-	}
+    return mapped.construct( sourceExtent, targetExtent, objectsMap, this );
+  }
 
-	/**
-	 * @see NameMapping#mapMetaAssociation(AssociationName, RefPackage, RefPackage, Map)
-	 */
-	public final Procedure<RefAssociationLink> mapMetaAssociation(AssociationName associationName,
-	                                                              RefPackage sourceExtent,
-	                                                              RefPackage targetExtent,
-	                                                              Map<RefObject, RefObject> objectsMap) {
-	  ConstructProcedure<RefAssociationLink> mapped;
+  /**
+   * @see NameMapping#mapMetaAssociation(AssociationName, RefPackage, RefPackage, Map)
+   */
+  public final Procedure<RefAssociationLink> mapMetaAssociation(AssociationName associationName,
+                                                                RefPackage sourceExtent,
+                                                                RefPackage targetExtent,
+                                                                Map<RefObject, RefObject> objectsMap) {
+    ConstructProcedure<RefAssociationLink> mapped;
 
-	  mapped	= (ConstructProcedure<RefAssociationLink>) lookupName(associationName);
+    mapped  = (ConstructProcedure<RefAssociationLink>) lookupName(associationName);
 
-	  return mapped.construct( sourceExtent, targetExtent, objectsMap, this );
-	}
+    return mapped.construct( sourceExtent, targetExtent, objectsMap, this );
+  }
 
-	/**
-	 * @see NameMapping#mapMetaFieldName(FieldName, RefPackage, RefPackage, Map)
-	 */
-	public final Procedure<RefObject> mapMetaFieldName(FieldName fieldName,
-	                                                   RefPackage sourceExtent,
-	                                                   RefPackage targetExtent, Map<RefObject, RefObject> objectsMap) {
-	  ConstructProcedure<RefObject> mapped;
+  /**
+   * @see NameMapping#mapMetaFieldName(FieldName, RefPackage, RefPackage, Map)
+   */
+  public final Procedure<RefObject> mapMetaFieldName(FieldName fieldName,
+                                                     RefPackage sourceExtent,
+                                                     RefPackage targetExtent, Map<RefObject, RefObject> objectsMap) {
+    ConstructProcedure<RefObject> mapped;
 
-	  mapped	= (ConstructProcedure<RefObject>) lookupName(fieldName);
+    mapped  = (ConstructProcedure<RefObject>) lookupName(fieldName);
 
-	  return mapped.construct(sourceExtent, targetExtent, objectsMap, this);
-	}
+    return mapped.construct(sourceExtent, targetExtent, objectsMap, this);
+  }
 
 
 
@@ -237,30 +237,30 @@ public class RenamingMapping implements NameMapping {
     return constructMappedName( source );
   }
 
-	/**
-	 * @param name not null
-	 * @return the non-null method to produce the transformation for the name into the corresponding object into the target extent
-	 */
-	private ConstructProcedure<?> lookupName(Name<?> name) {
-	  ConstructProcedure<?> result;
-		Name<?> mappedName;
+  /**
+   * @param name not null
+   * @return the non-null method to produce the transformation for the name into the corresponding object into the target extent
+   */
+  private ConstructProcedure<?> lookupName(Name<?> name) {
+    ConstructProcedure<?> result;
+    Name<?> mappedName;
 
-		result = nameToMethodMap.get(name);
+    result = nameToMethodMap.get(name);
 
-		if ( result==null ) { // no explicit method mapped
-			mappedName = constructMappedName(name);
+    if ( result==null ) { // no explicit method mapped
+      mappedName = constructMappedName(name);
 
-			if ( mappedName != null ) {
-			  result = mappedName.constructTransfromation();
-			} else {
-				result = name.constructNoTransfromation();
-			}
-		} else { // log the explicit procedure mapping to complete the name mapping log in constructMappedName
+      if ( mappedName != null ) {
+        result = mappedName.constructTransfromation();
+      } else {
+        result = name.constructNoTransfromation();
+      }
+    } else { // log the explicit procedure mapping to complete the name mapping log in constructMappedName
 
-	    LOGGER.log( Level.FINE, "{0} mapped to {1}", new Object[] {name, result});
-		}
-		return result;
-	}
+      LOGGER.log( Level.FINE, "{0} mapped to {1}", new Object[] {name, result});
+    }
+    return result;
+  }
 
   /**
    * @param name not null
@@ -296,32 +296,32 @@ public class RenamingMapping implements NameMapping {
     return result;
   }
 
-	/**
-	 * Use the defaults and existing mappings to construct the name that corresponds to the provided one in the target mode
-	 * @param name not null
-	 * @return null when no mapping defined
-	 */
-	private <P extends Name<?>, T extends Name<P>> T constructMappedName(T name) {
-		T result;
-		Name<?> constructedParent;
+  /**
+   * Use the defaults and existing mappings to construct the name that corresponds to the provided one in the target mode
+   * @param name not null
+   * @return null when no mapping defined
+   */
+  private <P extends Name<?>, T extends Name<P>> T constructMappedName(T name) {
+    T result;
+    Name<?> constructedParent;
 
     result = (T) renaming.get(name);
     if ( result == NO_MAP_NAME ) { // stop any mapping
       result = null;
 
     } else if ( result == null
-		            && name.getOwner() != null ) {
-		  constructedParent = constructMappedName((Name<?>) name.getOwner());
+                && name.getOwner() != null ) {
+      constructedParent = constructMappedName((Name<?>) name.getOwner());
 
       if ( constructedParent != null ) {
-      	result = (T) name.constructName((P) constructedParent, name.getName());
+        result = (T) name.constructName((P) constructedParent, name.getName());
       }
     }
 
     LOGGER.log( Level.FINE, "{0} mapped to {1}", new Object[] {name, result});
 
-		return result;
-	}
+    return result;
+  }
 
   /**
    * @see net.mdatools.modelant.core.api.model.NameMapping#mapEnum(net.mdatools.modelant.core.api.name.EnumValueName)

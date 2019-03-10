@@ -57,7 +57,7 @@ class InstanceDifferencesImpl implements InstanceDifference {
    * @param correspondents
    */
   InstanceDifferencesImpl(CachedModelElement xCorrespondent,
-  									      CachedModelElement yCorrespondent,
+                          CachedModelElement yCorrespondent,
                           EquivalenceClassesMap<RefObject> correspondents) {
     this.xObject = xCorrespondent;
     this.yObject = yCorrespondent;

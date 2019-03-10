@@ -364,9 +364,9 @@ public class Uml13ModelFactory {
     UmlPackage namespace;
 
     if ( name.getOwner() == null ) {
-    	namespace = model;
+      namespace = model;
     } else {
-    	namespace = constructPackage( name.getOwner() );
+      namespace = constructPackage( name.getOwner() );
     }
 
     result = (UmlPackage) locateLocalModelElement( namespace, name.getName() );
@@ -397,26 +397,26 @@ public class Uml13ModelFactory {
   }
 
   /**
-	 * @param tagName a non-null tag name
-	 * @return the tag with the name bound to this model element
-	 */
-	public TaggedValue getTaggedValue(ModelElement modelElement, String tagName) {
-	  TaggedValue result = null;
-	  TaggedValue tag;
-	  Iterator<TaggedValue> sourceIterator;
+   * @param tagName a non-null tag name
+   * @return the tag with the name bound to this model element
+   */
+  public TaggedValue getTaggedValue(ModelElement modelElement, String tagName) {
+    TaggedValue result = null;
+    TaggedValue tag;
+    Iterator<TaggedValue> sourceIterator;
 
-	  sourceIterator = allTaggedValues(modelElement).iterator();
-	  while ( result == null && sourceIterator.hasNext() ) {
-	    tag = sourceIterator.next();
+    sourceIterator = allTaggedValues(modelElement).iterator();
+    while ( result == null && sourceIterator.hasNext() ) {
+      tag = sourceIterator.next();
 
-	    if ( tagName.equals( tag.getTag() ) ) {
-	      result = tag;
-	    }
-	  }
-	  return result;
-	}
+      if ( tagName.equals( tag.getTag() ) ) {
+        result = tag;
+      }
+    }
+    return result;
+  }
 
-	public void constructTagDocumentation(ModelElement otherClass, String contents) {
+  public void constructTagDocumentation(ModelElement otherClass, String contents) {
     TaggedValue documentation;
 
     documentation = getTaggedValue( otherClass, net.mdatools.modelant.uml13.metamodel.Convention.TAG_VALUE_DOCUMENTATION);
@@ -505,61 +505,61 @@ public class Uml13ModelFactory {
    * @return the model element with the name specified.
    */
   public RefObject locateModelElement(Name<?> name) throws IllegalArgumentException {
-  	return locateModelElement(model, name);
+    return locateModelElement(model, name);
   }
 
 
   /**
-	 * Locate the model element using its Name in this model object.
-	 * @param namespace not null namespace to look for the name
-	 * @param name not null element name
-	 * @return the non-null model element with the name specified.
-	 * @throws IllegalArgumentException when not found
-	 */
-	public RefObject locateModelElement(Namespace namespace, Name<?> name) throws IllegalArgumentException {
-	  RefObject result;
-	  RefObject resultNamespace;
+   * Locate the model element using its Name in this model object.
+   * @param namespace not null namespace to look for the name
+   * @param name not null element name
+   * @return the non-null model element with the name specified.
+   * @throws IllegalArgumentException when not found
+   */
+  public RefObject locateModelElement(Namespace namespace, Name<?> name) throws IllegalArgumentException {
+    RefObject result;
+    RefObject resultNamespace;
 
-	  if ( name.getOwner() != null ) {
-	    resultNamespace = locateModelElement(namespace, name.getOwner());
-	  } else {
-	    resultNamespace = namespace;
-	  }
+    if ( name.getOwner() != null ) {
+      resultNamespace = locateModelElement(namespace, name.getOwner());
+    } else {
+      resultNamespace = namespace;
+    }
 
-	  // TODO: Reconsider the locateRelativeModelElement to throw exception when not applicable or found nothing (N/A again)
+    // TODO: Reconsider the locateRelativeModelElement to throw exception when not applicable or found nothing (N/A again)
 
-	  if ( !(resultNamespace instanceof Namespace) ) {
-	    throw new IllegalArgumentException("Looking up "+name.getOwner()+" reached a non-namespace element to lookup "+name.getName());
-	  }
-	  result = locateLocalModelElement((Namespace) resultNamespace, name.getName());
+    if ( !(resultNamespace instanceof Namespace) ) {
+      throw new IllegalArgumentException("Looking up "+name.getOwner()+" reached a non-namespace element to lookup "+name.getName());
+    }
+    result = locateLocalModelElement((Namespace) resultNamespace, name.getName());
 
-	  if (result == null ) {
-	    throw new IllegalArgumentException("Not found "+name+" in "+name.getOwner()+" namespace");
-	  }
+    if (result == null ) {
+      throw new IllegalArgumentException("Not found "+name+" in "+name.getOwner()+" namespace");
+    }
 
-	  return result;
-	}
+    return result;
+  }
 
-	/**
-	 * This method locates the model element with name provided in <b>elementName </b> within the UML
-	 * namespace <b>outerPackage </b>.
-	 *
-	 * @param elementName is a non-null name
-	 * @return null if no package found, otherwise the package with the name specified
-	 */
-	public ModelElement locateLocalModelElement(Namespace namespace, String elementName) {
-	  ModelElement result = null;
-	  ModelElement ownedElement;
-	  Iterator ownedElementsIterator;
+  /**
+   * This method locates the model element with name provided in <b>elementName </b> within the UML
+   * namespace <b>outerPackage </b>.
+   *
+   * @param elementName is a non-null name
+   * @return null if no package found, otherwise the package with the name specified
+   */
+  public ModelElement locateLocalModelElement(Namespace namespace, String elementName) {
+    ModelElement result = null;
+    ModelElement ownedElement;
+    Iterator ownedElementsIterator;
 
-	  ownedElementsIterator = namespace.getOwnedElement().iterator();
-	  while ( result == null && ownedElementsIterator.hasNext() ) {
-	    ownedElement = (ModelElement) ownedElementsIterator.next();
+    ownedElementsIterator = namespace.getOwnedElement().iterator();
+    while ( result == null && ownedElementsIterator.hasNext() ) {
+      ownedElement = (ModelElement) ownedElementsIterator.next();
 
-	    if ( elementName.equals( ownedElement.getName() ) ) {
-	      result = ownedElement;
-	    }
-	  }
-	  return result;
-	}
+      if ( elementName.equals( ownedElement.getName() ) ) {
+        result = ownedElement;
+      }
+    }
+    return result;
+  }
 }

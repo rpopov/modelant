@@ -15,6 +15,7 @@ import javax.jmi.reflect.RefPackage;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
+import org.apache.maven.plugins.annotations.Parameter;
 
 import net.mdatools.modelant.core.api.diff.Export;
 import net.mdatools.modelant.core.api.diff.ModelComparisonResult;
@@ -37,39 +38,33 @@ public class CompareModelsMojo extends AbstractMojo {
 
   /**
    * Where to generate the API sources
-   *
-   * @parameter property="project.build.sourceDirectory"
-   * @required
    */
+  @Parameter(required=true)
   private File sourceModel;
 
   /**
    * Where the metamodel is located
-   *
-   * @parameter
-   * @required
    */
+  @Parameter(required=true)
   private File targetModel;
 
   /**
    * Where the work files are located
-   *
-   * @parameter property="project.build.directory"
-   * @required
    */
+  @Parameter(property="project.build.directory", required=true)
   private File workDirectory;
 
   /**
    * Pairs of &lt;metaclass&gt;, &lt;metapackage&gt; as pairs of source and target metamodel classes,
    * that should be considered equal.
-   * @parameter
    */
+  @Parameter
   private List<ConsideredEqual> equals;
 
   /**
    * The mechanism to export the result of models comparison. Default: print the string representation
-   * @parameter
    */
+  @Parameter
   private Export export = Export.DEFAULT;
 
   public void execute() throws MojoExecutionException {

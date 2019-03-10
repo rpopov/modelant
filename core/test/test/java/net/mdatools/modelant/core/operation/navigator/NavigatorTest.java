@@ -53,39 +53,39 @@ public class NavigatorTest extends TestCase {
    * Count the associations in UML 1.3 metamodel
    */
   public void testGetAllAssociations() {
-  	List<RefAssociation> associations; 
+    List<RefAssociation> associations; 
   
-  	associations = Navigator.getAllAssociations(sourceModel);
+    associations = Navigator.getAllAssociations(sourceModel);
   
-  	LOGGER.log( Level.FINE, "All associations: {0}", new PrintModelElement().toPrint(associations));
+    LOGGER.log( Level.FINE, "All associations: {0}", new PrintModelElement().toPrint(associations));
 
-  	assertEquals(104, associations.size());
+    assertEquals(104, associations.size());
   }
 
   /**
    * Count the classes in UML 1.3 metamodel
    */
   public void testGetAllClasses() {
-  	List<RefClass> classes;
-  	
-  	classes = Navigator.getAllClasses(sourceModel);
+    List<RefClass> classes;
+    
+    classes = Navigator.getAllClasses(sourceModel);
 
-  	LOGGER.log( Level.FINE, "All classes: {0}", new PrintModelElement().toPrint(classes));
-  	
-  	assertEquals(110, classes.size());
+    LOGGER.log( Level.FINE, "All classes: {0}", new PrintModelElement().toPrint(classes));
+    
+    assertEquals(110, classes.size());
   }
 
   /**
    * Count the objects in UML 1.3 model loaded
    */
   public void testGetAllObjects() throws Exception {
-  	List<RefObject> objects;
-  	
+    List<RefObject> objects;
+    
     repository.readIntoExtent( sourceModel, "demo.xml", Thread.currentThread().getContextClassLoader() );
 
     objects = Navigator.getAllObjects(sourceModel);
-  	
-  	assertEquals(2627, objects.size());
+    
+    assertEquals(2627, objects.size());
   }
 
 

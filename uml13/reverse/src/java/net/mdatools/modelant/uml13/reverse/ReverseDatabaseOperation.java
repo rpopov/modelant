@@ -168,9 +168,9 @@ public class ReverseDatabaseOperation implements Function<Connection, RefPackage
    *
    * @see java.sql.DatabaseMetaData#getTableTypes()
    */
-	private static final String[] TABLE_TYPES_TO_REVERSE = new String[] { "TABLE", "VIEW", "SYSTEM TABLE",
-																																			  // "GLOBAL TEMPORARY", "LOCAL TEMPORARY",
-																																			 "ALIAS", "SYNONYM"};
+  private static final String[] TABLE_TYPES_TO_REVERSE = new String[] { "TABLE", "VIEW", "SYSTEM TABLE",
+                                                                        // "GLOBAL TEMPORARY", "LOCAL TEMPORARY",
+                                                                       "ALIAS", "SYNONYM"};
 
   private final ModelRepository modelRepository;
   private final String[] schemes;
@@ -275,28 +275,28 @@ public class ReverseDatabaseOperation implements Function<Connection, RefPackage
 
           // find the other class
           try {
-	          otherClass = findClass( otherTable );
+            otherClass = findClass( otherTable );
 
-	          // establish association
+            // establish association
 
-	          // other end - the referenced table (the primary key one)
-	          // the name of the role of the other end (the PK one) is stated in the foreign key name at
-	          // this send
-	          // multiplicity: to-one
+            // other end - the referenced table (the primary key one)
+            // the name of the role of the other end (the PK one) is stated in the foreign key name at
+            // this send
+            // multiplicity: to-one
 
-	          // this end (the foreign key table)
-	          // the name of the role of this end is simply the name of this (FK) table
-	          // multiplicity: from-more
+            // this end (the foreign key table)
+            // the name of the role of this end is simply the name of this (FK) table
+            // multiplicity: from-more
 
-	          isComposite = relationDescriptions.getShort( JDBC_RELATION_DESCRIPTION_DELETE_RULE )
-	                        == DatabaseMetaData.importedKeyCascade; // "Cascade delete" in the constraint means composition
+            isComposite = relationDescriptions.getShort( JDBC_RELATION_DESCRIPTION_DELETE_RULE )
+                          == DatabaseMetaData.importedKeyCascade; // "Cascade delete" in the constraint means composition
 
-	          factory.constructAssociation( otherClass, thisField, 1, isComposite, true,
-	                                        thisClass, "", net.mdatools.modelant.uml13.metamodel.Convention.UNLIMITED_UPPER_MULTIPLICITY,
-	                                        thisClass.getNamespace(),
-	                                        "" );
+            factory.constructAssociation( otherClass, thisField, 1, isComposite, true,
+                                          thisClass, "", net.mdatools.modelant.uml13.metamodel.Convention.UNLIMITED_UPPER_MULTIPLICITY,
+                                          thisClass.getNamespace(),
+                                          "" );
           } catch (IllegalArgumentException ex) {
-          	LOGGER.log(Level.SEVERE, ex.getMessage());
+            LOGGER.log(Level.SEVERE, ex.getMessage());
           }
         }
       } finally {
@@ -484,11 +484,11 @@ public class ReverseDatabaseOperation implements Function<Connection, RefPackage
       metadata = connection.getMetaData();
 
       for (String schema : schemes) {
-	      // process all tables and register corresponding classes
-	      tables = processTables( metadata, schema );
+        // process all tables and register corresponding classes
+        tables = processTables( metadata, schema );
 
-	      // describe the relations as associations
-	      processRelationships( tables, metadata, schema );
+        // describe the relations as associations
+        processRelationships( tables, metadata, schema );
       }
     } catch (SQLException ex) {
       throw new IllegalArgumentException(ex);

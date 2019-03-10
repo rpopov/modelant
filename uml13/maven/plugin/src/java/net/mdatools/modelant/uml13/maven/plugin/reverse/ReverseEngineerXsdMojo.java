@@ -54,19 +54,19 @@ public class ReverseEngineerXsdMojo extends AbstractMojo {
   /**
    * The schema file to reverse engineer
    */
-	@Parameter(required=true)
+  @Parameter(required=true)
   private File schemaFile;
 
   /**
    * The name of the file where to export the produced UML 1.3 model in XMI 1.2 format
    */
-	@Parameter(required=true)
+  @Parameter(required=true)
   private File outputFile;
 
   /**
    * The directory where to store the repository files
    */
-	@Parameter(property="project.build.directory", required=true)
+  @Parameter(property="project.build.directory", required=true)
   private File workDir;
 
   /**

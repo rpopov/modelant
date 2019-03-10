@@ -20,7 +20,7 @@ import net.mdatools.modelant.core.api.diff.ModelComparisonResult;
  */
 public class Mof14CompareSameUml14MetamodelsTest extends Mof14CompareMetamodelsBase {
 
-	public static final Logger LOGGER = Logger.getLogger(Mof14CompareSameUml14MetamodelsTest.class.getName());
+  public static final Logger LOGGER = Logger.getLogger(Mof14CompareSameUml14MetamodelsTest.class.getName());
 
   /**
    * @see net.mdatools.modelant.mof14.metamodel.Mof14CompareMetamodelsBase#getSourceMetamodelName()

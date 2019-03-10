@@ -25,8 +25,8 @@ import net.mdatools.modelant.repository.api.ModelRepositoryFactory;
 
 public class CompareSameModelsTest extends TestCase {
 
-	public static final Logger LOGGER = Logger.getLogger(CompareSameModelsTest.class.getName());
-	
+  public static final Logger LOGGER = Logger.getLogger(CompareSameModelsTest.class.getName());
+  
   private ModelRepository repository;
   private ModelFactory metamodelFactory;
   private RefPackage sourceModel;

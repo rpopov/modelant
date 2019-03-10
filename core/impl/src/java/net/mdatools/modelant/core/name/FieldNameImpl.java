@@ -39,15 +39,15 @@ public class FieldNameImpl extends NameImpl<ClassName> implements FieldName {
   }
 
   public FieldNameImpl(Attribute attribute) {
-  	super(new ClassNameImpl((Classifier) attribute.getContainer()), attribute.getName());
+    super(new ClassNameImpl((Classifier) attribute.getContainer()), attribute.getName());
   }
 
-	/* (non-Javadoc)
-	 * @see net.mdatools.modelant.core.api.name.Name#construct(net.mdatools.modelant.core.api.name.Name, java.lang.String)
-	 */
-	public Name<ClassName> constructName(ClassName parent, String name) {
-		return new FieldNameImpl(parent, name);
-	}
+  /* (non-Javadoc)
+   * @see net.mdatools.modelant.core.api.name.Name#construct(net.mdatools.modelant.core.api.name.Name, java.lang.String)
+   */
+  public Name<ClassName> constructName(ClassName parent, String name) {
+    return new FieldNameImpl(parent, name);
+  }
 
   /**
    * @see net.mdatools.modelant.core.api.name.Name#constructTransfromation()

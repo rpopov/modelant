@@ -199,7 +199,7 @@ public class ReverseEngineerJavaDoclet extends Doclet {
    * @throws FileNotFoundException
    */
   private void export() throws FileNotFoundException, IOException {
-  	System.out.println("Writing "+outputModelFile+"...");
+    System.out.println("Writing "+outputModelFile+"...");
 
     modelFactory.writeExtent(extent, outputModelFile);
   }
@@ -241,53 +241,53 @@ public class ReverseEngineerJavaDoclet extends Doclet {
    * Add attributes, methods, constructors to the class' model
    * @param classDoc
    */
-	private void fillInType(ClassDoc classDoc) {
-		FieldDoc[] fields;
-		MethodDoc[] methods;
-		ConstructorDoc[] constructors;
-		Classifier umlClassifier;
-		Attribute attribute;
-		Operation constructor;
-		Operation method;
+  private void fillInType(ClassDoc classDoc) {
+    FieldDoc[] fields;
+    MethodDoc[] methods;
+    ConstructorDoc[] constructors;
+    Classifier umlClassifier;
+    Attribute attribute;
+    Operation constructor;
+    Operation method;
 
 
-		umlClassifier = (Classifier) factory.locateModelElement( classDoc.qualifiedName() ); // classDoc must be already existing
+    umlClassifier = (Classifier) factory.locateModelElement( classDoc.qualifiedName() ); // classDoc must be already existing
 
-		fields = classDoc.fields( false ); // find all attributes regardless of the scope specified
+    fields = classDoc.fields( false ); // find all attributes regardless of the scope specified
 
-		// bind the attributes
-		for (int j = 0; j < fields.length; j++) {
-		  attribute = createAttribute( fields[ j ] );
-		  attribute.setOwner( umlClassifier );
+    // bind the attributes
+    for (int j = 0; j < fields.length; j++) {
+      attribute = createAttribute( fields[ j ] );
+      attribute.setOwner( umlClassifier );
 
-		  // mark the attributes in the interfaces as constants (static final)
-		  if ( classDoc.isInterface() ) {
-		    attribute.setVisibility( VisibilityKindEnum.VK_PUBLIC );    // public
-		    attribute.setOwnerScope( ScopeKindEnum.SK_CLASSIFIER );     // static
-		    attribute.setChangeability( ChangeableKindEnum.CK_FROZEN ); // final
-		  }
-		}
+      // mark the attributes in the interfaces as constants (static final)
+      if ( classDoc.isInterface() ) {
+        attribute.setVisibility( VisibilityKindEnum.VK_PUBLIC );    // public
+        attribute.setOwnerScope( ScopeKindEnum.SK_CLASSIFIER );     // static
+        attribute.setChangeability( ChangeableKindEnum.CK_FROZEN ); // final
+      }
+    }
 
-		// bind the constructors
-		constructors = classDoc.constructors( false ); // all declared constructors
-		for (int j = 0; j < constructors.length; j++) {
-		  constructor = createConstructor( constructors[ j ], umlClassifier );
-		  constructor.setOwner( umlClassifier );
-		}
+    // bind the constructors
+    constructors = classDoc.constructors( false ); // all declared constructors
+    for (int j = 0; j < constructors.length; j++) {
+      constructor = createConstructor( constructors[ j ], umlClassifier );
+      constructor.setOwner( umlClassifier );
+    }
 
-		// bind the methods
-		methods = classDoc.methods( false ); // all declared methods
-		for (int j = 0; j < methods.length; j++) {
-		  method = createMethod( methods[ j ] );
-		  method.setOwner( umlClassifier );
+    // bind the methods
+    methods = classDoc.methods( false ); // all declared methods
+    for (int j = 0; j < methods.length; j++) {
+      method = createMethod( methods[ j ] );
+      method.setOwner( umlClassifier );
 
-		  // mark the methods in the interfaces as abstract
-		  if ( classDoc.isInterface() ) {
-		    method.setVisibility( VisibilityKindEnum.VK_PUBLIC );    // public
-		    method.setAbstract( true );
-		  }
-		}
-	}
+      // mark the methods in the interfaces as abstract
+      if ( classDoc.isInterface() ) {
+        method.setVisibility( VisibilityKindEnum.VK_PUBLIC );    // public
+        method.setAbstract( true );
+      }
+    }
+  }
 
   /**
    * This method instantiates the proper interface, class or data type depending on
@@ -845,10 +845,10 @@ public class ReverseEngineerJavaDoclet extends Doclet {
     Type[] arguments;
 
     if ( typeDoc.isPrimitive() ) { // an attribute of primitive type
-    	try {
+      try {
         type = (Classifier) factory.locateModelElement( typeDoc.simpleTypeName() ); // TODO CHECK AGAIN if qualified of simple name should be used
 
-    	} catch (IllegalArgumentException ex) { // not found, this is an unknown primitive type
+      } catch (IllegalArgumentException ex) { // not found, this is an unknown primitive type
         type = factory.constructDataType( typeDoc.simpleTypeName());
       }
       result.setType( type );

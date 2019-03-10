@@ -66,11 +66,11 @@ public abstract class BaseModelFactory<P extends RefPackage> implements ModelFac
   /**
    * @see ModelFactory#getMetamodelExtent()
    */
-	public final RefPackage getMetamodelExtent() {
-		return mofExtent;
-	}
+  public final RefPackage getMetamodelExtent() {
+    return mofExtent;
+  }
 
-	/**
+  /**
    * @see net.mdatools.modelant.repository.api.ModelFactory#instantiate(java.lang.String)
    */
   public final P instantiate() {
