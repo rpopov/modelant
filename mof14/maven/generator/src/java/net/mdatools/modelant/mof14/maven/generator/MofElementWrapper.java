@@ -29,8 +29,6 @@ import javax.jmi.reflect.RefClass;
 import javax.jmi.reflect.RefPackage;
 
 import net.mdatools.modelant.core.api.wrap.Wrapper;
-import net.mdatools.modelant.core.api.wrap.WrapperFactory;
-import net.mdatools.modelant.core.wrap.BaseWrapper;
 import net.mdatools.modelant.template.api.TemplateContext;
 import net.mdatools.modelant.template.api.TemplateEngine;
 
@@ -39,7 +37,7 @@ import net.mdatools.modelant.template.api.TemplateEngine;
  *
  * @author Rusi Popov
  */
-public class MofElementWrapper extends BaseWrapper<ModelElement> {
+public class MofElementWrapper {
 
   /**
    * The <code>JAVAX_JMI_SUBSTITUTE_NAME</code> JMI standard tag ID for name substitution
@@ -63,11 +61,18 @@ public class MofElementWrapper extends BaseWrapper<ModelElement> {
    */
   private static final String JAVAX_JMI_PACKAGE_PREFIX = "javax.jmi.packagePrefix";
 
+  /**
+   * The object this wrapper class wraps to allow its rendering. The reflective
+   * interface of the model element is used in oder to make this class
+   * independent of the actual model and interface.
+   */
+  private final ModelElement wrapped;
+
 
   /**
    */
-  public MofElementWrapper(ModelElement wrapped, WrapperFactory factory) {
-    super( wrapped, factory );
+  public MofElementWrapper(ModelElement wrapped) {
+    this.wrapped = wrapped;
   }
 
 
@@ -594,5 +599,46 @@ public class MofElementWrapper extends BaseWrapper<ModelElement> {
     } catch (Exception ex) {
       LOGGER.log( Level.SEVERE, "Rendering the interfaces of " + delegateClassName + " caused: ", ex );
     }
+  }
+
+
+  /**
+   * CONVENTION:<ul>
+   * <li> when the wrapper is used to create a new wrapped object, it might happen that this method needs public access.
+   * <li> when wrapping a wrapper, this method is overridden, this way granting the outer-most wrapper
+   *      access to the nested-most wrapped object (bypassing the wrappers)
+   * </ul>
+   * @return the deepest wrapped object
+   */
+  public final ModelElement getWrapped() {
+    return wrapped;
+  }
+
+
+  /**
+   * Call this method in subclasses in order to instantiate the wrapper class
+   * that actually corresponds to the class of the object toWrap
+   * @param toWrap is the object to wrap in another wrapper class. Might be null;
+   * @return null, when null provided, otherwise a properly initialized
+   *         wrapper class that wraps toWrap
+   * @throws IllegalArgumentException when mapping is not possible
+   * @see Wrapper#wrap(Object)
+   */
+  public final Wrapper<ModelElement> wrap(ModelElement toWrap) throws IllegalArgumentException {
+    return factory.wrap( toWrap );
+  }
+
+
+  /**
+   * Call this method in subclasses in order to instantiate the wrapper class
+   * that actually corresponds to the class of the object toWrap
+   * @param toWrap is the object to wrap in another wrapper class. Might be null;
+   * @return null, when null provided, otherwise a properly initialized
+   *         collection of wrappers that wrap the elements of toWrap
+   * @throws IllegalArgumentException when mapping is not possible
+   * @see Wrapper#wrap(Collection)
+   */
+  public final List<Wrapper<ModelElement>> wrap(Collection<ModelElement> toWrap) throws IllegalArgumentException {
+    return factory.wrap( toWrap );
   }
 }

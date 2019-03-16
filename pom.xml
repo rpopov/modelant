@@ -116,6 +116,8 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
       -->
     <DEBUG_PORT>7000</DEBUG_PORT>
     <DEBUG_SUSPEND>n</DEBUG_SUSPEND>
+    <DEBUG_PLUGIN_SHOW_ERROR>false</DEBUG_PLUGIN_SHOW_ERROR>
+    <DEBUG_PLUGIN_SHOW_DEBUG>false</DEBUG_PLUGIN_SHOW_DEBUG>
 
     <build.compiler.debug>true</build.compiler.debug>
     <build.compiler.debug.level>lines,vars,source</build.compiler.debug.level>
@@ -280,7 +282,7 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
             <!--
               As of https://www.mojohaus.org/flatten-maven-plugin/flatten-mojo.html
               make maven FLAT plugin include the dependencies from the applied profiles by default
-           -->            
+           -->
             <embedBuildProfileDependencies>true</embedBuildProfileDependencies>
           </configuration>
           <executions>
@@ -683,7 +685,9 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-invoker-plugin</artifactId>
             <configuration>
-              <showErrors>true</showErrors>
+              <showErrors>${DEBUG_PLUGIN_SHOW_ERROR}</showErrors>
+              <debug>${DEBUG_PLUGIN_SHOW_DEBUG}</debug>
+              <mavenOpts>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=${DEBUG_SUSPEND},address=${DEBUG_PORT}</mavenOpts>
             </configuration>
           </plugin>
         </plugins>

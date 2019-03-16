@@ -3,21 +3,14 @@
 
   Assumes that the wrapper and the wrapped classes are in the same package, thus the import is skipped
 
---%><%@page wraps="net.mdatools.modelant.mof.MofElementWrapper"
-%><%@page import="net.mdatools.modelant.mof.MofElementWrapper, javax.jmi.model.Namespace"
+--%><%@page import="net.mdatools.modelant.mof.MofElementWrapper"
 %><%
 
  String className = wrapped.calculateSimpleBaseWrapperClassName();
- String modelInterfaceName = wrapped.calculateSimpleClassName();
-
- String rootPackageName;
- String factoryClassName;
- String wrapperPackage;
+ String componentName;
  String delegateClassName;
 
- wrapperPackage  = (String) request.getAttribute("component");
- rootPackageName = (String) request.getAttribute("metamodel.root.package");
- factoryClassName= (String) request.getAttribute("factory.class.name");
+ componentName  = (String) request.getAttribute("component");
 
  delegateClassName = wrapped.calculateQualifiedClassName();
 
@@ -31,87 +24,16 @@
  * Contributors:
  *    Rusi Popov (popovr@mdatools.net) - initial implementation
  */
-package <%=wrapped.calculateBaseWrapperPackageName( wrapperPackage ) %>;
+package <%=wrapped.calculateBasecomponentNameName( componentName ) %>;
 
-<%
-  if ( !wrapped.isAbstract() ) {
-
-%>import javax.jmi.reflect.RefClass;
-import javax.jmi.reflect.RefPackage;
-<%
-  }
-%>import <%=wrapped.calculateQualifiedClassName() %>;
-import net.mdatools.modelant.core.wrap.Factory;
-import net.mdatools.modelant.core.wrap.Factories;
+import <%=wrapped.calculateQualifiedClassName() %>;
 
 /**
- * This is a wrapper of <%=wrapped.calculateQualifiedClassName() %> that allows adding specific
- * custom methods and using them as templates for [code] generation.
+ * The JMI standard <%=wrapped.calculateQualifiedClassName()%> interface
  */
-public abstract class <%=className %> extends <%=wrapped.calculateQualifiedSuperclassWrapperName( wrapperPackage ) %> <% wrapped.renderImplementedInterfaces( delegateClassName, request, response); %>{
+public interface <%=className %> extends <%=wrapped.calculateQualifiedSuperclassWrapperName( componentName ) %> <% wrapped.renderImplementedInterfaces( delegateClassName, context); %>{
 
-<% wrapped.renderDelegatedDeclaredConstants( delegateClassName, request, response );
-%>  /**
-   * Wraps an already existing object into a new wrapper instance
-   */
-  protected <%=className %>(java.lang.Object wrapped, Factory factory) {
-    super( wrapped, factory );
-  }
-
-<%
-  if ( !wrapped.isAbstract() ) {
-
-
-%>  /**
-   * Constructs a new wrapped object
-   */
-  public <%=className %>(RefPackage extent) {
-    this( getClassProxy( extent ).refCreateInstance( null ),
-          Factories.getFactory( <%= factoryClassName %>.class ));
-    Factories.getFactory( <%= factoryClassName %>.class ).bind( this );
-  }
-
-  /**
-   * This method retrieves the factory for <%=wrapped.calculateQualifiedClassName() %> (also known as "class proxy")
-   * model class.
-   */
-  public static RefClass getClassProxy(RefPackage extent) {
-    return ((<%=rootPackageName %>) extent)<%
-
-    for (String name : wrapped.calculateQualifiedMofName()) {
-%>.get<%=net.mdatools.modelant.util.FormatHelper.formatCapitalizeFirst(name) %>()<%
-    }
-    %>;
-  }
-
-<%
-   }
-
-   if ( wrapped.isRoot() ) {
+<% wrapped.renderDelegatedDeclaredConstants( delegateClassName, context );
 %>
-   /**
-    * The factory instance of this wrapper
-    */
-   protected final <%=factoryClassName %> getFactory() {
-     return (<%=factoryClassName %>) super.getFactory();
-   }
-<%
-   }
-%>
-  /**
-   * Overrides the super implementation with the proper wrapped class
-   * @see net.mdatools.modelant.core.wrap.Wrapper#getWrapped()
-   */
-  public <%=modelInterfaceName %> getWrapped() {
-    return (<%=modelInterfaceName %>) super.getWrapped();
-  }
-
-  /**
-   * @see net.mdatools.modelant.core.wrap.Wrapper#getDelegate()
-   */
-  protected <%=modelInterfaceName %> getDelegate() {
-    return (<%=modelInterfaceName %>) super.getDelegate();
-  }
-
-<% wrapped.renderDelegatedDeclaredMethods( delegateClassName, request, response );
+<% wrapped.renderDelegatedDeclaredMethods( delegateClassName, context );
 %>}

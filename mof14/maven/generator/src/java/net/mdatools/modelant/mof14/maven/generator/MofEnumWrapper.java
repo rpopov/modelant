@@ -24,6 +24,6 @@ public class MofEnumWrapper extends MofElementWrapper {
    * @param factory
    */
   public MofEnumWrapper(ModelElement wrapped, WrapperFactory factory) {
-    super( wrapped, factory );
+    super( wrapped );
   }
 }
