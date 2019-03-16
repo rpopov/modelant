@@ -146,16 +146,8 @@ public class GeneratorMojo extends AbstractMojo {
    * @throws IOException when generation failed for any reason
    */
   private void generate(TemplateEngine engine, ModelElement metamodelClass) throws IOException {
-    render( engine, metamodelClass, "renderClass" );
-  }
-
-  /**
-   * @param engine not null
-   * @param metamodelEnum
-   * @throws IOException
-   */
-  private void generate(TemplateEngine engine, EnumerationType metamodelEnum) throws IOException {
-    render( engine, metamodelEnum, "renderClass" );
+    render( engine, metamodelClass, "renderInterface" );
+    render( engine, metamodelClass, "renderJmiInterface" );
   }
 
   private void render(TemplateEngine engine, ModelElement metamodelClass, String template) throws IOException {
