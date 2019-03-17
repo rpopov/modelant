@@ -34,18 +34,21 @@ public abstract class CompilationContext extends AbstractMojo implements Templat
 
   /**
    * Where the source files of the project templates are
+   * src/template
    */
   @Parameter(defaultValue="${project.build.sourceDirectory}/../template", required=true)
   private File templateDirectory;
 
   /**
    * The directory where to hold the translated to JAVA templates
+   * target/template-java
    */
-  @Parameter(defaultValue="${project.build.directory}/java", required=true)
+  @Parameter(defaultValue="${project.build.directory}/template-java", required=true)
   private File javaSourceDirectory;
 
   /**
    * Where to hold the compilation result files - the standard classes directory
+   * target/classes
    */
   @Parameter(property="project.build.outputDirectory", required=true, readonly=true)
   private File classDirectory;
@@ -62,13 +65,13 @@ public abstract class CompilationContext extends AbstractMojo implements Templat
    * (for tracing purposes) set it to true
    */
   @Parameter(alias="keepGenerated")
-  private boolean shouldKeepGenerated;
+  private boolean keepGenerated;
 
   /**
    * If the compiler should include debug information, set it to true
    */
   @Parameter(alias="compileForDebug")
-  private boolean shouldCompileForDebug;
+  private boolean compileForDebug;
 
   /**
    * Encoding of the template files, default: ISO-8859-1
@@ -123,6 +126,13 @@ public abstract class CompilationContext extends AbstractMojo implements Templat
       }
       result.append( artifact.getFile().getAbsolutePath() );
     }
+
+    // add this project's classes to classpath, as the template refers them
+    if (result.length() > 0) {
+      result.append( File.pathSeparatorChar );
+    }
+    result.append( getClassDirectory() );
+
     return result.toString();
   }
 
@@ -131,7 +141,7 @@ public abstract class CompilationContext extends AbstractMojo implements Templat
    * @see net.mdatools.modelant.template.api.TemplateCompilationContext#shouldKeepGenerated()
    */
   public boolean shouldKeepGenerated() {
-    return shouldKeepGenerated;
+    return keepGenerated;
   }
 
   /**
@@ -139,7 +149,7 @@ public abstract class CompilationContext extends AbstractMojo implements Templat
    * @see net.mdatools.modelant.template.api.TemplateCompilationContext#shouldCompileForDebug()
    */
   public boolean shouldCompileForDebug() {
-    return shouldCompileForDebug;
+    return compileForDebug;
   }
 
   /**

@@ -12,6 +12,7 @@ package net.mdatools.modelant.mof14.maven.generator;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.sql.Wrapper;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -20,6 +21,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.jmi.model.GeneralizableElement;
 import javax.jmi.model.ModelElement;
@@ -28,7 +30,6 @@ import javax.jmi.model.Tag;
 import javax.jmi.reflect.RefClass;
 import javax.jmi.reflect.RefPackage;
 
-import net.mdatools.modelant.core.api.wrap.Wrapper;
 import net.mdatools.modelant.template.api.TemplateContext;
 import net.mdatools.modelant.template.api.TemplateEngine;
 
@@ -38,6 +39,8 @@ import net.mdatools.modelant.template.api.TemplateEngine;
  * @author Rusi Popov
  */
 public class MofElementWrapper {
+
+  public static final Logger LOGGER = Logger.getLogger( MofElementWrapper.class.getName() );
 
   /**
    * The <code>JAVAX_JMI_SUBSTITUTE_NAME</code> JMI standard tag ID for name substitution
@@ -624,8 +627,8 @@ public class MofElementWrapper {
    * @throws IllegalArgumentException when mapping is not possible
    * @see Wrapper#wrap(Object)
    */
-  public final Wrapper<ModelElement> wrap(ModelElement toWrap) throws IllegalArgumentException {
-    return factory.wrap( toWrap );
+  public final MofElementWrapper wrap(ModelElement toWrap) throws IllegalArgumentException {
+    return new MofElementWrapper( toWrap );
   }
 
 
@@ -638,7 +641,13 @@ public class MofElementWrapper {
    * @throws IllegalArgumentException when mapping is not possible
    * @see Wrapper#wrap(Collection)
    */
-  public final List<Wrapper<ModelElement>> wrap(Collection<ModelElement> toWrap) throws IllegalArgumentException {
-    return factory.wrap( toWrap );
+  public final List<MofElementWrapper> wrap(Collection<ModelElement> toWrap) throws IllegalArgumentException {
+    List<MofElementWrapper> result;
+
+    result = new ArrayList<>();
+    for (ModelElement element : toWrap) {
+      result.add( new MofElementWrapper( element ) );
+    }
+    return result;
   }
 }

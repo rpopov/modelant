@@ -21,4 +21,10 @@ public interface TemplateContext {
    * @return non-null writer where to print the textual output of the template
    */
   PrintWriter getWriter();
+
+  /**
+   * @param name not null parameter name
+   * @return the parameter value bound to the name (it could be null)
+   */
+  <T> T get(String name);
 }

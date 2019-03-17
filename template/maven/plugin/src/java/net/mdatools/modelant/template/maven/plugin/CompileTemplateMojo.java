@@ -72,8 +72,8 @@ public class CompileTemplateMojo extends CompilationContext {
       throw new MojoFailureException("No template files selected");
     }
 
-    for ( int i=0; i < includedFiles.length; i++ ) {
-      relativeSourceFile = new File( includedFiles[i] ); // relative to fileset.directory
+    for ( String includedFileName: includedFiles) {
+      relativeSourceFile = new File( includedFileName ); // relative to fileset.directory
 
       templateFiles.add( relativeSourceFile );
       if ( getLog().isDebugEnabled() ) {
@@ -84,7 +84,6 @@ public class CompileTemplateMojo extends CompilationContext {
     try {
       engine = TemplateEngineFactory.construct( this );
       engine.compile( templateFiles );
-
     } catch (Exception ex) {
       getLog().error("Compilation failed: ", ex);
     }

@@ -77,7 +77,12 @@ The templates are stored in files with **.jsp** extension in order to reuse exis
     * java/lang/String/hello.jsp is a template rendering instances of java.lang.String
     * java/util/ArrayList/world.jsp is a template rendering instances of java.util.ArrayList
     
-NOTE: The syntax of of the templates is changed (simplified), compared to the syntax in 2.25 version.     
+NOTE: The syntax of of the templates is changed (simplified), compared to the syntax in 2.25 version.  
+
+Within the template the following objects are available:
+    * '''wrapped''' - the non-null object being rendered in this template (analogous to ''this'' in the methods)
+    * '''context''' - the TemplateContext intstance the rendering happens in. It provides the output writer to construct contents in.
+    * '''engine'''  - the template engine to render the nested templates applied
 
 Project Directories
 -------------------

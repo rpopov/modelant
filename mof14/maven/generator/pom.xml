@@ -49,9 +49,8 @@
     </dependency>
     <dependency>
       <groupId>net.mdatools</groupId>
-      <artifactId>modelant.template.impl</artifactId>
+      <artifactId>modelant.template.maven.plugin</artifactId>
       <version>${project.version}</version>
-      <scope>runtime</scope>
     </dependency>
   </dependencies>
   <build>

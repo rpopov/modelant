@@ -16,14 +16,19 @@ import net.mdatools.modelant.template.api.TemplateContext;
 /**
  * The context where a template is run in. It provides the global parameters
  * of the templates.
- * 
- * TODO: decide if overwriting / setting of parameters is allowed
- * 
+ *
  * @author Rusi Popov (popovr@mdatools.net)
  */
 public class TemplateContextImpl implements TemplateContext {
 
+  /**
+   * not null writer of the contents to generate
+   */
   private final PrintWriter out;
+
+  /**
+   * not null binding of parameter names to values
+   */
   private final Map<String, Object> bindings;
 
   /**
@@ -31,11 +36,11 @@ public class TemplateContextImpl implements TemplateContext {
    * @param bindings may be null name-value bindings as global parameters
    */
   public TemplateContextImpl(PrintWriter out, Map<String, Object> bindings) {
-    
+
     assert out != null : "Expected non-null output writer provided";
-    
+
     this.out = out;
-    
+
     if ( bindings != null ) {
       this.bindings = bindings;
     } else {
@@ -48,5 +53,12 @@ public class TemplateContextImpl implements TemplateContext {
    */
   public PrintWriter getWriter() {
     return out;
+  }
+
+  /**
+   * @see net.mdatools.modelant.template.api.TemplateContext#get(java.lang.String)
+   */
+  public <T> T get(String name) {
+    return (T) bindings.get( name );
   }
 }
