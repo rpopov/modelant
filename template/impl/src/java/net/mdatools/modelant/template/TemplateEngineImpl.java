@@ -15,6 +15,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.reflect.Method;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -106,6 +107,14 @@ class TemplateEngineImpl implements TemplateEngine {
       out.close();
     }
   }
+  /**
+   * @see net.mdatools.modelant.template.api.TemplateEngine#render(java.io.File, java.lang.Object, java.lang.String)
+   */
+  public final void render(File targetFile,
+                           Object targetObject,
+                           String template) throws IOException {
+    render( targetObject, template, new HashMap<>() );
+  }
 
   /**
    * @see net.mdatools.modelant.template.api.TemplateEngine#render(java.lang.Object, java.lang.String, java.util.Map)
@@ -128,6 +137,14 @@ class TemplateEngineImpl implements TemplateEngine {
       out.close();
     }
     return writer.toString();
+  }
+
+  /**
+   * @see net.mdatools.modelant.template.api.TemplateEngine#render(java.lang.Object, java.lang.String)
+   */
+  public final String render(Object targetObject,
+                             String template) throws IOException {
+    return render(targetObject, template, new HashMap<>());
   }
 
   /**

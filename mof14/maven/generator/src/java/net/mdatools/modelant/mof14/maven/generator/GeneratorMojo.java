@@ -10,7 +10,6 @@ package net.mdatools.modelant.mof14.maven.generator;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.HashMap;
 
 import javax.jmi.model.EnumerationType;
 import javax.jmi.model.ModelElement;
@@ -102,26 +101,42 @@ public class GeneratorMojo extends CompilationContext {
    * @throws IOException when generation failed for any reason
    */
   private void generate(TemplateEngine engine, ModelElement metamodelClass) throws IOException {
-    render( engine, metamodelClass, "renderInterface" );
-    render( engine, metamodelClass, "renderJmiInterface" );
-  }
-
-  private void render(TemplateEngine engine, ModelElement metamodelClass, String template) throws IOException {
     MofElementWrapper wrapper;
-    String qualifiedName;
-    File outputFile;
 
     wrapper = new MofElementWrapper(metamodelClass );
 
-    qualifiedName = wrapper.calculateQualifiedWrapperClassName( "component" ); // TODO: REMOVE TEH COMPONENT! THE API IS ONLY ONE!
+    renderInyterface( engine, wrapper);
+    renderJmiInterface( engine, wrapper);
+  }
+
+  private void renderInyterface(TemplateEngine engine,
+                                MofElementWrapper wrapper) throws IOException {
+    String qualifiedName;
+    File outputFile;
+
+    qualifiedName = wrapper.calculateQualifiedInterfaceName();
     outputFile = new File(outputDirectory,
                           qualifiedName.replace( '.', File.separatorChar )+".java");
 
     engine.render( outputFile,
                    wrapper,
-                   template,
-                   new HashMap<>());
+                   "renderInterface");
   }
+
+  private void renderJmiInterface(TemplateEngine engine,
+                                  MofElementWrapper wrapper) throws IOException {
+    String qualifiedName;
+    File outputFile;
+
+    qualifiedName = wrapper.calculateQualifiedJmiInterfaceName();
+    outputFile = new File(outputDirectory,
+                          qualifiedName.replace( '.', File.separatorChar )+".java");
+
+    engine.render( outputFile,
+                   wrapper,
+                   "renderJmiInterface");
+  }
+
 
   /**
    * This MOJO actually defines the compilation context

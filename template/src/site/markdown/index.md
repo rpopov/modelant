@@ -81,8 +81,9 @@ NOTE: The syntax of of the templates is changed (simplified), compared to the sy
 
 Within the template the following objects are available:
     * '''wrapped''' - the non-null object being rendered in this template (analogous to ''this'' in the methods)
-    * '''context''' - the TemplateContext intstance the rendering happens in. It provides the output writer to construct contents in.
-    * '''engine'''  - the template engine to render the nested templates applied
+    * '''context''' - the TemplateContext intstance the rendering happens in. 
+    * '''engine'''  - the template engine to render the nested templates applied.
+    * '''out'''     - the output print writer to construct contents in.
 
 Project Directories
 -------------------

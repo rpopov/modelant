@@ -4,5 +4,4 @@
 
 --%><%@
 import net.mdatools.modelant.mof14.maven.generator.MofElementWrapper;
-%><%=implementedInterface.getName() %> <%
-%>
+%><%=wrapped %> 

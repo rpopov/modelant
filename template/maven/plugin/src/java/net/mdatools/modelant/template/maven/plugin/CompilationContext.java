@@ -8,12 +8,13 @@
 package net.mdatools.modelant.template.maven.plugin;
 
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.AbstractMojo;
-import org.apache.maven.plugin.descriptor.PluginDescriptor;
-import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.project.MavenProject;
 
 import net.mdatools.modelant.template.api.TemplateCompilationContext;
 
@@ -22,6 +23,8 @@ import net.mdatools.modelant.template.api.TemplateCompilationContext;
  * @author Rusi Popov (popovr@mdatools.net)
  */
 public abstract class CompilationContext extends AbstractMojo implements TemplateCompilationContext {
+
+  protected static final Logger LOGGER = Logger.getLogger( CompilationContext.class.getName() );
 
   /**
    * Non-empty unique name to differentiate the set of templates to compile in this maven project
@@ -54,11 +57,12 @@ public abstract class CompilationContext extends AbstractMojo implements Templat
   private File classDirectory;
 
   /**
-   * PLEXUS should inject here the descriptor of the plugin this MOJO is in,
-   * so it could access its classpath
+   * Provide any compilation classpath as project dependencies.
+   * NOTE: This would allow using common DepednecyManagement definition, whereas if these dependencies were
+   * provided as dependencies in the plugin, explicit versions will have to be provided.
    */
-  @Component(role=org.apache.maven.plugin.descriptor.PluginDescriptor.class)
-  private PluginDescriptor pluginDescriptor;
+  @Parameter( defaultValue = "${project}", readonly = true )
+  private MavenProject project;
 
   /**
    * If the generated Java files from the templates should not be deleted
@@ -120,11 +124,14 @@ public abstract class CompilationContext extends AbstractMojo implements Templat
 
     // concatenate all artifacts in the classparh
     result = new StringBuilder(512);
-    for (Artifact artifact: pluginDescriptor.getArtifacts()) {
+    for (Artifact artifact: project.getDependencyArtifacts()) {
       if (result.length() > 0) {
         result.append( File.pathSeparatorChar );
       }
-      result.append( artifact.getFile().getAbsolutePath() );
+
+      if ( artifact.getFile() != null ) { // the dependency is resolved
+        result.append( artifact.getFile().getAbsolutePath() );
+      }
     }
 
     // add this project's classes to classpath, as the template refers them
@@ -132,6 +139,8 @@ public abstract class CompilationContext extends AbstractMojo implements Templat
       result.append( File.pathSeparatorChar );
     }
     result.append( getClassDirectory() );
+
+    LOGGER.log( Level.FINE, "Use template compilation classpath: {0}", result );
 
     return result.toString();
   }

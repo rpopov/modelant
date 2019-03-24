@@ -52,6 +52,19 @@ public interface TemplateEngine {
               String template,
               Map<String, Object> bindings) throws IOException;
   /**
+   * Use the template for the target object's class and render that object into a file. When the same template is called many times, it is really
+   * better to implement the call in a method, call it directly, hiding the template's name, thus reducing the complexity
+   * and allowing compile-time check.
+   * @param targetFile is the non-null file to create to store the template's output
+   * @param targetObject is the non-null object to call the template of/for
+   * @param template is the non-null, non-empty template name
+   * @throws IOException
+   */
+  void render(File targetFile,
+              Object targetObject,
+              String template) throws IOException;
+
+  /**
    * Use the template for the target object's class and render that object to a string.
    * @param targetObject is the non-null object to call the template of/for
    * @param template is the non-null, non-empty template name
@@ -64,6 +77,14 @@ public interface TemplateEngine {
                 String template,
                 Map<String, Object> bindings) throws IOException;
 
+  /**
+   * Use the template for the target object's class and render that object to a string.
+   * @param targetObject is the non-null object to call the template of/for
+   * @param template is the non-null, non-empty template name
+   * @return the result of template's rendering
+   * @throws IOException
+   */
+  String render(Object targetObject, String template) throws IOException;
 
   /**
    * This method calls the template for the target object, as part of a rendering sequence.

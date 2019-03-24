@@ -4,11 +4,8 @@
 --%><%@
 import net.mdatools.modelant.mof14.maven.generator.MofElementWrapper;
 %><%
- String component;
 
- component = (String) context.get("component");
-
- String className = wrapped.calculateQualifiedWrapperClassName( component );
+ String className = wrapped.calculateQualifiedInterfaceName();
 
 %><%="<" %>%@page import="<%=className %>"
 %<%=">" %>
