@@ -23,11 +23,6 @@
             </goals>
           </execution>
         </executions>
-        <configuration>
-          <uniqueName>test</uniqueName>
-          <keepGenerated>true</keepGenerated>
-		  <templateDirectory>src/template</templateDirectory>
-        </configuration>
       </plugin>
     </plugins>
   </build>

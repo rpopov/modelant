@@ -63,7 +63,6 @@
   </dependencies>
   <build>
     <plugins>
-      <!-- compile templates -->
       <plugin>
         <groupId>net.mdatools</groupId>
         <artifactId>modelant.template.maven.plugin</artifactId>
@@ -75,7 +74,7 @@
               <goal>compile-templates</goal>
             </goals>  
             <configuration>
-              <uniqueName>mof</uniqueName>
+              <name>uml.api</name>
             </configuration>
           </execution>
         </executions>
