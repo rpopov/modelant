@@ -8,11 +8,14 @@
 package net.mdatools.modelant.template.maven.plugin;
 
 import java.io.File;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.descriptor.PluginDescriptor;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 
@@ -24,19 +27,19 @@ import net.mdatools.modelant.template.api.TemplateCompilationContext;
  */
 public abstract class CompilationContext extends AbstractMojo implements TemplateCompilationContext {
 
-  protected static final Logger LOGGER = Logger.getLogger( CompilationContext.class.getName() );
-
   /**
-   * Non-empty unique name to differentiate the set of templates to compile in this maven project
-   * from any other set to compile in other projects. It also should avoid producing
-   * standard package names that are forbidden for custom class loaders.
-   * It should not be among the forbidden package names like: java, com.sun
+   * Non-empty unique name (in the format of java package identifier) to differentiate the set of templates to compile
+   * in this maven project from any other set to compile in other projects.
+   * It should not be among the forbidden package names like: java, com.sun, as these package names are forbidden
+   * by custom class loaders.
+   * This is a logical name, that represents the templatesDirectory in memory.
+   * @see #templateDirectory
    */
-  @Parameter(required=true)
-  private String uniqueName;
+  @Parameter(defaultValue="template", required=true)
+  private String name;
 
   /**
-   * Where the source files of the project templates are
+   * Where the source files of the project templates are stored in the file system and distribution .jars
    * src/template
    */
   @Parameter(defaultValue="${project.build.sourceDirectory}/../template", required=true)
@@ -65,6 +68,14 @@ public abstract class CompilationContext extends AbstractMojo implements Templat
   private MavenProject project;
 
   /**
+   * Provide any compilation classpath as project dependencies.
+   * NOTE: This would allow using common DepednecyManagement definition, whereas if these dependencies were
+   * provided as dependencies in the plugin, explicit versions will have to be provided.
+   */
+  @Parameter( defaultValue = "${plugin}", readonly = true )
+  private PluginDescriptor plugin;
+
+  /**
    * If the generated Java files from the templates should not be deleted
    * (for tracing purposes) set it to true
    */
@@ -88,7 +99,7 @@ public abstract class CompilationContext extends AbstractMojo implements Templat
    * @see net.mdatools.modelant.template.api.TemplateCompilationContext#getUniqueName()
    */
   public String getUniqueName() {
-    return uniqueName;
+    return name;
   }
 
   /**
@@ -116,33 +127,30 @@ public abstract class CompilationContext extends AbstractMojo implements Templat
   }
 
   /**
-   * Provide to the Template Engine
-   * @see net.mdatools.modelant.template.api.TemplateCompilationContext#getClassPath()
+   * @return non-null list of local files and directories forming the classpath of this context
+   * @see net.mdatools.modelant.template.api.TemplateCompilationContext#getClassPathAsList()
    */
-  public String getClassPath() {
-    StringBuilder result;
+  public List<URL> getClassPathAsList() throws MalformedURLException {
+    List<URL> result;
 
-    // concatenate all artifacts in the classparh
-    result = new StringBuilder(512);
+    result = new ArrayList<>();
+
     for (Artifact artifact: project.getDependencyArtifacts()) {
-      if (result.length() > 0) {
-        result.append( File.pathSeparatorChar );
-      }
-
       if ( artifact.getFile() != null ) { // the dependency is resolved
-        result.append( artifact.getFile().getAbsolutePath() );
+        result.add( artifact.getFile().toURL() );
       }
     }
-
-    // add this project's classes to classpath, as the template refers them
-    if (result.length() > 0) {
-      result.append( File.pathSeparatorChar );
+    for (Artifact artifact: plugin.getArtifacts()) {
+      if ( artifact.getFile() != null ) { // the dependency is resolved
+        result.add( artifact.getFile().toURL() );
+      }
     }
-    result.append( getClassDirectory() );
+    result.add( getClassDirectory().toURL() );
 
-    LOGGER.log( Level.FINE, "Use template compilation classpath: {0}", result );
-
-    return result.toString();
+    if ( getLog().isDebugEnabled()) {
+      getLog().debug( "Use template compilation classpath: "+result );
+    }
+    return result;
   }
 
   /**

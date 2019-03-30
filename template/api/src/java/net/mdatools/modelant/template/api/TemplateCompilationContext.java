@@ -8,6 +8,9 @@
 package net.mdatools.modelant.template.api;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.List;
 
 /**
  * The settings needed for the compilation of a set of Templates.
@@ -46,10 +49,33 @@ public interface TemplateCompilationContext {
   /**
    * @return non-null template compilation classpath string with platform-specific separators,
    *         including the template directory and the class directory
+   * @throws MalformedURLException when a classpath entry in invalid format is found
    * @see #getTemplateDirectory()
    * @see #getClassDirectory()
    */
-  public String getClassPath();
+  public List<URL> getClassPathAsList() throws MalformedURLException;
+
+  /**
+   * @throws MalformedURLException
+   * @see net.mdatools.modelant.template.api.TemplateCompilationContext#getClassPath()
+   */
+  public default String getClassPath() throws MalformedURLException {
+    StringBuilder result;
+
+    // concatenate all artifacts in the classparh
+    result = new StringBuilder(512);
+
+    for (URL artifact: getClassPathAsList()) {
+      if (result.length() > 0) {
+        result.append( File.pathSeparatorChar );
+      }
+      if ( artifact.getFile() != null ) { // the dependency is resolved
+        result.append( artifact.toString() );
+      }
+    }
+    return result.toString();
+  }
+
 
   /**
    * @return true if the generated Java files from the templates should not be deleted

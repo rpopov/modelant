@@ -71,10 +71,8 @@ public class TemplateCompiler {
     classpath = new ArrayList<>();
     classpath.add( compilationContext.getTemplateDirectory().getAbsoluteFile().toURL() );
     classpath.add( compilationContext.getClassDirectory().getAbsoluteFile().toURL() );
+    classpath.addAll( compilationContext.getClassPathAsList() );
 
-    for (String location: compilationContext.getClassPath().split( " +"+File.pathSeparatorChar+" +" )) {
-      classpath.add( new File(location).getAbsoluteFile().toURL() );
-    }
     this.classLoader = new URLClassLoader( classpath.toArray( new URL[0] ),
                                            getClass().getClassLoader() );
   }
@@ -180,7 +178,7 @@ public class TemplateCompiler {
     try {
       // make sure that the latest version of the template is compiled and loaded, the template may not exist
 
-      templateClassUrl = classLoader.getResource( templateClassName );
+      templateClassUrl = classLoader.getResource( templateClassName+".class" );
       if ( templateClassUrl != null ) { // compiled
         templateCompiledDate= getTime(templateClassUrl);
 

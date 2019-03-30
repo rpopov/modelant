@@ -9,7 +9,11 @@ package net.mdatools.modelant.template;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import junit.framework.TestCase;
@@ -57,9 +61,17 @@ public class TemplateEngineTest extends TestCase {
         return new File("target/test-classes/template");
       }
 
-      public String getClassPath() {
-        return System.getProperty( "user.home" )
-               + "\\.m2\\repository\\net\\mdatools\\modelant.template.api\\3.1.0-SNAPSHOT\\modelant.template.api-3.1.0-SNAPSHOT.jar"; // not clear
+      /**
+       * @see net.mdatools.modelant.template.api.TemplateCompilationContext#getClassPathAsList()
+       */
+      public List<URL> getClassPathAsList() throws MalformedURLException {
+        List<URL> result;
+
+        result = new ArrayList<>();
+        result.add( new File(System.getProperty( "user.home" ),
+                             "\\.m2\\repository\\net\\mdatools\\modelant.template.api\\3.1.0-SNAPSHOT\\modelant.template.api-3.1.0-SNAPSHOT.jar")
+                    .toURL() );
+        return result;
       }
 
       /**

@@ -63,6 +63,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -98,8 +99,9 @@ class SunJavaCompiler implements JavaCompiler {
   /**
    * @param compilationContext not null
    * @param encodingJavaFile the encoding of the java files to compile
+   * @throws MalformedURLException when invalid classpath entry provided
    */
-  public SunJavaCompiler(TemplateCompilationContext compilationContext, String encodingJavaFile) {
+  public SunJavaCompiler(TemplateCompilationContext compilationContext, String encodingJavaFile) throws MalformedURLException {
     this.classpath = System.getProperty( "java.class.path" )
                      + File.pathSeparator
                      + compilationContext.getClassPath()

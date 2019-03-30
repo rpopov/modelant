@@ -43,6 +43,12 @@ public class CompileTemplateMojo extends CompilationContext {
   private FileSet fileSet;
 
   /**
+   * Fail the build in case template compilation failed.
+   */
+  @Parameter(property="maven.compiler.failOnError", defaultValue="true")
+  private boolean failOnError;
+
+  /**
    * This method is used by the enclosing task ForEachTask.
    */
   public final void execute() throws MojoFailureException {
@@ -76,8 +82,9 @@ public class CompileTemplateMojo extends CompilationContext {
       relativeSourceFile = new File( includedFileName ); // relative to fileset.directory
 
       templateFiles.add( relativeSourceFile );
+
       if ( getLog().isDebugEnabled() ) {
-        getLog().debug( "add:"+relativeSourceFile);
+        getLog().debug( "add template to compile:"+relativeSourceFile);
       }
     }
 
@@ -85,7 +92,10 @@ public class CompileTemplateMojo extends CompilationContext {
       engine = TemplateEngineFactory.construct( this );
       engine.compile( templateFiles );
     } catch (Exception ex) {
-      getLog().error("Compilation failed: ", ex);
+      if ( failOnError ) {
+        throw new MojoFailureException("Compilation of "+templateFiles+" failed: ", ex);
+      }
+      getLog().error("Compilation of "+templateFiles+" failed: ", ex);
     }
   }
 }
