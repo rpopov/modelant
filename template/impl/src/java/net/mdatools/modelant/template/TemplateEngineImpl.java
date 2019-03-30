@@ -97,8 +97,16 @@ class TemplateEngineImpl implements TemplateEngine {
                            Map<String, Object> bindings) throws IOException {
     PrintWriter out;
     TemplateContext context;
+    File absoluteFile;
+    File directory;
 
-    out = new PrintWriter(new OutputStreamWriter(new FileOutputStream( targetFile.getAbsoluteFile() ), outputEncoding));
+    absoluteFile = targetFile.getAbsoluteFile();
+    directory = absoluteFile.getParentFile();
+    if ( directory !=  null ) {
+      directory.mkdirs();
+    }
+
+    out = new PrintWriter(new OutputStreamWriter(new FileOutputStream( absoluteFile ), outputEncoding));
     try {
       context = new TemplateContextImpl(out, bindings);
 
@@ -113,7 +121,7 @@ class TemplateEngineImpl implements TemplateEngine {
   public final void render(File targetFile,
                            Object targetObject,
                            String template) throws IOException {
-    render( targetObject, template, new HashMap<>() );
+    render( targetFile, targetObject, template, new HashMap<>() );
   }
 
   /**

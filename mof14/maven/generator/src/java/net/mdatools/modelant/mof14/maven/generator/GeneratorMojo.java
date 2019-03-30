@@ -49,7 +49,7 @@ public class GeneratorMojo extends CompilationContext {
   /**
    * The directory where to generate the result files
    */
-  @Parameter(property="project.output.directory", required=true)
+  @Parameter(defaultValue="${project.build.directory}/generated-sources", required=true)
   private File outputDirectory;
 
   /**
@@ -60,11 +60,12 @@ public class GeneratorMojo extends CompilationContext {
     ModelRepository repository;
     RefPackage sourceExtent;
 
-    // lookup the implementation in the plugin's classpath, as it should be a dependency of this plugin
     repository = ModelRepositoryFactory.construct(getClassDirectory());
     try {
       sourceExtent = repository.constructMetamodelExtent( "SOURCE" );
       repository.readIntoExtent( sourceExtent, sourceMetamodel );
+
+      outputDirectory.mkdirs();
 
       generateMetamodelApi(sourceExtent);
     } catch (Exception ex) {
@@ -93,6 +94,14 @@ public class GeneratorMojo extends CompilationContext {
     for (EnumerationType metamodelEnum : (Collection<EnumerationType>) metamodelExtent.refClass( "EnumerationType" ).refAllOfClass()) {
       generate(engine, metamodelEnum);
     }
+  }
+
+  /**
+   * This MOJO actually defines the compilation context
+   * @return
+   */
+  private TemplateCompilationContext constructCompilationContext() {
+    return this;
   }
 
   /**
@@ -135,14 +144,5 @@ public class GeneratorMojo extends CompilationContext {
     engine.render( outputFile,
                    wrapper,
                    "renderJmiInterface");
-  }
-
-
-  /**
-   * This MOJO actually defines the compilation context
-   * @return
-   */
-  private TemplateCompilationContext constructCompilationContext() {
-    return this;
   }
 }
