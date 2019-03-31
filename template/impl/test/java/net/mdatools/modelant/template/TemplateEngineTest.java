@@ -16,6 +16,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.jasper.compiler.TemplateCompiler;
+
 import junit.framework.TestCase;
 import net.mdatools.modelant.template.api.TemplateCompilationContext;
 import net.mdatools.modelant.template.api.TemplateEngine;
@@ -64,13 +66,12 @@ public class TemplateEngineTest extends TestCase {
       /**
        * @see net.mdatools.modelant.template.api.TemplateCompilationContext#getClassPathAsList()
        */
-      public List<URL> getClassPathAsList() throws MalformedURLException {
-        List<URL> result;
+      public List<File> getClassPathAsList() throws MalformedURLException {
+        List<File> result;
 
         result = new ArrayList<>();
-        result.add( new File(System.getProperty( "user.home" ),
-                             "\\.m2\\repository\\net\\mdatools\\modelant.template.api\\3.1.0-SNAPSHOT\\modelant.template.api-3.1.0-SNAPSHOT.jar")
-                    .toURL() );
+        result.add( TemplateCompiler.getTemplateApiJar( ) );
+
         return result;
       }
 

@@ -63,7 +63,7 @@ public class TemplateCompiler {
    * @throws IOException when invalid classpath entry is provided
    */
   public TemplateCompiler(TemplateCompilationContext compilationContext) throws IOException {
-    List<URL> classpath;
+    List<File> classpath;
     File classOutputDirectory;
 
     this.formatTemplateClassName = new Format( compilationContext.getUniqueName() );
@@ -76,10 +76,10 @@ public class TemplateCompiler {
     // construct the classpath, having the template source and class directories first,
     // allowing overriding the packaged in .jars contents
     classpath = new ArrayList<>();
-    classpath.add( getTemplateApiJar(Template.class));
-    classpath.add( compilationContext.getTemplateDirectory().getAbsoluteFile().toURL() );
-    classpath.add( classOutputDirectory.toURL() );
-    classpath.addAll( compilationContext.getClassPathAsList() );
+    classpath.add( getTemplateApiJar());
+    classpath.add( compilationContext.getTemplateDirectory().getAbsoluteFile());
+    classpath.add( classOutputDirectory);
+    classpath.addAll( compilationContext.getClassPathAsList());
 
     LOGGER.log(Level.FINE, "Actual compilation classpath {0}", classpath);
 
@@ -87,7 +87,7 @@ public class TemplateCompiler {
                                      classOutputDirectory,
                                      concatenateClassPath(classpath));
 
-    this.classLoader = new URLClassLoader( classpath.toArray( new URL[0] ),
+    this.classLoader = new URLClassLoader( convertToUrls( classpath ),
                                            getClass().getClassLoader() );
 
     this.translateToJavaDirectory = compilationContext.getJavaDirectory().getAbsoluteFile();
@@ -96,21 +96,37 @@ public class TemplateCompiler {
   }
 
   /**
+   * @param classpath not null
+   * @return non-null array of URLs representing the files/directories in classpath
    * @throws MalformedURLException
+   */
+  private static URL[] convertToUrls(List<File> classpath) throws MalformedURLException {
+    URL[] result;
+    int i;
+
+    i = 0;
+    result = new URL[classpath.size()];
+    for (File file : classpath) {
+      result[i++] = file.toURL();
+    }
+    return result;
+  }
+
+  /**
    * @see net.mdatools.modelant.template.api.TemplateCompilationContext#getClassPath()
    */
-  private static String concatenateClassPath(List<URL> classPath) throws MalformedURLException {
+  private static String concatenateClassPath(List<File> classPath) {
     StringBuilder result;
 
     // concatenate all artifacts in the classpath
     result = new StringBuilder(512);
 
-    for (URL artifact: classPath) {
+    for (File artifact: classPath) {
       if (result.length() > 0) {
         result.append( File.pathSeparatorChar );
       }
       if ( artifact.getPath() != null ) { // the dependency is resolved
-        result.append( artifact.getPath().toString() );
+        result.append( artifact.getAbsolutePath() );
       }
     }
     return result.toString();
@@ -118,40 +134,45 @@ public class TemplateCompiler {
 
 
   /**
-   * @param coontainingClass not null
    * @return the jar this class is in, so that the template core classes are found
    * @throws MalformedURLException
    */
-  private URL getTemplateApiJar(Class<?> coontainingClass) throws MalformedURLException {
-    URL result;
+  public static File getTemplateApiJar() throws MalformedURLException {
+    File result;
+    URL url;
     String resourceName;
     String location;
     int locationEndIndex;
+    Class containingClass;
 
-    resourceName = coontainingClass.getName().replace('.','/')+".class";
-    result = getClass().getClassLoader().getResource( resourceName );
+    containingClass = Template.class;
 
-    if ( result.getProtocol().equals("jar") ) { // jar:file:/c:/...!file URL
-      location = result.getPath();
+    resourceName = containingClass.getName().replace('.','/')+".class";
+    url = containingClass.getClassLoader().getResource( resourceName );
+
+    if ( url.getProtocol().equals("jar") ) { // jar:file:/c:/...!file URL
+      location = url.getPath();
       locationEndIndex = location.indexOf( "!" );
 
       if ( locationEndIndex < 0 ) {
-        throw new MalformedURLException("Expected to find '!' in "+result);
+        throw new MalformedURLException("Expected to find '!' in "+url);
       }
-      location = result.getPath().substring(0, locationEndIndex); // location already contains the nested URL
+      location = url.getPath().substring(0, locationEndIndex); // location already contains the nested URL
+      location = new URL(location).getPath();
 
-      result = new URL(location);
-
-    } if ( result.getProtocol().equals("file") ) {
-      location = result.getPath();
+    } else if ( url.getProtocol().equals("file") ) {
+      location = url.getPath();
       locationEndIndex = location.indexOf( resourceName );
 
       if ( locationEndIndex >= 0 ) {
         // extract the .jar / directory from class' URL
         location = location.substring( 0, locationEndIndex );
-        result = new URL(result.getProtocol(), result.getHost(), result.getPath());
       }
+    } else {
+      throw new MalformedURLException("Expected a jar: or file: URL, instead of  "+url);
     }
+    result = new File( location );
+
     return result;
   }
 

@@ -9,7 +9,6 @@ package net.mdatools.modelant.template.api;
 
 import java.io.File;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
 
 /**
@@ -53,7 +52,7 @@ public interface TemplateCompilationContext {
    * @see #getTemplateDirectory()
    * @see #getClassDirectory()
    */
-  public List<URL> getClassPathAsList() throws MalformedURLException;
+  public List<File> getClassPathAsList() throws MalformedURLException;
 
   /**
    * @return true if the generated Java files from the templates should not be deleted
