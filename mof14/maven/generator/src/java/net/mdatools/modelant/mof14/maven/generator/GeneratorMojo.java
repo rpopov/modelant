@@ -11,9 +11,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 
-import javax.jmi.model.EnumerationType;
-import javax.jmi.model.ModelElement;
+import javax.jmi.model.Association;
+import javax.jmi.model.ModelPackage;
 import javax.jmi.model.MofClass;
+import javax.jmi.model.MofPackage;
 import javax.jmi.reflect.RefPackage;
 
 import org.apache.maven.plugin.MojoExecutionException;
@@ -24,7 +25,6 @@ import org.apache.maven.plugins.annotations.Parameter;
 
 import net.mdatools.modelant.repository.api.ModelRepository;
 import net.mdatools.modelant.repository.api.ModelRepositoryFactory;
-import net.mdatools.modelant.template.api.TemplateCompilationContext;
 import net.mdatools.modelant.template.api.TemplateEngine;
 import net.mdatools.modelant.template.api.TemplateEngineFactory;
 import net.mdatools.modelant.template.maven.plugin.CompilationContext;
@@ -67,7 +67,7 @@ public class GeneratorMojo extends CompilationContext {
 
       outputDirectory.mkdirs();
 
-      generateMetamodelApi(sourceExtent);
+      generateMetamodelApi((ModelPackage) sourceExtent);
     } catch (Exception ex) {
       throw new MojoExecutionException( "The target failed with:", ex);
 
@@ -80,28 +80,23 @@ public class GeneratorMojo extends CompilationContext {
    * @param metamodelExtent not null
    * @throws IOException
    */
-  private void generateMetamodelApi(RefPackage metamodelExtent) throws IOException {
+  private void generateMetamodelApi(ModelPackage metamodelExtent) throws IOException {
     TemplateEngine engine;
 
-    engine = TemplateEngineFactory.construct(constructCompilationContext());
+    engine = TemplateEngineFactory.construct(this);
 
     // render the interfaces of model classes
-    for (MofClass metamodelClass : (Collection<MofClass>) metamodelExtent.refClass( "Class" ).refAllOfClass()) {
+    for (MofClass metamodelClass : (Collection<MofClass>) metamodelExtent.getMofClass().refAllOfClass()) {
       generate(engine, metamodelClass);
     }
 
-    // render interfaces for enumerations
-    for (EnumerationType metamodelEnum : (Collection<EnumerationType>) metamodelExtent.refClass( "EnumerationType" ).refAllOfClass()) {
-      generate(engine, metamodelEnum);
+    for (Association metamodelAssociation : (Collection<Association>) metamodelExtent.getAssociation().refAllOfClass()) {
+      generate(engine, metamodelAssociation);
     }
-  }
 
-  /**
-   * This MOJO actually defines the compilation context
-   * @return
-   */
-  private TemplateCompilationContext constructCompilationContext() {
-    return this;
+    for (MofPackage metamodelPackage : (Collection<MofPackage>) metamodelExtent.getMofPackage().refAllOfClass()) {
+      generate(engine, metamodelPackage);
+    }
   }
 
   /**
@@ -109,40 +104,137 @@ public class GeneratorMojo extends CompilationContext {
    * @param metamodelClass
    * @throws IOException when generation failed for any reason
    */
-  private void generate(TemplateEngine engine, ModelElement metamodelClass) throws IOException {
-    MofElementWrapper wrapper;
+  private void generate(TemplateEngine engine, MofClass metamodelClass) throws IOException {
+    MofElementWrapper<MofClass> wrapper;
 
-    wrapper = new MofElementWrapper(metamodelClass );
+    wrapper = new MofElementWrapper<>(metamodelClass );
 
-    renderInyterface( engine, wrapper);
+    renderInterface( engine, wrapper);
     renderJmiInterface( engine, wrapper);
+
+    renderInterfaceProxy( engine, wrapper);
+    renderJmiInterfaceProxy( engine, wrapper);
   }
 
-  private void renderInyterface(TemplateEngine engine,
-                                MofElementWrapper wrapper) throws IOException {
+  /**
+   * @throws IOException when generation failed for any reason
+   */
+  private void generate(TemplateEngine engine, Association metamodelAssociation) throws IOException {
+    MofElementWrapper<Association> wrapper;
+
+    wrapper = new MofElementWrapper<>(metamodelAssociation );
+
+    renderAssociationInterface( engine, wrapper);
+    renderJmiAssociationInterface( engine, wrapper);
+  }
+
+  /**
+   * @throws IOException when generation failed for any reason
+   */
+  private void generate(TemplateEngine engine, MofPackage metamodelPackage) throws IOException {
+    MofElementWrapper<MofPackage> wrapper;
+
+    wrapper = new MofElementWrapper<MofPackage>(metamodelPackage);
+
+    renderPackage( engine, wrapper);
+    renderJmiPackage( engine, wrapper);
+  }
+
+  /**
+   * Note: the method name is the name if the template to call
+   */
+  private void renderInterface(TemplateEngine engine,
+                               MofElementWrapper<MofClass> wrapper) throws IOException {
     String qualifiedName;
-    File outputFile;
 
     qualifiedName = wrapper.calculateQualifiedInterfaceName();
-    outputFile = new File(outputDirectory,
-                          qualifiedName.replace( '.', File.separatorChar )+".java");
-
-    engine.render( outputFile,
-                   wrapper,
-                   "renderInterface");
+    engine.render( toSourceFileName(qualifiedName), wrapper);
   }
 
-  private void renderJmiInterface(TemplateEngine engine,
-                                  MofElementWrapper wrapper) throws IOException {
+  /**
+   * Note: the method name is the name if the template to call
+   */
+  private void renderInterfaceProxy(TemplateEngine engine,
+                                    MofElementWrapper<MofClass> wrapper) throws IOException {
     String qualifiedName;
-    File outputFile;
+
+    qualifiedName = wrapper.calculateQualifiedInterfaceProxyName();
+    engine.render( toSourceFileName(qualifiedName), wrapper);
+  }
+
+  /**
+   * Note: the method name is the name if the template to call
+   */
+  private void renderJmiInterface(TemplateEngine engine,
+                                  MofElementWrapper<MofClass> wrapper) throws IOException {
+    String qualifiedName;
 
     qualifiedName = wrapper.calculateQualifiedJmiInterfaceName();
-    outputFile = new File(outputDirectory,
-                          qualifiedName.replace( '.', File.separatorChar )+".java");
+    engine.render( toSourceFileName(qualifiedName), wrapper);
+  }
 
-    engine.render( outputFile,
-                   wrapper,
-                   "renderJmiInterface");
+  /**
+   * Note: the method name is the name if the template to call
+   */
+  private void renderJmiInterfaceProxy(TemplateEngine engine,
+                                       MofElementWrapper<MofClass> wrapper) throws IOException {
+    String qualifiedName;
+
+    qualifiedName = wrapper.calculateQualifiedJmiInterfaceProxyName();
+
+    engine.render( toSourceFileName(qualifiedName), wrapper);
+  }
+
+  /**
+   * Note: the method name is the name if the template to call
+   */
+  private void renderAssociationInterface(TemplateEngine engine,
+                                          MofElementWrapper<Association> wrapper) throws IOException {
+    String qualifiedName;
+
+    qualifiedName = wrapper.calculateQualifiedInterfaceName();
+    engine.render( toSourceFileName(qualifiedName), wrapper);
+  }
+
+  /**
+   * Note: the method name is the name if the template to call
+   */
+  private void renderJmiAssociationInterface(TemplateEngine engine,
+                                             MofElementWrapper<Association> wrapper) throws IOException {
+    String qualifiedName;
+
+    qualifiedName = wrapper.calculateQualifiedJmiInterfaceName();
+    engine.render( toSourceFileName(qualifiedName), wrapper);
+  }
+
+  /**
+   * Note: the method name is the name if the template to call
+   */
+  private void renderPackage(TemplateEngine engine,
+                             MofElementWrapper<MofPackage> wrapper) throws IOException {
+    String qualifiedName;
+
+    qualifiedName = wrapper.calculateQualifiedInterfaceName();
+    engine.render( toSourceFileName(qualifiedName), wrapper);
+  }
+
+  /**
+   * Note: the method name is the name if the template to call
+   */
+  private void renderJmiPackage(TemplateEngine engine,
+                                MofElementWrapper<MofPackage> wrapper) throws IOException {
+    String qualifiedName;
+
+    qualifiedName = wrapper.calculateQualifiedJmiInterfaceName();
+    engine.render( toSourceFileName(qualifiedName), wrapper);
+  }
+
+  /**
+   * @param className java class name
+   * @return the target absolute file to store the Java code for that class
+   */
+  private File toSourceFileName(String className) {
+    return new File(outputDirectory,
+                    className.replace( '.', File.separatorChar )+".java");
   }
 }

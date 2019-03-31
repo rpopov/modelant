@@ -30,7 +30,7 @@ import net.mdatools.modelant.template.api.TemplateEngine;
  *
  * @author Rusi Popov
  */
-public class MofElementWrapper {
+public class MofElementWrapper<T extends ModelElement> {
 
   private static final Logger LOGGER = Logger.getLogger( MofElementWrapper.class.getName() );
 
@@ -54,13 +54,13 @@ public class MofElementWrapper {
    * interface of the model element is used in oder to make this class
    * independent of the actual model and interface.
    */
-  private final ModelElement wrapped;
+  private final T wrapped;
 
 
   /**
    * @param wrapped not null
    */
-  public MofElementWrapper(ModelElement wrapped) {
+  public MofElementWrapper(T wrapped) {
     assert wrapped != null : "Expected a non-null wobject to wrap";
 
     this.wrapped = wrapped;
@@ -343,5 +343,18 @@ public class MofElementWrapper {
    */
   public final void renderImports(TemplateEngine engine, TemplateContext context) throws IOException {
     engine.render( this, context );
+  }
+
+
+  /**
+   * @return the non-null class-proxy name, as of JMI
+   */
+  public String calculateQualifiedInterfaceProxyName() {
+    return calculateQualifiedInterfaceProxyName()+"Class";
+  }
+
+
+  public String calculateQualifiedJmiInterfaceProxyName() {
+    return calculateQualifiedJmiInterfaceProxyName()+"Class";
   }
 }

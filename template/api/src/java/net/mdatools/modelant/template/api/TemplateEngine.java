@@ -65,6 +65,16 @@ public interface TemplateEngine {
               String template) throws IOException;
 
   /**
+   * Use the template for the target object's class and render that object into a file.
+   * Uses the calling method name as the name of the template to apply.
+   * @param targetFile is the non-null file to create to store the template's output
+   * @param targetObject is the non-null object to call the template of/for
+   * @throws IOException
+   */
+  void render(File targetFile,
+              Object targetObject) throws IOException;
+
+  /**
    * Use the template for the target object's class and render that object to a string.
    * @param targetObject is the non-null object to call the template of/for
    * @param template is the non-null, non-empty template name
@@ -93,13 +103,13 @@ public interface TemplateEngine {
    * and allowing compile-time check.
    * IMPORTANT: This method does NOT provide compile time correctness checking of the template names.
    * @param targetObject not null object to render
-   * @param template not null
    * @param context not null
+   * @param template not nullS
    * @throws IOException
    */
   void render(Object targetObject,
-              String template,
-              TemplateContext context) throws IOException;
+              TemplateContext context,
+              String template) throws IOException;
 
 
   /**

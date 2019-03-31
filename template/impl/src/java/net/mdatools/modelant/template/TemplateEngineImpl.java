@@ -110,11 +110,24 @@ class TemplateEngineImpl implements TemplateEngine {
     try {
       context = new TemplateContextImpl(out, bindings);
 
-      render( targetObject, template, context );
+      render( targetObject, context, template );
     } finally {
       out.close();
     }
   }
+
+  /**
+   * @see net.mdatools.modelant.template.api.TemplateEngine#render(java.io.File, java.lang.Object)
+   */
+  public final void render(File targetFile,
+                           Object targetObject) throws IOException {
+    String templateName;
+
+    templateName = getCallingMethodName();
+
+    render( targetFile, targetObject, templateName);
+  }
+
   /**
    * @see net.mdatools.modelant.template.api.TemplateEngine#render(java.io.File, java.lang.Object, java.lang.String)
    */
@@ -140,7 +153,7 @@ class TemplateEngineImpl implements TemplateEngine {
     try {
       context = new TemplateContextImpl(out, bindings);
 
-      render( targetObject, template, context );
+      render( targetObject, context, template );
     } finally {
       out.close();
     }
@@ -166,8 +179,8 @@ class TemplateEngineImpl implements TemplateEngine {
    * @throws IOException
    */
   public final void render(Object targetObject,
-                           String method,
-                           TemplateContext templateContext) throws IOException {
+                           TemplateContext templateContext,
+                           String method) throws IOException {
     Template template;
 
     if ( targetObject == null ) {
@@ -185,6 +198,18 @@ class TemplateEngineImpl implements TemplateEngine {
    */
   public final void render(Object targetObject,
                            TemplateContext context) throws IOException {
+    String templateName;
+
+    templateName = getCallingMethodName();
+
+    render( targetObject, context, templateName );
+  }
+
+
+  /**
+   * @return the name of the method that called the calling method
+   */
+  private static String getCallingMethodName() {
     StackTraceElement frame;
     Throwable stackHandle;
 
@@ -192,11 +217,11 @@ class TemplateEngineImpl implements TemplateEngine {
     try {
       stackHandle = new Throwable();
       frame = (StackTraceElement) getStackTraceElementMethod.invoke( stackHandle,
-                                                                     new Object[] { new Integer( 1 ) } );
+                                                                     new Object[] { new Integer( 2 ) } );
     } catch (Exception ex) {
       throw new RuntimeException( "Cannot find calling method", ex );
     }
-    render( targetObject, frame.getMethodName(), context );
+    return frame.getMethodName();
   }
 
   /**
@@ -221,7 +246,7 @@ class TemplateEngineImpl implements TemplateEngine {
 
     iterator = collection.iterator();
     while ( iterator.hasNext() ) {
-      render( iterator.next(), template, context );
+      render( iterator.next(), context, template );
     }
   }
 

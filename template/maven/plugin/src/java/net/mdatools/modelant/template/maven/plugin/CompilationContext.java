@@ -9,7 +9,6 @@ package net.mdatools.modelant.template.maven.plugin;
 
 import java.io.File;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 

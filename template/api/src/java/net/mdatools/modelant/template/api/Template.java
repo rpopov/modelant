@@ -26,7 +26,7 @@ import java.io.IOException;
  * use the name of the Java method that immediately calls them as the name of the ModelAnt Template to call -
  * see the implicit methods below.
  * The methods:<ul>
- * <li>{@link TemplateEngine#render(Object, String, TemplateContext)}
+ * <li>{@link TemplateEngine#render(Object, TemplateContext, String)}
  * <li>{@link TemplateEngine#render(java.util.Collection, String, TemplateContext)}
  * </ul>
  * have as an additional parameter the name of the ModelAnt Template to call.<ul>

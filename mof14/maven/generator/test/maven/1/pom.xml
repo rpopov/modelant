@@ -31,18 +31,36 @@
         <version>@project.version@</version>
         <executions>
           <execution>
+            <phase>generate-sources</phase>
             <goals>
               <goal>generate-metamodel-wrapper</goal>
             </goals>
             <configuration>
               <sourceMetamodel>src/resource/01-12-02_Diff_modelant.xml</sourceMetamodel>
-              <targetDirectory>target/output</targetDirectory>
+              <outputDirectory>target/generated-sources</outputDirectory>
               <name>uml.api</name>
               <metamodelRootPackage>UML</metamodelRootPackage>
             </configuration>
           </execution>
         </executions>
       </plugin>
+
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.1</version>
+        <configuration>
+          <source>target/generated-sources</source>
+        </configuration>
+        <executions>
+          <execution>
+            <id>compile-generated-code</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>      
     </plugins>
   </build>
 </project>
