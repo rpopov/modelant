@@ -30,9 +30,9 @@ package <%=wrapped.calculateJmiPackageName()%>;
 <% wrapped.renderImports(engine, context); %>
 
 /**
- * The JMI standard <%=wrapped.calculateSimpleInterfaceName()%> interface
+ * The JMI standard <%=wrapped.calculateSimpleInterfaceProxyName()%> interface
  */
-public interface <%=wrapped.calculateSimpleInterfaceName() %> <% wrapped.renderExtends(engine, context); %> {
+public interface <%=wrapped.calculateSimpleInterfaceProxyName() %> extends javax.jmi.ref.RefClass {
 
 <%-- wrapped.renderDelegatedDeclaredConstants( delegateClassName, context );
 --%>

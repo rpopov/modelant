@@ -32,6 +32,8 @@ import net.mdatools.modelant.template.api.TemplateEngine;
  */
 public class MofElementWrapper<T extends ModelElement> {
 
+  private static final String JMI_CLASS_PROXY_SUFFIX = "Class";
+
   private static final Logger LOGGER = Logger.getLogger( MofElementWrapper.class.getName() );
 
   /**
@@ -148,7 +150,13 @@ public class MofElementWrapper<T extends ModelElement> {
     return name;
   }
 
-
+  /**
+   * @return the name of the model element as provided in the meta-model and optionally overridden
+   *         through JMI flags, if it violates Java naming conventions
+   */
+  public final String calculateSimpleInterfaceProxyName() {
+    return calculateSimpleInterfaceName()+JMI_CLASS_PROXY_SUFFIX;
+  }
   /**
    * Calculates the proper package name, regarding the name substitution and the package name
    * prefix.
@@ -193,6 +201,14 @@ public class MofElementWrapper<T extends ModelElement> {
   }
 
   /**
+   * @return the non-null class-proxy name, as of JMI
+   */
+  public String calculateQualifiedInterfaceProxyName() {
+    return calculateQualifiedInterfaceName()+JMI_CLASS_PROXY_SUFFIX;
+  }
+
+
+  /**
    * @return the qualified java class name of this element
    */
   public String calculateQualifiedJmiInterfaceName() {
@@ -207,6 +223,11 @@ public class MofElementWrapper<T extends ModelElement> {
     return result.toString();
   }
 
+
+
+  public String calculateQualifiedJmiInterfaceProxyName() {
+    return calculateQualifiedJmiInterfaceName()+JMI_CLASS_PROXY_SUFFIX;
+  }
 
 
   /**
@@ -343,18 +364,5 @@ public class MofElementWrapper<T extends ModelElement> {
    */
   public final void renderImports(TemplateEngine engine, TemplateContext context) throws IOException {
     engine.render( this, context );
-  }
-
-
-  /**
-   * @return the non-null class-proxy name, as of JMI
-   */
-  public String calculateQualifiedInterfaceProxyName() {
-    return calculateQualifiedInterfaceProxyName()+"Class";
-  }
-
-
-  public String calculateQualifiedJmiInterfaceProxyName() {
-    return calculateQualifiedJmiInterfaceProxyName()+"Class";
   }
 }

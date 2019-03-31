@@ -9,8 +9,8 @@ import java.util.List;
 %><% 
 boolean firstPrinted = false; 
 
-if (!((GeneralizableElement) wrapped.getWrapped()).getSupertypes().isEmpty()) { 
 %>extends <%
+if (!((GeneralizableElement) wrapped.getWrapped()).getSupertypes().isEmpty()) { 
   for (GeneralizableElement supertype : (List<GeneralizableElement>)((GeneralizableElement) wrapped.getWrapped()).getSupertypes()) {
     if ( firstPrinted ) {
       %>, <%
@@ -18,5 +18,6 @@ if (!((GeneralizableElement) wrapped.getWrapped()).getSupertypes().isEmpty()) {
     %><%= MofElementWrapper.wrap(supertype).calculateQualifiedInterfaceName() %><%
     firstPrinted = true;
   }
-%> <%  
+} else {
+%>javax.jmi.ref.RefObject<%  
 } %>

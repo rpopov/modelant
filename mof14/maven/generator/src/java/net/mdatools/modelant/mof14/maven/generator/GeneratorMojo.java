@@ -124,8 +124,8 @@ public class GeneratorMojo extends CompilationContext {
 
     wrapper = new MofElementWrapper<>(metamodelAssociation );
 
-    renderAssociationInterface( engine, wrapper);
-    renderJmiAssociationInterface( engine, wrapper);
+    renderAssociation( engine, wrapper);
+    renderJmiAssociation( engine, wrapper);
   }
 
   /**
@@ -188,8 +188,8 @@ public class GeneratorMojo extends CompilationContext {
   /**
    * Note: the method name is the name if the template to call
    */
-  private void renderAssociationInterface(TemplateEngine engine,
-                                          MofElementWrapper<Association> wrapper) throws IOException {
+  private void renderAssociation(TemplateEngine engine,
+                                 MofElementWrapper<Association> wrapper) throws IOException {
     String qualifiedName;
 
     qualifiedName = wrapper.calculateQualifiedInterfaceName();
@@ -199,8 +199,8 @@ public class GeneratorMojo extends CompilationContext {
   /**
    * Note: the method name is the name if the template to call
    */
-  private void renderJmiAssociationInterface(TemplateEngine engine,
-                                             MofElementWrapper<Association> wrapper) throws IOException {
+  private void renderJmiAssociation(TemplateEngine engine,
+                                    MofElementWrapper<Association> wrapper) throws IOException {
     String qualifiedName;
 
     qualifiedName = wrapper.calculateQualifiedJmiInterfaceName();
