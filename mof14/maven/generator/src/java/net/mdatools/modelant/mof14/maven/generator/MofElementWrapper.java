@@ -224,7 +224,9 @@ public class MofElementWrapper<T extends ModelElement> {
   }
 
 
-
+  /**
+   * @return the name of the class/proxy class from the main interface
+   */
   public String calculateQualifiedJmiInterfaceProxyName() {
     return calculateQualifiedJmiInterfaceName()+JMI_CLASS_PROXY_SUFFIX;
   }
