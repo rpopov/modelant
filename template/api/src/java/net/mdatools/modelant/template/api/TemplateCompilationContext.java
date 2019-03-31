@@ -56,28 +56,6 @@ public interface TemplateCompilationContext {
   public List<URL> getClassPathAsList() throws MalformedURLException;
 
   /**
-   * @throws MalformedURLException
-   * @see net.mdatools.modelant.template.api.TemplateCompilationContext#getClassPath()
-   */
-  public default String getClassPath() throws MalformedURLException {
-    StringBuilder result;
-
-    // concatenate all artifacts in the classparh
-    result = new StringBuilder(512);
-
-    for (URL artifact: getClassPathAsList()) {
-      if (result.length() > 0) {
-        result.append( File.pathSeparatorChar );
-      }
-      if ( artifact.getFile() != null ) { // the dependency is resolved
-        result.append( artifact.toString() );
-      }
-    }
-    return result.toString();
-  }
-
-
-  /**
    * @return true if the generated Java files from the templates should not be deleted
    *         (for tracing purposes)
    */

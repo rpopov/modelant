@@ -74,8 +74,6 @@ import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 
-import net.mdatools.modelant.template.api.TemplateCompilationContext;
-
 
 /**
  * @author Anil K. Vijendran
@@ -92,24 +90,27 @@ class SunJavaCompiler implements JavaCompiler {
 
   private final String classpath;
 
-  private final TemplateCompilationContext compilationContext;
-
   private final String encodingJavaFile;
 
+  private final File outputDirectory;
+
   /**
-   * @param compilationContext not null
    * @param encodingJavaFile the encoding of the java files to compile
+   * @param classDirectory not null existing directory to compile in
+   * @param classPath not null compilation classpath
    * @throws MalformedURLException when invalid classpath entry provided
    */
-  public SunJavaCompiler(TemplateCompilationContext compilationContext, String encodingJavaFile) throws MalformedURLException {
+  public SunJavaCompiler(String encodingJavaFile,
+                         File classDirectory,
+                         String classPath) throws MalformedURLException {
+    this.encodingJavaFile = encodingJavaFile;
+    this.outputDirectory = classDirectory;
+
     this.classpath = System.getProperty( "java.class.path" )
                      + File.pathSeparator
-                     + compilationContext.getClassPath()
+                     + classPath
                      + File.pathSeparator
-                     + compilationContext.getClassDirectory().getAbsolutePath();
-
-    this.compilationContext = compilationContext;
-    this.encodingJavaFile = encodingJavaFile;
+                     + classDirectory.getAbsolutePath();
   }
 
 
@@ -135,10 +136,6 @@ class SunJavaCompiler implements JavaCompiler {
 
     compilationUnits = fileManager.getJavaFileObjectsFromFiles(sources);
 
-    if ( !compilationContext.getClassDirectory().exists() ) {
-      compilationContext.getClassDirectory().mkdirs();
-    }
-
     // NOTE: Once absolute source file names are provided, no need of providing source directory
 
     options = new ArrayList<>();
@@ -148,7 +145,11 @@ class SunJavaCompiler implements JavaCompiler {
     options.add( "-classpath" );
     options.add( classpath );
     options.add( "-d" );
-    options.add( compilationContext.getClassDirectory().getAbsolutePath() );
+    options.add( outputDirectory.getAbsolutePath() );
+
+    LOGGER.log( Level.FINE,
+                "Compiler parameters: {0}",
+                options );
 
     out = new ByteArrayOutputStream( 256 );
 

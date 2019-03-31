@@ -51,30 +51,108 @@ public class TemplateCompiler {
 
   private final Format formatTemplateClassName;
 
-  private final TemplateCompilationContext compilationContext;
-
   private final ClassLoader classLoader;
 
+  private final File translateToJavaDirectory;
+
+  private final String templateEncoding;
+
+  private final boolean shouldKeepGenerated;
   /**
-   * @param compilationContext
+   * @param compilationContext not null
    * @throws IOException when invalid classpath entry is provided
    */
   public TemplateCompiler(TemplateCompilationContext compilationContext) throws IOException {
     List<URL> classpath;
+    File classOutputDirectory;
 
-    this.compilationContext = compilationContext;
     this.formatTemplateClassName = new Format( compilationContext.getUniqueName() );
-    this.javac = new SunJavaCompiler(compilationContext, ENCODING_JAVA_FILE);
+
+    classOutputDirectory = compilationContext.getClassDirectory().getAbsoluteFile();
+    if ( !classOutputDirectory.exists() ) {
+      classOutputDirectory.mkdirs();
+    }
 
     // construct the classpath, having the template source and class directories first,
     // allowing overriding the packaged in .jars contents
     classpath = new ArrayList<>();
+    classpath.add( getTemplateApiJar(Template.class));
     classpath.add( compilationContext.getTemplateDirectory().getAbsoluteFile().toURL() );
-    classpath.add( compilationContext.getClassDirectory().getAbsoluteFile().toURL() );
+    classpath.add( classOutputDirectory.toURL() );
     classpath.addAll( compilationContext.getClassPathAsList() );
+
+    LOGGER.log(Level.FINE, "Actual compilation classpath {0}", classpath);
+
+    this.javac = new SunJavaCompiler(ENCODING_JAVA_FILE,
+                                     classOutputDirectory,
+                                     concatenateClassPath(classpath));
 
     this.classLoader = new URLClassLoader( classpath.toArray( new URL[0] ),
                                            getClass().getClassLoader() );
+
+    this.translateToJavaDirectory = compilationContext.getJavaDirectory().getAbsoluteFile();
+    this.templateEncoding = compilationContext.getTemplateEncoding();
+    this.shouldKeepGenerated = compilationContext.shouldKeepGenerated();
+  }
+
+  /**
+   * @throws MalformedURLException
+   * @see net.mdatools.modelant.template.api.TemplateCompilationContext#getClassPath()
+   */
+  private static String concatenateClassPath(List<URL> classPath) throws MalformedURLException {
+    StringBuilder result;
+
+    // concatenate all artifacts in the classpath
+    result = new StringBuilder(512);
+
+    for (URL artifact: classPath) {
+      if (result.length() > 0) {
+        result.append( File.pathSeparatorChar );
+      }
+      if ( artifact.getPath() != null ) { // the dependency is resolved
+        result.append( artifact.getPath().toString() );
+      }
+    }
+    return result.toString();
+  }
+
+
+  /**
+   * @param coontainingClass not null
+   * @return the jar this class is in, so that the template core classes are found
+   * @throws MalformedURLException
+   */
+  private URL getTemplateApiJar(Class<?> coontainingClass) throws MalformedURLException {
+    URL result;
+    String resourceName;
+    String location;
+    int locationEndIndex;
+
+    resourceName = coontainingClass.getName().replace('.','/')+".class";
+    result = getClass().getClassLoader().getResource( resourceName );
+
+    if ( result.getProtocol().equals("jar") ) { // jar:file:/c:/...!file URL
+      location = result.getPath();
+      locationEndIndex = location.indexOf( "!" );
+
+      if ( locationEndIndex < 0 ) {
+        throw new MalformedURLException("Expected to find '!' in "+result);
+      }
+      location = result.getPath().substring(0, locationEndIndex); // location already contains the nested URL
+
+      result = new URL(location);
+
+    } if ( result.getProtocol().equals("file") ) {
+      location = result.getPath();
+      locationEndIndex = location.indexOf( resourceName );
+
+      if ( locationEndIndex >= 0 ) {
+        // extract the .jar / directory from class' URL
+        location = location.substring( 0, locationEndIndex );
+        result = new URL(result.getProtocol(), result.getHost(), result.getPath());
+      }
+    }
+    return result;
   }
 
   /**
@@ -99,7 +177,7 @@ public class TemplateCompiler {
 
     javac.compile( javaFiles );
 
-    if ( !compilationContext.shouldKeepGenerated() ) { // clean the generated files
+    if ( !shouldKeepGenerated ) { // clean the generated files
       for(File file : javaFiles ) {
         file.delete();
       }
@@ -138,8 +216,7 @@ public class TemplateCompiler {
       throw new IOException("Missing template source file: "+template.getPath());
     }
 
-    templateReader = new TemplateLexer(templateSourceUrl,
-                                        compilationContext.getTemplateEncoding());
+    templateReader = new TemplateLexer(templateSourceUrl, templateEncoding);
     try {
       parser = new TemplateParser( templateReader );
       generators = parser.parse();
@@ -149,7 +226,7 @@ public class TemplateCompiler {
 
     generateTemplate = new GenerateTemplate( packageName, className, wrappedClassName );
 
-    result = new File(compilationContext.getJavaDirectory().getAbsoluteFile(), javaFileName);
+    result = new File(translateToJavaDirectory, javaFileName);
     generateTemplate.generate( result, generators );
 
     return result;
@@ -178,7 +255,7 @@ public class TemplateCompiler {
     try {
       // make sure that the latest version of the template is compiled and loaded, the template may not exist
 
-      templateClassUrl = classLoader.getResource( templateClassName+".class" );
+      templateClassUrl = classLoader.getResource( templateClassName.replace('.', '/')+".class" );
       if ( templateClassUrl != null ) { // compiled
         templateCompiledDate= getTime(templateClassUrl);
 
@@ -213,7 +290,7 @@ public class TemplateCompiler {
    * @return the creation/last modified time the file file storing the contents with that URL
    * @throws MalformedURLException
    */
-  private Date getTime(URL templateResourceUrl) throws MalformedURLException {
+  private static Date getTime(URL templateResourceUrl) throws MalformedURLException {
     Date result;
     String path;
 

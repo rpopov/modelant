@@ -80,12 +80,11 @@ public class CompileTemplateMojo extends CompilationContext {
 
     for ( String includedFileName: includedFiles) {
       relativeSourceFile = new File( includedFileName ); // relative to fileset.directory
-
       templateFiles.add( relativeSourceFile );
+    }
 
-      if ( getLog().isDebugEnabled() ) {
-        getLog().debug( "add template to compile:"+relativeSourceFile);
-      }
+    if ( getLog().isDebugEnabled() ) {
+      getLog().debug( "Included files:"+templateFiles);
     }
 
     try {

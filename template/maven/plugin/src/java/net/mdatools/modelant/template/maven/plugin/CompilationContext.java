@@ -130,25 +130,20 @@ public abstract class CompilationContext extends AbstractMojo implements Templat
    * @return non-null list of local files and directories forming the classpath of this context
    * @see net.mdatools.modelant.template.api.TemplateCompilationContext#getClassPathAsList()
    */
-  public List<URL> getClassPathAsList() throws MalformedURLException {
-    List<URL> result;
+  public List<File> getClassPathAsList() throws MalformedURLException {
+    List<File> result;
 
     result = new ArrayList<>();
 
     for (Artifact artifact: project.getDependencyArtifacts()) {
       if ( artifact.getFile() != null ) { // the dependency is resolved
-        result.add( artifact.getFile().toURL() );
+        result.add( artifact.getFile());
       }
     }
     for (Artifact artifact: plugin.getArtifacts()) {
       if ( artifact.getFile() != null ) { // the dependency is resolved
-        result.add( artifact.getFile().toURL() );
+        result.add( artifact.getFile());
       }
-    }
-    result.add( getClassDirectory().toURL() );
-
-    if ( getLog().isDebugEnabled()) {
-      getLog().debug( "Use template compilation classpath: "+result );
     }
     return result;
   }

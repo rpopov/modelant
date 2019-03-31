@@ -316,7 +316,7 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
             <reuseForks>false</reuseForks>
             <failIfNoTests>false</failIfNoTests>
 
-            <argLine>-ea -Xmx1024m -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=${DEBUG_SUSPEND},address=${DEBUG_PORT} -Djava.util.logging.config.file=${basedir}${file.separator}logging.properties</argLine>
+            <argLine>-ea -Xmx1024m -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=${DEBUG_SUSPEND},address=${DEBUG_PORT} -Djava.util.logging.config.file=${java.home}${file.separator}lib${file.separator}logging.properties</argLine>
             <systemPropertyVariables></systemPropertyVariables>
 
             <!-- Terminate the test running JVMs when the main process is terminated  -->
@@ -519,7 +519,6 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
         </plugin>
-
       </plugins>
     </pluginManagement>
 
@@ -687,7 +686,7 @@ Modelant wraps the NetBeans Meta-Data Repository (MDR).
             <configuration>
               <showErrors>${DEBUG_PLUGIN_SHOW_ERROR}</showErrors>
               <debug>${DEBUG_PLUGIN_SHOW_DEBUG}</debug>
-              <mavenOpts>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=${DEBUG_SUSPEND},address=${DEBUG_PORT}</mavenOpts>
+              <mavenOpts>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=${DEBUG_SUSPEND},address=${DEBUG_PORT} -Djava.util.logging.config.file=${java.home}${file.separator}lib${file.separator}logging.properties</mavenOpts>
             </configuration>
           </plugin>
         </plugins>

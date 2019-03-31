@@ -97,7 +97,7 @@ public final class TemplateFactory {
         }
         result = (Template<? extends T>) templateDescriptor.getTemplate();
 
-      } else { // still not cached
+      } else { // still not cached or templateDescriptor bound to null (no implementation found)
 
         if ( !templates.containsKey( key ) ) { // the template is still not loaded
 
