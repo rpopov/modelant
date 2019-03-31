@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <groupId>net.mdatools</groupId>
+  <artifactId>modelant.mof14.maven.generator.test</artifactId>
+  <name>modelant.mof14.maven.generator.test</name>
+  <version>@project.parent.version@</version>
+  
+  <description>Maven plugin for ModelAnt MOF 1.4 Generator tests</description>
+
+  <dependencies>
+    <dependency>
+      <groupId>net.mdatools</groupId>
+      <artifactId>modelant.mof14.metamodel</artifactId>
+      <version>@project.version@</version>
+    </dependency>
+    <dependency>
+      <groupId>net.mdatools</groupId>
+      <artifactId>modelant.mof14.maven.plugin</artifactId>
+      <version>@project.version@</version>
+    </dependency> 
+  </dependencies>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>net.mdatools</groupId>
+        <artifactId>modelant.mof14.maven.generator</artifactId>
+        <version>@project.version@</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate-metamodel-wrapper</goal>
+            </goals>
+            <configuration>
+              <sourceMetamodel>src/resource/01-12-02_Diff_modelant.xml</sourceMetamodel>
+              <targetDirectory>target/output</targetDirectory>
+              <name>uml.api</name>
+              <metamodelRootPackage>UML</metamodelRootPackage>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

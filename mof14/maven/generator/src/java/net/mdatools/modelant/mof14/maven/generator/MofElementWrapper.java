@@ -9,6 +9,7 @@
  */
 package net.mdatools.modelant.mof14.maven.generator;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -20,6 +21,9 @@ import javax.jmi.model.ModelElement;
 import javax.jmi.model.Tag;
 import javax.jmi.reflect.RefClass;
 import javax.jmi.reflect.RefPackage;
+
+import net.mdatools.modelant.template.api.TemplateContext;
+import net.mdatools.modelant.template.api.TemplateEngine;
 
 /**
  * This class holds common methods to manage / query a MOF Objects repository
@@ -319,5 +323,25 @@ public class MofElementWrapper {
       result.add( new MofElementWrapper( element ) );
     }
     return result;
+  }
+
+  /**
+   * Render the <code>extends &lt;interface&gt; {, &lt;interface&gt;}</code>
+   * @param engine not null
+   * @param context not null
+   * @throws IOException
+   */
+  public final void renderExtends(TemplateEngine engine, TemplateContext context) throws IOException {
+    engine.render( this, context );
+  }
+
+  /**
+   * Render the <code>{import &lt;super-interface&gt;;}</code>
+   * @param engine not null
+   * @param context not null
+   * @throws IOException
+   */
+  public final void renderImports(TemplateEngine engine, TemplateContext context) throws IOException {
+    engine.render( this, context );
   }
 }

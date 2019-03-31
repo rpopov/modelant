@@ -16,6 +16,9 @@
         <groupId>net.mdatools</groupId>
         <artifactId>modelant.template.maven.plugin</artifactId>
         <version>@project.version@</version>
+        <configuration>
+          <keepGenerated>true</keepGenerated>
+        </configuration>
         <executions>
           <execution>
             <goals>
