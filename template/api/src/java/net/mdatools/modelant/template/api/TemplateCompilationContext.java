@@ -9,6 +9,7 @@ package net.mdatools.modelant.template.api;
 
 import java.io.File;
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 /**
@@ -70,4 +71,48 @@ public interface TemplateCompilationContext {
    * @return maybe null encoding of the template files, default: ISO-8859-1
    */
   public String getTemplateEncoding();
+
+
+  /**
+   * @return the jar this class is in, so that the template core classes are found
+   * @throws MalformedURLException
+   */
+  static File getTemplateApiJar() throws MalformedURLException {
+    File result;
+    URL url;
+    String resourceName;
+    String location;
+    int locationEndIndex;
+    Class containingClass;
+  
+    containingClass = Template.class;
+  
+    resourceName = containingClass.getName().replace('.','/')+".class";
+    url = containingClass.getClassLoader().getResource( resourceName );
+  
+    if ( url.getProtocol().equals("jar") ) { // jar:file:/c:/...!file URL
+      location = url.getPath();
+      locationEndIndex = location.indexOf( "!" );
+  
+      if ( locationEndIndex < 0 ) {
+        throw new MalformedURLException("Expected to find '!' in "+url);
+      }
+      location = url.getPath().substring(0, locationEndIndex); // location already contains the nested URL
+      location = new URL(location).getPath();
+  
+    } else if ( url.getProtocol().equals("file") ) {
+      location = url.getPath();
+      locationEndIndex = location.indexOf( resourceName );
+  
+      if ( locationEndIndex >= 0 ) {
+        // extract the .jar / directory from class' URL
+        location = location.substring( 0, locationEndIndex );
+      }
+    } else {
+      throw new MalformedURLException("Expected a jar: or file: URL, instead of  "+url);
+    }
+    result = new File( location );
+  
+    return result;
+  }
 }

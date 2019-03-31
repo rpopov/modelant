@@ -16,8 +16,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.jasper.compiler.TemplateCompiler;
-
 import junit.framework.TestCase;
 import net.mdatools.modelant.template.api.TemplateCompilationContext;
 import net.mdatools.modelant.template.api.TemplateEngine;
@@ -70,7 +68,7 @@ public class TemplateEngineTest extends TestCase {
         List<File> result;
 
         result = new ArrayList<>();
-        result.add( TemplateCompiler.getTemplateApiJar( ) );
+        result.add( TemplateCompilationContext.getTemplateApiJar( ) );
 
         return result;
       }
