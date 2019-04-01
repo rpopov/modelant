@@ -22,6 +22,11 @@ import javax.jmi.model.Tag;
 import javax.jmi.reflect.RefClass;
 import javax.jmi.reflect.RefPackage;
 
+import net.mdatools.modelant.mof14.maven.generator.name.ConstructName;
+import net.mdatools.modelant.mof14.maven.generator.name.DecorateNameWithTag;
+import net.mdatools.modelant.mof14.maven.generator.name.ConstructQualifiedName;
+import net.mdatools.modelant.mof14.maven.generator.name.GetName;
+import net.mdatools.modelant.mof14.maven.generator.name.PrefixPackageName;
 import net.mdatools.modelant.template.api.TemplateContext;
 import net.mdatools.modelant.template.api.TemplateEngine;
 
@@ -42,22 +47,22 @@ public class MofElementWrapper<T extends ModelElement> {
   private static final String JAVAX_JMI_SUBSTITUTE_NAME = "javax.jmi.substituteName";
 
   /**
-   * The <code>ORG_OMG_MOF_IDL_PREFIX</code> is the MOF tag ID for package name prefix
-   */
-  private static final String ORG_OMG_MOF_IDL_PREFIX = "org.omg.mof.idl_prefix";
-
-  /**
-   * The <code>JAVAX_JMI_PACKAGE_PREFIX</code> is the JMI standard tag ID for package name prefix
-   */
-  private static final String JAVAX_JMI_PACKAGE_PREFIX = "javax.jmi.packagePrefix";
-
-  /**
    * The object this wrapper class wraps to allow its rendering. The reflective
    * interface of the model element is used in oder to make this class
    * independent of the actual model and interface.
    */
   private final T wrapped;
 
+  private static final ConstructName constructSimpleName =
+      new DecorateNameWithTag( JAVAX_JMI_SUBSTITUTE_NAME,
+                               new GetName() );
+
+  private static final ConstructName constructQualifiedName = new ConstructQualifiedName( constructSimpleName );
+
+  /**
+   * Construct the package name as of JMI
+   */
+  private static final ConstructName constructJmiQualifiedName = new PrefixPackageName( "jmi", constructQualifiedName);
 
   /**
    * @param wrapped not null
@@ -66,38 +71,6 @@ public class MofElementWrapper<T extends ModelElement> {
     assert wrapped != null : "Expected a non-null wobject to wrap";
 
     this.wrapped = wrapped;
-  }
-
-
-  /**
-   * Retrieves the tag assigned to the MOF object provided
-   *
-   * @param tagId is the non null tag Id as defined in JMI 1.0/MOF 1.4 to search tag with
-   * @return the MOF Tag associated with the model element
-   */
-  public final Tag getTag(String tagId) {
-    Tag result;
-    RefPackage extent;
-    RefClass tagProxy;
-    Tag tag;
-    Iterator<Tag> tagsIterator;
-    ModelElement mofModelElement;
-
-    mofModelElement = getWrapped();
-    extent = mofModelElement.refOutermostPackage();
-    tagProxy = extent.refClass( Tag.class.getSimpleName() );
-
-    // find the tag bound to the model element
-    result = null;
-    tagsIterator = tagProxy.refAllOfClass().iterator();
-    while ( result == null && tagsIterator.hasNext() ) {
-      tag = tagsIterator.next();
-
-      if ( tagId.equals( tag.getTagId() ) && tag.getElements().contains( mofModelElement ) ) {
-        result = tag;
-      }
-    }
-    return result;
   }
 
 
@@ -136,18 +109,7 @@ public class MofElementWrapper<T extends ModelElement> {
    *         through JMI flags, if it violates Java naming conventions
    */
   public final String calculateSimpleInterfaceName() {
-    String name;
-    Tag tag;
-
-    // find the class name
-    tag = getTag( JAVAX_JMI_SUBSTITUTE_NAME );
-    if ( tag == null ) { // no name substitution
-      name = getWrapped().getName();
-
-    } else { // name substitution through the tag's value
-      name = (String) tag.getValues().get( 0 );
-    }
-    return name;
+    return constructSimpleName.constructName( getWrapped() );
   }
 
   /**
@@ -163,16 +125,9 @@ public class MofElementWrapper<T extends ModelElement> {
    * @return the non-null qualified name of the namespace of the wrapped object
    */
   public String calculatePackageName() {
-    String result;
     StringBuffer resultBuffer = new StringBuffer( 256 );
 
-    wrap( getWrapped().getContainer() ).constructRawQualifiedName( resultBuffer );
-
-    // additionally format according to Java rules
-    result = resultBuffer.toString().replaceAll( "[^a-zA-Z0-9.$]", "" );
-    result = result.toLowerCase();
-
-    return result;
+    return collectPackageNames( "", resultBuffer );
   }
 
   /**
@@ -180,9 +135,32 @@ public class MofElementWrapper<T extends ModelElement> {
    * @return the non-null qualified name of the namespace of the wrapped object
    */
   public String calculateJmiPackageName() {
-    return "jmi."+calculatePackageName();
+    return constructJmiQualifiedName.constructName( getWrapped() );
   }
 
+  /**
+   * @param prefix not null
+   * @param resultBuffer
+   * @return
+   */
+  private String collectPackageNames(String prefix, StringBuffer resultBuffer) {
+    String result;
+
+    if ( getWrapped().getContainer() != null ) {
+      result = constructQualifiedName.constructName( getWrapped().getContainer() );
+
+      if ( !prefix.isEmpty() ) {
+        result = prefix +"."+result;
+      }
+    } else {
+      result = prefix;
+    }
+
+    // additionally format according to Java rules
+    result = resultBuffer.toString().replaceAll( "[^a-zA-Z0-9.$]", "" ).toLowerCase();
+
+    return result;
+  }
 
 
   /**
@@ -191,7 +169,7 @@ public class MofElementWrapper<T extends ModelElement> {
   public String calculateQualifiedInterfaceName() {
     StringBuffer result = new StringBuffer( 256 );
 
-    result.append( calculatePackageName() );
+    collectPackageNames( "", result );
     if ( result.length() > 0 ) {
       result.append( "." );
     }
@@ -214,7 +192,7 @@ public class MofElementWrapper<T extends ModelElement> {
   public String calculateQualifiedJmiInterfaceName() {
     StringBuffer result = new StringBuffer( 256 );
 
-    result.append( calculateJmiPackageName() );
+    collectPackageNames( "jmi", result );
     if ( result.length() > 0 ) {
       result.append( "." );
     }
@@ -229,54 +207,6 @@ public class MofElementWrapper<T extends ModelElement> {
    */
   public String calculateQualifiedJmiInterfaceProxyName() {
     return calculateQualifiedJmiInterfaceName()+JMI_CLASS_PROXY_SUFFIX;
-  }
-
-
-  /**
-   * Appends to resultBuffer the qualified name of the wrapped model element/namespace, considered as a Java
-   * package name
-   *
-   * @param resultBuffer is not null
-   */
-  private void constructRawQualifiedName(StringBuffer resultBuffer) {
-    Tag tag;
-    ModelElement namespace;
-    ModelElement container;
-
-    namespace = getWrapped();
-
-    if ( namespace != null ) {
-      // check direct name substitution
-      tag = getTag( JAVAX_JMI_SUBSTITUTE_NAME );
-      if ( tag != null ) {
-        resultBuffer.append( tag.getValues().get( 0 ) );
-
-      } else {
-        // check for JMI package prefix insertion
-        tag = getTag( JAVAX_JMI_PACKAGE_PREFIX );
-        if ( tag != null ) {
-          resultBuffer.append( tag.getValues().get( 0 ) ).append( "." ).append( namespace.getName() );
-
-        } else {
-          // check for OMG IDL prefix insertion
-          tag = getTag( ORG_OMG_MOF_IDL_PREFIX );
-          if ( tag != null ) {
-            resultBuffer.append( tag.getValues().get( 0 ) ).append( "." ).append( namespace.getName() );
-
-          } else { // no name substitution - direct calculation
-            container = namespace.getContainer();
-
-            if ( container != null ) {
-              wrap( container ).constructRawQualifiedName( resultBuffer );
-            }
-            if ( resultBuffer.length() > 0 ) {
-              resultBuffer.append( "." );
-            }
-            resultBuffer.append( namespace.getName() );
-          }
-        }
-      }
-    }
   }
 
 
@@ -349,14 +279,35 @@ public class MofElementWrapper<T extends ModelElement> {
   }
 
   /**
+   * Render the <code>extends &lt;package proxy&gt;</code>
+   * @param engine not null
+   * @param context not null
+   * @throws IOException
+   */
+  public final void renderPackageExtends(TemplateEngine engine, TemplateContext context) throws IOException {
+    engine.render( this, context );
+  }
+
+  /**
+   * Render the <code>[package &lt;super-interface&gt;]</code>
+   * @param engine not null
+   * @param context not null
+   * @throws IOException
+   */
+  public final void renderStatementPackage(TemplateEngine engine, TemplateContext context) throws IOException {
+    engine.render( this, context );
+  }
+
+  /**
    * Render the <code>extends &lt;interface&gt; {, &lt;interface&gt;}</code>
    * @param engine not null
    * @param context not null
    * @throws IOException
    */
-  public final void renderExtends(TemplateEngine engine, TemplateContext context) throws IOException {
+  public final void renderStatementExtends(TemplateEngine engine, TemplateContext context) throws IOException {
     engine.render( this, context );
   }
+
 
   /**
    * Render the <code>{import &lt;super-interface&gt;;}</code>
@@ -364,7 +315,7 @@ public class MofElementWrapper<T extends ModelElement> {
    * @param context not null
    * @throws IOException
    */
-  public final void renderImports(TemplateEngine engine, TemplateContext context) throws IOException {
+  public final void renderStatementImports(TemplateEngine engine, TemplateContext context) throws IOException {
     engine.render( this, context );
   }
 }

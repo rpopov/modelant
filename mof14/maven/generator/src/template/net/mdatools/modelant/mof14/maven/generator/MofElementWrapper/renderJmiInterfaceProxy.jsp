@@ -25,9 +25,9 @@ import java.util.List;
  * Contributors:
  *    Rusi Popov (popovr@mdatools.net) - initial implementation
  */
-package <%=wrapped.calculateJmiPackageName()%>;
+<% wrapped.renderStatementPackage(engine, context);%>
 
-<% wrapped.renderImports(engine, context); %>
+<% wrapped.renderStatementImports(engine, context); %>
 
 /**
  * The JMI standard <%=wrapped.calculateSimpleInterfaceProxyName()%> interface

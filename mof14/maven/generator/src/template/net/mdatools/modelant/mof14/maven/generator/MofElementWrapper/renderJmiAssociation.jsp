@@ -25,14 +25,14 @@ import java.util.List;
  * Contributors:
  *    Rusi Popov (popovr@mdatools.net) - initial implementation
  */
-package <%=wrapped.calculateJmiPackageName()%>;
+<% wrapped.renderStatementPackage(engine, context);%>
 
-<% wrapped.renderImports(engine, context); %>
+<% wrapped.renderStatementImports(engine, context); %>
 
 /**
  * The JMI standard <%=wrapped.calculateSimpleInterfaceName()%> interface
  */
-public interface <%=wrapped.calculateSimpleInterfaceName() %> <% wrapped.renderExtends(engine, context); %>{
+public interface <%=wrapped.calculateSimpleInterfaceName() %> extends javax.jmi.ref.RefAssociation {
 
 <%-- wrapped.renderDelegatedDeclaredConstants( delegateClassName, context );
 --%>
