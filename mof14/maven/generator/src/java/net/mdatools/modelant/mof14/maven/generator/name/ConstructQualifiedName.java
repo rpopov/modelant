@@ -52,7 +52,7 @@ public class ConstructQualifiedName implements ConstructName {
     result = constructName.constructName( element );
     namespace = constructNamespace.constructName( element );
 
-    if ( namespace != null && !namespace.isEmpty() ) {
+    if ( !namespace.isEmpty() ) {
       result = namespace + "." + result;
     }
     return result;

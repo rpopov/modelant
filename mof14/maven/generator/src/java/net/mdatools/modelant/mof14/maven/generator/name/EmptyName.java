@@ -11,13 +11,13 @@ package net.mdatools.modelant.mof14.maven.generator.name;
 import javax.jmi.model.ModelElement;
 
 /**
- * NULL Name
+ * Empty string as a name
  * @author Rusi Popov
  */
-public class NullName implements ConstructName {
+public class EmptyName implements ConstructName {
 
   public String constructName(ModelElement element) {
-    return null;
+    return "";
   }
 
 }

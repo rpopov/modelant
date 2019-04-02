@@ -55,8 +55,7 @@ public class ConstructNamespaceName implements ConstructName {
     this.constructDecoratedNamespace =
         new DecorateNameWithTag( JAVAX_JMI_PACKAGE_PREFIX,
                                  new DecorateNameWithTag( ORG_OMG_MOF_IDL_PREFIX,
-                                                          new DecorateNameWithTag( ORG_OMG_XMI_NAMESPACE,
-                                                                                   new NullName() ) ) );
+                                                          new EmptyName() ) );
   }
 
   public String constructName(ModelElement element) {
@@ -66,7 +65,7 @@ public class ConstructNamespaceName implements ConstructName {
     // check for explicit namespace override
     result = constructDecoratedNamespace.constructName( element );
 
-    if ( result == null || result.isEmpty() ) {
+    if ( result.isEmpty() ) {
 
       if ( element != null && element.getContainer() != null ) {
         containerName = constructName( element.getContainer() );

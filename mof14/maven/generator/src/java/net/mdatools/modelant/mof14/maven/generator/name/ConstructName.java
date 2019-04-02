@@ -23,7 +23,7 @@ public interface ConstructName {
 
   /**
    * @param element whose name is to retrieve. It could be null for generality
-   * @return formatted name or null, if not defined
+   * @return non-null formatted name. It is empty if not defined
    */
   String constructName(ModelElement element);
 }

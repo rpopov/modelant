@@ -49,7 +49,6 @@ public class DecorateNameWithTag implements ConstructName {
     this.decorated = decorated;
   }
 
-
   /**
    * @see net.mdatools.modelant.mof14.maven.generator.name.ConstructName#constructName(javax.jmi.model.ModelElement)
    */
@@ -67,7 +66,7 @@ public class DecorateNameWithTag implements ConstructName {
         result = decorated.constructName( element );
       }
     } else {
-      result = null;
+      result = "";
     }
     return result;
   }
