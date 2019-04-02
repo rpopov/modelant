@@ -19,6 +19,7 @@ import javax.jmi.model.GeneralizableElement;
 import javax.jmi.model.ModelElement;
 
 import net.mdatools.modelant.mof14.maven.generator.name.ConstructName;
+import net.mdatools.modelant.mof14.maven.generator.name.ConstructNamespaceName;
 import net.mdatools.modelant.mof14.maven.generator.name.ConstructQualifiedName;
 import net.mdatools.modelant.mof14.maven.generator.name.DecorateNameWithTag;
 import net.mdatools.modelant.mof14.maven.generator.name.GetName;
@@ -50,10 +51,13 @@ public class MofElementWrapper<T extends ModelElement> {
 
   private static final ConstructName constructQualifiedName = new ConstructQualifiedName( constructSimpleName );
 
+  private static final ConstructName constructQualifiedNamespaceName = new ConstructNamespaceName( constructSimpleName );
+
   /**
    * Construct the package name as of JMI
    */
   private static final ConstructName constructJmiQualifiedName = new ConstructQualifiedName( constructSimpleName, "jmi" );
+  private static final ConstructName constructJmiQualifiedNamespaceName = new ConstructNamespaceName( constructSimpleName, "jmi" );
 
   /**
    * @param wrapped not null
@@ -70,7 +74,7 @@ public class MofElementWrapper<T extends ModelElement> {
    *         through JMI flags, if it violates Java naming conventions
    */
   public final String calculateSimpleInterfaceName() {
-    return constructSimpleName.constructName( getWrapped() );
+    return constructSimpleName.constructName(getWrapped());
   }
 
   /**
@@ -86,7 +90,7 @@ public class MofElementWrapper<T extends ModelElement> {
    * @return the non-null qualified name of the namespace of the wrapped object
    */
   public String calculatePackageName() {
-    return constructQualifiedName.constructName( getWrapped().getContainer() );
+    return constructQualifiedNamespaceName.constructName(getWrapped());
   }
 
   /**
@@ -94,7 +98,7 @@ public class MofElementWrapper<T extends ModelElement> {
    * @return the non-null qualified name of the namespace of the wrapped object
    */
   public String calculatePackageNameJmi() {
-    return constructJmiQualifiedName.constructName( getWrapped().getContainer() );
+    return constructJmiQualifiedNamespaceName.constructName(getWrapped());
   }
 
 
@@ -102,7 +106,7 @@ public class MofElementWrapper<T extends ModelElement> {
    * @return the qualified java class name of this element
    */
   public String calculateQualifiedInterfaceName() {
-    return constructQualifiedName.constructName( getWrapped() );
+    return constructQualifiedName.constructName(getWrapped());
   }
 
   /**
