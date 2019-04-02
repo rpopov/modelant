@@ -12,7 +12,7 @@ import javax.jmi.model.ModelElement;
 
 /**
  * Construct the qualified name of the namespace of the provided element,
- * considering explicit names overrrides and namespace overrides.
+ * considering explicit names overrides and namespace overrides.
  * @author Rusi Popov
  */
 public class ConstructNamespaceName implements ConstructName {
@@ -47,6 +47,8 @@ public class ConstructNamespaceName implements ConstructName {
    * @param prefix optional namespace prefix (like jms, base, ...). Does not end at "."
    */
   public ConstructNamespaceName(ConstructName constructDecoratedName, String prefix) {
+    assert constructDecoratedName != null : "Expected a non-null ConstructName to decorate";
+
     this.constructDecoratedName = constructDecoratedName;
     this.prefix = prefix;
 
@@ -66,7 +68,7 @@ public class ConstructNamespaceName implements ConstructName {
 
     if ( result == null || result.isEmpty() ) {
 
-      if ( element.getContainer() != null ) {
+      if ( element != null && element.getContainer() != null ) {
         containerName = constructName( element.getContainer() );
 
         if ( containerName != null && !containerName.isEmpty() ) {

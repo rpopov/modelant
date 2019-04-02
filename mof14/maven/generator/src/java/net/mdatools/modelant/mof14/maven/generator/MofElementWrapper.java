@@ -22,7 +22,6 @@ import net.mdatools.modelant.mof14.maven.generator.name.ConstructName;
 import net.mdatools.modelant.mof14.maven.generator.name.ConstructQualifiedName;
 import net.mdatools.modelant.mof14.maven.generator.name.DecorateNameWithTag;
 import net.mdatools.modelant.mof14.maven.generator.name.GetName;
-import net.mdatools.modelant.mof14.maven.generator.name.PrefixName;
 import net.mdatools.modelant.template.api.TemplateContext;
 import net.mdatools.modelant.template.api.TemplateEngine;
 
@@ -54,7 +53,7 @@ public class MofElementWrapper<T extends ModelElement> {
   /**
    * Construct the package name as of JMI
    */
-  private static final ConstructName constructJmiQualifiedName = new PrefixName( "jmi", constructQualifiedName);
+  private static final ConstructName constructJmiQualifiedName = new ConstructQualifiedName( constructSimpleName, "jmi" );
 
   /**
    * @param wrapped not null
@@ -175,8 +174,8 @@ public class MofElementWrapper<T extends ModelElement> {
    *         wrapper class that wraps toWrap
    * @throws IllegalArgumentException when mapping is not possible
    */
-  public static final MofElementWrapper wrap(ModelElement toWrap) throws IllegalArgumentException {
-    return new MofElementWrapper( toWrap );
+  public static final MofElementWrapper<ModelElement> wrap(ModelElement toWrap) throws IllegalArgumentException {
+    return new MofElementWrapper<>( toWrap );
   }
 
 
@@ -227,7 +226,6 @@ public class MofElementWrapper<T extends ModelElement> {
   public final void renderStatementExtends(TemplateEngine engine, TemplateContext context) throws IOException {
     engine.render( this, context );
   }
-
 
   /**
    * Render the <code>{import &lt;super-interface&gt;;}</code>

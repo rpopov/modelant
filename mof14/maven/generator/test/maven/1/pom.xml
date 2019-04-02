@@ -41,6 +41,7 @@
               <outputDirectory>target/generated-sources</outputDirectory>
               <name>uml.api</name>
               <metamodelRootPackage>UML</metamodelRootPackage>
+              <keepGenerated>true</keepGenerated>
             </configuration>
           </execution>
         </executions>
