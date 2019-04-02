@@ -15,7 +15,7 @@ if (!((GeneralizableElement) wrapped.getWrapped()).getSupertypes().isEmpty()) {
     if ( firstPrinted ) {
       %>, <%
     }
-    %><%= MofElementWrapper.wrap(supertype).calculateQualifiedInterfaceName() %><%
+    %><%= MofElementWrapper.wrap(supertype).calculateSimpleInterfaceName() %><%
     firstPrinted = true;
   }
 } else {

@@ -247,7 +247,7 @@ public class MofElementWrapper<T extends ModelElement> {
    * @param context not null
    * @throws IOException
    */
-  public final void renderStatementExtends(TemplateEngine engine, TemplateContext context) throws IOException {
+  public final void renderInterfaceExtends(TemplateEngine engine, TemplateContext context) throws IOException {
     engine.render( this, context );
   }
 
@@ -257,7 +257,7 @@ public class MofElementWrapper<T extends ModelElement> {
    * @param context not null
    * @throws IOException
    */
-  public final void renderStatementExtendsJmi(TemplateEngine engine, TemplateContext context) throws IOException {
+  public final void renderInterfaceExtendsJmi(TemplateEngine engine, TemplateContext context) throws IOException {
     engine.render( this, context );
   }
 
