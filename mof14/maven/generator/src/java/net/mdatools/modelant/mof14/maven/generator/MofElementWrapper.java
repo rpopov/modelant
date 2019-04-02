@@ -93,7 +93,7 @@ public class MofElementWrapper<T extends ModelElement> {
    * Calculates the proper package name to hold the JMI-compatible definitions interface (base)
    * @return the non-null qualified name of the namespace of the wrapped object
    */
-  public String calculateJmiPackageName() {
+  public String calculatePackageNameJmi() {
     return constructJmiQualifiedName.constructName( getWrapped().getContainer() );
   }
 
@@ -116,7 +116,7 @@ public class MofElementWrapper<T extends ModelElement> {
   /**
    * @return the qualified java class name of this element
    */
-  public String calculateQualifiedJmiInterfaceName() {
+  public String calculateQualifiedInterfaceNameJmi() {
     return constructJmiQualifiedName.constructName( getWrapped() );
   }
 
@@ -124,8 +124,8 @@ public class MofElementWrapper<T extends ModelElement> {
   /**
    * @return the name of the class/proxy class from the main interface
    */
-  public String calculateQualifiedJmiInterfaceProxyName() {
-    return calculateQualifiedJmiInterfaceName()+JMI_CLASS_PROXY_SUFFIX;
+  public String calculateQualifiedInterfaceProxyNameJmi() {
+    return calculateQualifiedInterfaceNameJmi()+JMI_CLASS_PROXY_SUFFIX;
   }
 
 
@@ -208,12 +208,32 @@ public class MofElementWrapper<T extends ModelElement> {
   }
 
   /**
+   * Render the <code>extends &lt;package proxy&gt;</code>
+   * @param engine not null
+   * @param context not null
+   * @throws IOException
+   */
+  public final void renderPackageExtendsJmi(TemplateEngine engine, TemplateContext context) throws IOException {
+    engine.render( this, context );
+  }
+
+  /**
    * Render the <code>[package &lt;super-interface&gt;]</code>
    * @param engine not null
    * @param context not null
    * @throws IOException
    */
   public final void renderStatementPackage(TemplateEngine engine, TemplateContext context) throws IOException {
+    engine.render( this, context );
+  }
+
+  /**
+   * Render the <code>[package &lt;super-interface&gt;]</code>
+   * @param engine not null
+   * @param context not null
+   * @throws IOException
+   */
+  public final void renderStatementPackageJmi(TemplateEngine engine, TemplateContext context) throws IOException {
     engine.render( this, context );
   }
 
@@ -228,12 +248,32 @@ public class MofElementWrapper<T extends ModelElement> {
   }
 
   /**
+   * Render the <code>extends &lt;interface&gt; {, &lt;interface&gt;}</code>
+   * @param engine not null
+   * @param context not null
+   * @throws IOException
+   */
+  public final void renderStatementExtendsJmi(TemplateEngine engine, TemplateContext context) throws IOException {
+    engine.render( this, context );
+  }
+
+  /**
    * Render the <code>{import &lt;super-interface&gt;;}</code>
    * @param engine not null
    * @param context not null
    * @throws IOException
    */
   public final void renderStatementImports(TemplateEngine engine, TemplateContext context) throws IOException {
+    engine.render( this, context );
+  }
+
+  /**
+   * Render the <code>{import &lt;super-interface&gt;;}</code>
+   * @param engine not null
+   * @param context not null
+   * @throws IOException
+   */
+  public final void renderStatementImportsJmi(TemplateEngine engine, TemplateContext context) throws IOException {
     engine.render( this, context );
   }
 }

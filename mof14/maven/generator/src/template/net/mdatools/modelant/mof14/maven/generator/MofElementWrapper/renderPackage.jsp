@@ -26,5 +26,5 @@ import net.mdatools.modelant.mof14.maven.generator.MofElementWrapper;
  * Extend the JMI standard <%=wrapped.calculateSimpleInterfaceName()%> interface with
  * additional default methods, still keping its JMI compatibility.
  */
-public interface <%=wrapped.calculateSimpleInterfaceName() %> extends <%=wrapped.calculateQualifiedJmiInterfaceName() %> {
+public interface <%=wrapped.calculateSimpleInterfaceName() %> extends <%=wrapped.calculateQualifiedInterfaceNameJmi() %> {
 }

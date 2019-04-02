@@ -110,10 +110,10 @@ public class GeneratorMojo extends CompilationContext {
     wrapper = new MofElementWrapper<>(metamodelClass );
 
     renderInterface( engine, wrapper);
-    renderJmiInterface( engine, wrapper);
+    renderInterfaceJmi( engine, wrapper);
 
     renderInterfaceProxy( engine, wrapper);
-    renderJmiInterfaceProxy( engine, wrapper);
+    renderInterfaceProxyJmi( engine, wrapper);
   }
 
   /**
@@ -125,7 +125,7 @@ public class GeneratorMojo extends CompilationContext {
     wrapper = new MofElementWrapper<>(metamodelAssociation );
 
     renderAssociation( engine, wrapper);
-    renderJmiAssociation( engine, wrapper);
+    renderAssociationJmi( engine, wrapper);
   }
 
   /**
@@ -137,7 +137,7 @@ public class GeneratorMojo extends CompilationContext {
     wrapper = new MofElementWrapper<MofPackage>(metamodelPackage);
 
     renderPackage( engine, wrapper);
-    renderJmiPackage( engine, wrapper);
+    renderPackageJmi( engine, wrapper);
   }
 
   /**
@@ -165,22 +165,22 @@ public class GeneratorMojo extends CompilationContext {
   /**
    * Note: the method name is the name if the template to call
    */
-  private void renderJmiInterface(TemplateEngine engine,
+  private void renderInterfaceJmi(TemplateEngine engine,
                                   MofElementWrapper<MofClass> wrapper) throws IOException {
     String qualifiedName;
 
-    qualifiedName = wrapper.calculateQualifiedJmiInterfaceName();
+    qualifiedName = wrapper.calculateQualifiedInterfaceNameJmi();
     engine.render( toSourceFileName(qualifiedName), wrapper);
   }
 
   /**
    * Note: the method name is the name if the template to call
    */
-  private void renderJmiInterfaceProxy(TemplateEngine engine,
+  private void renderInterfaceProxyJmi(TemplateEngine engine,
                                        MofElementWrapper<MofClass> wrapper) throws IOException {
     String qualifiedName;
 
-    qualifiedName = wrapper.calculateQualifiedJmiInterfaceProxyName();
+    qualifiedName = wrapper.calculateQualifiedInterfaceProxyNameJmi();
 
     engine.render( toSourceFileName(qualifiedName), wrapper);
   }
@@ -199,11 +199,11 @@ public class GeneratorMojo extends CompilationContext {
   /**
    * Note: the method name is the name if the template to call
    */
-  private void renderJmiAssociation(TemplateEngine engine,
+  private void renderAssociationJmi(TemplateEngine engine,
                                     MofElementWrapper<Association> wrapper) throws IOException {
     String qualifiedName;
 
-    qualifiedName = wrapper.calculateQualifiedJmiInterfaceName();
+    qualifiedName = wrapper.calculateQualifiedInterfaceNameJmi();
     engine.render( toSourceFileName(qualifiedName), wrapper);
   }
 
@@ -221,11 +221,11 @@ public class GeneratorMojo extends CompilationContext {
   /**
    * Note: the method name is the name if the template to call
    */
-  private void renderJmiPackage(TemplateEngine engine,
+  private void renderPackageJmi(TemplateEngine engine,
                                 MofElementWrapper<MofPackage> wrapper) throws IOException {
     String qualifiedName;
 
-    qualifiedName = wrapper.calculateQualifiedJmiInterfaceName();
+    qualifiedName = wrapper.calculateQualifiedInterfaceNameJmi();
     engine.render( toSourceFileName(qualifiedName), wrapper);
   }
 

@@ -44,10 +44,11 @@ public class ConstructNamespaceName implements ConstructName {
 
   /**
    * @param constructDecoratedName not null
-   * @param prefix optional namespace prefix (like jms, base, ...). Does not end at "."
+   * @param prefix non-null, possibly empty namespace prefix (like jms, base, ...). Does not end at "."
    */
   public ConstructNamespaceName(ConstructName constructDecoratedName, String prefix) {
     assert constructDecoratedName != null : "Expected a non-null ConstructName to decorate";
+    assert prefix != null : "Expected a non-null prefix";
 
     this.constructDecoratedName = constructDecoratedName;
     this.prefix = prefix;
@@ -65,7 +66,7 @@ public class ConstructNamespaceName implements ConstructName {
     // check for explicit namespace override
     result = constructDecoratedNamespace.constructName( element );
 
-    if ( result.isEmpty() ) {
+    if ( result.isEmpty() ) { // no explicit override
 
       if ( element != null && element.getContainer() != null ) {
         containerName = constructName( element.getContainer() );
@@ -80,6 +81,8 @@ public class ConstructNamespaceName implements ConstructName {
       } else { // there is no container - the namespace is the provided namespace prefix (if any)
         result = prefix;
       }
+    } else if ( !prefix.isEmpty() ) {  // there is an explicit override + prefix
+      result = prefix + "." + result;
     }
     return result;
   }

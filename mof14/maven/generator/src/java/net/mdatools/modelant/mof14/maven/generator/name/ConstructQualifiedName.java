@@ -36,7 +36,7 @@ public class ConstructQualifiedName implements ConstructName {
 
   /**
    * @param constructDecoratedName not null
-   * @param prefix optional namespace prefix,not ending at "."
+   * @param prefix non-null namespace prefix, possibly empty, not ending at "."
    */
   public ConstructQualifiedName(ConstructName constructDecoratedName, String prefix) {
     assert constructDecoratedName != null : "Expected a non-null ConstructName to decorate";
@@ -52,7 +52,7 @@ public class ConstructQualifiedName implements ConstructName {
     result = constructName.constructName( element );
     namespace = constructNamespace.constructName( element );
 
-    if ( !namespace.isEmpty() ) {
+    if ( !namespace.isEmpty() && !result.isEmpty()) {
       result = namespace + "." + result;
     }
     return result;

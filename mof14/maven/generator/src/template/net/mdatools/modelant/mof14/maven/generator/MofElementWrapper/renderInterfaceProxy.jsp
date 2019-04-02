@@ -26,5 +26,5 @@ import net.mdatools.modelant.mof14.maven.generator.MofElementWrapper;
  * Extend the JMI proxy/class for <%=wrapped.calculateSimpleInterfaceName()%> interface with
  * additional default methods, still keping its JMI compatibility.
  */
-public interface <%=wrapped.calculateSimpleInterfaceProxyName() %> extends <%=wrapped.calculateQualifiedJmiInterfaceProxyName() %> {
+public interface <%=wrapped.calculateSimpleInterfaceProxyName() %> extends <%=wrapped.calculateQualifiedInterfaceProxyNameJmi() %> {
 }
