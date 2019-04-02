@@ -33,6 +33,11 @@ public class DecorateNameWithTag implements ConstructName {
   private final ConstructName decorated;
 
   /**
+   * The <code>JAVAX_JMI_SUBSTITUTE_NAME</code> JMI standard tag ID for name substitution
+   */
+  public static final String JAVAX_JMI_SUBSTITUTE_NAME = "javax.jmi.substituteName";
+
+  /**
    * @param tagId not null tag ID to lookup
    * @param decorated not null
    */
@@ -52,13 +57,17 @@ public class DecorateNameWithTag implements ConstructName {
     String result;
     Tag tag;
 
-    tag = getTag( element );
-    if ( tag != null ) {
-      result = (String) tag.getValues().get( 0 );
+    if ( element != null ) {
+      tag = getTag( element );
+      if ( tag != null ) {
+        result = (String) tag.getValues().get( 0 );
 
-      LOGGER.log( Level.FINE, "tag {0} name = {1}", new String[] {tagId, result});
+        LOGGER.log( Level.FINE, "tag {0} name = {1}", new String[] {tagId, result});
+      } else {
+        result = decorated.constructName( element );
+      }
     } else {
-      result = decorated.constructName( element );
+      result = null;
     }
     return result;
   }

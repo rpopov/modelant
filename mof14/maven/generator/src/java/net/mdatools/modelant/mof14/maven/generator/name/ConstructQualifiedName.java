@@ -53,24 +53,20 @@ public class ConstructQualifiedName implements ConstructName {
 
   public String constructName(ModelElement element) {
     String result;
-    ModelElement namespace;
+    String name;
 
     result = constructDecoratedNamespace.constructName( element );
-    if ( result == null ) { // no explicit oevrride
-      namespace = element.getContainer();
-
-      if ( namespace != null ) {
-        result = constructName( namespace );
-
-      } else { // no namespace
-        result = prefix;
+    if ( result == null || result.isEmpty() ) {
+      if ( element != null ) { // no explicit override
+        result = constructName( element.getContainer() );
       }
     }
 
+    name = constructDecoratedName.constructName( element );
     if ( result == null || result.isEmpty()) {
-      result = constructDecoratedName.constructName( element );
+      result = name;
     } else {
-      result = result +"." + constructDecoratedName.constructName( element );
+      result = result +"." + name;
     }
     return result;
   }

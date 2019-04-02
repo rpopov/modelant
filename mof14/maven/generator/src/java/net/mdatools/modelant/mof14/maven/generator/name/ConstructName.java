@@ -22,8 +22,8 @@ public interface ConstructName {
   Logger LOGGER = Logger.getLogger( ConstructName.class.getName() );
 
   /**
-   * @param element not null element whose name is to retrieve
-   * @return name,  null not defined
+   * @param element whose name is to retrieve. It could be null for generality
+   * @return formatted name or null, if not defined
    */
   String constructName(ModelElement element);
 }

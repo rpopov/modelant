@@ -12,21 +12,17 @@ package net.mdatools.modelant.mof14.maven.generator;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
 
 import javax.jmi.model.GeneralizableElement;
 import javax.jmi.model.ModelElement;
-import javax.jmi.model.Tag;
-import javax.jmi.reflect.RefClass;
-import javax.jmi.reflect.RefPackage;
 
 import net.mdatools.modelant.mof14.maven.generator.name.ConstructName;
-import net.mdatools.modelant.mof14.maven.generator.name.DecorateNameWithTag;
 import net.mdatools.modelant.mof14.maven.generator.name.ConstructQualifiedName;
+import net.mdatools.modelant.mof14.maven.generator.name.DecorateNameWithTag;
 import net.mdatools.modelant.mof14.maven.generator.name.GetName;
-import net.mdatools.modelant.mof14.maven.generator.name.PrefixPackageName;
+import net.mdatools.modelant.mof14.maven.generator.name.PrefixName;
 import net.mdatools.modelant.template.api.TemplateContext;
 import net.mdatools.modelant.template.api.TemplateEngine;
 
@@ -34,17 +30,13 @@ import net.mdatools.modelant.template.api.TemplateEngine;
  * This class holds common methods to manage / query a MOF Objects repository
  *
  * @author Rusi Popov
+ * @param <T> the MOF type of the wrapped element
  */
 public class MofElementWrapper<T extends ModelElement> {
 
   private static final String JMI_CLASS_PROXY_SUFFIX = "Class";
 
   private static final Logger LOGGER = Logger.getLogger( MofElementWrapper.class.getName() );
-
-  /**
-   * The <code>JAVAX_JMI_SUBSTITUTE_NAME</code> JMI standard tag ID for name substitution
-   */
-  private static final String JAVAX_JMI_SUBSTITUTE_NAME = "javax.jmi.substituteName";
 
   /**
    * The object this wrapper class wraps to allow its rendering. The reflective
@@ -54,7 +46,7 @@ public class MofElementWrapper<T extends ModelElement> {
   private final T wrapped;
 
   private static final ConstructName constructSimpleName =
-      new DecorateNameWithTag( JAVAX_JMI_SUBSTITUTE_NAME,
+      new DecorateNameWithTag( DecorateNameWithTag.JAVAX_JMI_SUBSTITUTE_NAME,
                                new GetName() );
 
   private static final ConstructName constructQualifiedName = new ConstructQualifiedName( constructSimpleName );
@@ -62,7 +54,7 @@ public class MofElementWrapper<T extends ModelElement> {
   /**
    * Construct the package name as of JMI
    */
-  private static final ConstructName constructJmiQualifiedName = new PrefixPackageName( "jmi", constructQualifiedName);
+  private static final ConstructName constructJmiQualifiedName = new PrefixName( "jmi", constructQualifiedName);
 
   /**
    * @param wrapped not null
@@ -71,36 +63,6 @@ public class MofElementWrapper<T extends ModelElement> {
     assert wrapped != null : "Expected a non-null wobject to wrap";
 
     this.wrapped = wrapped;
-  }
-
-
-  /**
-   * Retrieves the tag assigned to the MOF object provided
-   *
-   * @return the MOF Tag associated with the provided element
-   */
-  public final Collection<Tag> getAllTags() {
-    Collection<Tag> result;
-    RefPackage extent;
-    RefClass tagProxy;
-    Tag tag;
-    Iterator<Tag> tagsIterator;
-    ModelElement mofModelElement;
-
-    mofModelElement = getWrapped();
-    extent = mofModelElement.refOutermostPackage();
-    tagProxy = extent.refClass( Tag.class.getSimpleName() );
-
-    // collect all tags bound to the model element
-    result = new ArrayList<Tag>();
-    tagsIterator = tagProxy.refAllOfClass().iterator();
-    while ( tagsIterator.hasNext() ) {
-      tag = tagsIterator.next();
-      if ( tag.getElements().contains( mofModelElement ) ) {
-        result.add( tag );
-      }
-    }
-    return result;
   }
 
 
@@ -125,9 +87,7 @@ public class MofElementWrapper<T extends ModelElement> {
    * @return the non-null qualified name of the namespace of the wrapped object
    */
   public String calculatePackageName() {
-    StringBuffer resultBuffer = new StringBuffer( 256 );
-
-    return collectPackageNames( "", resultBuffer );
+    return constructQualifiedName.constructName( getWrapped().getContainer() );
   }
 
   /**
@@ -135,31 +95,7 @@ public class MofElementWrapper<T extends ModelElement> {
    * @return the non-null qualified name of the namespace of the wrapped object
    */
   public String calculateJmiPackageName() {
-    return constructJmiQualifiedName.constructName( getWrapped() );
-  }
-
-  /**
-   * @param prefix not null
-   * @param resultBuffer
-   * @return
-   */
-  private String collectPackageNames(String prefix, StringBuffer resultBuffer) {
-    String result;
-
-    if ( getWrapped().getContainer() != null ) {
-      result = constructQualifiedName.constructName( getWrapped().getContainer() );
-
-      if ( !prefix.isEmpty() ) {
-        result = prefix +"."+result;
-      }
-    } else {
-      result = prefix;
-    }
-
-    // additionally format according to Java rules
-    result = resultBuffer.toString().replaceAll( "[^a-zA-Z0-9.$]", "" ).toLowerCase();
-
-    return result;
+    return constructJmiQualifiedName.constructName( getWrapped().getContainer() );
   }
 
 
@@ -167,15 +103,7 @@ public class MofElementWrapper<T extends ModelElement> {
    * @return the qualified java class name of this element
    */
   public String calculateQualifiedInterfaceName() {
-    StringBuffer result = new StringBuffer( 256 );
-
-    collectPackageNames( "", result );
-    if ( result.length() > 0 ) {
-      result.append( "." );
-    }
-    result.append( calculateSimpleInterfaceName() );
-
-    return result.toString();
+    return constructQualifiedName.constructName( getWrapped() );
   }
 
   /**
@@ -190,15 +118,7 @@ public class MofElementWrapper<T extends ModelElement> {
    * @return the qualified java class name of this element
    */
   public String calculateQualifiedJmiInterfaceName() {
-    StringBuffer result = new StringBuffer( 256 );
-
-    collectPackageNames( "jmi", result );
-    if ( result.length() > 0 ) {
-      result.append( "." );
-    }
-    result.append( calculateSimpleInterfaceName() );
-
-    return result.toString();
+    return constructJmiQualifiedName.constructName( getWrapped() );
   }
 
 

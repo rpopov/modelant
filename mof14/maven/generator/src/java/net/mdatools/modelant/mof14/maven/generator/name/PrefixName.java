@@ -14,7 +14,7 @@ import javax.jmi.model.ModelElement;
  * Add a non-null, not empty package prefix to the wrapped name
  * @author Rusi Popov
  */
-public class PrefixPackageName implements ConstructName {
+public class PrefixName implements ConstructName {
 
   /**
    * not null, not empty
@@ -30,7 +30,7 @@ public class PrefixPackageName implements ConstructName {
    * @param prefix not null, not empty prefix, not ending at "."
    * @param decorated not null name decorator
    */
-  public PrefixPackageName(String prefix, ConstructName decorated) {
+  public PrefixName(String prefix, ConstructName decorated) {
     assert prefix != null && !prefix.isEmpty() : "Expected a non-empty prefix";
     assert decorated != null : "Expected non-null decorator";
 
@@ -42,13 +42,12 @@ public class PrefixPackageName implements ConstructName {
   public String constructName(ModelElement element) {
     String result;
     String name;
-    ModelElement
 
     name = decorated.constructName( element );
-    if ( name != null && !name.isEmpty() ) {
-      result = prefix + "." + name;
-    } else {
+    if ( name == null || name.isEmpty() ) {
       result = prefix;
+    } else {
+      result = prefix + "." + name;
     }
     return result;
   }
