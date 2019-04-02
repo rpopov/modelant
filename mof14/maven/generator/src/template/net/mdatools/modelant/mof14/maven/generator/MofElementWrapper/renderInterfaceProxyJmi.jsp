@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * The JMI standard <%=wrapped.calculateSimpleInterfaceProxyName()%> interface
  */
-public interface <%=wrapped.calculateSimpleInterfaceProxyName() %> extends javax.jmi.ref.RefClass {
+public interface <%=wrapped.calculateSimpleInterfaceProxyName() %> extends javax.jmi.reflect.RefClass {
 
 <%-- wrapped.renderDelegatedDeclaredConstants( delegateClassName, context );
 --%>

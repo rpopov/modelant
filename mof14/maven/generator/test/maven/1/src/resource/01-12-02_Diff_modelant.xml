@@ -40,10 +40,10 @@
             </Model:Tag>
 
             <!-- rename the UML package as uml13 to avoid name conflicts with UML 1.4 -->
-            <Model:Tag xmi.id = 'tag-uml.2' name = 'javax.jmi.substituteName=uml13'
+            <Model:Tag xmi.id = 'tag-uml.2' name = 'javax.jmi.substituteName=Uml13'
               annotation = '' tagId = 'javax.jmi.substituteName' elements='uml'>
               <Model:Tag.values>
-                  <XMI.any xmi.type = 'string' xmi.name = ''>uml13</XMI.any>
+                  <XMI.any xmi.type = 'string' xmi.name = ''>Uml13</XMI.any>
               </Model:Tag.values>
             </Model:Tag>
 

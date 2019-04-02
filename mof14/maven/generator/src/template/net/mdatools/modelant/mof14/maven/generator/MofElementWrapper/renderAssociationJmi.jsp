@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * The JMI standard <%=wrapped.calculateSimpleInterfaceName()%> interface
  */
-public interface <%=wrapped.calculateSimpleInterfaceName() %> extends javax.jmi.ref.RefAssociation {
+public interface <%=wrapped.calculateSimpleInterfaceName() %> extends javax.jmi.reflect.RefAssociation {
 
 <%-- wrapped.renderDelegatedDeclaredConstants( delegateClassName, context );
 --%>

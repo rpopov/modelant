@@ -70,6 +70,7 @@ public class ConstructNamespaceName implements ConstructName {
   public String constructName(ModelElement element) {
     String result;
     String containerName;
+    String ownName;
 
     // check for explicit namespace override
     result = constructDecoratedNamespace.constructName( element );
@@ -79,12 +80,16 @@ public class ConstructNamespaceName implements ConstructName {
       if ( element != null && element.getContainer() != null ) {
         containerName = constructName( element.getContainer() );
 
+        ownName = constructDecoratedName.constructName( element.getContainer())
+                                        .replaceAll( "[^a-zA-Z0-9.$]", "" )
+                                        .toLowerCase();
+
         if ( containerName != null && !containerName.isEmpty() ) {
           result = containerName
                    + "."
-                   + constructDecoratedName.constructName( element.getContainer());
+                   + ownName;
         } else {
-          result = constructDecoratedName.constructName( element.getContainer());
+          result = ownName;
         }
       } else { // there is no container - the namespace is the provided namespace prefix (if any)
         result = prefix;

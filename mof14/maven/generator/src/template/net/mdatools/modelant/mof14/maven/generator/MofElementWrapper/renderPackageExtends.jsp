@@ -19,5 +19,5 @@ if (!((GeneralizableElement) wrapped.getWrapped()).getSupertypes().isEmpty()) {
     firstPrinted = true;
   }
 } else {
-%>javax.jmi.ref.RefPackage<%  
+%>javax.jmi.reflect.RefPackage<%  
 } %>
