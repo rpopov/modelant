@@ -18,8 +18,10 @@ import java.util.logging.Logger;
 import javax.jmi.model.GeneralizableElement;
 import javax.jmi.model.ModelElement;
 
+import net.mdatools.modelant.mof14.maven.generator.name.ConstructClassProxyName;
 import net.mdatools.modelant.mof14.maven.generator.name.ConstructName;
 import net.mdatools.modelant.mof14.maven.generator.name.ConstructNamespaceName;
+import net.mdatools.modelant.mof14.maven.generator.name.ConstructPackageProxyName;
 import net.mdatools.modelant.mof14.maven.generator.name.ConstructQualifiedName;
 import net.mdatools.modelant.mof14.maven.generator.name.DecorateNameWithTag;
 import net.mdatools.modelant.mof14.maven.generator.name.GetName;
@@ -34,8 +36,6 @@ import net.mdatools.modelant.template.api.TemplateEngine;
  */
 public class MofElementWrapper<T extends ModelElement> {
 
-  private static final String JMI_CLASS_PROXY_SUFFIX = "Class";
-
   private static final Logger LOGGER = Logger.getLogger( MofElementWrapper.class.getName() );
 
   /**
@@ -48,16 +48,20 @@ public class MofElementWrapper<T extends ModelElement> {
   private static final ConstructName constructSimpleName =
       new DecorateNameWithTag( DecorateNameWithTag.JAVAX_JMI_SUBSTITUTE_NAME,
                                new GetName() );
+  private static final ConstructName constructSimplePackageProxyName = new ConstructPackageProxyName( constructSimpleName );
+  private static final ConstructName constructSimpleClassProxyName = new ConstructClassProxyName( constructSimpleName );
 
   private static final ConstructName constructQualifiedName = new ConstructQualifiedName( constructSimpleName );
+  private static final ConstructName constructQualifiedNameJmi = new ConstructQualifiedName( constructSimpleName, "jmi" );
+
+  private static final ConstructName constructQualifiedPackageProxyName = new ConstructPackageProxyName(constructQualifiedName);
+  private static final ConstructName constructQualifiedPackageProxyNameJmi = new ConstructPackageProxyName(constructQualifiedNameJmi);
+
+  private static final ConstructName constructQualifiedClassProxyName = new ConstructClassProxyName(constructQualifiedName);
+  private static final ConstructName constructQualifiedClassProxyNameJmi = new ConstructClassProxyName(constructQualifiedNameJmi);
 
   private static final ConstructName constructQualifiedNamespaceName = new ConstructNamespaceName( constructSimpleName );
-
-  /**
-   * Construct the package name as of JMI
-   */
-  private static final ConstructName constructJmiQualifiedName = new ConstructQualifiedName( constructSimpleName, "jmi" );
-  private static final ConstructName constructJmiQualifiedNamespaceName = new ConstructNamespaceName( constructSimpleName, "jmi" );
+  private static final ConstructName constructQualifiedNamespaceNameJmi = new ConstructNamespaceName( constructSimpleName, "jmi" );
 
   /**
    * @param wrapped not null
@@ -81,8 +85,16 @@ public class MofElementWrapper<T extends ModelElement> {
    * @return the name of the model element as provided in the meta-model and optionally overridden
    *         through JMI flags, if it violates Java naming conventions
    */
+  public final String calculateSimplePackageProxyName() {
+    return constructSimplePackageProxyName.constructName(getWrapped());
+  }
+
+  /**
+   * @return the name of the model element as provided in the meta-model and optionally overridden
+   *         through JMI flags, if it violates Java naming conventions
+   */
   public final String calculateSimpleInterfaceProxyName() {
-    return calculateSimpleInterfaceName()+JMI_CLASS_PROXY_SUFFIX;
+    return constructSimpleClassProxyName.constructName( getWrapped() );
   }
   /**
    * Calculates the proper package name, regarding the name substitution and the package name
@@ -98,7 +110,7 @@ public class MofElementWrapper<T extends ModelElement> {
    * @return the non-null qualified name of the namespace of the wrapped object
    */
   public String calculatePackageNameJmi() {
-    return constructJmiQualifiedNamespaceName.constructName(getWrapped());
+    return constructQualifiedNamespaceNameJmi.constructName(getWrapped());
   }
 
 
@@ -110,10 +122,26 @@ public class MofElementWrapper<T extends ModelElement> {
   }
 
   /**
+   * @return the qualified java class name of this element
+   */
+  public String calculateQualifiedPackageProxyName() {
+    return constructQualifiedPackageProxyName.constructName(getWrapped());
+  }
+
+  /**
+   * @return the qualified java class name of this element
+   */
+  public String calculateQualifiedPackageProxyNameJmi() {
+    return constructQualifiedPackageProxyNameJmi.constructName(getWrapped());
+  }
+
+
+
+  /**
    * @return the non-null class-proxy name, as of JMI
    */
   public String calculateQualifiedInterfaceProxyName() {
-    return calculateQualifiedInterfaceName()+JMI_CLASS_PROXY_SUFFIX;
+    return constructQualifiedClassProxyName.constructName( getWrapped() );
   }
 
 
@@ -121,7 +149,7 @@ public class MofElementWrapper<T extends ModelElement> {
    * @return the qualified java class name of this element
    */
   public String calculateQualifiedInterfaceNameJmi() {
-    return constructJmiQualifiedName.constructName( getWrapped() );
+    return constructQualifiedNameJmi.constructName( getWrapped() );
   }
 
 
@@ -129,7 +157,7 @@ public class MofElementWrapper<T extends ModelElement> {
    * @return the name of the class/proxy class from the main interface
    */
   public String calculateQualifiedInterfaceProxyNameJmi() {
-    return calculateQualifiedInterfaceNameJmi()+JMI_CLASS_PROXY_SUFFIX;
+    return constructQualifiedClassProxyNameJmi.constructName( getWrapped() );
   }
 
 

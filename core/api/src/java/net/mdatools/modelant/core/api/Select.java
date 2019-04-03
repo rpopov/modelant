@@ -14,5 +14,5 @@ import java.util.Collection;
  * @param <T> the type of the argument and result collections' contents
  * @author Rusi Popov (popovr@mdatools.net)
  */
-public interface Filter<T> extends Selector<Collection<T>, T> {
+public interface Select<T> extends Selector<Collection<T>, T> {
 }

@@ -23,6 +23,8 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
+import net.mdatools.modelant.core.filter.Filter;
+import net.mdatools.modelant.mof14.maven.generator.select.IsLifecyclePackage;
 import net.mdatools.modelant.repository.api.ModelRepository;
 import net.mdatools.modelant.repository.api.ModelRepositoryFactory;
 import net.mdatools.modelant.template.api.TemplateEngine;
@@ -94,7 +96,11 @@ public class GeneratorMojo extends CompilationContext {
       generate(engine, metamodelAssociation);
     }
 
-    for (MofPackage metamodelPackage : (Collection<MofPackage>) metamodelExtent.getMofPackage().refAllOfClass()) {
+    // See JMI 1.0 Specification, Section 4.8.1
+    for (MofPackage metamodelPackage : new Filter<>(new IsLifecyclePackage())
+                                           .execute((Collection<MofPackage>) (metamodelExtent
+                                                                              .getMofPackage()
+                                                                              .refAllOfClass()))) {
       generate(engine, metamodelPackage);
     }
   }
@@ -214,7 +220,7 @@ public class GeneratorMojo extends CompilationContext {
                              MofElementWrapper<MofPackage> wrapper) throws IOException {
     String qualifiedName;
 
-    qualifiedName = wrapper.calculateQualifiedInterfaceName();
+    qualifiedName = wrapper.calculateQualifiedPackageProxyName();
     engine.render( toSourceFileName(qualifiedName), wrapper);
   }
 
@@ -225,7 +231,7 @@ public class GeneratorMojo extends CompilationContext {
                                 MofElementWrapper<MofPackage> wrapper) throws IOException {
     String qualifiedName;
 
-    qualifiedName = wrapper.calculateQualifiedInterfaceNameJmi();
+    qualifiedName = wrapper.calculateQualifiedPackageProxyNameJmi();
     engine.render( toSourceFileName(qualifiedName), wrapper);
   }
 

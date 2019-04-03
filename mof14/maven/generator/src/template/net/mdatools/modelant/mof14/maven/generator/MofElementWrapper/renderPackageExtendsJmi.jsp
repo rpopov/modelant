@@ -15,7 +15,7 @@ if (!((GeneralizableElement) wrapped.getWrapped()).getSupertypes().isEmpty()) {
     if ( firstPrinted ) {
       %>, <%
     }
-    %><%= MofElementWrapper.wrap(supertype).calculateQualifiedInterfaceNameJmi() %><%
+    %><%= MofElementWrapper.wrap(supertype).calculateQualifiedPackageProxyNameJmi() %><%
     firstPrinted = true;
   }
 } else {

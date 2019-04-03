@@ -7,20 +7,41 @@
  */
 package net.mdatools.modelant.core.filter;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.jmi.reflect.RefObject;
 
-import net.mdatools.modelant.core.condition.HasFieldValue;
+import net.mdatools.modelant.core.api.Condition;
+import net.mdatools.modelant.core.api.Select;
 
 /**
  * Filter the collection based on the contents of "name" field, if any
  * @author Rusi Popov (popovr@mdatools.net)
  */
-public class FilterByField<T extends RefObject> extends Filter<T> {
+public class Filter<T extends RefObject> implements Select<T> {
+
+  private final Condition<T> condition;
+
   /**
    * @param fieldName non-null field name to evaluate value if it has the value provided
    * @param target not null name value to search for
    */
-  public FilterByField(String fieldName, String target) {
-    super(new HasFieldValue<>( fieldName, target));
+  public Filter(Condition<T> condition) {
+    this.condition = condition;
   }
+
+  public Collection<T> execute(Collection<T> collection) throws RuntimeException, IllegalArgumentException {
+    Collection<T> result;
+    Object value;
+
+    result = new ArrayList<>();
+    for (T element:collection) {
+      if ( condition.eval( element )) {
+        result.add(element);
+      }
+    }
+    return result;
+  }
+
 }

@@ -7,41 +7,19 @@
  */
 package net.mdatools.modelant.core.filter;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 import javax.jmi.reflect.RefObject;
 
-import net.mdatools.modelant.core.api.Filter;
+import net.mdatools.modelant.core.condition.IsNamed;
 
 /**
  * Filter the collection based on the contents of "name" field, if any
  * @author Rusi Popov (popovr@mdatools.net)
  */
-public class FilterByName<T extends RefObject> implements Filter<T> {
-
-  private final String target;
-
+public class FilterByName<T extends RefObject> extends Filter<T> {
   /**
    * @param target not null name value to search for
    */
   public FilterByName(String target) {
-    this.target = target;
+    super(new IsNamed<>( target));
   }
-
-  public Collection<T> execute(Collection<T> collection) throws RuntimeException, IllegalArgumentException {
-    Collection<T> result;
-    Object value;
-
-    result = new ArrayList<>();
-    for (T element:collection) {
-      value = element.refGetValue( "name" );
-
-      if ( target.equals(value) ) {
-        result.add(element);
-      }
-    }
-    return result;
-  }
-
 }

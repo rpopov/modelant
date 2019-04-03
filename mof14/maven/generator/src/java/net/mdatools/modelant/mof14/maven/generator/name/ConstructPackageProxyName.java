@@ -14,14 +14,14 @@ import javax.jmi.model.ModelElement;
  * Construct a Package Interface name, as of JMI 1.0 Specification, Section 4.8.1
  * @author Rusi Popov
  */
-public class ConstructPackageName implements ConstructName {
+public class ConstructPackageProxyName implements ConstructName {
 
   private final ConstructName decorated;
 
   /**
    * @param decorated not null mechanism to construct a name
    */
-  public ConstructPackageName(ConstructName decorated) {
+  public ConstructPackageProxyName(ConstructName decorated) {
     this.decorated = decorated;
   }
 

@@ -27,12 +27,11 @@ import java.util.List;
  */
 <% wrapped.renderStatementPackageJmi(engine, context);%>
 
-<% wrapped.renderStatementImportsJmi(engine, context); %>
-
+<%-- wrapped.renderStatementImportsJmi(engine, context); --%>
 /**
  * The JMI standard <%=wrapped.calculateSimpleInterfaceName()%> interface
  */
-public interface <%=wrapped.calculateSimpleInterfaceName() %> <% wrapped.renderPackageExtendsJmi(engine, context); %> {
+public interface <%=wrapped.calculateSimplePackageProxyName() %> <% wrapped.renderPackageExtendsJmi(engine, context); %> {
 
 <%-- wrapped.renderDelegatedDeclaredConstants( delegateClassName, context );
 --%>

@@ -9,7 +9,7 @@ package net.mdatools.modelant.core.filter;
 
 import java.util.Collection;
 
-import net.mdatools.modelant.core.api.Filter;
+import net.mdatools.modelant.core.api.Select;
 import net.mdatools.modelant.core.api.Selector;
 
 /**
@@ -18,10 +18,10 @@ import net.mdatools.modelant.core.api.Selector;
  */
 public final class FilterSelect<A,T> implements Selector<A,T> {
 
-  private final Filter<T> f;
+  private final Select<T> f;
   private final Selector<A, T> s;
 
-  public FilterSelect(Filter<T> f, Selector<A, T> s) {
+  public FilterSelect(Select<T> f, Selector<A, T> s) {
     this.f = f;
     this.s = s;
   }
