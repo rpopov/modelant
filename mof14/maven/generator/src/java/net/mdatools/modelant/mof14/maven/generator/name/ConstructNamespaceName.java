@@ -17,8 +17,6 @@ import javax.jmi.model.ModelElement;
  */
 public class ConstructNamespaceName implements ConstructName {
 
-  private static final String ORG_OMG_XMI_NAMESPACE = "org.omg.xmi.namespace";
-
   /**
    * The <code>ORG_OMG_MOF_IDL_PREFIX</code> is the MOF tag ID for package name prefix
    */

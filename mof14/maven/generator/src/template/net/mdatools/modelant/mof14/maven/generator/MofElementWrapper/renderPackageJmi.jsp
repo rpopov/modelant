@@ -33,7 +33,6 @@ import java.util.List;
  */
 <% wrapped.renderStatementPackageJmi(engine, context);%>
 
-<%-- wrapped.renderStatementImportsJmi(engine, context); --%>
 <%  // As of JMI 1.0, section 4.8.1
  
   for (Import element : (Collection<Import>) new Filter(new IsPubliclyImportedPackage()).execute((Collection<ModelElement>) ((MofPackage) wrapped.getWrapped()).getContents())) {

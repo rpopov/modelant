@@ -24,6 +24,7 @@ public class GetName implements ConstructName {
     if ( result == null ) {
       result = "";
     }
+    result = result.replaceAll( "[^a-zA-Z0-9$]", "" );
 
     LOGGER.log( Level.FINE, "name = {0}", result );
     return result;
