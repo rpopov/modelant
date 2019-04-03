@@ -13,14 +13,14 @@ import javax.jmi.reflect.JmiException;
 import javax.jmi.reflect.RefObject;
 import javax.jmi.reflect.RefPackage;
 
-import net.mdatools.modelant.core.api.Selector;
+import net.mdatools.modelant.core.api.Select;
 import net.mdatools.modelant.core.util.Navigator;
 
 /**
  * Selector of all model elements, which are instances of the classes in the wrapped extent.
  * @author popovr
  */
-public class SelectAllObjects implements Selector<RefPackage, RefObject> {
+public class SelectAllObjects implements Select<RefPackage, RefObject> {
 
   /**
    * @param sourceExtent not null extent where to collect all instances in

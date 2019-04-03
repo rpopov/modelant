@@ -47,6 +47,16 @@
     </dependency>
     <dependency>
       <groupId>net.mdatools</groupId>
+      <artifactId>modelant.core.api</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>net.mdatools</groupId>
+      <artifactId>modelant.core.impl</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>net.mdatools</groupId>
       <artifactId>modelant.mof14.metamodel</artifactId>
       <version>${project.version}</version>
     </dependency>

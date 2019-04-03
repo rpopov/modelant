@@ -19,7 +19,7 @@ import net.mdatools.modelant.core.api.Select;
  * Filter the collection based on the contents of "name" field, if any
  * @author Rusi Popov (popovr@mdatools.net)
  */
-public class Filter<T extends RefObject> implements Select<T> {
+public class Filter<T extends RefObject> implements Select<Collection<T>, T> {
 
   private final Condition<T> condition;
 
@@ -31,9 +31,8 @@ public class Filter<T extends RefObject> implements Select<T> {
     this.condition = condition;
   }
 
-  public Collection<T> execute(Collection<T> collection) throws RuntimeException, IllegalArgumentException {
+  public final Collection<T> execute(Collection<T> collection) throws RuntimeException, IllegalArgumentException {
     Collection<T> result;
-    Object value;
 
     result = new ArrayList<>();
     for (T element:collection) {
@@ -43,5 +42,4 @@ public class Filter<T extends RefObject> implements Select<T> {
     }
     return result;
   }
-
 }

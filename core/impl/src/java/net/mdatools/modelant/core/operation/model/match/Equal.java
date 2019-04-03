@@ -12,7 +12,7 @@ import javax.jmi.reflect.RefPackage;
 
 import org.apache.maven.plugins.annotations.Parameter;
 
-import net.mdatools.modelant.core.api.Selector;
+import net.mdatools.modelant.core.api.Select;
 import net.mdatools.modelant.core.api.match.ConsideredEqual;
 import net.mdatools.modelant.core.selector.SelectByQualifiedName;
 
@@ -56,7 +56,7 @@ public class Equal implements ConsideredEqual {
   /**
    * @see net.mdatools.modelant.core.api.match.ConsideredEqual#selectNew()
    */
-  public Selector<RefPackage, RefObject> selectNew() {
+  public Select<RefPackage, RefObject> selectNew() {
     return new SelectByQualifiedName(target);
   }
 
@@ -64,7 +64,7 @@ public class Equal implements ConsideredEqual {
   /**
    * @see net.mdatools.modelant.core.api.match.ConsideredEqual#selectOld()
    */
-  public Selector<RefPackage, RefObject> selectOld() {
+  public Select<RefPackage, RefObject> selectOld() {
     return new SelectByQualifiedName(source);
   }
 }

@@ -14,14 +14,14 @@ import javax.jmi.reflect.JmiException;
 import javax.jmi.reflect.RefObject;
 import javax.jmi.reflect.RefPackage;
 
-import net.mdatools.modelant.core.api.Selector;
+import net.mdatools.modelant.core.api.Select;
 import net.mdatools.modelant.core.util.Navigator;
 
 /**
  * Selector of a metamodel package with the provided qualified name
  * @author popovr
  */
-public class SelectMetaPackage implements Selector<RefPackage, RefObject> {
+public class SelectMetaPackage implements Select<RefPackage, RefObject> {
 
   /**
    * The qualified name of a metaclass

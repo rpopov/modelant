@@ -28,6 +28,7 @@ import net.mdatools.modelant.core.api.name.ClassName;
 import net.mdatools.modelant.core.api.name.EnumValueName;
 import net.mdatools.modelant.core.api.name.FieldName;
 import net.mdatools.modelant.core.api.name.StructName;
+import net.mdatools.modelant.core.operation.element.PrintModelElement;
 
 /**
  * Identity names mapping
@@ -79,7 +80,10 @@ public final class IdentityNameMapping implements NameMapping {
           RefObject targetSecond;
 
           targetFirst = objectsMap.get(source.refFirstEnd());
+          assert targetFirst != null : "Expected targetFirst is not null, mapped to "+new PrintModelElement().execute( source.refFirstEnd() );
+
           targetSecond = objectsMap.get(source.refSecondEnd());
+          assert targetSecond != null : "Expected targetSecond is not null, mapped to "+new PrintModelElement().execute( source.refSecondEnd() );
 
           assoc.refAddLink(targetFirst, targetSecond);
         }

@@ -13,14 +13,14 @@ import javax.jmi.reflect.JmiException;
 import javax.jmi.reflect.RefObject;
 import javax.jmi.reflect.RefPackage;
 
-import net.mdatools.modelant.core.api.Selector;
+import net.mdatools.modelant.core.api.Select;
 import net.mdatools.modelant.core.util.Navigator;
 
 /**
  * Selector of all model elements, that are instances of a metaclass
  * @author popovr
  */
-public class SelectMetaclassInstances implements Selector<RefPackage, RefObject> {
+public class SelectMetaclassInstances implements Select<RefPackage, RefObject> {
 
   /**
    * The qualified name of a metaclass

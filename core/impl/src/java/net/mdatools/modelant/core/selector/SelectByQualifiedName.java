@@ -15,7 +15,7 @@ import javax.jmi.reflect.JmiException;
 import javax.jmi.reflect.RefObject;
 import javax.jmi.reflect.RefPackage;
 
-import net.mdatools.modelant.core.api.Selector;
+import net.mdatools.modelant.core.api.Select;
 import net.mdatools.modelant.core.api.name.Name;
 import net.mdatools.modelant.core.util.Navigator;
 
@@ -23,7 +23,7 @@ import net.mdatools.modelant.core.util.Navigator;
  * Selector of a metamodel class with the provided qualified name
  * @author popovr
  */
-public class SelectByQualifiedName implements Selector<RefPackage, RefObject> {
+public class SelectByQualifiedName implements Select<RefPackage, RefObject> {
 
   /**
    * The qualified name of the object(s) to retrieve

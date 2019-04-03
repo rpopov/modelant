@@ -6,15 +6,21 @@
 --%><%@
 import javax.jmi.model.GeneralizableElement;
 import javax.jmi.model.ModelElement;
+import javax.jmi.model.MofPackage;
+import javax.jmi.model.Import;
 
 import net.mdatools.modelant.mof14.maven.generator.MofElementWrapper;
+import net.mdatools.modelant.core.filter.Filter;
+import net.mdatools.modelant.mof14.maven.generator.select.IsPubliclyImportedPackage;
 
+import java.util.Collection;
 import java.util.List;
 
 %><%
 
  String className;
-
+ MofElementWrapper<MofPackage> wrappedPackage;
+ 
 %>/*
  * Copyright (c) 2001,2012 Rusi Popov, MDA Tools.net
  * All rights reserved. This program and the accompanying materials
@@ -28,11 +34,28 @@ import java.util.List;
 <% wrapped.renderStatementPackageJmi(engine, context);%>
 
 <%-- wrapped.renderStatementImportsJmi(engine, context); --%>
+<%  // As of JMI 1.0, section 4.8.1
+ 
+  for (Import element : (Collection<Import>) new Filter(new IsPubliclyImportedPackage()).execute((Collection<ModelElement>) ((MofPackage) wrapped.getWrapped()).getContents())) {
+    wrappedPackage = new MofElementWrapper( element.getImportedNamespace() );
+    
+%>import <%=wrappedPackage.calculateQualifiedPackageProxyName()%>;
+<%    
+  }
+%>
 /**
  * The JMI standard <%=wrapped.calculateSimpleInterfaceName()%> interface
  */
 public interface <%=wrapped.calculateSimplePackageProxyName() %> <% wrapped.renderPackageExtendsJmi(engine, context); %> {
 
+<%  // As of JMI 1.0, section 4.8.1
+ 
+  for (Import element : (Collection<Import>) new Filter(new IsPubliclyImportedPackage()).execute((Collection<ModelElement>) ((MofPackage) wrapped.getWrapped()).getContents())) {
+    wrappedPackage = new MofElementWrapper( (MofPackage) element.getImportedNamespace() );
+%>  <%=wrappedPackage.calculateSimplePackageProxyName()%> get<%=wrappedPackage.calculateSimplePackageProxyName()%>();
+<%    
+  }
+%>
 <%-- wrapped.renderDelegatedDeclaredConstants( delegateClassName, context );
 --%>
 <%-- wrapped.renderDelegatedDeclaredMethods( delegateClassName, context );

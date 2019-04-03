@@ -10,7 +10,7 @@ package net.mdatools.modelant.core.api.match;
 import javax.jmi.reflect.RefObject;
 import javax.jmi.reflect.RefPackage;
 
-import net.mdatools.modelant.core.api.Selector;
+import net.mdatools.modelant.core.api.Select;
 
 /**
  * Defines a set of "from" (old) objects that corresponds to a set of "to" (new) objects, considered as equal
@@ -23,24 +23,24 @@ public interface ConsideredEqual {
    * to retrieve the "new" model elements to be treated as equal to the "old" ones.
    * Defines a set of "new"  model objects.
    */
-  Selector<RefPackage, RefObject> selectOld();
+  Select<RefPackage, RefObject> selectOld();
 
   /**
    * @return the non-null selection criteria (like in the &lt;select&gt;) over the "old" model,
    * to retrieve the "old" model elements to be treated as equal to the "old" ones.
    * Defines a set of "new"  model objects.
    */
-  Selector<RefPackage, RefObject> selectNew();
+  Select<RefPackage, RefObject> selectNew();
 
   /**
    * No objects are considered equal by external criteria
    */
   ConsideredEqual EMPTY = new ConsideredEqual() {
-    public Selector<RefPackage, RefObject> selectOld() {
-      return Selector.EMPTY;
+    public Select<RefPackage, RefObject> selectOld() {
+      return Select.EMPTY;
     }
-    public Selector<RefPackage, RefObject> selectNew() {
-      return Selector.EMPTY;
+    public Select<RefPackage, RefObject> selectNew() {
+      return Select.EMPTY;
     }
   };
 
@@ -49,14 +49,14 @@ public interface ConsideredEqual {
    * because of other reasons, overriding any comparison rules.
    */
   public class EqualSelectors implements ConsideredEqual {
-    private final Selector<RefPackage,RefObject> oldSet;
-    private final Selector<RefPackage,RefObject> newSet;
+    private final Select<RefPackage,RefObject> oldSet;
+    private final Select<RefPackage,RefObject> newSet;
 
     /**
      * @param oldSet not null
      * @param newSet not null
      */
-    public EqualSelectors(Selector<RefPackage,RefObject> oldSet, Selector<RefPackage,RefObject> newSet) {
+    public EqualSelectors(Select<RefPackage,RefObject> oldSet, Select<RefPackage,RefObject> newSet) {
       assert oldSet != null : "Expected is 'old' set defined";
       assert newSet != null : "Expected is 'new' set defined";
 
@@ -67,14 +67,14 @@ public interface ConsideredEqual {
     /**
      * @see net.mdatools.modelant.core.api.match.ConsideredEqual#selectOld()
      */
-    public Selector<RefPackage,RefObject> selectOld() {
+    public Select<RefPackage,RefObject> selectOld() {
       return oldSet;
     }
 
     /**
      * @see net.mdatools.modelant.core.api.match.ConsideredEqual#selectNew()
      */
-    public Selector<RefPackage,RefObject> selectNew() {
+    public Select<RefPackage,RefObject> selectNew() {
       return newSet;
     }
   }
