@@ -8,11 +8,9 @@
  */
 package net.mdatools.modelant.mof14.maven.generator.name;
 
-import java.util.Iterator;
 import java.util.logging.Level;
 
 import javax.jmi.model.ModelElement;
-import javax.jmi.model.ModelPackage;
 import javax.jmi.model.Tag;
 
 /**
@@ -34,6 +32,7 @@ public class DecorateNameWithTag implements ConstructName {
 
   /**
    * The <code>JAVAX_JMI_SUBSTITUTE_NAME</code> JMI standard tag ID for name substitution
+   * See Section 4.6.2 of JMI 1.0 Specification
    */
   public static final String JAVAX_JMI_SUBSTITUTE_NAME = "javax.jmi.substituteName";
 
@@ -57,7 +56,7 @@ public class DecorateNameWithTag implements ConstructName {
     Tag tag;
 
     if ( element != null ) {
-      tag = getTag( element );
+      tag = ConstructName.getTag( element, tagId );
       if ( tag != null ) {
         result = (String) tag.getValues().get( 0 );
 
@@ -67,33 +66,6 @@ public class DecorateNameWithTag implements ConstructName {
       }
     } else {
       result = "";
-    }
-    return result;
-  }
-
-  /**
-   * Retrieves the tag assigned to the MOF object provided
-   *
-   * @param element non null whose tags to check
-   * @return the MOF Tag associated with the model element or null
-   */
-  private Tag getTag(ModelElement element) {
-    Tag result;
-    ModelPackage extent;
-    Tag tag;
-    Iterator<Tag> tagsIterator;
-
-    extent = (ModelPackage) element.refOutermostPackage();
-
-    // find the tag bound to the model element
-    result = null;
-    tagsIterator = extent.getTag().refAllOfClass().iterator();
-    while ( result == null && tagsIterator.hasNext() ) {
-      tag = tagsIterator.next();
-
-      if ( tagId.equals( tag.getTagId() ) && tag.getElements().contains( element ) ) {
-        result = tag;
-      }
     }
     return result;
   }

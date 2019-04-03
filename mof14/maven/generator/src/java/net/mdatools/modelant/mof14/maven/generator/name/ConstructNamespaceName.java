@@ -26,6 +26,7 @@ public class ConstructNamespaceName implements ConstructName {
 
   /**
    * The <code>JAVAX_JMI_PACKAGE_PREFIX</code> is the JMI standard tag ID for package name prefix
+   * See section 4.6.1 of JMI 1.0 specification
    */
   private static final String JAVAX_JMI_PACKAGE_PREFIX = "javax.jmi.packagePrefix";
 
