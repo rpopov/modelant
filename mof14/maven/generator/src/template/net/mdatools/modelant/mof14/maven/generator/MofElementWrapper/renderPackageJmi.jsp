@@ -12,6 +12,7 @@ import javax.jmi.model.Import;
 import net.mdatools.modelant.mof14.maven.generator.MofElementWrapper;
 import net.mdatools.modelant.core.filter.Filter;
 import net.mdatools.modelant.mof14.maven.generator.select.IsPubliclyImportedPackage;
+import net.mdatools.modelant.mof14.maven.generator.select.IsPublicPackage;
 
 import java.util.Collection;
 import java.util.List;
@@ -41,6 +42,14 @@ import java.util.List;
 %>import <%=wrappedPackage.calculateQualifiedPackageProxyName()%>;
 <%    
   }
+  
+  for (MofPackage element : (Collection<MofPackage>) new Filter(new IsPublicPackage()).execute((Collection<ModelElement>) ((MofPackage) wrapped.getWrapped()).getContents())) {
+    wrappedPackage = new MofElementWrapper( element );
+    
+%>import <%=wrappedPackage.calculateQualifiedPackageProxyName()%>;
+<%    
+  }
+  
 %>
 /**
  * The JMI standard <%=wrapped.calculateSimpleInterfaceName()%> interface
@@ -51,9 +60,18 @@ public interface <%=wrapped.calculateSimplePackageProxyName() %> <% wrapped.rend
  
   for (Import element : (Collection<Import>) new Filter(new IsPubliclyImportedPackage()).execute((Collection<ModelElement>) ((MofPackage) wrapped.getWrapped()).getContents())) {
     wrappedPackage = new MofElementWrapper( (MofPackage) element.getImportedNamespace() );
+    
 %>  <%=wrappedPackage.calculateSimplePackageProxyName()%> get<%=wrappedPackage.calculateSimplePackageProxyName()%>();
 <%    
   }
+  
+  for (MofPackage element : (Collection<MofPackage>) new Filter(new IsPublicPackage()).execute((Collection<ModelElement>) ((MofPackage) wrapped.getWrapped()).getContents())) {
+    wrappedPackage = new MofElementWrapper( (MofPackage) element );
+    
+%>  <%=wrappedPackage.calculateSimplePackageProxyName()%> get<%=wrappedPackage.calculateSimplePackageProxyName()%>();
+<%    
+  }
+
 %>
 <%-- wrapped.renderDelegatedDeclaredConstants( delegateClassName, context );
 --%>
