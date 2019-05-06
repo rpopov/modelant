@@ -11,8 +11,8 @@ import javax.jmi.model.Import;
 
 import net.mdatools.modelant.mof14.maven.generator.MofElementWrapper;
 import net.mdatools.modelant.core.filter.Filter;
-import net.mdatools.modelant.mof14.maven.generator.select.IsPubliclyImportedPackage;
-import net.mdatools.modelant.mof14.maven.generator.select.IsPublicPackage;
+import net.mdatools.modelant.mof14.maven.generator.condition.IsPubliclyImportedPackage;
+import net.mdatools.modelant.mof14.maven.generator.condition.IsPublicPackage;
 
 import java.util.Collection;
 import java.util.List;

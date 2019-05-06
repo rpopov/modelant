@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Created on Apr 3, 2019
  */
-package net.mdatools.modelant.mof14.maven.generator.select;
+package net.mdatools.modelant.mof14.maven.generator.condition;
 
 import javax.jmi.model.MofPackage;
 import javax.jmi.model.Tag;

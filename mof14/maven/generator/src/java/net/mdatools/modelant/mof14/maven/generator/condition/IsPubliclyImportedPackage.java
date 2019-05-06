@@ -6,10 +6,10 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Created on Apr 3, 2019
  */
-package net.mdatools.modelant.mof14.maven.generator.select;
+package net.mdatools.modelant.mof14.maven.generator.condition;
 
+import javax.jmi.model.Import;
 import javax.jmi.model.ModelElement;
-import javax.jmi.model.MofPackage;
 import javax.jmi.model.VisibilityKindEnum;
 
 import net.mdatools.modelant.core.api.Condition;
@@ -18,18 +18,22 @@ import net.mdatools.modelant.core.api.Condition;
  * Choose only those packages that have no ignoreLifecycle tag set to "true"
  * @author Rusi Popov
  */
-public class IsPublicPackage implements Condition<ModelElement> {
+public class IsPubliclyImportedPackage implements Condition<ModelElement> {
 
   public boolean eval(ModelElement element) throws RuntimeException, IllegalArgumentException {
     boolean result;
-    MofPackage argument;
+    Import argument;
 
-    result = element instanceof MofPackage;
+    result = element instanceof Import;
 
-    if ( result ) {
-      argument = (MofPackage) element;
-      result = VisibilityKindEnum.PUBLIC_VIS.equals( argument.getVisibility());
-    }
+   if ( result ) {
+     argument = (Import) element;
+     result = argument.isClustered()
+              && VisibilityKindEnum.PUBLIC_VIS.equals( argument.getVisibility());
+      // NOTE: The specification requires also: importedNamespace.visibility == public_vis
+      //       but this cannot be represented in MOF 1.4
+   }
     return result;
   }
+
 }

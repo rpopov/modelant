@@ -6,30 +6,24 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Created on Apr 3, 2019
  */
-package net.mdatools.modelant.mof14.maven.generator.select;
+package net.mdatools.modelant.mof14.maven.generator.condition;
 
+import javax.jmi.model.Attribute;
 import javax.jmi.model.ModelElement;
-import javax.jmi.model.MofClass;
-import javax.jmi.model.VisibilityKindEnum;
 
 import net.mdatools.modelant.core.api.Condition;
 
 /**
- * Choose only public classes
+ * Choose only structures
  * @author Rusi Popov
  */
-public class IsPublicClass implements Condition<ModelElement> {
+public class IsAttribute implements Condition<ModelElement> {
 
   public boolean eval(ModelElement element) throws RuntimeException, IllegalArgumentException {
     boolean result;
-    MofClass argument;
 
-    result = element instanceof MofClass;
+    result = element instanceof Attribute;
 
-    if ( result ) {
-      argument = (MofClass) element;
-      result = VisibilityKindEnum.PUBLIC_VIS.equals( argument.getVisibility());
-    }
     return result;
   }
 }

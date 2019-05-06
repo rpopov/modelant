@@ -6,30 +6,24 @@
  * http://www.eclipse.org/legal/epl-v10.html
  * Created on Apr 3, 2019
  */
-package net.mdatools.modelant.mof14.maven.generator.select;
+package net.mdatools.modelant.mof14.maven.generator.condition;
 
-import javax.jmi.model.Association;
 import javax.jmi.model.ModelElement;
-import javax.jmi.model.VisibilityKindEnum;
+import javax.jmi.model.StructureType;
 
 import net.mdatools.modelant.core.api.Condition;
 
 /**
- * Choose public associations
+ * Choose only structures
  * @author Rusi Popov
  */
-public class IsPublicAssociation implements Condition<ModelElement> {
+public class IsStructure implements Condition<ModelElement> {
 
   public boolean eval(ModelElement element) throws RuntimeException, IllegalArgumentException {
     boolean result;
-    Association argument;
 
-    result = element instanceof Association;
+    result = element instanceof StructureType;
 
-    if ( result ) {
-      argument = (Association) element;
-      result = VisibilityKindEnum.PUBLIC_VIS.equals( argument.getVisibility());
-    }
     return result;
   }
 }

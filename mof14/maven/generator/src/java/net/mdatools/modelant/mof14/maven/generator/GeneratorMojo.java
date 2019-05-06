@@ -23,8 +23,8 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
+import net.mdatools.modelant.mof14.maven.generator.condition.IsLifecyclePackage;
 import net.mdatools.modelant.mof14.maven.generator.filter.ComposedFilter;
-import net.mdatools.modelant.mof14.maven.generator.select.IsLifecyclePackage;
 import net.mdatools.modelant.repository.api.ModelRepository;
 import net.mdatools.modelant.repository.api.ModelRepositoryFactory;
 import net.mdatools.modelant.template.api.TemplateEngine;

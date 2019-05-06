@@ -22,6 +22,7 @@ import net.mdatools.modelant.core.condition.IsDerivedAttribute;
 import net.mdatools.modelant.core.condition.IsFrozenModelElement;
 import net.mdatools.modelant.core.condition.IsInstanceFeature;
 import net.mdatools.modelant.core.condition.Not;
+import net.mdatools.modelant.mof14.maven.generator.condition.IsAttribute;
 import net.mdatools.modelant.mof14.maven.generator.filter.ComposedFilter;
 import net.mdatools.modelant.mof14.maven.generator.name.ConstructClassProxyName;
 import net.mdatools.modelant.mof14.maven.generator.name.ConstructName;
@@ -32,7 +33,6 @@ import net.mdatools.modelant.mof14.maven.generator.name.DecorateNameWithTag;
 import net.mdatools.modelant.mof14.maven.generator.name.GetName;
 import net.mdatools.modelant.mof14.maven.generator.select.CollectContents;
 import net.mdatools.modelant.mof14.maven.generator.select.FilteredSelector;
-import net.mdatools.modelant.mof14.maven.generator.select.IsAttribute;
 import net.mdatools.modelant.template.api.TemplateContext;
 import net.mdatools.modelant.template.api.TemplateEngine;
 
