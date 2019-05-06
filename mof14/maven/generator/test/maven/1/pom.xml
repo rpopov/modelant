@@ -23,6 +23,10 @@
     </dependency> 
   </dependencies>
   
+  <!-- 
+    First generator plugin test: Generate sources and compile them
+   -->
+  
   <build>
     <sourceDirectory>target/generated-sources</sourceDirectory>
     <plugins>
