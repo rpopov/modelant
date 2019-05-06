@@ -10,6 +10,7 @@ package net.mdatools.modelant.mof14.maven.generator.name;
 
 import java.util.logging.Level;
 
+import javax.jmi.model.AliasType;
 import javax.jmi.model.ModelElement;
 
 /**
@@ -20,12 +21,15 @@ public class GetName implements ConstructName {
   public String constructName(ModelElement element) {
     String result;
 
-    result = element.getName();
-    if ( result == null ) {
-      result = "";
+    if ( element instanceof AliasType ) {
+      result = constructName(((AliasType) element).getType());
+    } else {
+      result = element.getName();
+      if ( result == null ) {
+        result = "";
+      }
+      result = result.replaceAll( "[^a-zA-Z0-9$]", "" );
     }
-    result = result.replaceAll( "[^a-zA-Z0-9$]", "" );
-
     LOGGER.log( Level.FINE, "name = {0}", result );
     return result;
   }

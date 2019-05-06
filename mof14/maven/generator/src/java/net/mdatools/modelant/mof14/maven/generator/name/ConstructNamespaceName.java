@@ -8,6 +8,7 @@
  */
 package net.mdatools.modelant.mof14.maven.generator.name;
 
+import javax.jmi.model.AliasType;
 import javax.jmi.model.ModelElement;
 
 /**
@@ -71,30 +72,36 @@ public class ConstructNamespaceName implements ConstructName {
     String containerName;
     String ownName;
 
-    // check for explicit namespace override
-    result = constructDecoratedNamespace.constructName( element );
+    if ( element instanceof AliasType ) {
+      result = constructName(((AliasType) element).getType());
 
-    if ( result.isEmpty() ) { // no explicit override
+    } else {
 
-      if ( element != null && element.getContainer() != null ) {
-        containerName = constructName( element.getContainer() );
+      // check for explicit namespace override
+      result = constructDecoratedNamespace.constructName( element );
 
-        ownName = constructDecoratedName.constructName( element.getContainer())
-                                        .replaceAll( "[^a-zA-Z0-9.$]", "" )
-                                        .toLowerCase();
+      if ( result.isEmpty() ) { // no explicit override
 
-        if ( containerName != null && !containerName.isEmpty() ) {
-          result = containerName
-                   + "."
-                   + ownName;
-        } else {
-          result = ownName;
+        if ( element != null && element.getContainer() != null ) {
+          containerName = constructName( element.getContainer() );
+
+          ownName = constructDecoratedName.constructName( element.getContainer())
+                                          .replaceAll( "[^a-zA-Z0-9.$]", "" )
+                                          .toLowerCase();
+
+          if ( containerName != null && !containerName.isEmpty() ) {
+            result = containerName
+                     + "."
+                     + ownName;
+          } else {
+            result = ownName;
+          }
+        } else { // there is no container - the namespace is the provided namespace prefix (if any)
+          result = prefix;
         }
-      } else { // there is no container - the namespace is the provided namespace prefix (if any)
-        result = prefix;
+      } else if ( !prefix.isEmpty() ) {  // there is an explicit override + prefix
+        result = prefix + "." + result;
       }
-    } else if ( !prefix.isEmpty() ) {  // there is an explicit override + prefix
-      result = prefix + "." + result;
     }
     return result;
   }

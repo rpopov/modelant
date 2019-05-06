@@ -13,11 +13,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.logging.Logger;
 
 import javax.jmi.model.GeneralizableElement;
 import javax.jmi.model.ModelElement;
 
+import net.mdatools.modelant.core.api.Select;
+import net.mdatools.modelant.core.condition.IsDerivedAttribute;
+import net.mdatools.modelant.core.condition.IsFrozenModelElement;
+import net.mdatools.modelant.core.condition.IsInstanceFeature;
+import net.mdatools.modelant.core.condition.Not;
+import net.mdatools.modelant.mof14.maven.generator.filter.ComposedFilter;
 import net.mdatools.modelant.mof14.maven.generator.name.ConstructClassProxyName;
 import net.mdatools.modelant.mof14.maven.generator.name.ConstructName;
 import net.mdatools.modelant.mof14.maven.generator.name.ConstructNamespaceName;
@@ -25,6 +30,9 @@ import net.mdatools.modelant.mof14.maven.generator.name.ConstructPackageProxyNam
 import net.mdatools.modelant.mof14.maven.generator.name.ConstructQualifiedName;
 import net.mdatools.modelant.mof14.maven.generator.name.DecorateNameWithTag;
 import net.mdatools.modelant.mof14.maven.generator.name.GetName;
+import net.mdatools.modelant.mof14.maven.generator.select.CollectContents;
+import net.mdatools.modelant.mof14.maven.generator.select.FilteredSelector;
+import net.mdatools.modelant.mof14.maven.generator.select.IsAttribute;
 import net.mdatools.modelant.template.api.TemplateContext;
 import net.mdatools.modelant.template.api.TemplateEngine;
 
@@ -35,8 +43,6 @@ import net.mdatools.modelant.template.api.TemplateEngine;
  * @param <T> the MOF type of the wrapped element
  */
 public class MofElementWrapper<T extends ModelElement> {
-
-  private static final Logger LOGGER = Logger.getLogger( MofElementWrapper.class.getName() );
 
   /**
    * The object this wrapper class wraps to allow its rendering. The reflective
@@ -63,6 +69,12 @@ public class MofElementWrapper<T extends ModelElement> {
   private static final ConstructName constructQualifiedNamespaceName = new ConstructNamespaceName( constructSimpleName );
   private static final ConstructName constructQualifiedNamespaceNameJmi = new ConstructNamespaceName( constructSimpleName, "jmi" );
 
+  private static final Select<ModelElement, ModelElement> selectNestedInstanceAttributes =
+      new FilteredSelector<>(new ComposedFilter<>(new IsAttribute())
+                                             .and(new IsInstanceFeature())
+                                             .and(new Not(new IsDerivedAttribute()))
+                                             .and(new Not(new IsFrozenModelElement())),
+                             new CollectContents());
   /**
    * @param wrapped not null
    */
@@ -160,7 +172,6 @@ public class MofElementWrapper<T extends ModelElement> {
     return constructQualifiedClassProxyNameJmi.constructName( getWrapped() );
   }
 
-
   /**
    * @return true if the wrapped MOF class describes an abstract model class
    */
@@ -227,6 +238,13 @@ public class MofElementWrapper<T extends ModelElement> {
       result.add( new MofElementWrapper( element ) );
     }
     return result;
+  }
+
+  /**
+   * @return non-null collection of all attributes directly nested in this or inherited from superclasses
+   */
+  public Collection<ModelElement> collectNestedInstanceAttributes() {
+    return selectNestedInstanceAttributes.execute( getWrapped() );
   }
 
   /**

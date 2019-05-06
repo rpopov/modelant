@@ -23,7 +23,7 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
-import net.mdatools.modelant.core.filter.Filter;
+import net.mdatools.modelant.mof14.maven.generator.filter.ComposedFilter;
 import net.mdatools.modelant.mof14.maven.generator.select.IsLifecyclePackage;
 import net.mdatools.modelant.repository.api.ModelRepository;
 import net.mdatools.modelant.repository.api.ModelRepositoryFactory;
@@ -97,7 +97,7 @@ public class GeneratorMojo extends CompilationContext {
     }
 
     // See JMI 1.0 Specification, Section 4.8.1
-    for (MofPackage metamodelPackage : new Filter<>(new IsLifecyclePackage())
+    for (MofPackage metamodelPackage : new ComposedFilter<>(new IsLifecyclePackage())
                                            .execute((Collection<MofPackage>) (metamodelExtent
                                                                               .getMofPackage()
                                                                               .refAllOfClass()))) {
