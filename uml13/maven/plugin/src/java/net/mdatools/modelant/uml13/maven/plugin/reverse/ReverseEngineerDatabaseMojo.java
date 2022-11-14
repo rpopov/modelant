@@ -80,7 +80,15 @@ public class ReverseEngineerDatabaseMojo extends AbstractMojo {
   private String driver;
 
   /**
-   * A comma-separated list of database schemes to reverse engineer into a dingle model
+   * Optional catalog / database name to restrict the table selection.
+   * For some databases it is mandatory. Case sensitive.
+   */
+  @Parameter(required=false)
+  private String catalog;
+
+  /**
+   * A comma-separated list of database schemes to reverse engineer into a single model.
+   * Case sensitive.
    */
 	@Parameter(required=true)
   private String[] schema;
@@ -114,7 +122,7 @@ public class ReverseEngineerDatabaseMojo extends AbstractMojo {
         Class.forName( driver );
         connection = DriverManager.getConnection( url, user, password );
         try {
-          operation = new ReverseDatabaseOperation(modelRepository, schema);
+          operation = new ReverseDatabaseOperation(modelRepository, catalog, schema);
           extent = operation.execute( connection );
         } finally {
           connection.close();
