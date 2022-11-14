@@ -120,8 +120,6 @@ public class PrintModelElement implements Function<Object, String>{
 //        result.append( wrapped.getClass() ).append( "  " );
 //        result.append( wrapped );
 //
-      } else if (wrapped instanceof String) {
-        result.append( ((String) wrapped).toUpperCase() );
       } else {
         result.append( wrapped );
       }

@@ -168,23 +168,30 @@ public class ReverseDatabaseOperation implements Function<Connection, RefPackage
    *
    * @see java.sql.DatabaseMetaData#getTableTypes()
    */
-	private static final String[] TABLE_TYPES_TO_REVERSE = new String[] { "TABLE", "VIEW", "SYSTEM TABLE",
-																																			  // "GLOBAL TEMPORARY", "LOCAL TEMPORARY",
-																																			 "ALIAS", "SYNONYM"};
+	private static final String[] TABLE_TYPES_TO_REVERSE = new String[] { "TABLE", "VIEW", "SYSTEM TABLE", 
+	                                                                      // "GLOBAL TEMPORARY", "LOCAL TEMPORARY",
+																		  "ALIAS", "SYNONYM"};
 
   private final ModelRepository modelRepository;
   private final String[] schemes;
+  
+  /**
+   * Could be null if no database/catalog restriction applied
+   */
+  private final String catalog;
 
   private Uml13ModelFactory factory;
 
   /**
    * @param modelRepository not null
+   * @param catalog Could be null if no database/catalog restriction applied
    * @param schemes not null, not empty name of the schemes to reverse engineer.
    * NOTE: It might be case sensitive.
    */
-  public ReverseDatabaseOperation(ModelRepository modelRepository, String... schemes) {
+  public ReverseDatabaseOperation(ModelRepository modelRepository, String catalog, String... schemes) {
     this.modelRepository = modelRepository;
     this.schemes = schemes;
+    this.catalog = catalog;
   }
 
   /**
@@ -267,7 +274,7 @@ public class ReverseDatabaseOperation implements Function<Connection, RefPackage
       LOGGER.log(Level.INFO, "Relations of: {0}", tableName );
 
       // retrieve the relationships - the tables this class/table refers through foreign keys
-      relationDescriptions = metadata.getImportedKeys( null, schema, tableName );
+      relationDescriptions = metadata.getImportedKeys( catalog, schema, tableName );
       try {
         while ( relationDescriptions.next() ) {
           otherTable = relationDescriptions.getString( JDBC_RELATION_DESCRIPTION_PK_TABLE_NAME );

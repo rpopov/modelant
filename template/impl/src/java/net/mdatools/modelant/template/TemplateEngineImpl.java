@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -49,25 +48,6 @@ import net.mdatools.modelant.template.api.TemplateEngine;
  * @author Rusi Popov (popovr@mdatools.net), 2002, 2012, 2017
  */
 class TemplateEngineImpl implements TemplateEngine {
-
-  /**
-   * Initialize the method-identification framework, based on the PRIVATE methods of
-   * Throwable class
-   */
-  private static final Method getStackTraceDepthMethod;
-
-  private static final Method getStackTraceElementMethod;
-  static {
-    try {
-      getStackTraceDepthMethod = Throwable.class.getDeclaredMethod( "getStackTraceDepth", (Class[]) null );
-      getStackTraceDepthMethod.setAccessible( true );
-
-      getStackTraceElementMethod = Throwable.class.getDeclaredMethod( "getStackTraceElement", new Class[] { int.class } );
-      getStackTraceElementMethod.setAccessible( true );
-    } catch (Exception ex) {
-      throw new RuntimeException( "Cannot initialize render methods identification mechanism", ex );
-    }
-  }
 
   /**
    */
@@ -166,8 +146,7 @@ class TemplateEngineImpl implements TemplateEngine {
     // find name of the calling method and use it as template name
     try {
       stackHandle = new Throwable();
-      frame = (StackTraceElement) getStackTraceElementMethod.invoke( stackHandle,
-                                                                     new Object[] { new Integer( 1 ) } );
+      frame = stackHandle.getStackTrace()[1]; 
     } catch (Exception ex) {
       throw new RuntimeException( "Cannot find calling method", ex );
     }

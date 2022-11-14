@@ -131,7 +131,7 @@ public class Node<V extends RefObject> {
             printableValues.add(stringValue);
 
           } else if ( value != null ) {
-            stringValue = value.toString();
+            stringValue = value.toString().toUpperCase();
 
             valuesHash += Hash.hash( stringValue );
             printableValues.add(stringValue);

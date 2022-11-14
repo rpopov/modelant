@@ -45,7 +45,7 @@ public class ReverseDatabaseOperationTest extends TestModel {
     statement = connection.createStatement();
     statement.execute( "create table A (C1 NUMERIC(10))" );
 
-    operation = new ReverseDatabaseOperation( modelRepository, "SA" );
+    operation = new ReverseDatabaseOperation( modelRepository, null, "SA" );
     extent = (Uml13Package) operation.execute( connection );
     factory = new Uml13ModelFactory(extent);
 
@@ -66,7 +66,7 @@ public class ReverseDatabaseOperationTest extends TestModel {
     statement.execute( "create table A (ID   NUMERIC(10) PRIMARY KEY)" );
     statement.execute( "create table B (A_ID NUMERIC(10) REFERENCES A)" );
 
-    operation = new ReverseDatabaseOperation( modelRepository, new String[] {"SA"} );
+    operation = new ReverseDatabaseOperation( modelRepository, null, new String[] {"SA"} );
     extent = (Uml13Package) operation.execute( connection );
     factory = new Uml13ModelFactory(extent);
 

@@ -23,8 +23,8 @@ public class TemplateEngineTest extends TestCase {
 
   private static final String TEMPLATE_NAME = "renderProperty";
   private static final String TEMPLATE = "java/lang/String/"+TEMPLATE_NAME+".jsp";
-  private static final String TEMPLATE_JAVA = "test/java/lang/String/"+TEMPLATE_NAME+".java";
-  private static final String TEMPLATE_CLASS = "test/java/lang/String/"+TEMPLATE_NAME+".class";
+  private static final String TEMPLATE_JAVA = "test/java/lang/string/"+TEMPLATE_NAME+".java";
+  private static final String TEMPLATE_CLASS = "test/java/lang/string/"+TEMPLATE_NAME+".class";
 
   private static final String TEXT_TO_RENDER = "render!me";
 
@@ -120,8 +120,9 @@ public class TemplateEngineTest extends TestCase {
 
     assertNotNull("Instantiating template engine", engine );
 
-    assertTrue("Template "+TEMPLATE+" should exist in Template dir (copied by maven) "+new File(context.getTemplateDirectory(), TEMPLATE).getAbsolutePath(),
-               new File(context.getTemplateDirectory(), TEMPLATE).getAbsoluteFile().exists());
+    assertTrue("Template "+TEMPLATE+" should exist in Template dir (copied by maven) "
+               +new File(context.getTemplateDirectory(), TEMPLATE).getAbsolutePath(),
+                new File(context.getTemplateDirectory(), TEMPLATE).getAbsoluteFile().exists());
 
     result = engine.render( TEXT_TO_RENDER, TEMPLATE_NAME, (Map)null );
 

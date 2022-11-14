@@ -19,7 +19,7 @@ System.err.println(">>>>>>>>>>> verify.bsh !!!!!!!!!!!!");
    modelFactory = repository.loadMetamodel("UML13");
    modelExtent = modelFactory.instantiate("JVADOC");  
  
-   modelFile = new File(projectBaseDir+"\\target\\maven-test\\java\\target\\model.xmi");
+   modelFile = new File(projectBaseDir+"/target/maven-test/java/target/model.xmi");
    modelFactory.readModel(modelExtent, modelFile);
 
    modelElementsFactory = new Uml13ModelFactory(modelExtent);
@@ -36,7 +36,7 @@ System.err.println(">>>>>>>>>>> verify.bsh !!!!!!!!!!!!");
    modelElementsFactory.locateModelElement(mdatoolsPackage);   
    modelElementsFactory.locateModelElement(modelantPackage);
    
-   //    
+   
  } finally {
    repository.shutdown();
  }

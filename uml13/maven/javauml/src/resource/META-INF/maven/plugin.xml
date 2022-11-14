@@ -410,7 +410,7 @@ See &lt;a href=&quot;http://docs.oracle.com/javase/7/docs/technotes/tools/window
         <mojo implementation="org.apache.maven.plugin.MojoExecution" default-value="${dolar}{mojoExecution}"/>
         <nodeprecated implementation="boolean" default-value="false">${dolar}{nodeprecated}</nodeprecated>
         <nodeprecatedlist implementation="boolean" default-value="false">${dolar}{nodeprecatedlist}</nodeprecatedlist>
-        <modelFile implementation="java.io.File" default-value="${dolar}{project.build.directory}">${dolar}{destDir}/model.xmi</modelFile>
+        <modelFile implementation="java.io.File" default-value="${dolar}{project.build.directory}/model.xmi"></modelFile>
         <outputDirectory implementation="java.io.File" default-value="${dolar}{project.build.directory}"/>
         <workDirectory implementation="java.io.File" default-value="${dolar}{project.build.directory}/model">${dolar}{project.build.directory}</workDirectory>
         <project implementation="org.apache.maven.project.MavenProject" default-value="${dolar}{project}"/>
