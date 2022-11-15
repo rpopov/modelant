@@ -50,6 +50,6 @@ public class CompareMof14ModelsUml13toUml14WithEqualTest extends CompareMof14Mod
 
     LOGGER.log( Level.INFO, "Differences: {0}", result);
 
-    assertEquals("Expected differences", 472, result.getExactlyMatched().size());
+    assertEquals("Expected differences", 475, result.getExactlyMatched().size());
   }
 }

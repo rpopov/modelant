@@ -59,15 +59,16 @@ public interface MatchingCriteria {
   };
 
   /**
-   * Name and namespace matching criteria
+   * Name and namespace matching criteria.
+   * Compare the tagged values (the most elements in the model) by tag and referred model element
    */
   MatchingCriteria NAME_AND_NAMESPACE_MATCH = new MatchingCriteria() {
     public List<String> getAttributes(RefObject forObject) {
-      return Arrays.asList( "name" );
+      return Arrays.asList( "name", "tag" );
     }
 
     public List<String> getAssociations(RefObject forObject) {
-      return Arrays.asList( "namespace" );
+      return Arrays.asList( "namespace", "modelElement" );
     }
   };
 }

@@ -94,34 +94,38 @@ class ModelComparisonResultImpl implements ModelComparisonResult {
   public String toString() {
     StringBuilder builder = new StringBuilder();
 
-    builder.append( "ModelComparisonResult {\r\n" );
+    builder.append( "ModelComparisonResult {"+System.lineSeparator() );
 
     builder.append( "matchingCcriteria=" );
     builder.append( matchingCriteria );
-    builder.append( ",\r\n" );
+    builder.append( ","+System.lineSeparator() );
 
     if ( deleted != null ) {
       builder.append( "deleted=" );
       builder.append( deleted );
-      builder.append( ",\r\n" );
+      builder.append( ","+System.lineSeparator() );
     }
     if ( added != null ) {
       builder.append( "added=" );
       builder.append( added );
-      builder.append( ",\r\n" );
+      builder.append( ","+System.lineSeparator() );
     }
     if ( changed != null ) {
       builder.append( "changed=" );
       builder.append(  changed );
-      builder.append( ",\r\n" );
+      builder.append( ","+System.lineSeparator() );
     }
+/**    
     if ( exactMatches != null ) {
       builder.append( "exactMatches=" );
       builder.append( exactMatches );
-      builder.append( ",\r\n" );
+      builder.append( ","+System.lineSeparator() );
       builder.append( exactMatches.size()+"  elements" );
-      builder.append( "\r\n" );
+      builder.append( System.lineSeparator() );
     }
+ **/    
+    builder.append( "exactMatches= NOT PRINTED" );
+    builder.append( System.lineSeparator() );
     builder.append( "}" );
 
     return builder.toString();

@@ -313,7 +313,7 @@ class InstanceDifferencesImpl implements InstanceDifference {
 
     builder.append( "InstanceDifferences {\n" );
     if ( getXObject() != null ) {
-      builder.append( "  xObject=" ).append( PRINT_MODEL_ELEMENT.execute(getXObject())).append( ",\n" );
+      builder.append( "  xObject=" ).append(PRINT_MODEL_ELEMENT.execute(getXObject())).append( ",\n" );
     }
     if ( getYObject() != null ) {
       builder.append( "  yObject=" ).append(PRINT_MODEL_ELEMENT.execute(getYObject())).append( ",\n" );

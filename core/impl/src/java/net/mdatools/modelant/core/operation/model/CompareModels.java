@@ -256,7 +256,6 @@ public class CompareModels implements Function<RefPackage, ModelComparisonResult
     List<Node<RefObject>> collectedMatchedTargets;
 
     List<Node<RefObject>> unmatchedSources;
-    List<Node<RefObject>> localUmatchedSources;
 
     unmatchedSources = new ArrayList<>();
 
@@ -422,11 +421,6 @@ public class CompareModels implements Function<RefPackage, ModelComparisonResult
 
     yRepresentative = equivalenceClasses.map( xRepresentative );
 
-    LOGGER.log(Level.INFO, 
-               "Detect chages of {0} vs {1} representatives", 
-               new Object[] {PRINT_MODEL_ELEMENT.toPrint(xRepresentative), 
-                             PRINT_MODEL_ELEMENT.toPrint(yRepresentative)});
-    
     xEquivalents = CachedModelElement.cacheModel(equivalenceClasses.getEquivalents( xRepresentative ),
                                                 attributeNames,
                                                 associationNames);
@@ -434,7 +428,9 @@ public class CompareModels implements Function<RefPackage, ModelComparisonResult
                                                 attributeNames,
                                                 associationNames);
 
-    LOGGER.log(Level.INFO, "X {0} elements vs Y {1} elements", new Object[] {xEquivalents.size(), yEquivalents.size()});
+    LOGGER.log(Level.FINE, 
+               "Detect changes of X {0} elements vs Y {1} elements of {2}", 
+               new Object[] {xEquivalents.size(), yEquivalents.size(), PRINT_MODEL_ELEMENT.toPrint(xRepresentative)});
     
     // collect the changes locally, before committing them to the non-local/shared changes list
     detectedChanges = new ArrayList<>();

@@ -62,13 +62,13 @@ public class CompareModelsMojo extends AbstractMojo {
    * Pairs of &lt;metaclass&gt;, &lt;metapackage&gt; as pairs of source and target metamodel classes,
    * that should be considered equal.
    */
-  @Parameter
+//  @Parameter
   private List<ConsideredEqual> equals;
 
   /**
    * The mechanism to export the result of models comparison. Default: print the string representation
    */
-  @Parameter
+//  @Parameter
   private Export export = Export.DEFAULT;
 
   public void execute() throws MojoExecutionException {
