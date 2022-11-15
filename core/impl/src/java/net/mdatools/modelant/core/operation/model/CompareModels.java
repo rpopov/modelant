@@ -256,11 +256,14 @@ public class CompareModels implements Function<RefPackage, ModelComparisonResult
     List<Node<RefObject>> collectedMatchedTargets;
 
     List<Node<RefObject>> unmatchedSources;
+    List<Node<RefObject>> localUmatchedSources;
 
     unmatchedSources = new ArrayList<>();
 
     collectedMatchedSources = new ArrayList<>();
     collectedMatchedTargets = new ArrayList<>();
+
+    LOGGER.log(Level.INFO, "Finding equals started");
 
     iteration = 0;
 
@@ -269,6 +272,8 @@ public class CompareModels implements Function<RefPackage, ModelComparisonResult
 
     while ( !sourceGenerationReady.isEmpty() ) {
       iteration++;
+      
+      LOGGER.log( Level.INFO, "Iteration {0}", iteration);
 
       while ( !sourceGenerationReady.isEmpty() ) {
         sourceRepresentative = sourceGenerationReady.get(0);
@@ -336,6 +341,8 @@ public class CompareModels implements Function<RefPackage, ModelComparisonResult
       sourceGenerationReady = sourceTopology.getGenerationOfReady();
       targetGenerationReady = targetTopology.getGenerationOfReady();
     } // any nodes left in this or other topology were not matched or participate in one or more circular dependencies
+
+    LOGGER.log(Level.INFO, "Finding equals completed");
   }
 
   /**
@@ -365,6 +372,7 @@ public class CompareModels implements Function<RefPackage, ModelComparisonResult
   private void detectElementChanges(List<InstanceDifference> exactMatches,
                                     List<InstanceDifference> changes,
                                     EquivalenceClassesMap<RefObject> equivalenceClasses) {
+    LOGGER.log(Level.INFO, "Detect chages of {0} equivalence classes", equivalenceClasses.getXKeys().size());
 
     // split each 1:1 mapped classes of equivalent elements into pairs of identical elements into exactMatches
     equivalenceClasses.getXKeys()
@@ -372,7 +380,9 @@ public class CompareModels implements Function<RefPackage, ModelComparisonResult
 //                      .parallelStream()
                       .forEach( xRepresentative -> compareRepresentatives(xRepresentative,
                                                                           exactMatches,
-                                                                          changes, equivalenceClasses) );
+                                                                          changes, 
+                                                                          equivalenceClasses) );
+    LOGGER.log(Level.INFO, "Detect chages of equivalence classes completed");
   }
 
   /**
@@ -412,6 +422,11 @@ public class CompareModels implements Function<RefPackage, ModelComparisonResult
 
     yRepresentative = equivalenceClasses.map( xRepresentative );
 
+    LOGGER.log(Level.INFO, 
+               "Detect chages of {0} vs {1} representatives", 
+               new Object[] {PRINT_MODEL_ELEMENT.toPrint(xRepresentative), 
+                             PRINT_MODEL_ELEMENT.toPrint(yRepresentative)});
+    
     xEquivalents = CachedModelElement.cacheModel(equivalenceClasses.getEquivalents( xRepresentative ),
                                                 attributeNames,
                                                 associationNames);
@@ -419,10 +434,10 @@ public class CompareModels implements Function<RefPackage, ModelComparisonResult
                                                 attributeNames,
                                                 associationNames);
 
+    LOGGER.log(Level.INFO, "X {0} elements vs Y {1} elements", new Object[] {xEquivalents.size(), yEquivalents.size()});
+    
     // collect the changes locally, before committing them to the non-local/shared changes list
     detectedChanges = new ArrayList<>();
-
-    LOGGER.log( Level.FINE, "Each-to-each comparison of: {0}", new Integer(xEquivalents.size()));
 
     xEquivalentIterator = xEquivalents.iterator();
     while ( xEquivalentIterator.hasNext() ) {

@@ -125,7 +125,7 @@ public class Node<V extends RefObject> {
         printableValues = new ArrayList<>();
         for ( Object value: values ) {
           if ( value instanceof RefBaseObject || value instanceof RefStruct ) {
-            stringValue = PRINT_MODEL_ELEMENT.execute( value );
+            stringValue = PRINT_MODEL_ELEMENT.execute( value ).toUpperCase();
 
             valuesHash += Hash.hash( stringValue );
             printableValues.add(stringValue);

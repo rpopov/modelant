@@ -6,8 +6,30 @@
   <groupId>net.mdatools</groupId>
   <artifactId>modelant.uml13.maven.test</artifactId>
   <name>modelant.uml13.maven.test</name>
-  <version>@project.version@</version>
+  <version>3.3.0</version>
 
   <description>The MOF 1.4 maven plugin tests</description>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>net.mdatools</groupId>
+        <artifactId>modelant.uml13.maven.plugin</artifactId>
+        <version>3.3.0</version>
+        <executions>
+          <execution>
+            <phase>compile</phase>
+            <goals>
+              <goal>compare-uml13-models</goal>
+            </goals>
+            <configuration>
+              <sourceModel>jira-UML13-oracle.xmi</sourceModel>
+	      <targetModel>jira-UML13-postgre.xmi</targetModel>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>

@@ -13,6 +13,8 @@ import java.util.IdentityHashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.jmi.reflect.RefObject;
 
@@ -37,6 +39,8 @@ import net.mdatools.modelant.core.util.map.MapToSet;
  * @author Rusi Popov (popovr@mdatools.net)
  */
 public class ModelTopology {
+
+  private static final Logger LOGGER = Logger.getLogger( ModelTopology.class.getName() );
 
   /**
    * Maps node.level to set of nodes with that value
@@ -81,6 +85,8 @@ public class ModelTopology {
 
     assert criteria != null : "Expected non-null criteria";
 
+    LOGGER.log(Level.INFO, "Start loading a model of {0} elements", elements.size());
+    
     // enlist the model elements to order
     elementsIterator = elements.iterator();
     while ( elementsIterator.hasNext() ) {
@@ -90,6 +96,8 @@ public class ModelTopology {
       elementToNodeMap.put( element, node );
     }
 
+    LOGGER.log(Level.INFO, "Converted {0} elements to nodes", elementToNodeMap.size());
+
     // arrange the nodes in this topology according to its level (relations to other nodes it refers)
     nodesIterator = elementToNodeMap.values().iterator();
     while ( nodesIterator.hasNext() ) {
@@ -98,6 +106,8 @@ public class ModelTopology {
       node.assignAssociatedNodes( elementToNodeMap );
       add( node );
     }
+
+    LOGGER.log(Level.INFO, "Bound reerred elements {0}", elementToNodeMap.size());
   }
 
 
@@ -118,6 +128,8 @@ public class ModelTopology {
    *         that could be manipulated independently of the current set of ready nodes
    */
   public final ArrayList<Node<RefObject>> getGenerationOfReady() {
+    LOGGER.log(Level.INFO, "Next generation of {0} ready elements to compare", readyNodes.size());
+    
     return new ArrayList<>(readyNodes);
   }
 

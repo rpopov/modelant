@@ -129,7 +129,7 @@ class InstanceDifferencesImpl implements InstanceDifference {
       if ( !(newValue == oldValue
              || newValue != null
                 && oldValue != null
-                && PRINT_MODEL_ELEMENT.execute( newValue ).equals( PRINT_MODEL_ELEMENT.execute( oldValue )))) { // not equal values found
+                && PRINT_MODEL_ELEMENT.execute( newValue ).toUpperCase().equals( PRINT_MODEL_ELEMENT.execute( oldValue ).toUpperCase()))) { // not equal values found
         attributesWithDifferences.add( attributeName );
       }
     }
