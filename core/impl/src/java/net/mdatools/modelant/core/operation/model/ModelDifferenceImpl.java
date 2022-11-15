@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import javax.jmi.reflect.RefObject;
 
 import net.mdatools.modelant.core.api.diff.ModelDifference;
+import net.mdatools.modelant.core.api.diff.PrefixedPrint;
 import net.mdatools.modelant.core.api.match.MatchingCriteria;
 import net.mdatools.modelant.core.operation.element.PrintModelElement;
 import net.mdatools.modelant.core.util.Navigator;
@@ -27,7 +28,7 @@ import net.mdatools.modelant.core.util.map.MapToList;
 /**
  * A single model element added or deleted to a model
  */
-class ModelDifferenceImpl implements ModelDifference {
+class ModelDifferenceImpl implements ModelDifference, PrefixedPrint {
   /**
    * This is a common logger
    */
@@ -132,7 +133,7 @@ class ModelDifferenceImpl implements ModelDifference {
       } catch (Exception ex) {
         LOGGER.log( Level.FINE,
                     "Model element: {0} does not support association: {1}",
-                    new Object[]{ModelComparisonResultImpl.PRINT_MODEL_ELEMENT.execute(getElement()), association});
+                    new Object[]{new PrintModelElement().execute(getElement()), association});
       }
     }
     return result;
@@ -143,29 +144,24 @@ class ModelDifferenceImpl implements ModelDifference {
     associations.put( association, difference);
   }
 
-
-  /**
-   * @see java.lang.Object#toString()
-   */
   public String toString() {
+    return toString("");
+  }
+  
+  public String toString(String prefix) {
     StringBuilder result = new StringBuilder(128);
-
+    
+    result.append( new PrintModelElement(prefix).execute( wrapped ) );
+    
     if ( !associations.isEmpty() ) {
-      result.append( "{"+System.lineSeparator())
-            .append( "    ")
-            .append( new PrintModelElement("    ").execute( wrapped ) );
       for (Map.Entry<String, Collection<ModelDifference>> entry: associations.entrySet()) {
         result.append( System.lineSeparator())
-              .append( "    being " )
+              .append( prefix )
+              .append( "being " )
               .append( entry.getKey() )
               .append( " of: " )
-              .append( new PrintModelElement("      ").execute( entry.getValue() ));
+              .append( new PrintModelElement(prefix).execute( entry.getValue() ));
       }
-      result.append( System.lineSeparator()+"    }" );
-    } else {
-      result.append( System.lineSeparator())
-            .append( "    ")
-            .append( new PrintModelElement("    ").execute( wrapped ) );
     }
     return result.toString();
   }

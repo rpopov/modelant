@@ -27,6 +27,7 @@ import javax.jmi.reflect.RefPackage;
 import javax.jmi.reflect.RefStruct;
 
 import net.mdatools.modelant.core.api.Function;
+import net.mdatools.modelant.core.api.diff.PrefixedPrint;
 
 /**
  * Print the actual attributes and values of model elements using only the
@@ -120,6 +121,9 @@ public class PrintModelElement implements Function<Object, String>{
 //        result.append( wrapped.getClass() ).append( "  " );
 //        result.append( wrapped );
 //
+      } else if ( wrapped instanceof PrefixedPrint ) {
+        result.append( ((PrefixedPrint) wrapped).toString(prefix) );
+
       } else {
         result.append( wrapped );
       }
@@ -353,7 +357,9 @@ public class PrintModelElement implements Function<Object, String>{
     Object value;
     Iterator valuesIterator;
     boolean onSeparateLine;
+    String prefixNested;
 
+    prefixNested = prefix+"  ";
     result.append( "{" );
 
     onSeparateLine = false;
@@ -366,25 +372,23 @@ public class PrintModelElement implements Function<Object, String>{
                         || value instanceof RefStruct
                         || value instanceof RefEnum
                         || value instanceof RefAssociation
-                        || value instanceof RefAssociationLink;
+                        || value instanceof RefAssociationLink
+                        || value instanceof PrefixedPrint;
 
       if ( onSeparateLine ) { // print the model elements with the prefix
         result.append( System.lineSeparator() );
-        result.append( prefix+"  " );
+        result.append( prefixNested );
       }
-      toString( value, result, prefix+"  ", visited );
+      toString( value, result, prefixNested, visited );
       if ( valuesIterator.hasNext() ) {
         result.append(",");
       }
     }
     if ( onSeparateLine ) { // model elements were printed
       result.append( System.lineSeparator())
-            .append( prefix )
-            .append( "}" );
-
-    } else { // a regular list
-      result.append( "}" );
+            .append( prefix );
     }
+    result.append( "}" );
   }
 
   /**

@@ -17,13 +17,14 @@ import javax.jmi.reflect.RefObject;
 
 import net.mdatools.modelant.core.api.diff.AssociationDifference;
 import net.mdatools.modelant.core.api.diff.InstanceDifference;
+import net.mdatools.modelant.core.api.diff.PrefixedPrint;
 import net.mdatools.modelant.core.operation.element.PrintModelElement;
 import net.mdatools.modelant.core.operation.model.topology.EquivalenceClassesMap;
 
 /**
  * Hold all identified changes/differences between xObject and yObject
  */
-class InstanceDifferencesImpl implements InstanceDifference {
+class InstanceDifferencesImpl implements InstanceDifference, PrefixedPrint {
 
   private final List<String> attributesWithDifferences = new ArrayList<>();
   private final List<AssociationDifference> associationDiffs = new ArrayList<>();
@@ -195,7 +196,7 @@ class InstanceDifferencesImpl implements InstanceDifference {
   /**
    * The differences found in a single association, no matter if it is x-to-one or x-to-many
    */
-  private static class AssociationDiff implements AssociationDifference {
+  private static class AssociationDiff implements AssociationDifference, PrefixedPrint {
     private final String associationName;
     private final List<RefObject> xMinusY = new ArrayList<>();
     private final List<RefObject> yMinusX = new ArrayList<>();
@@ -283,47 +284,70 @@ class InstanceDifferencesImpl implements InstanceDifference {
       return xMinusY.isEmpty() && yMinusX.isEmpty();
     }
 
-    /**
-     * @see java.lang.Object#toString()
-     */
     public String toString() {
+      return toString("");
+    }
+    
+    
+    public String toString(String prefix) {
       StringBuilder builder = new StringBuilder();
+      String nestedPrefix;
 
+      nestedPrefix = prefix + "  ";
       builder.append( "AssociationDiff {"+System.lineSeparator());
       if ( associationName != null ) {
-        builder.append( "      associationName=" ).append( associationName ).append( ","+System.lineSeparator() );
+        builder.append(nestedPrefix)
+               .append("associationName=" ).append( associationName )
+               .append( ",")
+               .append(System.lineSeparator() );
       }
       if ( xMinusY != null ) {
-        builder.append( "      xMinusY=" ).append( new PrintModelElement("      ").execute(xMinusY) ).append( ","+System.lineSeparator() );
+        builder.append(nestedPrefix)
+               .append("xMinusY=" ).append( new PrintModelElement(nestedPrefix).execute(xMinusY) )
+               .append( ",")
+               .append(System.lineSeparator() );
       }
       if ( yMinusX != null ) {
-        builder.append( "      yMinusX=" ).append( new PrintModelElement("      ").execute(yMinusX) ).append( ""+System.lineSeparator() );
+        builder.append(nestedPrefix)
+               .append( "yMinusX=" ).append( new PrintModelElement(nestedPrefix).execute(yMinusX) )
+               .append( ",")
+               .append(System.lineSeparator() );
       }
-      builder.append( "  }" );
+      builder.append( prefix)
+             .append("}");
       return builder.toString();
     }
   }
 
-  /**
-   * @see java.lang.Object#toString()
-   */
   public String toString() {
+    return toString("");
+  }
+    
+  public String toString(String prefix) {
     StringBuilder builder = new StringBuilder();
+    String nestedPrefix;
+
+    nestedPrefix = prefix + "  ";
 
     builder.append( "InstanceDifferences {"+System.lineSeparator() );
     if ( getXObject() != null ) {
-      builder.append( "    xObject=" ).append(new PrintModelElement("    ").execute(getXObject())).append( ","+System.lineSeparator() );
+      builder.append(nestedPrefix)
+             .append("xObject=" ).append(new PrintModelElement(nestedPrefix).execute(getXObject())).append( ","+System.lineSeparator() );
     }
     if ( getYObject() != null ) {
-      builder.append( "    yObject=" ).append(new PrintModelElement("    ").execute(getYObject())).append( ","+System.lineSeparator() );
+      builder.append(nestedPrefix)
+             .append("yObject=" ).append(new PrintModelElement(nestedPrefix).execute(getYObject())).append( ","+System.lineSeparator() );
     }
     if ( attributesWithDifferences != null ) {
-      builder.append( "    attributesWithDifferences=" ).append( attributesWithDifferences ).append( ","+System.lineSeparator() );
+      builder.append(nestedPrefix)
+             .append("attributesWithDifferences=" ).append( attributesWithDifferences ).append( ","+System.lineSeparator() );
     }
     if ( associationDiffs != null ) {
-      builder.append( "    associationDiffs=" ).append( associationDiffs ).append( System.lineSeparator() );
+      builder.append(nestedPrefix)
+             .append("associationDiffs=" ).append( new PrintModelElement(nestedPrefix).execute(associationDiffs) ).append( System.lineSeparator() );
     }
-    builder.append( "  }" );
+    builder.append(prefix)
+           .append("}");
     return builder.toString();
   }
 

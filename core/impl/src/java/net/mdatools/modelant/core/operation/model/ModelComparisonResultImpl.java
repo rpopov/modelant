@@ -27,8 +27,6 @@ import net.mdatools.modelant.core.operation.element.PrintModelElement;
  */
 class ModelComparisonResultImpl implements ModelComparisonResult {
 
-  static final PrintModelElement PRINT_MODEL_ELEMENT = new PrintModelElement();
-
   private final List<ModelDifference> deleted;
 
   private final List<ModelDifference> added;
@@ -93,7 +91,10 @@ class ModelComparisonResultImpl implements ModelComparisonResult {
    */
   public String toString() {
     StringBuilder builder = new StringBuilder();
+    PrintModelElement printModelElement;
 
+    printModelElement = new PrintModelElement("  ");
+    
     builder.append( "ModelComparisonResult {"+System.lineSeparator() );
 /*
     builder.append( "matchingCcriteria=" );
@@ -101,18 +102,18 @@ class ModelComparisonResultImpl implements ModelComparisonResult {
     builder.append( ","+System.lineSeparator() );
 */
     if ( deleted != null ) {
-      builder.append( "deleted=" );
-      builder.append( deleted );
+      builder.append( "  deleted=" );
+      builder.append( printModelElement.execute(deleted) );
       builder.append( ","+System.lineSeparator() );
     }
     if ( added != null ) {
-      builder.append( "added=" );
-      builder.append( added );
+      builder.append( "  added=" );
+      builder.append( printModelElement.execute(added) );
       builder.append( ","+System.lineSeparator() );
     }
     if ( changed != null ) {
-      builder.append( "changed=" );
-      builder.append(  changed );
+      builder.append( "  changed=" );
+      builder.append( printModelElement.execute(changed) );
       builder.append( ","+System.lineSeparator() );
     }
 /**    
@@ -124,7 +125,7 @@ class ModelComparisonResultImpl implements ModelComparisonResult {
       builder.append( System.lineSeparator() );
     }
  **/    
-    builder.append( "exactMatches= NOT PRINTED" );
+    builder.append( "  exactMatches= NOT PRINTED" );
     builder.append( System.lineSeparator() );
     builder.append( "}" );
 
