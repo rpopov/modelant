@@ -64,7 +64,7 @@ public interface MatchingCriteria {
    */
   MatchingCriteria NAME_AND_NAMESPACE_MATCH = new MatchingCriteria() {
     public List<String> getAttributes(RefObject forObject) {
-      return Arrays.asList( "name", "tag" );
+      return Arrays.asList( "name", "tag", "body" );
     }
 
     public List<String> getAssociations(RefObject forObject) {
