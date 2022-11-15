@@ -95,11 +95,11 @@ class ModelComparisonResultImpl implements ModelComparisonResult {
     StringBuilder builder = new StringBuilder();
 
     builder.append( "ModelComparisonResult {"+System.lineSeparator() );
-
+/*
     builder.append( "matchingCcriteria=" );
     builder.append( matchingCriteria );
     builder.append( ","+System.lineSeparator() );
-
+*/
     if ( deleted != null ) {
       builder.append( "deleted=" );
       builder.append( deleted );

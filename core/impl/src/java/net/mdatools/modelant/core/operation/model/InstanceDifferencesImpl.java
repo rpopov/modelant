@@ -44,7 +44,6 @@ class InstanceDifferencesImpl implements InstanceDifference {
   private final Iterator<String> associationsIterator;
 
   private static final PrintModelElement PRINT_MODEL_ELEMENT = new PrintModelElement("  ");
-  private static final PrintModelElement PRINT_NESTED_MODEL_ELEMENT = new PrintModelElement("    ");
 
   /**
    * Requires: <ul>
@@ -290,17 +289,17 @@ class InstanceDifferencesImpl implements InstanceDifference {
     public String toString() {
       StringBuilder builder = new StringBuilder();
 
-      builder.append( "AssociationDiff {\n");
+      builder.append( "AssociationDiff {"+System.lineSeparator());
       if ( associationName != null ) {
-        builder.append( "    associationName=" ).append( associationName ).append( ",\n" );
+        builder.append( "      associationName=" ).append( associationName ).append( ","+System.lineSeparator() );
       }
       if ( xMinusY != null ) {
-        builder.append( "    xMinusY=" ).append( PRINT_NESTED_MODEL_ELEMENT.execute(xMinusY) ).append( ",\n" );
+        builder.append( "      xMinusY=" ).append( new PrintModelElement("      ").execute(xMinusY) ).append( ","+System.lineSeparator() );
       }
       if ( yMinusX != null ) {
-        builder.append( "    yMinusX=" ).append( PRINT_NESTED_MODEL_ELEMENT.execute(yMinusX) ).append( "\n" );
+        builder.append( "      yMinusX=" ).append( new PrintModelElement("      ").execute(yMinusX) ).append( ""+System.lineSeparator() );
       }
-      builder.append( "}" );
+      builder.append( "  }" );
       return builder.toString();
     }
   }
@@ -311,20 +310,20 @@ class InstanceDifferencesImpl implements InstanceDifference {
   public String toString() {
     StringBuilder builder = new StringBuilder();
 
-    builder.append( "InstanceDifferences {\n" );
+    builder.append( "InstanceDifferences {"+System.lineSeparator() );
     if ( getXObject() != null ) {
-      builder.append( "  xObject=" ).append(PRINT_MODEL_ELEMENT.execute(getXObject())).append( ",\n" );
+      builder.append( "    xObject=" ).append(new PrintModelElement("    ").execute(getXObject())).append( ","+System.lineSeparator() );
     }
     if ( getYObject() != null ) {
-      builder.append( "  yObject=" ).append(PRINT_MODEL_ELEMENT.execute(getYObject())).append( ",\n" );
+      builder.append( "    yObject=" ).append(new PrintModelElement("    ").execute(getYObject())).append( ","+System.lineSeparator() );
     }
     if ( attributesWithDifferences != null ) {
-      builder.append( "  attributesWithDifferences=" ).append( attributesWithDifferences ).append( ",\n" );
+      builder.append( "    attributesWithDifferences=" ).append( attributesWithDifferences ).append( ","+System.lineSeparator() );
     }
     if ( associationDiffs != null ) {
-      builder.append( "  associationDiffs=" ).append( associationDiffs ).append( "\n" );
+      builder.append( "    associationDiffs=" ).append( associationDiffs ).append( System.lineSeparator() );
     }
-    builder.append( "}" );
+    builder.append( "  }" );
     return builder.toString();
   }
 

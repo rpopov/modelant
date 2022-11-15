@@ -134,21 +134,21 @@ public class PrintModelElement implements Function<Object, String>{
    */
   private void append(StringBuilder result, String prefix, JmiException exception, Set visited) {
     result.append( exception.getClass() );
-    result.append( " {\n" );
+    result.append( " {"+System.lineSeparator() );
     result.append( prefix );
     result.append( "  message = " );
     result.append( exception.getMessage() );
-    result.append( "\n" );
+    result.append( System.lineSeparator() );
 
     result.append( prefix );
     result.append( "  elementInError = " );
     toString(exception.getElementInError(), result, prefix+"  ", visited);
-    result.append( "\n" );
+    result.append( System.lineSeparator() );
 
     result.append( prefix );
     result.append( "  objectInError = " );
     toString( exception.getObjectInError(), result, prefix+"  ", visited );
-    result.append( "\n" );
+    result.append( System.lineSeparator() );
 
     result.append( prefix );
     result.append( "}" );
@@ -174,7 +174,7 @@ public class PrintModelElement implements Function<Object, String>{
     prefixNested = prefix+"  ";
 
     result.append( metaObject.getName() )
-          .append( " {\n" );
+          .append( " {"+System.lineSeparator() );
 
     // find the description of the class of this object and their superclasses
     // Each element of allMetaObjects is an M2 object of MOF classes that describes
@@ -207,7 +207,7 @@ public class PrintModelElement implements Function<Object, String>{
           } catch (Exception e) { // this should not happen
             result.append( " exception caused: " + e.getClass().getName() +" : "+ e.getMessage() );
           }
-          result.append( ",\n" );
+          result.append( ","+System.lineSeparator() );
         }
       }
     }
@@ -233,7 +233,7 @@ public class PrintModelElement implements Function<Object, String>{
 
     typeNames = object.refTypeName(); // size > 0
     result.append( typeNames.get( typeNames.size()-1 ) )
-          .append( " {\n" );
+          .append( " {"+System.lineSeparator() );
 
     namesIterator = object.refFieldNames().iterator();
     while ( namesIterator.hasNext() ) {
@@ -252,7 +252,7 @@ public class PrintModelElement implements Function<Object, String>{
       } catch (Exception e) { // this should not happen
         result.append( " exception caused: " + e.getClass().getName() + " : " + e.getMessage() );
       }
-      result.append( ",\n" );
+      result.append( ","+System.lineSeparator() );
     }
     result.append( prefix )
           .append( "}" );
@@ -306,7 +306,7 @@ public class PrintModelElement implements Function<Object, String>{
 
     result.append( "RefAssociation ")
           .append( object.refMetaObject().refGetValue( "name" ) );
-    result.append( " {\n");
+    result.append( " {"+System.lineSeparator());
 
 //    linksIterator = object.refAllLinks().iterator();
 //    while ( linksIterator.hasNext() ) {
@@ -314,7 +314,7 @@ public class PrintModelElement implements Function<Object, String>{
 //
 //      result.append( prefix );
 //      toString( link, result, prefix+"  ", visited );
-//      result.append( "\n");
+//      result.append( System.lineSeparator());
 //    }
 
     result.append( prefix )
@@ -330,15 +330,15 @@ public class PrintModelElement implements Function<Object, String>{
    */
   private void append(StringBuilder result, String prefix, RefAssociationLink object, Set visited) {
     result.append( "RefAssociationLink ")
-          .append( "{\n")
+          .append( "{"+System.lineSeparator())
           .append( prefix )
           .append( "  firstEnd=");
            toString( object.refFirstEnd(), result, prefix+"  ", visited);
-           result.append("\n")
+           result.append(System.lineSeparator())
           .append( prefix )
           .append( "  secondEnd=");
            toString( object.refSecondEnd(), result, prefix+"  ", visited);
-           result.append("\n")
+           result.append(System.lineSeparator())
           .append( prefix )
           .append("}");
   }
@@ -369,7 +369,7 @@ public class PrintModelElement implements Function<Object, String>{
                         || value instanceof RefAssociationLink;
 
       if ( onSeparateLine ) { // print the model elements with the prefix
-        result.append( "\n" );
+        result.append( System.lineSeparator() );
         result.append( prefix+"  " );
       }
       toString( value, result, prefix+"  ", visited );
@@ -378,7 +378,7 @@ public class PrintModelElement implements Function<Object, String>{
       }
     }
     if ( onSeparateLine ) { // model elements were printed
-      result.append("\n")
+      result.append( System.lineSeparator())
             .append( prefix )
             .append( "}" );
 

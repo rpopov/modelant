@@ -150,18 +150,23 @@ class ModelDifferenceImpl implements ModelDifference {
   public String toString() {
     StringBuilder result = new StringBuilder(128);
 
-    result.append( "{\r\n element: " )
-          .append( new PrintModelElement().execute( wrapped ) );
     if ( !associations.isEmpty() ) {
+      result.append( "{"+System.lineSeparator())
+            .append( "    ")
+            .append( new PrintModelElement("    ").execute( wrapped ) );
       for (Map.Entry<String, Collection<ModelDifference>> entry: associations.entrySet()) {
-        result.append( ",\r\n being " )
+        result.append( System.lineSeparator())
+              .append( "    being " )
               .append( entry.getKey() )
-              .append( " of:" )
-              .append( entry.getValue() );
+              .append( " of: " )
+              .append( new PrintModelElement("      ").execute( entry.getValue() ));
       }
+      result.append( System.lineSeparator()+"    }" );
+    } else {
+      result.append( System.lineSeparator())
+            .append( "    ")
+            .append( new PrintModelElement("    ").execute( wrapped ) );
     }
-    result.append( "\r\n}" );
-
     return result.toString();
   }
 }
