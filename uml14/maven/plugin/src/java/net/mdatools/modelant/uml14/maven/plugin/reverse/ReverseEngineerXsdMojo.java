@@ -45,7 +45,7 @@ import net.mdatools.modelant.uml14.reverse.ReverseXsdOperation;
  * </ul>
  * @author Rusi Popov (popovr@mdatools.net)
  */
-@Mojo(name="xsd-to-uml13",
+@Mojo(name="xsd-to-uml14",
   defaultPhase=LifecyclePhase.COMPILE
 )
 @Execute(phase=LifecyclePhase.COMPILE)

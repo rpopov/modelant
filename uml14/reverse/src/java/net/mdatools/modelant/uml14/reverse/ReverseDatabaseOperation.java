@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 import javax.jmi.reflect.RefPackage;
 
@@ -57,7 +58,7 @@ public class ReverseDatabaseOperation implements Function<Connection, RefPackage
 
   private static final Logger LOGGER = Logger.getLogger( ReverseDatabaseOperation.class.getName() );
 
-  private static final String LEGAL_TABLE_NAME_REGEX = "^[a-z$#A-Z0-9_]+$";
+  private static final Pattern LEGAL_TABLE_NAME_REGEX = Pattern.compile("^[a-z$#A-Z0-9_]+$");
 
   /**
    * Column name that contains the decimal digits for the column in the result set that describes a
@@ -203,7 +204,7 @@ public class ReverseDatabaseOperation implements Function<Connection, RefPackage
    * @return non-null list of registered tables
    * @throws SQLException
    */
-  protected List<UmlClass> processTables(DatabaseMetaData metadata, String schema) throws SQLException {
+  protected List<UmlClass> readTables(DatabaseMetaData metadata, String schema) throws SQLException {
     List<UmlClass> result;
     ResultSet tableDescriptions;
     String tableName;
@@ -229,8 +230,6 @@ public class ReverseDatabaseOperation implements Function<Connection, RefPackage
 
           factory.constructTagDocumentation( umlClass, remarks );
           factory.constructTagPersistent( umlClass );
-
-          defineAttributes( metadata, umlClass, schema, tableName );
         } else {
           LOGGER.log(Level.INFO,"  skipped" );
         }
@@ -242,12 +241,19 @@ public class ReverseDatabaseOperation implements Function<Connection, RefPackage
     return result;
   }
 
+  protected void readAttributes(List<UmlClass> result, DatabaseMetaData metadata, String schema) throws SQLException {
+    for (UmlClass umlClass : result) {
+      LOGGER.log(Level.INFO, "Attributes of: {0}", umlClass.getName() );
+      defineAttributes( metadata, umlClass, schema, umlClass.getName() );
+    }
+  }
+
   /**
    * Returns true if the table name is a legal one (otherwise JDBC functions would fail)
    * @param tableName
    */
   private boolean isValidTableName(String tableName) {
-    return tableName.matches(LEGAL_TABLE_NAME_REGEX);
+    return LEGAL_TABLE_NAME_REGEX.matcher(tableName).matches();
   }
 
   /**
@@ -258,7 +264,7 @@ public class ReverseDatabaseOperation implements Function<Connection, RefPackage
    * @param schema the name of the DB schemes to reverse engineer
    * @throws SQLException
    */
-  protected void processRelationships(List<UmlClass> tables, DatabaseMetaData metadata, String schema) throws SQLException {
+  protected void readRelationships(List<UmlClass> tables, DatabaseMetaData metadata, String schema) throws SQLException {
     ResultSet relationDescriptions;
     String tableName;
     String otherTable;
@@ -481,8 +487,8 @@ public class ReverseDatabaseOperation implements Function<Connection, RefPackage
     DatabaseMetaData metadata;
     List<UmlClass> tables;
 
-    modelFactory = modelRepository.loadMetamodel("UML13");
-    result = modelFactory.instantiate("model");
+    modelFactory = modelRepository.loadMetamodel("UML14");
+    result = modelFactory.instantiate("uml14");
 
     factory = new Uml14ModelFactory( result );
     factory.setModelName( schemes[0] );
@@ -491,11 +497,9 @@ public class ReverseDatabaseOperation implements Function<Connection, RefPackage
       metadata = connection.getMetaData();
 
       for (String schema : schemes) {
-	      // process all tables and register corresponding classes
-	      tables = processTables( metadata, schema );
-
-	      // describe the relations as associations
-	      processRelationships( tables, metadata, schema );
+	      tables = readTables( metadata, schema );
+	      readAttributes(tables, metadata, schema);
+	      readRelationships( tables, metadata, schema );
       }
     } catch (SQLException ex) {
       throw new IllegalArgumentException(ex);

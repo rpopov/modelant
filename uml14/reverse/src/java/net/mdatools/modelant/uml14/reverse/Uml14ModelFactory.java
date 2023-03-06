@@ -30,9 +30,11 @@ import org.omg.uml14.core.TaggedValue;
 import org.omg.uml14.core.UmlAssociation;
 import org.omg.uml14.core.UmlClass;
 import org.omg.uml14.datatypes.AggregationKindEnum;
+import org.omg.uml14.datatypes.ChangeableKindEnum;
 import org.omg.uml14.datatypes.Expression;
 import org.omg.uml14.datatypes.Multiplicity;
 import org.omg.uml14.datatypes.MultiplicityRange;
+import org.omg.uml14.datatypes.OrderingKindEnum;
 import org.omg.uml14.datatypes.ScopeKindEnum;
 import org.omg.uml14.datatypes.VisibilityKindEnum;
 import org.omg.uml14.modelmanagement.Model;
@@ -53,11 +55,9 @@ public class Uml14ModelFactory {
    */
   public static final String STEREOTYPE_ELEMENT = "element";
 
-  private static final PackageName foundation;
   private static final PackageName core;
   private static final PackageName modelManagement;
   private static final PackageName dataTypes;
-  private static final PackageName extensionMechanisms;
   private static final PackageName bebehavioralElements;
   private static final PackageName commonBehavior;
   private static final ClassName taggedValue;
@@ -80,17 +80,15 @@ public class Uml14ModelFactory {
   private static final ClassName dataType;
 
   static {
-    foundation = new PackageNameImpl("Foundation");
-    core = new PackageNameImpl(foundation, "Core");
-    dataTypes = new PackageNameImpl(foundation, "Data_Types");
-    extensionMechanisms = new PackageNameImpl(foundation, "Extension_Mechanisms");
+    core = new PackageNameImpl("Core");
+    dataTypes = new PackageNameImpl("Data_Types");
 
     modelManagement = new PackageNameImpl("Model_Management");
 
     bebehavioralElements = new PackageNameImpl("Behavioral_Elements");
     commonBehavior = new PackageNameImpl(bebehavioralElements,"Common_Behavior");
 
-    taggedValue = new ClassNameImpl(extensionMechanisms, "TaggedValue");
+    taggedValue = new ClassNameImpl(core, "TaggedValue");
     attribute = new ClassNameImpl(core, "Attribute");
     parameter = new ClassNameImpl(core, "Parameter");
 
@@ -106,7 +104,7 @@ public class Uml14ModelFactory {
     expression = new ClassNameImpl(dataTypes, "Expression");
     umlPackage = new ClassNameImpl(modelManagement, "Package");
     modelName = new ClassNameImpl(modelManagement, "Model");
-    stereotype = new ClassNameImpl(extensionMechanisms, "Stereotype");
+    stereotype = new ClassNameImpl(core, "Stereotype");
     generalization = new ClassNameImpl(core, "Generalization");
 
     multiplicity = new ClassNameImpl(dataTypes, "Multiplicity");
@@ -155,8 +153,7 @@ public class Uml14ModelFactory {
 
     result = (UmlAssociation) association.getMetaClass( extent ).refCreateInstance( null );
     result.setNamespace( namespace );
-    result.setName( "" );
-    result.setVisibility( VisibilityKindEnum.VK_PUBLIC );
+//    result.setName( thisClass.getName()+"-to-"+otherClass.getName() );
 
     // this end (the class with the associative attribute)
     thisEnd = constructAssociationEnd( thisClass, thisRole, thisEndUpper, result );
@@ -177,11 +174,17 @@ public class Uml14ModelFactory {
     AssociationEnd thisEnd;
 
     thisEnd = (AssociationEnd) associationEnd.getMetaClass( extent ).refCreateInstance( null );
-    thisEnd.setName( thisRole );
+    if ( thisRole != null && !thisRole.isEmpty() ) {
+      thisEnd.setName( thisRole );
+    }
     thisEnd.setParticipant( thisClass );
     thisEnd.setVisibility( VisibilityKindEnum.VK_PUBLIC );
     thisEnd.setAssociation( result );
     thisEnd.setMultiplicity( constructMultiplicity( thisEndUpper ) );
+    thisEnd.setTargetScope(ScopeKindEnum.SK_INSTANCE);
+    thisEnd.setChangeability(ChangeableKindEnum.CK_CHANGEABLE);
+    thisEnd.setOrdering(OrderingKindEnum.OK_UNORDERED);
+    thisEnd.setAggregation(AggregationKindEnum.AK_NONE);
 
     return thisEnd;
   }
@@ -456,11 +459,13 @@ public class Uml14ModelFactory {
   public void constructTag(ModelElement modelElement, String name, String value) {
     TaggedValue result;
 
-    result = (TaggedValue) taggedValue.getMetaClass( extent ).refCreateInstance( null );
+    if ( value != null ) {
+      result = (TaggedValue) taggedValue.getMetaClass( extent ).refCreateInstance( null );
 
-    result.setName( name );
-    result.getDataValue().add( value );
-    result.setModelElement( modelElement );
+      result.setName( name );
+      result.getDataValue().add( value );
+      result.setModelElement( modelElement );
+    }
   }
 
   public void constructTagFieldPrecision(ModelElement intoClass, int precision) {
