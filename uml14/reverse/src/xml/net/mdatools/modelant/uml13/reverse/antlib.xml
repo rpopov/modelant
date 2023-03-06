@@ -1,0 +1,539 @@
+<?xml version="1.0"?>
+<!--
+ * Copyright (c) 2001,2012 Rusi Popov, MDA Tools.net
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *    Rusi Popov (popovr@mdatools.net) - initial implementation
+ -->
+
+<!--
+  Tasks, types and macros of ModelAnt UML 1.3 Reverse Engineering <br/>
+  Usage:<br/><br/>
+
+  &lt;typedef resource="net/mdatools/modelant/uml13/reverse/antlib.xml"/&gt;<br/><br/>
+
+  Imports:<br/><br/>
+
+  &lt;typedef resource="net/mdatools/modelant/uml13/wrap/antlib.xml"/&gt;<br/>
+  &lt;typedef resource="net/mdatools/modelant/template/antlib.xml"/&gt;
+  -->
+<antlib xmlns:current="ant:current" >
+
+   <!--
+      Register in the UML 1.3 Core wrapper classes and factory, needed for the tasks below.
+     -->
+   <typedef resource="net/mdatools/modelant/uml13/reverse/private.antlib.xml"/>
+
+  <!--
+    Reverse engineer Ant script and library files, in terms of defined tasks, macros, types and targets. Represent them as classes,
+    attributes and generaliizations in a UML 1.3 model.
+   -->
+  <taskdef name="reverse.ant" classname="net.mdatools.modelant.uml13.reverse.task.ReverseEngineerAntScriptTask"/>
+
+
+   <!--
+     Convert a DTD into XSD<br/>
+
+Based on <a href="http://www.thaiopensource.com/relaxng/trang.html">Trang Manual</a><br/><br/>
+
+Based on Version 20081028<br/><br/>
+
+<h3><a name="dtdnput">DTD input module</a></h3>
+
+<p>This input module accepts DTDs as defined by the XML 1.0 <a href="http://www.w3.org/TR/REC-xml">Recommendation</a>.</p>
+
+<p>It accepts the following INPUT parameters:</p>
+
+<table>
+<tr><td><code>xmlns=<i>uri</i></code></td>
+
+<td>Specifies the default namespace, that is the namespace used for
+unqualified element names.</td></tr>
+
+<tr><td><code>xmlns:<i>prefix</i>=<i>uri</i></code></td>
+
+<td>Specifies the namespace for the element and attribute names using
+<code><i>prefix</i></code>.</td></tr>
+
+<tr><td><code>colon-replacement=<i>chars</i></code></td>
+
+<td><a name="colon-replacement">Replaces colons in element names by
+<code><i>chars</i></code> when constructing the names of
+definitions used to represent the element declarations and attribute
+list declarations in the DTD.  Trang generates a definition for each
+element declaration and attlist declaration in the DTD. The name of
+the definition is based on the name of the element. In RELAX NG, the
+names of definitions cannot contain colons.  However, in the DTD, the
+element name may contain a colon.  By default, Trang will first try to
+use the element names without prefixes.  If this causes a conflict, it
+will instead replace the colon by a legal name character (it try first
+to use a period).</a></td></tr>
+
+<tr><td><code>element-define=<i>name-pattern</i></code></td>
+
+<td>Specifies how to construct the name of the definition representing
+an element declaration from the name of the element.  The
+<code><i>name-pattern</i></code> must contain exactly one percent
+character.  This percent character is replaced by the name of element
+(after <a href="#colon-replacement">colon replacement</a>) and the
+result is used as the name of the definition.</td></tr>
+
+<tr><td><a name="inline-attlist"><code>inline-attlist</code></a></td>
+
+<td>Specifies not to generate definitions for attribute list
+declarations and instead move attributes declared in attribute list
+declarations into the definitions generated for element declarations.
+This is the default behavior when the output module is
+<code>xsd</code>.  Otherwise, the default behaviour is as described in
+the <a href="#nonline-attlist"><code>nonline-attlist</code></a>
+parameter.</td></tr>
+
+<tr><td><a name="nonline-attlist"><code>nonline-attlist</code></a></td>
+
+<td>Generates a distinct definition (with
+<code>combine="interleave"</code>) for each attribute list declaration
+in the DTD; the definition for each element declaration references the
+definition for the corresponding attribute list declaration.  This is
+the default behavior, except when the output module is
+<code>xsd</code>, for which the default behavior is as described in
+the <a href="#inline-attlist"><code>inline-attlist</code></a>
+parameter.</td></tr>
+
+<tr><td><code>attlist-define=<i>name-pattern</i></code></td>
+
+<td>This specifies how to construct the name of the definition
+representing an attribute list declaration from the name of the
+element. The <code><i>name-pattern</i></code> must contain exactly
+one percent character.  This percent character is replaced by the name
+of element (after <a href="#colon-replacement">colon replacement</a>)
+and the result is used as the name of the definition.</td></tr>
+
+<tr><td><code>any-name=<i>name</i></code></td>
+
+<td>Specifies the name of the definition generated for the content of
+elements declared in the DTD as having a content model of ANY.</td></tr>
+
+<tr><td><code>strict-any</code></td>
+
+<td>Preserves the exact semantics of ANY content models by using an
+explicit choice of references to all declared elements.  By default,
+Trang uses a wildcard that allows any element.</td></tr>
+
+<tr><td><code>annotation-prefix=<i>prefix</i></code></td>
+
+<td>Default values are represented using an annotation attribute
+<code><i>prefix</i>:defaultValue</code> where
+<code><i>prefix</i></code> is bound to
+<code>http://relaxng.org/ns/compatibility/annotations/1.0</code> as
+defined by the RELAX NG DTD Compatibility <a href="http://www.oasis-open.org/committees/relax-ng/compatibility.html">Committee Specification</a>. By default, Trang will use
+<code>a</code> for <code><i>prefix</i></code> unless that
+conflicts with a prefix used in the DTD.</td></tr>
+
+<tr><td><code>generate-start</code></td>
+<tr><td><code>no-generate-start</code></td>
+
+<td>Specifies whether Trang should generate a <code>start</code>
+element. DTDs do not indicate what elements are allowed as document
+elements.  Trang assumes that all elements that are defined but never
+referenced are allowed as document elements.</td></tr>
+
+</table>
+<h3><a name="xsd-output">W3C XML Schema output module</a></h3>
+
+<p>This output module outputs an W3C XML Schema as defined by the XML
+Schema <a href="http://www.w3.org/TR/xmlschema-1/">Recommendation</a>.</p>
+
+<p>It supports the following OUTPUT parameters:</p>
+
+<table>
+<tr><td><code>encoding=<i>name</i></code></td>
+
+<td>Use an encoding of <code><i>name</i></code> for the output
+files.</td></tr>
+
+<tr><td><code>indent=<i>n</i></code></td>
+
+<td>Indent by <code><i>n</i></code> spaces for each indentation
+level.</td></tr>
+<tr><td><code>disable-abstract-elements</code></td>
+
+<td>Disables the use of abstract elements and subsitution groups in
+the generated XML Schema.  This can also be controlled using an <a href="#enable-abstract-elements">annotation attribute</a>.</td></tr>
+
+<tr><td><code>any-process-contents=strict</code>|<code>lax</code>|<code>skip</code></td>
+
+<td>Specifies the value for the <code>processContents</code> attribute
+of <code>any</code> elements.  The default is <code>skip</code>
+(corresponding to RELAX NG semantics) unless the input format is
+<code>dtd</code>, in which case the default is <code>strict</code>
+(corresponding to DTD semantics).</td></tr>
+
+<tr><td><code>any-attribute-process-contents=strict</code>|<code>lax</code>|<code>skip</code></td>
+
+<td>Specifies the value for the <code>processContents</code> attribute
+of <code>anyAttribute</code> elements.  The default is
+<code>skip</code> (corresponding to RELAX NG semantics).</td></tr>
+
+</table>
+
+
+<p>It has the following limitations:</p>
+
+<ul>
+
+<li>it may generate schemas that violate W3C XML Schema's restrictions
+on ambiguous content models;</li>
+
+<li>it may generate schemas that violate W3C XML Schema's restrictions
+on consistent element types;</li>
+
+<li>when the RELAX NG schema cannot be represented by W3C XML Schema,
+a generalization is generated; it should give a warning in this case,
+but does not always do so.</li>
+
+</ul>
+
+<p>Annotations can be added to the RELAX NG schema to guide the
+translation.  These annotations have the namespace URI
+<code>http://www.thaiopensource.com/ns/relaxng/xsd</code>. This document
+will use the convention that the prefix <code>tx</code> refers to this
+namespace URI; in other words, it will assume a namespace declaration
+of</p>
+
+<pre>xmlns:tx="http://www.thaiopensource.com/ns/relaxng/xsd"</pre>
+
+<p><a name="enable-abstract-elements">Currently, only one annotation
+is supported, an attribute <code>tx:enableAbstractElements</code>.
+The value of this must be <code>true</code> or <code>false</code>.  It
+applies to RELAX NG <code>define</code> elements.  Trang has the
+ability to translate a <code>define</code> that contains a choice of
+element patterns into an abstract element declaration, which will be
+used as the head of a substitution group whose members are the
+elements in the choice.  Whether it does this is determined by the
+value of the <code>tx:enableAbstractElements</code> annotation
+attribute.  If the value is <code>true</code>, it will attempt to use
+an abstract element element.  If the value is <code>false</code>, it
+will not, which means the <code>define</code> will typically be
+translated into a group definition.</a></p><a name="enable-abstract-elements">
+
+<p>The <code>tx:enableAbstractElements</code> attribute is inherited
+in a similar way to the <code>ns</code> attribute: it can be specified
+on a <code>grammar</code>, <code>div</code> or <code>include</code>
+element to enable or disable the use of abstract elements for all
+descendant <code>define</code> elements. In the absence of any
+inherited <code>tx:enableAbstractElements</code> attribute, the use of
+abstract elements is enabled unless the <code>
+disable-abstract-elements</code> option was specified.</p>
+
+<p>It can happen that the same element name occurs in a choice in more
+than one <code>define</code> element; at most one of these
+<code>define</code> elements can be translated to an abstract element.
+In this case, Trang will not translate any of them to an abstract
+element, unless the use of abstract elements has been disabled by
+<code>tx:enableAbstractElements</code> for all except one of the
+<code>define</code> elements.</p>
+
+<p>In fact, the use of abstract elements is not restricted to the case
+where the <code>define</code> consists of a <code>choice</code> that
+contains only <code>element</code> patterns; the <code>choice</code>
+may also contain <code>ref</code> patterns referring to definitions
+that are to be translated into element declarations, whether abstract
+or not. The <code>tx:enableAbstractElements</code> attribute applies
+equally to these definitions.</p>
+     -->
+   <taskdef name="convert.dtd2xsd" classname="net.mdatools.modelant.uml13.reverse.task.Dtd2XsdTask"/>
+
+  <!--
+     Generate documentation of all tasks/types/macros in modelant, integrated with its javadoc
+     documentation. <pre>
+     Usage:
+     &lt;ant.doc output.dir="${root.doc}/antlibdoc" javadoc.dir="../api" java.model="${out}/reverse.java.xmi" work.dir="${work}"&gt;
+       &lt;fileset dir="util/src/xml"&gt;
+         &lt;include name="**/antlib.xml" /&gt;
+       &lt;/fileset&gt;
+
+       &lt;fileset dir="mdr/src/xml"&gt;
+         &lt;include name="**/antlib.xml" /&gt;
+       &lt;/fileset&gt;
+     &lt;/ant.doc&gt;
+     </pre>
+     See <a href="reverse.ant.html">reverse.ant</a>
+    -->
+  <macrodef name="ant.doc">
+    <attribute name="output.dir"  description="the name of the directory where to generate the documentation"/>
+    <attribute name="javadoc.dir"  default="" description="the optional name of the directory, relative to output.dir, where javadoc documentation will be/is generated"/>
+    <attribute name="java.model"  default="" description="the optional name of the file with the reverse engineered java implementations of the tasks to document"/>
+    <attribute name="work.dir"  default="" description="the name of the work directory where to keep the repository files"/>
+    <attribute name="header" default="jsp/modelant/documentation/header.html"
+                             description="Optional text resource in classpath, containing an HTML fragment to include as a header of the pages shown in the main frame of the documentation"/>
+    <attribute name="footer" default="jsp/modelant/documentation/footer.html"
+                             description="Optional text resource in classpath, containing an HTML fragment to include as a footer of the pages shown in the main frame of the documentation"/>
+    <attribute name="classpath" default="${net.mdatools.modelant.uml13.reverse.antlib.classpath}"
+                             description="Optional classpath where to load header/footer from"/>
+    <element name="nested" optional="true" implicit="true" description="This is an implicit optional element holding fileset(s) that describe the antlib.xml files to reverse engineer"/>
+    <sequential>
+      <local>
+        <property name="repository.model" value="antlib"/>
+
+        <list.create name="service.names"/> <!-- the set*-method names that are not treated as attributes -->
+        <list.add property="service.names" value="RuntimeConfigurableWrapper"/>
+        <list.add property="service.names" value="TaskName"/>
+        <list.add property="service.names" value="TaskType"/>
+        <list.add property="service.names" value="Task"/>
+        <list.add property="service.names" value="OwningTarget"/>
+        <list.add property="service.names" value="Project"/>
+        <list.add property="service.names" value="Location"/>
+
+        <reverse.ant output="@{work.dir}/result-antlib.xmi" input="@{java.model}" work="@{work.dir}" taskname="ant.doc">
+          <nested/>
+        </reverse.ant>
+
+        <mdr work="@{work.dir}"/>
+
+        <uml13.load.metamodel/>
+        <uml13.instantiate extent="${repository.model}"/>
+        <mdr.read.xmi extent="${repository.model}"
+                      file="@{work.dir}/result-antlib.xmi"/>
+
+        <uml13.wrap.register.factory/>
+
+        <uml13.begin.intensive.read extent="${repository.model}"/>
+
+        <property name="header" value=""/>
+        <if>
+          <not>
+            <length string="@{header}" trim="true" length="0"/>
+          </not>
+          <then>
+            <loadresource property="header">
+              <javaresource name="@{header}" classpath="@{classpath}"/>
+            </loadresource>
+          </then>
+        </if>
+
+        <property name="footer" value=""/>
+        <if>
+          <not>
+            <length string="@{footer}" trim="true" length="0"/>
+          </not>
+          <then>
+            <loadresource property="footer">
+              <javaresource name="@{footer}" classpath="@{classpath}"/>
+            </loadresource>
+          </then>
+        </if>
+
+        <!-- Generate documentation -->
+        <template.init root="jsp"
+                       context="modelant/documentation"
+                       classpath="${net.mdatools.modelant.uml13.reverse.antlib.classpath}"/>
+
+        <!-- select all explicit task/type/macro definitions - they have a stereotype -->
+        <select name="all.definitions">
+          <allOfMetaclassSelector extent="${repository.model}" metaclass="Foundation::Core::Class"/>
+
+          <evaluate>
+            <tasks>
+              <uml13.get path="stereotype"/>
+            </tasks>
+
+            <and>
+              <not>
+                <isempty/>
+              </not>
+
+              <evaluate>
+                <tasks>
+                  <ref.get path="name" name="stereotype.name"/>
+                </tasks>
+
+                <not>
+                  <equals arg1="${stereotype.name}" arg2="Interface"/>
+                </not>
+              </evaluate>
+            </and>
+          </evaluate>
+        </select>
+
+        <!-- collect all packages containing at least one task/type/macro i.e. a class having a stereotype -->
+        <select name="all.packages">
+          <allOfMetaclassSelector extent="${repository.model}" metaclass="Model_Management::Package"/>
+
+          <or>
+            <and>
+              <not>
+                <exists>  <!-- just a script with no targets -->
+                  <ref.get path="ownedElement"/>
+                </exists>
+              </not>
+              <evaluate>
+                <tasks>
+                  <uml13.get path="stereotype"   name="package.stereotype"/>
+                </tasks>
+
+                <not>
+                  <isempty property="package.stereotype"/>
+                </not>
+              </evaluate>
+            </and>
+
+            <exists> <!-- a package (i.e. script) with ant target/macro/task/type definition -->
+              <ref.get path="ownedElement"/>
+
+              <and>
+                <isinstanceof metaclass="Foundation:Core:Class"/>
+
+                <evaluate>
+                  <tasks>
+                    <uml13.get path="stereotype" name="stereotype"/>
+                  </tasks>
+
+                  <and>
+                    <not>
+                      <isempty property="stereotype"/>
+                    </not>
+
+                    <evaluate>
+                      <tasks>
+                        <ref.get   property="stereotype" path="name" name="stereotype.name"/>
+                      </tasks>
+
+                      <not>
+                        <equals arg1="${stereotype.name}" arg2="Interface"/>
+                      </not>
+                    </evaluate>
+                  </and>
+                </evaluate>
+              </and>
+            </exists>
+          </or>
+        </select>
+
+        <!--
+           Make the javadoc directory accessible in the documentation templates
+          -->
+        <property name="javadoc.dir" value="@{javadoc.dir}"/>
+
+        <!-- list the pages for a single explicit task/type/macro definition -->
+        <for property="all.definitions">
+          <tasks>
+
+            <!-- construct the actual package name  as the qualified name of the namespace of the model class -->
+            <wrap.method method="formatPackageName" name="package"/>
+
+            <!-- construct the corresponding directory name -->
+            <string.replace string="${package}" regex="\." replacement="/" name="directory"/>
+
+            <!-- construct the result file name as the capitalized name of the model class -->
+            <ref.get name="class.name" path="name"/>
+
+            <!-- Create the single class description to be shown in the right (main) frame -->
+            <wrap/>
+            <template context="modelant/documentation"
+                      file="@{output.dir}/${directory}/${class.name}.html"
+                      method="renderPage"  taskname="ant.doc"/>
+          </tasks>
+        </for>
+
+        <!-- list the summary pages, each for a package containing tasks/types/macros -->
+        <for property="all.packages">
+          <tasks>
+
+            <wrap.method method="formatQualifiedName" name="package"/>
+
+            <!-- construct the corresponding directory name -->
+            <string.replace string="${package}" regex="\." replacement="/" name="directory"/>
+
+            <wrap/>
+
+            <!-- Render the package summary page to be shown in the left bottom frame-->
+            <template context="modelant/documentation"
+                      file="@{output.dir}/${directory}/package-frame.html"
+                      method="renderClassesInPackageIndex"  taskname="ant.doc"/>
+
+            <!-- Render the package summary page to be shown in the right frame-->
+            <template context="modelant/documentation"
+                      file="@{output.dir}/${directory}/package-summary.html"
+                      method="renderClassesInPackageSummary"  taskname="ant.doc"/>
+          </tasks>
+        </for>
+
+        <!-- Identify the package group names -->
+        <method.new class="java.util.HashSet" name="files"/>
+        <for property="all.packages">
+          <tasks>
+            <wrap.method method="getLogicalName" name="file.name"/>
+            <string.replace string="${file.name}" regex="^(.*?)\.[a-z]*$" replacement="$1" name="name"/>
+            <method property="files" method="add" name="void">
+              <parameter value="${name}" signature="java.lang.Object"/>
+            </method>
+          </tasks>
+        </for>
+
+        <!-- Generate toc-classes content files for each name of a group of files -->
+        <for iterator="group.name">
+          <propertySelector property="files"/>
+
+          <tasks>
+            <select name="group.definitions">
+              <propertySelector property="all.definitions"/>
+
+              <evaluate>
+                <tasks>
+                  <ref.get path="namespace.name" name="name"/>
+                </tasks>
+                <matches string="${name}" pattern="^${group.name}.*$"/>
+              </evaluate>
+            </select>
+
+            <!-- filter the task definitions to include in the group, i.e. definitions in a package -->
+            <template context="modelant/documentation"
+                      file="@{output.dir}/toc-${group.name}-classes.html"
+                      method="renderTOCClasses"
+                      property="group.definitions"  taskname="ant.doc"/>
+
+          </tasks>
+        </for>
+
+        <!-- Create the containing index page - the main frames structure -->
+        <template context="modelant/documentation"
+                  file="@{output.dir}/index.html"
+                  method="renderIndex"
+                  property="all.definitions"  taskname="ant.doc"/>
+
+        <!-- Create the list of packages page - the list of packages shown in the left upper frame -->
+        <template context="modelant/documentation"
+                  file="@{output.dir}/toc-packages.html"
+                  method="renderTOCPackages"
+                  property="all.packages"  taskname="ant.doc"/>
+
+        <!-- Create the containing index page - the all classes list shown in the left bottom frame -->
+        <template context="modelant/documentation"
+                  file="@{output.dir}/toc-classes.html"
+                  method="renderTOCClasses"
+                  property="all.definitions"  taskname="ant.doc"/>
+
+        <!-- Create the containing index page - the initial contents of the right (main) frame -->
+        <template context="modelant/documentation"
+                  file="@{output.dir}/cover.html"
+                  method="renderCover"
+                  property="all.packages"  taskname="ant.doc"/>
+
+        <template context="modelant/documentation"
+                  file="@{output.dir}/stylesheet.css"
+                  method="renderCss"
+                  property="all.packages"  taskname="ant.doc"/>
+        <uml13.wrap.unregister.factory/>
+      </local>
+    </sequential>
+  </macrodef>
+
+  <!--
+    Set in net.mdatools.modelant.uml13.reverse.antlib.classpath the classpath of this library
+    -->
+  <init/>
+</antlib>

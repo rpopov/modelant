@@ -9,59 +9,65 @@
  *    Rusi Popov (popovr@mdatools.net) - initial implementation
  --%><%--
   *
-  * Render a list of classes, assumed to pertain to the same package
+  * Render a root list of classes shown in the left lower frame
   *
-  * Parameter
-  *   title - the title under which to list those classes
+  * Parameters:
+  *   title - the title to print
   *
---%><%@page wraps="java.util.ArrayList"
-%><%@page import="org.omg.uml13.wrap.modelmanagement.WrapUmlPackage,
-                  java.util.*,
+--%><%@page wraps="java.util.List"
+%><%@page import="java.util.*,
                   org.omg.uml13.wrap.foundation.core.*,
                   org.omg.uml13.foundation.core.*,
                   org.omg.uml13.wrap.foundation.extensionmechanisms.*,
                   org.omg.uml13.foundation.extensionmechanisms.*,
                   org.omg.uml13.wrap.modelmanagement.*,
                   org.omg.uml13.modelmanagement.*,
-                  net.mdatools.modelant.core.wrap.Factories,net.mdatools.modelant.uml14.reverse.Convention,
+                  net.mdatools.modelant.core.wrap.Factories,
                   javax.jmi.reflect.*"
 %><%
 
+  String title;
+
   UmlClass thisClass;
-  WrapUmlClass wrappedClass;
+  UmlPackage thisPackage;
+  Stereotype stereotype;
+
+  WrapUmlClass wrapClass;
+  WrapUmlPackage wrapPackage;
 
   String className;
   String path;
-  String rootPath;
-  String title;
 
   Iterator classIterator;
 
-  if ( !wrapped.isEmpty() ) {
-    title = (String) request.getAttribute("title");
+  title = (String) request.getAttribute("title");
 
+  // NOTE: the targets are not listed intensionally, becasue they mean nothng without the script they are defined in
+
+  if ( !wrapped.isEmpty() ) {
+
+%><table width="100%">
+<thead>
+  <th align="left"><b><%=title%></b></th>
+</thead>
+<tbody>
+<%
     WrapModelElement.sortByName( wrapped );
 
-%>
-<table width="100%">
-  <thead>
-    <th align="left"><b><%=title %></b></th>
-  </thead>
-  <tbody>
-<%
     classIterator = wrapped.iterator();
     while ( classIterator.hasNext() ) {
       thisClass = (UmlClass) classIterator.next();
 
-      wrappedClass = (WrapUmlClass) Factories.wrap( thisClass );
+      thisPackage = (UmlPackage) thisClass.getNamespace();
+      wrapPackage = (WrapUmlPackage) Factories.wrap( thisPackage );
 
-      rootPath = wrappedClass.formatPackageName().replaceAll("[a-zA-Z0-9]+(\\.|$)", "../");
-      path = wrappedClass.formatPackageName().replace(".", "/");
+      path = wrapPackage.formatQualifiedName().replace(".", "/");
 
-%><tr><td nowrap><a href="<%=rootPath %><%=path %>/<%=thisClass.getName() %>.html" target="mainFrame"><%=thisClass.getName() %></a></td></tr>
+%><tr><td nowrap><a href="<%=path %>/<%=thisClass.getName() %>.html" target="mainFrame"><%=thisClass.getName() %></a></td></tr>
 <%
     }
-%></tbody></table><br/>
+%></tbody></table>
+<br/>
 <%
   }
 %>

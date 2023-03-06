@@ -5,13 +5,13 @@
 
   <parent>
     <groupId>net.mdatools</groupId>
-    <artifactId>modelant.uml13</artifactId>
+    <artifactId>modelant.uml14</artifactId>
     <version>${revision}</version>
   </parent>
 
-  <artifactId>modelant.uml13.reverse</artifactId>
-  <name>modelant.uml13.reverse</name>  
-  <description>Functionality for reverse engineering to UML 1.3 models, implemented as POJO.</description>
+  <artifactId>modelant.uml14.reverse</artifactId>
+  <name>modelant.uml14.reverse</name>  
+  <description>Functionality for reverse engineering to UML 1.4 models, implemented as POJO.</description>
 
   <dependencies>
     <dependency>
@@ -26,7 +26,7 @@
     </dependency>
     <dependency>
       <groupId>net.mdatools</groupId>
-      <artifactId>modelant.uml13.metamodel</artifactId>
+      <artifactId>modelant.uml14.metamodel</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
@@ -41,7 +41,7 @@
     </dependency>
     <dependency>
       <groupId>net.mdatools</groupId>
-      <artifactId>modelant.uml13.api</artifactId>
+      <artifactId>modelant.uml14.api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>

@@ -1,0 +1,2531 @@
+<?xml version = '1.0' encoding = 'UTF-8' ?>
+<XMI xmi.version = '1.2' xmlns:Model = 'org.omg.xmi.namespace.Model' timestamp = 'Mon Mar 06 13:31:42 EET 2023'>
+  <XMI.header>
+    <XMI.documentation>
+      <XMI.exporter>Netbeans XMI Writer</XMI.exporter>
+      <XMI.exporterVersion>1.0</XMI.exporterVersion>
+    </XMI.documentation>
+  </XMI.header>
+  <XMI.content>
+    <Model:Package xmi.id = 'a1' name = 'PrimitiveTypes' annotation = '' isRoot = 'false'
+      isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis'>
+      <Model:Namespace.contents>
+        <Model:Tag xmi.id = 'a2' name = '*tag' annotation = '' tagId = 'javax.jmi.packagePrefix'>
+          <Model:Tag.values>javax.jmi</Model:Tag.values>
+          <Model:Tag.elements>
+            <Model:Package xmi.idref = 'a1'/>
+          </Model:Tag.elements>
+        </Model:Tag>
+        <Model:PrimitiveType xmi.id = 'a3' name = 'Boolean' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis'/>
+        <Model:PrimitiveType xmi.id = 'a4' name = 'Integer' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis'/>
+        <Model:PrimitiveType xmi.id = 'a5' name = 'Long' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis'/>
+        <Model:PrimitiveType xmi.id = 'a6' name = 'Float' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis'/>
+        <Model:PrimitiveType xmi.id = 'a7' name = 'Double' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis'/>
+        <Model:PrimitiveType xmi.id = 'a8' name = 'String' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis'/>
+      </Model:Namespace.contents>
+    </Model:Package>
+    <Model:Package xmi.id = 'a9' name = 'Model' annotation = '' isRoot = 'false'
+      isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis'>
+      <Model:ModelElement.constraints>
+        <Model:Constraint xmi.idref = 'a10'/>
+        <Model:Constraint xmi.idref = 'a11'/>
+        <Model:Constraint xmi.idref = 'a12'/>
+        <Model:Constraint xmi.idref = 'a13'/>
+      </Model:ModelElement.constraints>
+      <Model:Namespace.contents>
+        <Model:Import xmi.id = 'a14' name = 'PrimitiveTypes' annotation = '' visibility = 'public_vis'
+          isClustered = 'false'>
+          <Model:Import.importedNamespace>
+            <Model:Package xmi.idref = 'a1'/>
+          </Model:Import.importedNamespace>
+        </Model:Import>
+        <Model:Tag xmi.id = 'a15' name = '*tag_1' annotation = '' tagId = 'org.omg.mof.idl_prefix'>
+          <Model:Tag.values>org.omg.mof</Model:Tag.values>
+          <Model:Tag.elements>
+            <Model:Package xmi.idref = 'a9'/>
+          </Model:Tag.elements>
+        </Model:Tag>
+        <Model:Tag xmi.id = 'a16' name = '*tag_2' annotation = '' tagId = 'org.omg.mof.idl_version'>
+          <Model:Tag.values>1.4</Model:Tag.values>
+          <Model:Tag.elements>
+            <Model:Package xmi.idref = 'a9'/>
+          </Model:Tag.elements>
+        </Model:Tag>
+        <Model:Tag xmi.id = 'a17' name = '*tag_3' annotation = '' tagId = 'javax.jmi.packagePrefix'>
+          <Model:Tag.values>javax.jmi</Model:Tag.values>
+          <Model:Tag.elements>
+            <Model:Package xmi.idref = 'a9'/>
+          </Model:Tag.elements>
+        </Model:Tag>
+        <Model:Tag xmi.id = 'a18' name = '*tag_4' annotation = '' tagId = 'org.omg.xmi.namespace'>
+          <Model:Tag.values>Model</Model:Tag.values>
+          <Model:Tag.elements>
+            <Model:Package xmi.idref = 'a9'/>
+          </Model:Tag.elements>
+        </Model:Tag>
+        <Model:Class xmi.id = 'a19' name = 'ModelElement' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'true' visibility = 'public_vis' isSingleton = 'false'>
+          <Model:ModelElement.constraints>
+            <Model:Constraint xmi.idref = 'a20'/>
+            <Model:Constraint xmi.idref = 'a21'/>
+            <Model:Constraint xmi.idref = 'a22'/>
+            <Model:Constraint xmi.idref = 'a23'/>
+          </Model:ModelElement.constraints>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a24' name = '*tag_5' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a19'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Constraint xmi.id = 'a23' name = 'MustBeContainedUnlessPackage' annotation = ''
+              expression = 'context ModelElement&#10;                inv: &#10;                not self.oclIsTypeOf(Package) implies &#10;                self.container -&gt; size = 1'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a19'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a22' name = 'FrozenAttributesCannotBeChanged'
+              annotation = '' expression = 'context ModelElement&#10;                inv: &#10;                self.isFrozen() implies &#10;                let myTypes = &#10;                self.oclType() -&gt; allSupertypes() -&gt; includes(self.oclType()) in&#10;                let myAttrs : Set(Attribute) = &#10;                self.RefBaseObject::refMetaObject() -&gt; asOclType(Class) -&gt; &#10;                findElementsByTypeExtended(Attribute) in&#10;                myAttrs -&gt; forAll(a | &#10;                self.RefObject::refValue@pre(a) = self.RefObject::refValue(a))'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a19'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a21' name = 'FrozenElementsCannotBeDeleted'
+              annotation = '' expression = 'context ModelElement&#10;                post: &#10;                (self.isFrozen@pre() and &#10;                self.container@pre -&gt; notEmpty and&#10;                self.container.isFrozen@pre()) implies&#10;                (self.container.Object::non_existent() or &#10;                not self.Object::non_existent())'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a19'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a20' name = 'FrozenDependenciesCannotBeChanged'
+              annotation = '' expression = 'context ModelElement&#10;                post: &#10;                self.isFrozen() implies &#10;                let myClasses = self.oclType() -&gt; allSupertypes() -&gt; &#10;                includes(self.oclType()) in&#10;                let myRefs = Set(Reference) = &#10;                self.RefBaseObject::refMetaObject() -&gt; asOclType(Class) -&gt; &#10;                findElementsByTypeExtended(Reference) in&#10;                let myDepRefs = myRefs -&gt; &#10;                select(r | Set{&quot;&#10;                &quot;&#10;                &quot;&#10;                includes(r.name)) in&#10;                myDepRefs -&gt; forAll(r | &#10;                self.RefObject::refValue@pre(r) = self.RefObject::refValue(r))'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a19'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Attribute xmi.id = 'a25' name = 'name' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true' isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a8'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+            <Model:Tag xmi.id = 'a26' name = '*tag_6' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Attribute xmi.idref = 'a25'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Attribute xmi.id = 'a27' name = 'qualifiedName' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'false' isDerived = 'true'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>-1</XMI.field>
+                <XMI.field>true</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a8'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+            <Model:Tag xmi.id = 'a28' name = '*tag_7' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Attribute xmi.idref = 'a27'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Attribute xmi.id = 'a29' name = 'annotation' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true' isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a8'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+            <Model:Tag xmi.id = 'a30' name = '*tag_8' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Attribute xmi.idref = 'a29'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Reference xmi.id = 'a31' name = 'requiredElements' annotation = ''
+              scope = 'instance_level' visibility = 'public_vis' isChangeable = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>0</XMI.field>
+                <XMI.field>-1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>true</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a19'/>
+              </Model:TypedElement.type>
+              <Model:Reference.referencedEnd>
+                <Model:AssociationEnd xmi.idref = 'a32'/>
+              </Model:Reference.referencedEnd>
+            </Model:Reference>
+            <Model:Constant xmi.id = 'a33' name = 'ContainerDep' annotation = '' value = 'container'>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a8'/>
+              </Model:TypedElement.type>
+            </Model:Constant>
+            <Model:Constant xmi.id = 'a34' name = 'ContentsDep' annotation = '' value = 'contents'>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a8'/>
+              </Model:TypedElement.type>
+            </Model:Constant>
+            <Model:Constant xmi.id = 'a35' name = 'SignatureDep' annotation = '' value = 'signature'>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a8'/>
+              </Model:TypedElement.type>
+            </Model:Constant>
+            <Model:Constant xmi.id = 'a36' name = 'ConstraintDep' annotation = '' value = 'constraint'>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a8'/>
+              </Model:TypedElement.type>
+            </Model:Constant>
+            <Model:Constant xmi.id = 'a37' name = 'ConstrainedElementsDep' annotation = ''
+              value = 'constrained elements'>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a8'/>
+              </Model:TypedElement.type>
+            </Model:Constant>
+            <Model:Constant xmi.id = 'a38' name = 'SpecializationDep' annotation = ''
+              value = 'specialization'>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a8'/>
+              </Model:TypedElement.type>
+            </Model:Constant>
+            <Model:Constant xmi.id = 'a39' name = 'ImportDep' annotation = '' value = 'import'>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a8'/>
+              </Model:TypedElement.type>
+            </Model:Constant>
+            <Model:Constant xmi.id = 'a40' name = 'TypeDefinitionDep' annotation = ''
+              value = 'type definition'>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a8'/>
+              </Model:TypedElement.type>
+            </Model:Constant>
+            <Model:Constant xmi.id = 'a41' name = 'ReferencedEndsDep' annotation = ''
+              value = 'referenced ends'>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a8'/>
+              </Model:TypedElement.type>
+            </Model:Constant>
+            <Model:Constant xmi.id = 'a42' name = 'TaggedElementsDep' annotation = ''
+              value = 'tagged elements'>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a8'/>
+              </Model:TypedElement.type>
+            </Model:Constant>
+            <Model:Constant xmi.id = 'a43' name = 'IndirectDep' annotation = '' value = 'indirect'>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a8'/>
+              </Model:TypedElement.type>
+            </Model:Constant>
+            <Model:Constant xmi.id = 'a44' name = 'AllDep' annotation = '' value = 'all'>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a8'/>
+              </Model:TypedElement.type>
+            </Model:Constant>
+            <Model:Operation xmi.id = 'a45' name = 'findRequiredElements' annotation = ''
+              scope = 'instance_level' visibility = 'public_vis' isQuery = 'false'>
+              <Model:Namespace.contents>
+                <Model:Parameter xmi.id = 'a46' name = '**result**' annotation = '' direction = 'return_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>0</XMI.field>
+                    <XMI.field>-1</XMI.field>
+                    <XMI.field>false</XMI.field>
+                    <XMI.field>true</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:Class xmi.idref = 'a19'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+                <Model:Parameter xmi.id = 'a47' name = 'kinds' annotation = '' direction = 'in_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>-1</XMI.field>
+                    <XMI.field>false</XMI.field>
+                    <XMI.field>true</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:PrimitiveType xmi.idref = 'a8'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+                <Model:Parameter xmi.id = 'a48' name = 'recursive' annotation = '' direction = 'in_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>false</XMI.field>
+                    <XMI.field>false</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:PrimitiveType xmi.idref = 'a3'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+                <Model:Tag xmi.id = 'a49' name = '*tag_9' annotation = '' tagId = 'org.omg.mof.idl_version'>
+                  <Model:Tag.values>1.4</Model:Tag.values>
+                  <Model:Tag.elements>
+                    <Model:Operation xmi.idref = 'a45'/>
+                  </Model:Tag.elements>
+                </Model:Tag>
+              </Model:Namespace.contents>
+            </Model:Operation>
+            <Model:Operation xmi.id = 'a50' name = 'isRequiredBecause' annotation = ''
+              scope = 'instance_level' visibility = 'public_vis' isQuery = 'false'>
+              <Model:Namespace.contents>
+                <Model:Parameter xmi.id = 'a51' name = '**result**' annotation = '' direction = 'return_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>false</XMI.field>
+                    <XMI.field>false</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:PrimitiveType xmi.idref = 'a3'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+                <Model:Parameter xmi.id = 'a52' name = 'otherElement' annotation = '' direction = 'in_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>false</XMI.field>
+                    <XMI.field>false</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:Class xmi.idref = 'a19'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+                <Model:Parameter xmi.id = 'a53' name = 'reason' annotation = '' direction = 'out_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>false</XMI.field>
+                    <XMI.field>false</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:PrimitiveType xmi.idref = 'a8'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+                <Model:Tag xmi.id = 'a54' name = '*tag_10' annotation = '' tagId = 'org.omg.mof.idl_version'>
+                  <Model:Tag.values>1.4</Model:Tag.values>
+                  <Model:Tag.elements>
+                    <Model:Operation xmi.idref = 'a50'/>
+                  </Model:Tag.elements>
+                </Model:Tag>
+              </Model:Namespace.contents>
+            </Model:Operation>
+            <Model:Reference xmi.id = 'a55' name = 'container' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>0</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a56'/>
+              </Model:TypedElement.type>
+              <Model:Reference.referencedEnd>
+                <Model:AssociationEnd xmi.idref = 'a57'/>
+              </Model:Reference.referencedEnd>
+            </Model:Reference>
+            <Model:Reference xmi.id = 'a58' name = 'constraints' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>0</XMI.field>
+                <XMI.field>-1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>true</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a59'/>
+              </Model:TypedElement.type>
+              <Model:Reference.referencedEnd>
+                <Model:AssociationEnd xmi.idref = 'a60'/>
+              </Model:Reference.referencedEnd>
+            </Model:Reference>
+            <Model:Operation xmi.id = 'a61' name = 'isFrozen' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isQuery = 'false'>
+              <Model:Namespace.contents>
+                <Model:Parameter xmi.id = 'a62' name = '**result**' annotation = '' direction = 'return_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>false</XMI.field>
+                    <XMI.field>false</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:PrimitiveType xmi.idref = 'a3'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+              </Model:Namespace.contents>
+            </Model:Operation>
+            <Model:Operation xmi.id = 'a63' name = 'isVisible' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isQuery = 'false'>
+              <Model:Namespace.contents>
+                <Model:Parameter xmi.id = 'a64' name = '**result**' annotation = '' direction = 'return_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>false</XMI.field>
+                    <XMI.field>false</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:PrimitiveType xmi.idref = 'a3'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+                <Model:Parameter xmi.id = 'a65' name = 'otherElement' annotation = '' direction = 'in_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>false</XMI.field>
+                    <XMI.field>false</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:Class xmi.idref = 'a19'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+              </Model:Namespace.contents>
+            </Model:Operation>
+          </Model:Namespace.contents>
+        </Model:Class>
+        <Model:EnumerationType xmi.id = 'a66' name = 'VisibilityKind' annotation = ''
+          isRoot = 'true' isLeaf = 'true' isAbstract = 'false' visibility = 'public_vis'>
+          <Model:EnumerationType.labels>public_vis</Model:EnumerationType.labels>
+          <Model:EnumerationType.labels>protected_vis</Model:EnumerationType.labels>
+          <Model:EnumerationType.labels>private_vis</Model:EnumerationType.labels>
+        </Model:EnumerationType>
+        <Model:Class xmi.id = 'a56' name = 'Namespace' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'true' visibility = 'public_vis' isSingleton = 'false'>
+          <Model:ModelElement.constraints>
+            <Model:Constraint xmi.idref = 'a67'/>
+          </Model:ModelElement.constraints>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a68' name = '*tag_11' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a56'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Constraint xmi.id = 'a67' name = 'ContentNamesMustNotCollide' annotation = ''
+              expression = 'context Namespace&#10;                inv: self.contents.forAll(e1, e2 | e1.name = e2.name implies r1 = r2)'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a56'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Exception xmi.id = 'a69' name = 'NameNotFound' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis'>
+              <Model:Namespace.contents>
+                <Model:Parameter xmi.id = 'a70' name = 'name' annotation = '' direction = 'out_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>false</XMI.field>
+                    <XMI.field>false</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:PrimitiveType xmi.idref = 'a8'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+                <Model:Tag xmi.id = 'a71' name = '*tag_12' annotation = '' tagId = 'org.omg.mof.idl_version'>
+                  <Model:Tag.values>1.4</Model:Tag.values>
+                  <Model:Tag.elements>
+                    <Model:Exception xmi.idref = 'a69'/>
+                  </Model:Tag.elements>
+                </Model:Tag>
+              </Model:Namespace.contents>
+            </Model:Exception>
+            <Model:Exception xmi.id = 'a72' name = 'NameNotResolved' annotation = ''
+              scope = 'instance_level' visibility = 'public_vis'>
+              <Model:Namespace.contents>
+                <Model:Parameter xmi.id = 'a73' name = 'explanation' annotation = '' direction = 'out_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>false</XMI.field>
+                    <XMI.field>false</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:PrimitiveType xmi.idref = 'a8'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+                <Model:Parameter xmi.id = 'a74' name = 'restOfName' annotation = '' direction = 'out_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>0</XMI.field>
+                    <XMI.field>-1</XMI.field>
+                    <XMI.field>true</XMI.field>
+                    <XMI.field>false</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:PrimitiveType xmi.idref = 'a8'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+                <Model:Tag xmi.id = 'a75' name = '*tag_13' annotation = '' tagId = 'org.omg.mof.idl_version'>
+                  <Model:Tag.values>1.4</Model:Tag.values>
+                  <Model:Tag.elements>
+                    <Model:Exception xmi.idref = 'a72'/>
+                  </Model:Tag.elements>
+                </Model:Tag>
+              </Model:Namespace.contents>
+            </Model:Exception>
+            <Model:Reference xmi.id = 'a76' name = 'contents' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>0</XMI.field>
+                <XMI.field>-1</XMI.field>
+                <XMI.field>true</XMI.field>
+                <XMI.field>true</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a19'/>
+              </Model:TypedElement.type>
+              <Model:Reference.referencedEnd>
+                <Model:AssociationEnd xmi.idref = 'a77'/>
+              </Model:Reference.referencedEnd>
+            </Model:Reference>
+            <Model:Operation xmi.id = 'a78' name = 'lookupElement' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isQuery = 'false'>
+              <Model:Namespace.contents>
+                <Model:Parameter xmi.id = 'a79' name = '**result**' annotation = '' direction = 'return_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>false</XMI.field>
+                    <XMI.field>false</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:Class xmi.idref = 'a19'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+                <Model:Parameter xmi.id = 'a80' name = 'name' annotation = '' direction = 'in_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>false</XMI.field>
+                    <XMI.field>false</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:PrimitiveType xmi.idref = 'a8'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+                <Model:Tag xmi.id = 'a81' name = '*tag_14' annotation = '' tagId = 'org.omg.mof.idl_version'>
+                  <Model:Tag.values>1.4</Model:Tag.values>
+                  <Model:Tag.elements>
+                    <Model:Operation xmi.idref = 'a78'/>
+                  </Model:Tag.elements>
+                </Model:Tag>
+              </Model:Namespace.contents>
+              <Model:Operation.exceptions>
+                <Model:Exception xmi.idref = 'a69'/>
+              </Model:Operation.exceptions>
+            </Model:Operation>
+            <Model:Operation xmi.id = 'a82' name = 'resolveQualifiedName' annotation = ''
+              scope = 'instance_level' visibility = 'public_vis' isQuery = 'false'>
+              <Model:Namespace.contents>
+                <Model:Parameter xmi.id = 'a83' name = '**result**' annotation = '' direction = 'return_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>false</XMI.field>
+                    <XMI.field>false</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:Class xmi.idref = 'a19'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+                <Model:Parameter xmi.id = 'a84' name = 'qualifiedName' annotation = '' direction = 'in_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>-1</XMI.field>
+                    <XMI.field>true</XMI.field>
+                    <XMI.field>false</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:PrimitiveType xmi.idref = 'a8'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+                <Model:Tag xmi.id = 'a85' name = '*tag_15' annotation = '' tagId = 'org.omg.mof.idl_version'>
+                  <Model:Tag.values>1.4</Model:Tag.values>
+                  <Model:Tag.elements>
+                    <Model:Operation xmi.idref = 'a82'/>
+                  </Model:Tag.elements>
+                </Model:Tag>
+              </Model:Namespace.contents>
+              <Model:Operation.exceptions>
+                <Model:Exception xmi.idref = 'a72'/>
+              </Model:Operation.exceptions>
+            </Model:Operation>
+            <Model:Operation xmi.id = 'a86' name = 'findElementsByType' annotation = ''
+              scope = 'instance_level' visibility = 'public_vis' isQuery = 'false'>
+              <Model:Namespace.contents>
+                <Model:Parameter xmi.id = 'a87' name = '**result**' annotation = '' direction = 'return_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>0</XMI.field>
+                    <XMI.field>-1</XMI.field>
+                    <XMI.field>true</XMI.field>
+                    <XMI.field>true</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:Class xmi.idref = 'a19'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+                <Model:Parameter xmi.id = 'a88' name = 'ofType' annotation = '' direction = 'in_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>false</XMI.field>
+                    <XMI.field>false</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:Class xmi.idref = 'a89'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+                <Model:Parameter xmi.id = 'a90' name = 'includeSubtypes' annotation = ''
+                  direction = 'in_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>false</XMI.field>
+                    <XMI.field>false</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:PrimitiveType xmi.idref = 'a3'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+              </Model:Namespace.contents>
+            </Model:Operation>
+            <Model:Operation xmi.id = 'a91' name = 'nameIsValid' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isQuery = 'false'>
+              <Model:Namespace.contents>
+                <Model:Parameter xmi.id = 'a92' name = '**result**' annotation = '' direction = 'return_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>false</XMI.field>
+                    <XMI.field>false</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:PrimitiveType xmi.idref = 'a3'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+                <Model:Parameter xmi.id = 'a93' name = 'proposedName' annotation = '' direction = 'in_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>false</XMI.field>
+                    <XMI.field>false</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:PrimitiveType xmi.idref = 'a8'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+                <Model:Tag xmi.id = 'a94' name = '*tag_16' annotation = '' tagId = 'org.omg.mof.idl_version'>
+                  <Model:Tag.values>1.4</Model:Tag.values>
+                  <Model:Tag.elements>
+                    <Model:Operation xmi.idref = 'a91'/>
+                  </Model:Tag.elements>
+                </Model:Tag>
+              </Model:Namespace.contents>
+            </Model:Operation>
+          </Model:Namespace.contents>
+          <Model:GeneralizableElement.supertypes>
+            <Model:Class xmi.idref = 'a19'/>
+          </Model:GeneralizableElement.supertypes>
+        </Model:Class>
+        <Model:Class xmi.id = 'a95' name = 'GeneralizableElement' annotation = ''
+          isRoot = 'false' isLeaf = 'false' isAbstract = 'true' visibility = 'public_vis'
+          isSingleton = 'false'>
+          <Model:ModelElement.constraints>
+            <Model:Constraint xmi.idref = 'a96'/>
+            <Model:Constraint xmi.idref = 'a97'/>
+            <Model:Constraint xmi.idref = 'a98'/>
+            <Model:Constraint xmi.idref = 'a99'/>
+            <Model:Constraint xmi.idref = 'a100'/>
+            <Model:Constraint xmi.idref = 'a101'/>
+            <Model:Constraint xmi.idref = 'a102'/>
+          </Model:ModelElement.constraints>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a103' name = '*tag_17' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a95'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Constraint xmi.id = 'a102' name = 'SupertypeMustNotBeSelf' annotation = ''
+              expression = 'context GeneralizableElement&#10;                inv: self.allSupertypes() -&gt; forAll(s | s &lt;&gt; self)'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a95'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a101' name = 'SupertypeKindMustBeSame' annotation = ''
+              expression = 'context GeneralizableElement&#10;                inv: self.supertypes -&gt; forAll(s | s.oclType() = self.oclType())'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a95'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a100' name = 'ContentsMustNotCollideWithSupertypes'
+              annotation = '' expression = 'context GeneralizableElement&#10;                inv:&#10;                let superContents = self.allSupertypes() -&gt; &#10;                collect(s | s.contents) in&#10;                self.contents -&gt; forAll(m1 | superContents -&gt; &#10;                forAll(m2 | m1.name = m2.name implies m1 = m2))'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a95'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a99' name = 'DiamondRuleMustBeObeyed' annotation = ''
+              expression = 'context GeneralizableElement&#10;                inv:&#10;                let superNamespaces = &#10;                self.supertypes -&gt; collect(s | s.extendedNamespace) in&#10;                superNamespaces -&gt; asSet -&gt; isUnique(s | s.name)'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a95'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a98' name = 'NoSupertypesAllowedForRoot' annotation = ''
+              expression = 'context GeneralizableElement&#10;                inv: self.isRoot implies self.supertypes -&gt; isEmpty'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a95'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a97' name = 'SupertypesMustBeVisible' annotation = ''
+              expression = 'context GeneralizableElement&#10;                inv: self.supertypes -&gt; forAll(s | self.isVisible(s))'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a95'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a96' name = 'NoSubtypesAllowedForLeaf' annotation = ''
+              expression = 'context GeneralizableElement&#10;                inv: self.supertypes -&gt; forAll(s | not s.isLeaf)'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a95'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Attribute xmi.id = 'a104' name = 'isRoot' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true' isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a3'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+            <Model:Attribute xmi.id = 'a105' name = 'isLeaf' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true' isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a3'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+            <Model:Attribute xmi.id = 'a106' name = 'isAbstract' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true' isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a3'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+            <Model:Attribute xmi.id = 'a107' name = 'visibility' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true' isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:EnumerationType xmi.idref = 'a66'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+            <Model:Reference xmi.id = 'a108' name = 'supertypes' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>0</XMI.field>
+                <XMI.field>-1</XMI.field>
+                <XMI.field>true</XMI.field>
+                <XMI.field>true</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a95'/>
+              </Model:TypedElement.type>
+              <Model:Reference.referencedEnd>
+                <Model:AssociationEnd xmi.idref = 'a109'/>
+              </Model:Reference.referencedEnd>
+            </Model:Reference>
+            <Model:Operation xmi.id = 'a110' name = 'allSupertypes' annotation = ''
+              scope = 'instance_level' visibility = 'public_vis' isQuery = 'false'>
+              <Model:Namespace.contents>
+                <Model:Parameter xmi.id = 'a111' name = '**result**' annotation = '' direction = 'return_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>0</XMI.field>
+                    <XMI.field>-1</XMI.field>
+                    <XMI.field>true</XMI.field>
+                    <XMI.field>true</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:Class xmi.idref = 'a95'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+              </Model:Namespace.contents>
+            </Model:Operation>
+            <Model:Operation xmi.id = 'a112' name = 'lookupElementExtended' annotation = ''
+              scope = 'instance_level' visibility = 'public_vis' isQuery = 'false'>
+              <Model:Namespace.contents>
+                <Model:Parameter xmi.id = 'a113' name = '**result**' annotation = '' direction = 'return_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>false</XMI.field>
+                    <XMI.field>false</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:Class xmi.idref = 'a19'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+                <Model:Parameter xmi.id = 'a114' name = 'name' annotation = '' direction = 'in_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>false</XMI.field>
+                    <XMI.field>false</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:PrimitiveType xmi.idref = 'a8'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+              </Model:Namespace.contents>
+              <Model:Operation.exceptions>
+                <Model:Exception xmi.idref = 'a69'/>
+              </Model:Operation.exceptions>
+            </Model:Operation>
+            <Model:Operation xmi.id = 'a115' name = 'findElementsByTypeExtended' annotation = ''
+              scope = 'instance_level' visibility = 'public_vis' isQuery = 'false'>
+              <Model:Namespace.contents>
+                <Model:Parameter xmi.id = 'a116' name = '**result**' annotation = '' direction = 'return_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>0</XMI.field>
+                    <XMI.field>-1</XMI.field>
+                    <XMI.field>true</XMI.field>
+                    <XMI.field>true</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:Class xmi.idref = 'a19'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+                <Model:Parameter xmi.id = 'a117' name = 'ofType' annotation = '' direction = 'in_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>false</XMI.field>
+                    <XMI.field>false</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:Class xmi.idref = 'a89'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+                <Model:Parameter xmi.id = 'a118' name = 'includeSubtypes' annotation = ''
+                  direction = 'in_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>false</XMI.field>
+                    <XMI.field>false</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:PrimitiveType xmi.idref = 'a3'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+              </Model:Namespace.contents>
+            </Model:Operation>
+          </Model:Namespace.contents>
+          <Model:GeneralizableElement.supertypes>
+            <Model:Class xmi.idref = 'a56'/>
+          </Model:GeneralizableElement.supertypes>
+        </Model:Class>
+        <Model:Class xmi.id = 'a119' name = 'TypedElement' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'true' visibility = 'public_vis' isSingleton = 'false'>
+          <Model:ModelElement.constraints>
+            <Model:Constraint xmi.idref = 'a120'/>
+            <Model:Constraint xmi.idref = 'a121'/>
+          </Model:ModelElement.constraints>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a122' name = '*tag_18' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a119'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Constraint xmi.id = 'a121' name = 'AssociationsCannotBeTypes' annotation = ''
+              expression = 'context TypedElement&#10;                inv: not self.type.oclIsKindOf(Association)'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a119'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a120' name = 'TypeMustBeVisible' annotation = ''
+              expression = 'context TypedElement&#10;                inv: self.isVisible(self.type)'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a119'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Reference xmi.id = 'a123' name = 'type' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a124'/>
+              </Model:TypedElement.type>
+              <Model:Reference.referencedEnd>
+                <Model:AssociationEnd xmi.idref = 'a125'/>
+              </Model:Reference.referencedEnd>
+            </Model:Reference>
+          </Model:Namespace.contents>
+          <Model:GeneralizableElement.supertypes>
+            <Model:Class xmi.idref = 'a19'/>
+          </Model:GeneralizableElement.supertypes>
+        </Model:Class>
+        <Model:Class xmi.id = 'a124' name = 'Classifier' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'true' visibility = 'public_vis' isSingleton = 'false'>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a126' name = '*tag_19' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a124'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+          </Model:Namespace.contents>
+          <Model:GeneralizableElement.supertypes>
+            <Model:Class xmi.idref = 'a95'/>
+          </Model:GeneralizableElement.supertypes>
+        </Model:Class>
+        <Model:Class xmi.id = 'a89' name = 'Class' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis' isSingleton = 'false'>
+          <Model:ModelElement.constraints>
+            <Model:Constraint xmi.idref = 'a127'/>
+            <Model:Constraint xmi.idref = 'a128'/>
+          </Model:ModelElement.constraints>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a129' name = '*tag_20' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a89'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Tag xmi.id = 'a130' name = '*tag_21' annotation = '' tagId = 'javax.jmi.substituteName'>
+              <Model:Tag.values>MofClass</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a89'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Constraint xmi.id = 'a128' name = 'ClassContainmentRules' annotation = ''
+              expression = 'context Class&#10;                inv: &#10;                Set{Class, DataType, Attribute, Reference, Operation,&#10;                Exception, Constant, Constraint, Tag} -&gt;&#10;                includesAll(self.contentTypes())'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a89'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a127' name = 'AbstractClassesCannotBeSingleton'
+              annotation = '' expression = 'context Class&#10;                inv: self.isAbstract implies not self.isSingleton'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a89'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Attribute xmi.id = 'a131' name = 'isSingleton' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true' isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a3'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+          </Model:Namespace.contents>
+          <Model:GeneralizableElement.supertypes>
+            <Model:Class xmi.idref = 'a124'/>
+          </Model:GeneralizableElement.supertypes>
+        </Model:Class>
+        <Model:Constant xmi.id = 'a132' name = 'Unbounded' annotation = '' value = '-1'>
+          <Model:TypedElement.type>
+            <Model:PrimitiveType xmi.idref = 'a4'/>
+          </Model:TypedElement.type>
+        </Model:Constant>
+        <Model:StructureType xmi.id = 'a133' name = 'MultiplicityType' annotation = ''
+          isRoot = 'true' isLeaf = 'true' isAbstract = 'false' visibility = 'public_vis'>
+          <Model:Namespace.contents>
+            <Model:StructureField xmi.id = 'a134' name = 'lower' annotation = ''>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a4'/>
+              </Model:TypedElement.type>
+            </Model:StructureField>
+            <Model:StructureField xmi.id = 'a135' name = 'upper' annotation = ''>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a4'/>
+              </Model:TypedElement.type>
+            </Model:StructureField>
+            <Model:StructureField xmi.id = 'a136' name = 'isOrdered' annotation = ''>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a3'/>
+              </Model:TypedElement.type>
+            </Model:StructureField>
+            <Model:StructureField xmi.id = 'a137' name = 'isUnique' annotation = ''>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a3'/>
+              </Model:TypedElement.type>
+            </Model:StructureField>
+          </Model:Namespace.contents>
+        </Model:StructureType>
+        <Model:Constraint xmi.id = 'a13' name = 'LowerCannotBeNegativeOrUnbounded'
+          annotation = '' expression = 'context MultiplicityType&#10;            inv: self.lower &gt;= 0 and self.lower &lt;&gt; Unbounded'
+          language = 'OCL' evaluationPolicy = 'deferred'>
+          <Model:Constraint.constrainedElements>
+            <Model:Package xmi.idref = 'a9'/>
+          </Model:Constraint.constrainedElements>
+        </Model:Constraint>
+        <Model:Constraint xmi.id = 'a12' name = 'LowerCannotExceedUpper' annotation = ''
+          expression = 'context MultiplicityType&#10;            inv: self.lower &lt;= self.upper or self.upper = Unbounded'
+          language = 'OCL' evaluationPolicy = 'deferred'>
+          <Model:Constraint.constrainedElements>
+            <Model:Package xmi.idref = 'a9'/>
+          </Model:Constraint.constrainedElements>
+        </Model:Constraint>
+        <Model:Constraint xmi.id = 'a11' name = 'UpperMustBePositive' annotation = ''
+          expression = 'context MultiplicityType&#10;            inv: self.upper &gt;= 1 or self.upper = Unbounded'
+          language = 'OCL' evaluationPolicy = 'deferred'>
+          <Model:Constraint.constrainedElements>
+            <Model:Package xmi.idref = 'a9'/>
+          </Model:Constraint.constrainedElements>
+        </Model:Constraint>
+        <Model:Constraint xmi.id = 'a10' name = 'MustBeUnorderedNonunique' annotation = ''
+          expression = 'context MultiplicityType&#10;            inv: &#10;            self.upper = 1 implies (not self.isOrdered and not self.isUnique)'
+          language = 'OCL' evaluationPolicy = 'deferred'>
+          <Model:Constraint.constrainedElements>
+            <Model:Package xmi.idref = 'a9'/>
+          </Model:Constraint.constrainedElements>
+        </Model:Constraint>
+        <Model:Class xmi.id = 'a138' name = 'DataType' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'true' visibility = 'public_vis' isSingleton = 'false'>
+          <Model:ModelElement.constraints>
+            <Model:Constraint xmi.idref = 'a139'/>
+            <Model:Constraint xmi.idref = 'a140'/>
+            <Model:Constraint xmi.idref = 'a141'/>
+          </Model:ModelElement.constraints>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a142' name = '*tag_22' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a138'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Constraint xmi.id = 'a141' name = 'DataTypeContainmentRules' annotation = ''
+              expression = 'context DataType&#10;                inv: &#10;                if self.oclIsOfType(StructureType)&#10;                then&#10;                Set{TypeAlias, Constraint, Tag, StructureField} -&gt;&#10;                includesAll(self.contentTypes())&#10;                else&#10;                Set{TypeAlias, Constraint, Tag} -&gt; &#10;                includesAll(self.contentTypes())'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a138'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a140' name = 'DataTypesHaveNoSupertypes' annotation = ''
+              expression = 'context DataType&#10;                inv: self.supertypes -&gt; isEmpty'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a138'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a139' name = 'DataTypesCannotBeAbstract' annotation = ''
+              expression = 'context DataType&#10;                inv: not self.isAbstract'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a138'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+          </Model:Namespace.contents>
+          <Model:GeneralizableElement.supertypes>
+            <Model:Class xmi.idref = 'a124'/>
+          </Model:GeneralizableElement.supertypes>
+        </Model:Class>
+        <Model:Class xmi.id = 'a143' name = 'PrimitiveType' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis' isSingleton = 'false'>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a144' name = '*tag_23' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a143'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+          </Model:Namespace.contents>
+          <Model:GeneralizableElement.supertypes>
+            <Model:Class xmi.idref = 'a138'/>
+          </Model:GeneralizableElement.supertypes>
+        </Model:Class>
+        <Model:Class xmi.id = 'a145' name = 'EnumerationType' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis' isSingleton = 'false'>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a146' name = '*tag_24' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a145'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Attribute xmi.id = 'a147' name = 'labels' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true' isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>-1</XMI.field>
+                <XMI.field>true</XMI.field>
+                <XMI.field>true</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a8'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+          </Model:Namespace.contents>
+          <Model:GeneralizableElement.supertypes>
+            <Model:Class xmi.idref = 'a138'/>
+          </Model:GeneralizableElement.supertypes>
+        </Model:Class>
+        <Model:Class xmi.id = 'a148' name = 'CollectionType' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis' isSingleton = 'false'>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a149' name = '*tag_25' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a148'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Attribute xmi.id = 'a150' name = 'multiplicity' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true' isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:StructureType xmi.idref = 'a133'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+          </Model:Namespace.contents>
+          <Model:GeneralizableElement.supertypes>
+            <Model:Class xmi.idref = 'a138'/>
+            <Model:Class xmi.idref = 'a119'/>
+          </Model:GeneralizableElement.supertypes>
+        </Model:Class>
+        <Model:Class xmi.id = 'a151' name = 'StructureType' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis' isSingleton = 'false'>
+          <Model:ModelElement.constraints>
+            <Model:Constraint xmi.idref = 'a152'/>
+          </Model:ModelElement.constraints>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a153' name = '*tag_26' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a151'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Constraint xmi.id = 'a152' name = 'MustHaveFields' annotation = ''
+              expression = 'context StructureType&#10;                inv: self.contents -&gt; exists(c | c.oclIsOfType(StructureField))'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a151'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+          </Model:Namespace.contents>
+          <Model:GeneralizableElement.supertypes>
+            <Model:Class xmi.idref = 'a138'/>
+          </Model:GeneralizableElement.supertypes>
+        </Model:Class>
+        <Model:Class xmi.id = 'a154' name = 'StructureField' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis' isSingleton = 'false'>
+          <Model:ModelElement.constraints>
+            <Model:Constraint xmi.idref = 'a155'/>
+          </Model:ModelElement.constraints>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a156' name = '*tag_27' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a154'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Constraint xmi.id = 'a155' name = 'StructureFieldContainmentRules'
+              annotation = '' expression = 'context StructureField&#10;                inv: Set{Constraint, Tag}) -&gt; includesAll(self.contentTypes)'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a154'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+          </Model:Namespace.contents>
+          <Model:GeneralizableElement.supertypes>
+            <Model:Class xmi.idref = 'a119'/>
+          </Model:GeneralizableElement.supertypes>
+        </Model:Class>
+        <Model:Class xmi.id = 'a157' name = 'AliasType' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis' isSingleton = 'false'>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a158' name = '*tag_28' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a157'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+          </Model:Namespace.contents>
+          <Model:GeneralizableElement.supertypes>
+            <Model:Class xmi.idref = 'a138'/>
+            <Model:Class xmi.idref = 'a119'/>
+          </Model:GeneralizableElement.supertypes>
+        </Model:Class>
+        <Model:EnumerationType xmi.id = 'a159' name = 'ScopeKind' annotation = ''
+          isRoot = 'true' isLeaf = 'true' isAbstract = 'false' visibility = 'public_vis'>
+          <Model:EnumerationType.labels>instance_level</Model:EnumerationType.labels>
+          <Model:EnumerationType.labels>classifier_level</Model:EnumerationType.labels>
+        </Model:EnumerationType>
+        <Model:Class xmi.id = 'a160' name = 'Feature' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'true' visibility = 'public_vis' isSingleton = 'false'>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a161' name = '*tag_29' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a160'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Attribute xmi.id = 'a162' name = 'scope' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true' isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:EnumerationType xmi.idref = 'a159'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+            <Model:Attribute xmi.id = 'a163' name = 'visibility' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true' isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:EnumerationType xmi.idref = 'a66'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+          </Model:Namespace.contents>
+          <Model:GeneralizableElement.supertypes>
+            <Model:Class xmi.idref = 'a19'/>
+          </Model:GeneralizableElement.supertypes>
+        </Model:Class>
+        <Model:Class xmi.id = 'a164' name = 'StructuralFeature' annotation = ''
+          isRoot = 'false' isLeaf = 'false' isAbstract = 'true' visibility = 'public_vis'
+          isSingleton = 'false'>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a165' name = '*tag_30' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a164'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Attribute xmi.id = 'a166' name = 'multiplicity' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true' isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:StructureType xmi.idref = 'a133'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+            <Model:Attribute xmi.id = 'a167' name = 'isChangeable' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true' isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a3'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+          </Model:Namespace.contents>
+          <Model:GeneralizableElement.supertypes>
+            <Model:Class xmi.idref = 'a160'/>
+            <Model:Class xmi.idref = 'a119'/>
+          </Model:GeneralizableElement.supertypes>
+        </Model:Class>
+        <Model:Class xmi.id = 'a168' name = 'Attribute' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis' isSingleton = 'false'>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a169' name = '*tag_31' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a168'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Tag xmi.id = 'a170' name = '*tag_32' annotation = '' tagId = 'org.omg.mof.idl_substitute_name'>
+              <Model:Tag.values>MofAttribute</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a168'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Attribute xmi.id = 'a171' name = 'isDerived' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true' isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a3'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+          </Model:Namespace.contents>
+          <Model:GeneralizableElement.supertypes>
+            <Model:Class xmi.idref = 'a164'/>
+          </Model:GeneralizableElement.supertypes>
+        </Model:Class>
+        <Model:Class xmi.id = 'a172' name = 'Reference' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis' isSingleton = 'false'>
+          <Model:ModelElement.constraints>
+            <Model:Constraint xmi.idref = 'a173'/>
+            <Model:Constraint xmi.idref = 'a174'/>
+            <Model:Constraint xmi.idref = 'a175'/>
+            <Model:Constraint xmi.idref = 'a176'/>
+            <Model:Constraint xmi.idref = 'a177'/>
+            <Model:Constraint xmi.idref = 'a178'/>
+            <Model:Constraint xmi.idref = 'a179'/>
+          </Model:ModelElement.constraints>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a180' name = '*tag_33' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a172'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Constraint xmi.id = 'a179' name = 'ReferenceMultiplicityMustMatchEnd'
+              annotation = '' expression = 'context Reference&#10;                inv: self.multiplicity = self.referencedEnd.multiplicity'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a172'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a178' name = 'ReferenceMustBeInstanceScoped'
+              annotation = '' expression = 'context Reference&#10;                inv: self.scope = #instance_level'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a172'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a177' name = 'ChangeableReferenceMustHaveChangeableEnd'
+              annotation = '' expression = 'context Reference&#10;                inv: self.isChangeable = self.referencedEnd.isChangeable'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a172'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a176' name = 'ReferenceTypeMustMatchEndType'
+              annotation = '' expression = 'context Reference&#10;                inv: self.type = self.referencedEnd.type'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a172'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a175' name = 'ReferencedEndMustBeNavigable'
+              annotation = '' expression = 'context Reference&#10;                inv: self.referencedEnd.isNavigable'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a172'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a174' name = 'ContainerMustMatchExposedType'
+              annotation = '' expression = 'context Reference&#10;                inv:&#10;                self.container.allSupertypes() -&gt; including(self) -&gt;&#10;                includes(self.referencedEnd.otherEnd.type)'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a172'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a173' name = 'ReferencedEndMustBeVisible' annotation = ''
+              expression = 'context Reference&#10;                inv: self.isVisible(self.referencedEnd)'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a172'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Reference xmi.id = 'a181' name = 'exposedEnd' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a182'/>
+              </Model:TypedElement.type>
+              <Model:Reference.referencedEnd>
+                <Model:AssociationEnd xmi.idref = 'a183'/>
+              </Model:Reference.referencedEnd>
+            </Model:Reference>
+            <Model:Reference xmi.id = 'a184' name = 'referencedEnd' annotation = ''
+              scope = 'instance_level' visibility = 'public_vis' isChangeable = 'true'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a182'/>
+              </Model:TypedElement.type>
+              <Model:Reference.referencedEnd>
+                <Model:AssociationEnd xmi.idref = 'a185'/>
+              </Model:Reference.referencedEnd>
+            </Model:Reference>
+          </Model:Namespace.contents>
+          <Model:GeneralizableElement.supertypes>
+            <Model:Class xmi.idref = 'a164'/>
+          </Model:GeneralizableElement.supertypes>
+        </Model:Class>
+        <Model:Class xmi.id = 'a186' name = 'BehavioralFeature' annotation = ''
+          isRoot = 'false' isLeaf = 'false' isAbstract = 'true' visibility = 'public_vis'
+          isSingleton = 'false'>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a187' name = '*tag_34' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a186'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+          </Model:Namespace.contents>
+          <Model:GeneralizableElement.supertypes>
+            <Model:Class xmi.idref = 'a160'/>
+            <Model:Class xmi.idref = 'a56'/>
+          </Model:GeneralizableElement.supertypes>
+        </Model:Class>
+        <Model:Class xmi.id = 'a188' name = 'Operation' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis' isSingleton = 'false'>
+          <Model:ModelElement.constraints>
+            <Model:Constraint xmi.idref = 'a189'/>
+            <Model:Constraint xmi.idref = 'a190'/>
+            <Model:Constraint xmi.idref = 'a191'/>
+          </Model:ModelElement.constraints>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a192' name = '*tag_35' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a188'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Constraint xmi.id = 'a191' name = 'OperationContainmentRules' annotation = ''
+              expression = 'context Operation&#10;                inv: &#10;                Set{Parameter, Constraint, Tag} -&gt; includesAll(self.contentTypes())'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a188'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a190' name = 'OperationsHaveAtMostOneReturn'
+              annotation = '' expression = 'context Operation&#10;                inv:&#10;                self.contents -&gt; &#10;                select(c | c.oclIsTypeOf(Parameter)) -&gt;&#10;                select(p : Parameter | p.direction = #return_dir) -&gt; size &lt; 2'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a188'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a189' name = 'OperationExceptionsMustBeVisible'
+              annotation = '' expression = 'context Operation&#10;                inv: self.exceptions -&gt; forAll(e | self.isVisible(e))'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a188'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Attribute xmi.id = 'a193' name = 'isQuery' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true' isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a3'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+            <Model:Reference xmi.id = 'a194' name = 'exceptions' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>0</XMI.field>
+                <XMI.field>-1</XMI.field>
+                <XMI.field>true</XMI.field>
+                <XMI.field>true</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a195'/>
+              </Model:TypedElement.type>
+              <Model:Reference.referencedEnd>
+                <Model:AssociationEnd xmi.idref = 'a196'/>
+              </Model:Reference.referencedEnd>
+            </Model:Reference>
+          </Model:Namespace.contents>
+          <Model:GeneralizableElement.supertypes>
+            <Model:Class xmi.idref = 'a186'/>
+          </Model:GeneralizableElement.supertypes>
+        </Model:Class>
+        <Model:Class xmi.id = 'a195' name = 'Exception' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis' isSingleton = 'false'>
+          <Model:ModelElement.constraints>
+            <Model:Constraint xmi.idref = 'a197'/>
+            <Model:Constraint xmi.idref = 'a198'/>
+          </Model:ModelElement.constraints>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a199' name = '*tag_36' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a195'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Tag xmi.id = 'a200' name = '*tag_37' annotation = '' tagId = 'org.omg.mof.idl_substitute_name'>
+              <Model:Tag.values>MofException</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a195'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Tag xmi.id = 'a201' name = '*tag_38' annotation = '' tagId = 'javax.jmi.substituteName'>
+              <Model:Tag.values>MofException</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a195'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Constraint xmi.id = 'a198' name = 'ExceptionContainmentRules' annotation = ''
+              expression = 'context Exception&#10;                inv: Set{Parameter, Tag}) -&gt; includesAll(self.contentTypes())'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a195'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a197' name = 'ExceptionsHaveOnlyOutParameters'
+              annotation = '' expression = 'context Exception&#10;                inv:&#10;                self.contents -&gt; &#10;                select(c | c.oclIsTypeOf(Parameter)) -&gt;&#10;                forAll(p : Parameter | p.direction = #out_dir)'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a195'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+          </Model:Namespace.contents>
+          <Model:GeneralizableElement.supertypes>
+            <Model:Class xmi.idref = 'a186'/>
+          </Model:GeneralizableElement.supertypes>
+        </Model:Class>
+        <Model:Class xmi.id = 'a202' name = 'Association' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis' isSingleton = 'false'>
+          <Model:ModelElement.constraints>
+            <Model:Constraint xmi.idref = 'a203'/>
+            <Model:Constraint xmi.idref = 'a204'/>
+            <Model:Constraint xmi.idref = 'a205'/>
+            <Model:Constraint xmi.idref = 'a206'/>
+            <Model:Constraint xmi.idref = 'a207'/>
+            <Model:Constraint xmi.idref = 'a208'/>
+          </Model:ModelElement.constraints>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a209' name = '*tag_39' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a202'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Constraint xmi.id = 'a208' name = 'AssociationContainmentRules' annotation = ''
+              expression = 'context Association&#10;                inv: &#10;                Set{AssociationEnd, Constraint, Tag} -&gt;&#10;                includesAll(self.contentTypes())'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a202'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a207' name = 'AssociationsHaveNoSupertypes'
+              annotation = '' expression = 'context Association&#10;                inv: self.supertypes -&gt; isEmpty'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a202'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a206' name = 'AssociationMustBeRootAndLeaf'
+              annotation = '' expression = 'context Association&#10;                inv: self.isRoot and self.isLeaf'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a202'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a205' name = 'AssociationsCannotBeAbstract'
+              annotation = '' expression = 'context Association&#10;                inv: not self.isAbstract'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a202'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a204' name = 'AssociationsMustBePublic' annotation = ''
+              expression = 'context Association&#10;                inv: self.visibility = #public_vis'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a202'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a203' name = 'AssociationsMustBeBinary' annotation = ''
+              expression = 'context Association&#10;                inv: self.contents -&gt; &#10;                select(c | c.oclIsTypeOf(AssociationEnd)) -&gt; size = 2'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a202'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Attribute xmi.id = 'a210' name = 'isDerived' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true' isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a3'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+          </Model:Namespace.contents>
+          <Model:GeneralizableElement.supertypes>
+            <Model:Class xmi.idref = 'a124'/>
+          </Model:GeneralizableElement.supertypes>
+        </Model:Class>
+        <Model:EnumerationType xmi.id = 'a211' name = 'AggregationKind' annotation = ''
+          isRoot = 'true' isLeaf = 'true' isAbstract = 'false' visibility = 'public_vis'>
+          <Model:EnumerationType.labels>none</Model:EnumerationType.labels>
+          <Model:EnumerationType.labels>shared</Model:EnumerationType.labels>
+          <Model:EnumerationType.labels>composite</Model:EnumerationType.labels>
+        </Model:EnumerationType>
+        <Model:Class xmi.id = 'a182' name = 'AssociationEnd' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis' isSingleton = 'false'>
+          <Model:ModelElement.constraints>
+            <Model:Constraint xmi.idref = 'a212'/>
+            <Model:Constraint xmi.idref = 'a213'/>
+            <Model:Constraint xmi.idref = 'a214'/>
+            <Model:Constraint xmi.idref = 'a215'/>
+          </Model:ModelElement.constraints>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a216' name = '*tag_40' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a182'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Constraint xmi.id = 'a215' name = 'EndTypeMustBeClass' annotation = ''
+              expression = 'context AssociationEnd&#10;                inv: self.type.oclIsTypeOf(Class)'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a182'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a214' name = 'EndsMustBeUnique' annotation = ''
+              expression = 'context AssociationEnd&#10;                inv: &#10;                (self.multiplicity.upper &gt; 1 or &#10;                self.multiplicity.upper = UNBOUNDED) implies&#10;                self.multiplicity.isUnique'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a182'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a213' name = 'CannotHaveTwoOrderedEnds' annotation = ''
+              expression = 'context AssociationEnd&#10;                inv:&#10;                self.multiplicity.isOrdered implies &#10;                not self.otherEnd.multiplicity.isOrdered'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a182'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a212' name = 'CannotHaveTwoAggregateEnds' annotation = ''
+              expression = 'context AssociationEnd&#10;                inv: &#10;                self.aggregation &lt;&gt; #none implies self.otherEnd = #none'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a182'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Attribute xmi.id = 'a217' name = 'isNavigable' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true' isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a3'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+            <Model:Attribute xmi.id = 'a218' name = 'aggregation' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true' isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:EnumerationType xmi.idref = 'a211'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+            <Model:Attribute xmi.id = 'a219' name = 'multiplicity' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true' isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:StructureType xmi.idref = 'a133'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+            <Model:Attribute xmi.id = 'a220' name = 'isChangeable' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true' isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a3'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+            <Model:Operation xmi.id = 'a221' name = 'otherEnd' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isQuery = 'false'>
+              <Model:Namespace.contents>
+                <Model:Parameter xmi.id = 'a222' name = '**result**' annotation = '' direction = 'return_dir'>
+                  <Model:Parameter.multiplicity>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>1</XMI.field>
+                    <XMI.field>false</XMI.field>
+                    <XMI.field>false</XMI.field>
+                  </Model:Parameter.multiplicity>
+                  <Model:TypedElement.type>
+                    <Model:Class xmi.idref = 'a182'/>
+                  </Model:TypedElement.type>
+                </Model:Parameter>
+              </Model:Namespace.contents>
+            </Model:Operation>
+          </Model:Namespace.contents>
+          <Model:GeneralizableElement.supertypes>
+            <Model:Class xmi.idref = 'a119'/>
+          </Model:GeneralizableElement.supertypes>
+        </Model:Class>
+        <Model:Class xmi.id = 'a223' name = 'Package' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis' isSingleton = 'false'>
+          <Model:ModelElement.constraints>
+            <Model:Constraint xmi.idref = 'a224'/>
+            <Model:Constraint xmi.idref = 'a225'/>
+          </Model:ModelElement.constraints>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a226' name = '*tag_41' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a223'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Tag xmi.id = 'a227' name = '*tag_42' annotation = '' tagId = 'javax.jmi.substituteName'>
+              <Model:Tag.values>MofPackage</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a223'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Constraint xmi.id = 'a225' name = 'PackageContainmentRules' annotation = ''
+              expression = 'context Package&#10;                inv:&#10;                Set{Package, Class, DataType, Association, Exception, &#10;                Constant, Constraint, Import, Tag}) -&gt;&#10;                includesAll(self.contentTypes)'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a223'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a224' name = 'PackagesCannotBeAbstract' annotation = ''
+              expression = 'context Package&#10;                inv: not self.isAbstract'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a223'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+          </Model:Namespace.contents>
+          <Model:GeneralizableElement.supertypes>
+            <Model:Class xmi.idref = 'a95'/>
+          </Model:GeneralizableElement.supertypes>
+        </Model:Class>
+        <Model:Class xmi.id = 'a228' name = 'Import' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis' isSingleton = 'false'>
+          <Model:ModelElement.constraints>
+            <Model:Constraint xmi.idref = 'a229'/>
+            <Model:Constraint xmi.idref = 'a230'/>
+            <Model:Constraint xmi.idref = 'a231'/>
+            <Model:Constraint xmi.idref = 'a232'/>
+            <Model:Constraint xmi.idref = 'a233'/>
+          </Model:ModelElement.constraints>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a234' name = '*tag_43' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a228'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Constraint xmi.id = 'a233' name = 'ImportedNamespaceMustBeVisible'
+              annotation = '' expression = 'context Import&#10;                inv: self.container.isVisible(self.importedNamespace)'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a228'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a232' name = 'CanOnlyImportPackagesAndClasses'
+              annotation = '' expression = 'context Import&#10;                inv:&#10;                self.imported.oclIsTypeOf(Class) or&#10;                self.imported.oclIsTypeOf(Package)'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a228'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a231' name = 'CannotImportSelf' annotation = ''
+              expression = 'context Import&#10;                inv: self.container &lt;&gt; self.imported'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a228'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a230' name = 'CannotImportNestedComponents'
+              annotation = '' expression = 'context Import&#10;                inv: not self.container.allContents() -&gt; includes(self.imported)'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a228'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a229' name = 'NestedPackagesCannotImport' annotation = ''
+              expression = 'context Import&#10;                inv:&#10;                self.container -&gt; notEmpty implies&#10;                self.container -&gt; asSequence -&gt; first -&gt; container -&gt; isEmpty'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a228'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Attribute xmi.id = 'a235' name = 'visibility' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true' isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:EnumerationType xmi.idref = 'a66'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+            <Model:Attribute xmi.id = 'a236' name = 'isClustered' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true' isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a3'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+            <Model:Reference xmi.id = 'a237' name = 'importedNamespace' annotation = ''
+              scope = 'instance_level' visibility = 'public_vis' isChangeable = 'true'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a56'/>
+              </Model:TypedElement.type>
+              <Model:Reference.referencedEnd>
+                <Model:AssociationEnd xmi.idref = 'a238'/>
+              </Model:Reference.referencedEnd>
+            </Model:Reference>
+          </Model:Namespace.contents>
+          <Model:GeneralizableElement.supertypes>
+            <Model:Class xmi.idref = 'a19'/>
+          </Model:GeneralizableElement.supertypes>
+        </Model:Class>
+        <Model:EnumerationType xmi.id = 'a239' name = 'DirectionKind' annotation = ''
+          isRoot = 'true' isLeaf = 'true' isAbstract = 'false' visibility = 'public_vis'>
+          <Model:EnumerationType.labels>in_dir</Model:EnumerationType.labels>
+          <Model:EnumerationType.labels>out_dir</Model:EnumerationType.labels>
+          <Model:EnumerationType.labels>inout_dir</Model:EnumerationType.labels>
+          <Model:EnumerationType.labels>return_dir</Model:EnumerationType.labels>
+        </Model:EnumerationType>
+        <Model:Class xmi.id = 'a240' name = 'Parameter' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis' isSingleton = 'false'>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a241' name = '*tag_44' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a240'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Attribute xmi.id = 'a242' name = 'direction' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true' isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:EnumerationType xmi.idref = 'a239'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+            <Model:Attribute xmi.id = 'a243' name = 'multiplicity' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true' isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:StructureType xmi.idref = 'a133'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+          </Model:Namespace.contents>
+          <Model:GeneralizableElement.supertypes>
+            <Model:Class xmi.idref = 'a119'/>
+          </Model:GeneralizableElement.supertypes>
+        </Model:Class>
+        <Model:Class xmi.id = 'a59' name = 'Constraint' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis' isSingleton = 'false'>
+          <Model:ModelElement.constraints>
+            <Model:Constraint xmi.idref = 'a244'/>
+            <Model:Constraint xmi.idref = 'a245'/>
+          </Model:ModelElement.constraints>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a246' name = '*tag_45' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a59'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Constraint xmi.id = 'a245' name = 'CannotConstrainThisElement' annotation = ''
+              expression = 'context Constraint&#10;                inv:&#10;                self.constrainedElements -&gt; &#10;                forAll(c | not Set{Constraint, Tag, Imports, Constant} -&gt; &#10;                includes(c.oclType())'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a59'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a244' name = 'ConstraintsLimitedToContainer'
+              annotation = '' expression = 'context Constraint&#10;                inv:&#10;                self.constrainedElements -&gt;&#10;                forAll(c | self.container.extendedNamespace() -&gt; includes(c))'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a59'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Attribute xmi.id = 'a247' name = 'expression' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true' isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a8'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+            <Model:Tag xmi.id = 'a248' name = '*tag_46' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Attribute xmi.idref = 'a247'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Attribute xmi.id = 'a249' name = 'language' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true' isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a8'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+            <Model:Tag xmi.id = 'a250' name = '*tag_47' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Attribute xmi.idref = 'a249'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:EnumerationType xmi.id = 'a251' name = 'EvaluationKind' annotation = ''
+              isRoot = 'true' isLeaf = 'true' isAbstract = 'false' visibility = 'public_vis'>
+              <Model:EnumerationType.labels>immediate</Model:EnumerationType.labels>
+              <Model:EnumerationType.labels>deferred</Model:EnumerationType.labels>
+            </Model:EnumerationType>
+            <Model:Attribute xmi.id = 'a252' name = 'evaluationPolicy' annotation = ''
+              scope = 'instance_level' visibility = 'public_vis' isChangeable = 'true'
+              isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:EnumerationType xmi.idref = 'a251'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+            <Model:Reference xmi.id = 'a253' name = 'constrainedElements' annotation = ''
+              scope = 'instance_level' visibility = 'public_vis' isChangeable = 'true'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>-1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>true</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a19'/>
+              </Model:TypedElement.type>
+              <Model:Reference.referencedEnd>
+                <Model:AssociationEnd xmi.idref = 'a254'/>
+              </Model:Reference.referencedEnd>
+            </Model:Reference>
+          </Model:Namespace.contents>
+          <Model:GeneralizableElement.supertypes>
+            <Model:Class xmi.idref = 'a19'/>
+          </Model:GeneralizableElement.supertypes>
+        </Model:Class>
+        <Model:Class xmi.id = 'a255' name = 'Constant' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis' isSingleton = 'false'>
+          <Model:ModelElement.constraints>
+            <Model:Constraint xmi.idref = 'a256'/>
+            <Model:Constraint xmi.idref = 'a257'/>
+          </Model:ModelElement.constraints>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a258' name = '*tag_48' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a255'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Constraint xmi.id = 'a257' name = 'ConstantsValueMustMatchType' annotation = ''
+              expression = 'context Constant&#10;                inv: ...' language = 'OCL'
+              evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a255'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Constraint xmi.id = 'a256' name = 'ConstantsTypeMustBePrimitive'
+              annotation = '' expression = 'context Constant&#10;                inv: self.type.oclIsOfType(PrimitiveType)'
+              language = 'OCL' evaluationPolicy = 'deferred'>
+              <Model:Constraint.constrainedElements>
+                <Model:Class xmi.idref = 'a255'/>
+              </Model:Constraint.constrainedElements>
+            </Model:Constraint>
+            <Model:Attribute xmi.id = 'a259' name = 'value' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true' isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a8'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+            <Model:Tag xmi.id = 'a260' name = '*tag_49' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Attribute xmi.idref = 'a259'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+          </Model:Namespace.contents>
+          <Model:GeneralizableElement.supertypes>
+            <Model:Class xmi.idref = 'a119'/>
+          </Model:GeneralizableElement.supertypes>
+        </Model:Class>
+        <Model:Class xmi.id = 'a261' name = 'Tag' annotation = '' isRoot = 'false'
+          isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis' isSingleton = 'false'>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a262' name = '*tag_50' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Class xmi.idref = 'a261'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Attribute xmi.id = 'a263' name = 'tagId' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true' isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a8'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+            <Model:Tag xmi.id = 'a264' name = '*tag_51' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Attribute xmi.idref = 'a263'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Attribute xmi.id = 'a265' name = 'values' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true' isDerived = 'false'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>0</XMI.field>
+                <XMI.field>-1</XMI.field>
+                <XMI.field>true</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:PrimitiveType xmi.idref = 'a8'/>
+              </Model:TypedElement.type>
+            </Model:Attribute>
+            <Model:Tag xmi.id = 'a266' name = '*tag_52' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Attribute xmi.idref = 'a265'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:Reference xmi.id = 'a267' name = 'elements' annotation = '' scope = 'instance_level'
+              visibility = 'public_vis' isChangeable = 'true'>
+              <Model:StructuralFeature.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>-1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>true</XMI.field>
+              </Model:StructuralFeature.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a19'/>
+              </Model:TypedElement.type>
+              <Model:Reference.referencedEnd>
+                <Model:AssociationEnd xmi.idref = 'a268'/>
+              </Model:Reference.referencedEnd>
+            </Model:Reference>
+          </Model:Namespace.contents>
+          <Model:GeneralizableElement.supertypes>
+            <Model:Class xmi.idref = 'a19'/>
+          </Model:GeneralizableElement.supertypes>
+        </Model:Class>
+        <Model:Association xmi.id = 'a269' name = 'AttachesTo' annotation = '' isRoot = 'true'
+          isLeaf = 'true' isAbstract = 'false' visibility = 'public_vis' isDerived = 'false'>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a270' name = '*tag_53' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Association xmi.idref = 'a269'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:AssociationEnd xmi.id = 'a268' name = 'modelElement' annotation = ''
+              isNavigable = 'true' aggregation = 'none' isChangeable = 'true'>
+              <Model:AssociationEnd.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>-1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>true</XMI.field>
+              </Model:AssociationEnd.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a19'/>
+              </Model:TypedElement.type>
+            </Model:AssociationEnd>
+            <Model:AssociationEnd xmi.id = 'a271' name = 'tag' annotation = '' isNavigable = 'true'
+              aggregation = 'none' isChangeable = 'true'>
+              <Model:AssociationEnd.multiplicity>
+                <XMI.field>0</XMI.field>
+                <XMI.field>-1</XMI.field>
+                <XMI.field>true</XMI.field>
+                <XMI.field>true</XMI.field>
+              </Model:AssociationEnd.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a261'/>
+              </Model:TypedElement.type>
+            </Model:AssociationEnd>
+          </Model:Namespace.contents>
+        </Model:Association>
+        <Model:Association xmi.id = 'a272' name = 'DependsOn' annotation = '' isRoot = 'true'
+          isLeaf = 'true' isAbstract = 'false' visibility = 'public_vis' isDerived = 'true'>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a273' name = '*tag_54' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Association xmi.idref = 'a272'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:AssociationEnd xmi.id = 'a274' name = 'dependent' annotation = ''
+              isNavigable = 'true' aggregation = 'none' isChangeable = 'false'>
+              <Model:AssociationEnd.multiplicity>
+                <XMI.field>0</XMI.field>
+                <XMI.field>-1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>true</XMI.field>
+              </Model:AssociationEnd.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a19'/>
+              </Model:TypedElement.type>
+            </Model:AssociationEnd>
+            <Model:AssociationEnd xmi.id = 'a32' name = 'provider' annotation = '' isNavigable = 'true'
+              aggregation = 'none' isChangeable = 'false'>
+              <Model:AssociationEnd.multiplicity>
+                <XMI.field>0</XMI.field>
+                <XMI.field>-1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>true</XMI.field>
+              </Model:AssociationEnd.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a19'/>
+              </Model:TypedElement.type>
+            </Model:AssociationEnd>
+          </Model:Namespace.contents>
+        </Model:Association>
+        <Model:Association xmi.id = 'a275' name = 'Contains' annotation = '' isRoot = 'true'
+          isLeaf = 'true' isAbstract = 'false' visibility = 'public_vis' isDerived = 'false'>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a276' name = '*tag_55' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Association xmi.idref = 'a275'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:AssociationEnd xmi.id = 'a57' name = 'container' annotation = ''
+              isNavigable = 'true' aggregation = 'composite' isChangeable = 'true'>
+              <Model:AssociationEnd.multiplicity>
+                <XMI.field>0</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:AssociationEnd.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a56'/>
+              </Model:TypedElement.type>
+            </Model:AssociationEnd>
+            <Model:AssociationEnd xmi.id = 'a77' name = 'containedElement' annotation = ''
+              isNavigable = 'true' aggregation = 'none' isChangeable = 'true'>
+              <Model:AssociationEnd.multiplicity>
+                <XMI.field>0</XMI.field>
+                <XMI.field>-1</XMI.field>
+                <XMI.field>true</XMI.field>
+                <XMI.field>true</XMI.field>
+              </Model:AssociationEnd.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a19'/>
+              </Model:TypedElement.type>
+            </Model:AssociationEnd>
+          </Model:Namespace.contents>
+        </Model:Association>
+        <Model:Association xmi.id = 'a277' name = 'Generalizes' annotation = ''
+          isRoot = 'true' isLeaf = 'true' isAbstract = 'false' visibility = 'public_vis'
+          isDerived = 'false'>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a278' name = '*tag_56' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Association xmi.idref = 'a277'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:AssociationEnd xmi.id = 'a109' name = 'supertype' annotation = ''
+              isNavigable = 'true' aggregation = 'none' isChangeable = 'true'>
+              <Model:AssociationEnd.multiplicity>
+                <XMI.field>0</XMI.field>
+                <XMI.field>-1</XMI.field>
+                <XMI.field>true</XMI.field>
+                <XMI.field>true</XMI.field>
+              </Model:AssociationEnd.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a95'/>
+              </Model:TypedElement.type>
+            </Model:AssociationEnd>
+            <Model:AssociationEnd xmi.id = 'a279' name = 'subtype' annotation = '' isNavigable = 'true'
+              aggregation = 'none' isChangeable = 'true'>
+              <Model:AssociationEnd.multiplicity>
+                <XMI.field>0</XMI.field>
+                <XMI.field>-1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>true</XMI.field>
+              </Model:AssociationEnd.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a95'/>
+              </Model:TypedElement.type>
+            </Model:AssociationEnd>
+          </Model:Namespace.contents>
+        </Model:Association>
+        <Model:Association xmi.id = 'a280' name = 'Aliases' annotation = '' isRoot = 'true'
+          isLeaf = 'true' isAbstract = 'false' visibility = 'public_vis' isDerived = 'false'>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a281' name = '*tag_57' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Association xmi.idref = 'a280'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:AssociationEnd xmi.id = 'a282' name = 'importer' annotation = ''
+              isNavigable = 'true' aggregation = 'none' isChangeable = 'true'>
+              <Model:AssociationEnd.multiplicity>
+                <XMI.field>0</XMI.field>
+                <XMI.field>-1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>true</XMI.field>
+              </Model:AssociationEnd.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a228'/>
+              </Model:TypedElement.type>
+            </Model:AssociationEnd>
+            <Model:AssociationEnd xmi.id = 'a238' name = 'imported' annotation = ''
+              isNavigable = 'true' aggregation = 'none' isChangeable = 'true'>
+              <Model:AssociationEnd.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:AssociationEnd.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a56'/>
+              </Model:TypedElement.type>
+            </Model:AssociationEnd>
+          </Model:Namespace.contents>
+        </Model:Association>
+        <Model:Association xmi.id = 'a283' name = 'Constrains' annotation = '' isRoot = 'true'
+          isLeaf = 'true' isAbstract = 'false' visibility = 'public_vis' isDerived = 'false'>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a284' name = '*tag_58' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Association xmi.idref = 'a283'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:AssociationEnd xmi.id = 'a60' name = 'constraint' annotation = ''
+              isNavigable = 'true' aggregation = 'none' isChangeable = 'true'>
+              <Model:AssociationEnd.multiplicity>
+                <XMI.field>0</XMI.field>
+                <XMI.field>-1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>true</XMI.field>
+              </Model:AssociationEnd.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a59'/>
+              </Model:TypedElement.type>
+            </Model:AssociationEnd>
+            <Model:AssociationEnd xmi.id = 'a254' name = 'constrainedElement' annotation = ''
+              isNavigable = 'true' aggregation = 'none' isChangeable = 'true'>
+              <Model:AssociationEnd.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>-1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>true</XMI.field>
+              </Model:AssociationEnd.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a19'/>
+              </Model:TypedElement.type>
+            </Model:AssociationEnd>
+          </Model:Namespace.contents>
+        </Model:Association>
+        <Model:Association xmi.id = 'a285' name = 'CanRaise' annotation = '' isRoot = 'true'
+          isLeaf = 'true' isAbstract = 'false' visibility = 'public_vis' isDerived = 'false'>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a286' name = '*tag_59' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Association xmi.idref = 'a285'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:AssociationEnd xmi.id = 'a287' name = 'operation' annotation = ''
+              isNavigable = 'true' aggregation = 'none' isChangeable = 'true'>
+              <Model:AssociationEnd.multiplicity>
+                <XMI.field>0</XMI.field>
+                <XMI.field>-1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>true</XMI.field>
+              </Model:AssociationEnd.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a188'/>
+              </Model:TypedElement.type>
+            </Model:AssociationEnd>
+            <Model:AssociationEnd xmi.id = 'a196' name = 'except' annotation = '' isNavigable = 'true'
+              aggregation = 'none' isChangeable = 'true'>
+              <Model:AssociationEnd.multiplicity>
+                <XMI.field>0</XMI.field>
+                <XMI.field>-1</XMI.field>
+                <XMI.field>true</XMI.field>
+                <XMI.field>true</XMI.field>
+              </Model:AssociationEnd.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a195'/>
+              </Model:TypedElement.type>
+            </Model:AssociationEnd>
+          </Model:Namespace.contents>
+        </Model:Association>
+        <Model:Association xmi.id = 'a288' name = 'Exposes' annotation = '' isRoot = 'true'
+          isLeaf = 'true' isAbstract = 'false' visibility = 'public_vis' isDerived = 'true'>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a289' name = '*tag_60' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Association xmi.idref = 'a288'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:AssociationEnd xmi.id = 'a290' name = 'referrer' annotation = ''
+              isNavigable = 'true' aggregation = 'none' isChangeable = 'true'>
+              <Model:AssociationEnd.multiplicity>
+                <XMI.field>0</XMI.field>
+                <XMI.field>-1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>true</XMI.field>
+              </Model:AssociationEnd.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a172'/>
+              </Model:TypedElement.type>
+            </Model:AssociationEnd>
+            <Model:AssociationEnd xmi.id = 'a183' name = 'exposedEnd' annotation = ''
+              isNavigable = 'true' aggregation = 'none' isChangeable = 'true'>
+              <Model:AssociationEnd.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:AssociationEnd.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a182'/>
+              </Model:TypedElement.type>
+            </Model:AssociationEnd>
+          </Model:Namespace.contents>
+        </Model:Association>
+        <Model:Association xmi.id = 'a291' name = 'RefersTo' annotation = '' isRoot = 'true'
+          isLeaf = 'true' isAbstract = 'false' visibility = 'public_vis' isDerived = 'false'>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a292' name = '*tag_61' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Association xmi.idref = 'a291'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:AssociationEnd xmi.id = 'a293' name = 'referent' annotation = ''
+              isNavigable = 'true' aggregation = 'none' isChangeable = 'true'>
+              <Model:AssociationEnd.multiplicity>
+                <XMI.field>0</XMI.field>
+                <XMI.field>-1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>true</XMI.field>
+              </Model:AssociationEnd.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a172'/>
+              </Model:TypedElement.type>
+            </Model:AssociationEnd>
+            <Model:AssociationEnd xmi.id = 'a185' name = 'referencedEnd' annotation = ''
+              isNavigable = 'true' aggregation = 'none' isChangeable = 'true'>
+              <Model:AssociationEnd.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:AssociationEnd.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a182'/>
+              </Model:TypedElement.type>
+            </Model:AssociationEnd>
+          </Model:Namespace.contents>
+        </Model:Association>
+        <Model:Association xmi.id = 'a294' name = 'IsOfType' annotation = '' isRoot = 'true'
+          isLeaf = 'true' isAbstract = 'false' visibility = 'public_vis' isDerived = 'false'>
+          <Model:Namespace.contents>
+            <Model:Tag xmi.id = 'a295' name = '*tag_62' annotation = '' tagId = 'org.omg.mof.idl_version'>
+              <Model:Tag.values>1.4</Model:Tag.values>
+              <Model:Tag.elements>
+                <Model:Association xmi.idref = 'a294'/>
+              </Model:Tag.elements>
+            </Model:Tag>
+            <Model:AssociationEnd xmi.id = 'a125' name = 'type' annotation = '' isNavigable = 'true'
+              aggregation = 'none' isChangeable = 'true'>
+              <Model:AssociationEnd.multiplicity>
+                <XMI.field>1</XMI.field>
+                <XMI.field>1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>false</XMI.field>
+              </Model:AssociationEnd.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a124'/>
+              </Model:TypedElement.type>
+            </Model:AssociationEnd>
+            <Model:AssociationEnd xmi.id = 'a296' name = 'typedElements' annotation = ''
+              isNavigable = 'true' aggregation = 'none' isChangeable = 'true'>
+              <Model:AssociationEnd.multiplicity>
+                <XMI.field>0</XMI.field>
+                <XMI.field>-1</XMI.field>
+                <XMI.field>false</XMI.field>
+                <XMI.field>true</XMI.field>
+              </Model:AssociationEnd.multiplicity>
+              <Model:TypedElement.type>
+                <Model:Class xmi.idref = 'a119'/>
+              </Model:TypedElement.type>
+            </Model:AssociationEnd>
+          </Model:Namespace.contents>
+        </Model:Association>
+      </Model:Namespace.contents>
+    </Model:Package>
+    <Model:Package xmi.id = 'a297' name = 'CorbaIdlTypes' annotation = '' isRoot = 'false'
+      isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis'>
+      <Model:Namespace.contents>
+        <Model:Tag xmi.id = 'a298' name = '*tag' annotation = '' tagId = 'javax.jmi.packagePrefix'>
+          <Model:Tag.values>javax.jmi</Model:Tag.values>
+          <Model:Tag.elements>
+            <Model:Package xmi.idref = 'a297'/>
+          </Model:Tag.elements>
+        </Model:Tag>
+        <Model:PrimitiveType xmi.id = 'a299' name = 'CorbaOctet' annotation = ''
+          isRoot = 'false' isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis'/>
+        <Model:PrimitiveType xmi.id = 'a300' name = 'CorbaShort' annotation = ''
+          isRoot = 'false' isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis'/>
+        <Model:PrimitiveType xmi.id = 'a301' name = 'CorbaUnsignedShort' annotation = ''
+          isRoot = 'false' isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis'/>
+        <Model:PrimitiveType xmi.id = 'a302' name = 'CorbaUnsignedLong' annotation = ''
+          isRoot = 'false' isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis'/>
+        <Model:PrimitiveType xmi.id = 'a303' name = 'CorbaUnsignedLongLong' annotation = ''
+          isRoot = 'false' isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis'/>
+        <Model:PrimitiveType xmi.id = 'a304' name = 'CorbaLongDouble' annotation = ''
+          isRoot = 'false' isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis'/>
+        <Model:PrimitiveType xmi.id = 'a305' name = 'CorbaString' annotation = ''
+          isRoot = 'false' isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis'/>
+        <Model:PrimitiveType xmi.id = 'a306' name = 'CorbaChar' annotation = ''
+          isRoot = 'false' isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis'/>
+        <Model:PrimitiveType xmi.id = 'a307' name = 'CorbaWChar' annotation = ''
+          isRoot = 'false' isLeaf = 'false' isAbstract = 'false' visibility = 'public_vis'/>
+      </Model:Namespace.contents>
+    </Model:Package>
+  </XMI.content>
+</XMI>

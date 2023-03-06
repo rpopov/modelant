@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://java.sun.com/xml/ns/j2ee" xmlns:j2ee="http://java.sun.com/xml/ns/j2ee" xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.4">
+
+  <xsd:group name="descriptionGroup">
+    <xsd:sequence> <!-- 3 attributes -->
+      <xsd:element name="description"  type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="display-name" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xsd:element name="icon"         type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:group>
+
+  <xsd:complexType name="listenerType">
+    <xsd:sequence>
+      <xsd:group ref="j2ee:descriptionGroup"/> <!-- 3 inlined association -->
+      <xsd:element name="listener-class" type="xsd:string"/> <!-- + 1 association -->
+    </xsd:sequence>
+    <xsd:attribute name="id" type="xsd:ID"/>
+  </xsd:complexType>
+
+</xsd:schema>

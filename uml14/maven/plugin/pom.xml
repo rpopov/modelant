@@ -28,6 +28,11 @@
     </dependency>
     <dependency>
       <groupId>net.mdatools</groupId>
+      <artifactId>modelant.uml14.reverse</artifactId>
+      <version>${revision}</version>
+    </dependency>
+    <dependency>
+      <groupId>net.mdatools</groupId>
       <artifactId>modelant.core.impl</artifactId>
       <version>${revision}</version>
     </dependency>
