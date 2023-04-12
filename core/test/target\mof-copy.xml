@@ -1,5 +1,5 @@
 <?xml version = '1.0' encoding = 'UTF-8' ?>
-<XMI xmi.version = '1.2' xmlns:Model = 'org.omg.xmi.namespace.Model' timestamp = 'Mon Mar 06 13:31:42 EET 2023'>
+<XMI xmi.version = '1.2' xmlns:Model = 'org.omg.xmi.namespace.Model' timestamp = 'Mon Mar 06 21:33:45 EET 2023'>
   <XMI.header>
     <XMI.documentation>
       <XMI.exporter>Netbeans XMI Writer</XMI.exporter>
@@ -1146,8 +1146,8 @@
             </Model:Attribute>
           </Model:Namespace.contents>
           <Model:GeneralizableElement.supertypes>
-            <Model:Class xmi.idref = 'a138'/>
             <Model:Class xmi.idref = 'a119'/>
+            <Model:Class xmi.idref = 'a138'/>
           </Model:GeneralizableElement.supertypes>
         </Model:Class>
         <Model:Class xmi.id = 'a151' name = 'StructureType' annotation = '' isRoot = 'false'
@@ -1209,8 +1209,8 @@
             </Model:Tag>
           </Model:Namespace.contents>
           <Model:GeneralizableElement.supertypes>
-            <Model:Class xmi.idref = 'a138'/>
             <Model:Class xmi.idref = 'a119'/>
+            <Model:Class xmi.idref = 'a138'/>
           </Model:GeneralizableElement.supertypes>
         </Model:Class>
         <Model:EnumerationType xmi.id = 'a159' name = 'ScopeKind' annotation = ''
@@ -1292,8 +1292,8 @@
             </Model:Attribute>
           </Model:Namespace.contents>
           <Model:GeneralizableElement.supertypes>
-            <Model:Class xmi.idref = 'a160'/>
             <Model:Class xmi.idref = 'a119'/>
+            <Model:Class xmi.idref = 'a160'/>
           </Model:GeneralizableElement.supertypes>
         </Model:Class>
         <Model:Class xmi.id = 'a168' name = 'Attribute' annotation = '' isRoot = 'false'
@@ -1442,8 +1442,8 @@
             </Model:Tag>
           </Model:Namespace.contents>
           <Model:GeneralizableElement.supertypes>
-            <Model:Class xmi.idref = 'a160'/>
             <Model:Class xmi.idref = 'a56'/>
+            <Model:Class xmi.idref = 'a160'/>
           </Model:GeneralizableElement.supertypes>
         </Model:Class>
         <Model:Class xmi.id = 'a188' name = 'Operation' annotation = '' isRoot = 'false'

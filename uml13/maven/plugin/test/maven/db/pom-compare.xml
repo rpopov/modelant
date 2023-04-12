@@ -23,8 +23,8 @@
               <goal>compare-uml13-models</goal>
             </goals>
             <configuration>
-              <sourceModel>jira-UML13-oracle.xmi</sourceModel>
-	      <targetModel>jira-UML13-postgre.xmi</targetModel>
+              <sourceModel>jira-UML13-221129.xmi</sourceModel>
+	            <targetModel>jira-UML13-postgre-221129-2.xmi</targetModel>
             </configuration>
           </execution>
         </executions>
